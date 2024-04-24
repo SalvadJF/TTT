@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComentarioRequest;
 use App\Http\Requests\UpdateComentarioRequest;
-use App\Models\Comentario;
 
 class ComentarioController extends Controller
 {

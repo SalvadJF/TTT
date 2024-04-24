@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Textura;
+use App\Models\Noticia;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTexturaRequest;
-use App\Http\Requests\UpdateTexturaRequest;
+use App\Http\Requests\StoreNoticiaRequest;
+use App\Http\Requests\UpdateNoticiaRequest;
 
-class TexturaController extends Controller
+class NoticiaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class TexturaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTexturaRequest $request)
+    public function store(StoreNoticiaRequest $request)
     {
         //
     }
@@ -36,7 +36,7 @@ class TexturaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Textura $textura)
+    public function show(Noticia $noticia)
     {
         //
     }
@@ -44,7 +44,7 @@ class TexturaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Textura $textura)
+    public function edit(Noticia $noticia)
     {
         //
     }
@@ -52,7 +52,7 @@ class TexturaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTexturaRequest $request, Textura $textura)
+    public function update(UpdateNoticiaRequest $request, Noticia $noticia)
     {
         //
     }
@@ -60,7 +60,7 @@ class TexturaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Textura $textura)
+    public function destroy(Noticia $noticia)
     {
         //
     }
