@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articulo;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticuloRequest;
 use App\Http\Requests\UpdateArticuloRequest;
-use App\Models\Articulo;
 
 class ArticuloController extends Controller
 {

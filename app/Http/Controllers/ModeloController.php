@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Modelo;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreModeloRequest;
 use App\Http\Requests\UpdateModeloRequest;
-use App\Models\Modelo;
 
 class ModeloController extends Controller
 {
