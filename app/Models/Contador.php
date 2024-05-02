@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Contador extends Model
 {
     use HasFactory;
+
+    public function objetivos()
+    {
+        return $this->hasMany(Objetivo_Contador::class);
+    }
+
 }

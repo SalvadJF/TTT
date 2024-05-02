@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Modelo extends Model
 {
     use HasFactory;
+
+    public function articulos_tipos()
+    {
+        return $this->morphMany(Articulo_tipo::class, 'tipo');
+    }
 }
