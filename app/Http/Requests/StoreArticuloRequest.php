@@ -11,7 +11,8 @@ class StoreArticuloRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Verifica si el usuario está autenticado
+        return auth()->check();
     }
 
     /**
@@ -19,10 +20,20 @@ class StoreArticuloRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El nombre del artículo es obligatorio.',
+            'nombre.max' => 'El nombre del artículo no puede ser mayor a 255 caracteres.',
+            'descripcion.required' => 'La descripción del artículo es obligatoria.',
         ];
     }
 }
