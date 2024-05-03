@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\NoticiaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,5 +20,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('articulos', ArticuloController::class)->middleware('auth');
+
+Route::resource('noticias', NoticiaController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
