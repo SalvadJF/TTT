@@ -6,12 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateNoticiaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        // Verifica si el usuario está autenticado
+        return auth()->check();
     }
 
     /**
@@ -19,10 +17,18 @@ class UpdateNoticiaRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'titulo' => 'sometimes|string|max:255',
+            'contenido' => 'sometimes|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'titulo.max' => 'El titulo del artículo no puede ser mayor a 255 caracteres.',
         ];
     }
 }

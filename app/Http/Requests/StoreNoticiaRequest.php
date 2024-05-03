@@ -11,7 +11,8 @@ class StoreNoticiaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Verifica si el usuario está autenticado
+        return auth()->check();
     }
 
     /**
@@ -19,10 +20,20 @@ class StoreNoticiaRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'titulo' => 'required|string|max:255',
+            'contenido' => 'required|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'titulo.required' => 'El titulo de la noticia es obligatorio.',
+            'titulo.max' => 'El titulo de la noticia no puede ser mayor a 255 caracteres.',
+            'contenido.required' => 'El contenido de la noticia es obligatorio.',
         ];
     }
 }

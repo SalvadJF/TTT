@@ -14,7 +14,8 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        //
+        $noticias = Noticia::all();
+        return view('noticias.index', ['noticias' => $noticias]);
     }
 
     /**
@@ -22,7 +23,7 @@ class NoticiaController extends Controller
      */
     public function create()
     {
-        //
+        return view('noticias.create');
     }
 
     /**
@@ -30,7 +31,16 @@ class NoticiaController extends Controller
      */
     public function store(StoreNoticiaRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        $noticia = new Noticia();
+        $noticia->titulo = $request->titulo;
+        $noticia->contenido = $request->contenido;
+        $noticia->user_id = $user->id;
+        $noticia->save();
+
+        session()->flash('success', 'La noticia se ha creado correctamente.');
+        return redirect()->route('noticias.index');
     }
 
     /**
@@ -38,7 +48,7 @@ class NoticiaController extends Controller
      */
     public function show(Noticia $noticia)
     {
-        //
+        return view('noticias.show', ['noticia' => $noticia]);
     }
 
     /**
@@ -46,22 +56,28 @@ class NoticiaController extends Controller
      */
     public function edit(Noticia $noticia)
     {
-        //
+        return view('noticias.edit', ['noticia' => $noticia]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNoticiaRequest $request, Noticia $noticia)
+    public function update(UpdateNoticiaRequest $request, noticia $noticia)
     {
-        //
+        $noticia->update($request->only('titulo', 'contenido'));
+
+        session()->flash('success', 'La noticia se ha actualizado correctamente.');
+        return redirect()->route('noticias.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Noticia $noticia)
+    public function destroy(noticia $noticia)
     {
-        //
+        $noticia->delete();
+
+        session()->flash('success', 'La noticia se ha eliminado correctamente.');
+        return redirect()->route('noticias.index');
     }
 }
