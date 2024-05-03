@@ -11,7 +11,8 @@ class UpdateArticuloRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Verifica si el usuario está autenticado
+        return auth()->check();
     }
 
     /**
@@ -19,10 +20,18 @@ class UpdateArticuloRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'nombre' => 'sometimes|string|max:255',
+            'descripcion' => 'sometimes|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.max' => 'El nombre del artículo no puede ser mayor a 255 caracteres.',
         ];
     }
 }

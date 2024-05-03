@@ -14,7 +14,8 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        //
+        $articulos = Articulo::all();
+        return view('articulos.index', ['articulos' => $articulos]);
     }
 
     /**
@@ -22,7 +23,7 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+        return view('articulos.create');
     }
 
     /**
@@ -30,7 +31,16 @@ class ArticuloController extends Controller
      */
     public function store(StoreArticuloRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        $articulo = new Articulo();
+        $articulo->nombre = $request->nombre;
+        $articulo->descripcion = $request->descripcion;
+        $articulo->user_id = $user->id;
+        $articulo->save();
+
+        session()->flash('success', 'El artículo se ha creado correctamente.');
+        return redirect()->route('articulos.index');
     }
 
     /**
@@ -38,7 +48,7 @@ class ArticuloController extends Controller
      */
     public function show(Articulo $articulo)
     {
-        //
+        return view('articulos.show', ['articulo' => $articulo]);
     }
 
     /**
@@ -46,7 +56,7 @@ class ArticuloController extends Controller
      */
     public function edit(Articulo $articulo)
     {
-        //
+        return view('articulos.edit', ['articulo' => $articulo]);
     }
 
     /**
@@ -54,7 +64,10 @@ class ArticuloController extends Controller
      */
     public function update(UpdateArticuloRequest $request, Articulo $articulo)
     {
-        //
+        $articulo->update($request->only('nombre', 'descripcion'));
+
+        session()->flash('success', 'El artículo se ha actualizado correctamente.');
+        return redirect()->route('articulos.index');
     }
 
     /**
@@ -62,6 +75,9 @@ class ArticuloController extends Controller
      */
     public function destroy(Articulo $articulo)
     {
-        //
+        $articulo->delete();
+
+        session()->flash('success', 'El artículo se ha eliminado correctamente.');
+        return redirect()->route('articulos.index');
     }
 }
