@@ -12,6 +12,7 @@
                     {{ __("You're logged in!") }}
                 </div>
                 <div id="prueba"></div>
+                <div id="pruebaBoo"></div>
             </div>
         </div>
     </div>
