@@ -1,4 +1,6 @@
 import './bootstrap';
+import 'flowbite';
+
 import './componentes/prueba.jsx'
 import './componentes/pruebaBoo.jsx'
 
