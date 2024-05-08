@@ -1,4 +1,5 @@
 import './bootstrap';
+import './componentes/prueba.jsx'
 
 //import Alpine from 'alpinejs';
 
