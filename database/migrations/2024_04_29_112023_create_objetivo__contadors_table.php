@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('objetivo__contadores', function (Blueprint $table) {
+        Schema::create('objetivo_contadores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contador_id')->constrained();
+            $table->foreignId('contador_id')->constrained('contadores');
             $table->morphs('objetivo');
             $table->integer('cantidad');
             $table->timestamps();
