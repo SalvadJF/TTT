@@ -1,7 +1,7 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<nav class="bg-white border-gray-200 dark:bg-gray-900 h-20 sticky top-0">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            Home
+            <img src="{{ asset('imagenes/LogoMono.svg') }}" alt="Logo" class="w-20 h-24">
         </a>
 
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -17,7 +17,7 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mi perfil</a>
+              <a href="route('profile.edit')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mi perfil</a>
             </li>
             <li>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Configuracion</a>
@@ -26,7 +26,12 @@
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Likes </a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Salir</a>
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                @csrf
+              <a href="route('logout')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onclick="event.preventDefault();
+              this.closest('form').submit();">
+{{ __('Salir') }}</a>
             </li>
           </ul>
         </div>
