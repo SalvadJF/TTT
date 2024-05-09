@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Articulo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,14 +12,28 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ArticuloFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Articulo::class;
+
+
+    /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            //
+            'nombre' => $this->faker->name,
+            'descripcion' => $this->faker->paragraph,
+            'user_id' => function () {
+                // Si deseas asignar un usuario existente
+                return User::inRandomOrder()->first()->id;
+            },
+            // Agrega más campos y lógica según sea necesario
         ];
     }
 }

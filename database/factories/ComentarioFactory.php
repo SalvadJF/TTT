@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Articulo;
+use App\Models\Comentario;
+use App\Models\Noticia;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,14 +14,37 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ComentarioFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Comentario::class;
+
+    /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
+        $models = [
+            Articulo::class,
+            Noticia::class,
+            User::class,
+            Comentario::class,
+        ];
+
+        $modelType = $this->faker->randomElement($models);
+
         return [
-            //
+            'contenido' => $this->faker->paragraph,
+            'origen_type' => $modelType,
+            'origen_id' => function () use ($modelType) {
+                return $modelType::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return User::inRandomOrder()->first()->id;
+            },
         ];
     }
 }

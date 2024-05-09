@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Articulo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ArticuloSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Articulo::factory()->count(10)->create();
     }
 }
