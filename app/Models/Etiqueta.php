@@ -18,4 +18,5 @@ class Etiqueta extends Model
     {
         return $this->belongsToMany(Noticia::class, 'noticias_etiquetas', 'etiqueta_id', 'noticia_id');
     }
+
 }

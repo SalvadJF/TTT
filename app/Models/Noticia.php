@@ -21,11 +21,11 @@ class Noticia extends Model
 
     public function etiquetas()
     {
-        return $this->belongsToMany(Etiqueta::class, 'articulos_etiquetas', 'articulo_id', 'etiqueta_id');
+        return $this->belongsToMany(Etiqueta::class, 'noticias_etiquetas', 'noticia_id', 'etiqueta_id');
     }
 
     public function categorias()
     {
-        return $this->belongsToMany(Categoria::class, 'articulos_categorias', 'articulo_id', 'categoria_id');
+        return $this->belongsToMany(Categoria::class, 'noticias_categorias', 'noticia_id', 'categoria_id');
     }
 }
