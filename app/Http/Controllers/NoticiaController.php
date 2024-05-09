@@ -14,7 +14,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        $noticias = Noticia::all();
+        $noticias = Noticia::paginate(8);
         return view('noticias.index', ['noticias' => $noticias]);
     }
 
