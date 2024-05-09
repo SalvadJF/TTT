@@ -28,7 +28,7 @@ class ArticuloFactory extends Factory
     {
         return [
             'nombre' => $this->faker->name,
-            'descripcion' => $this->faker->paragraph,
+            'descripcion' => $this->faker->paragraphs(1, true),
             'user_id' => function () {
                 // Si deseas asignar un usuario existente
                 return User::inRandomOrder()->first()->id;

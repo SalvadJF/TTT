@@ -13,6 +13,8 @@ class EtiquetaSeeder extends Seeder
      */
     public function run(): void
     {
-        Etiqueta::factory()->count(10)->create();
+        Etiqueta::create(['nombre' => '3D']);
+        Etiqueta::create(['nombre' => 'Avanzado']);
+        Etiqueta::create(['nombre' => 'Dificil']);
     }
 }

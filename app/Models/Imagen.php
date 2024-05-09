@@ -9,6 +9,8 @@ class Imagen extends Model
 {
     use HasFactory;
 
+    protected $table = "imagenes";
+
     public function usuario()
     {
         return $this->belongsTo(User::class);
@@ -16,11 +18,12 @@ class Imagen extends Model
 
     public function articulos()
     {
-        return $this->morphToMany(Articulo::class, 'mostrar');
+        return $this->belongsToMany(Articulo::class, 'articulos_imagenes', 'imagen_id', 'articulo_id');
     }
 
     public function noticias()
     {
-        return $this->morphToMany(Noticia::class, 'mostrar');
+        return $this->belongsToMany(Articulo::class, 'noticias_imagenes', 'imagen_id', 'noticia_id');
     }
+
 }

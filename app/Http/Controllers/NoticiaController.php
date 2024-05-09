@@ -6,6 +6,7 @@ use App\Models\Noticia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNoticiaRequest;
 use App\Http\Requests\UpdateNoticiaRequest;
+use Illuminate\Support\Facades\Auth;
 
 class NoticiaController extends Controller
 {

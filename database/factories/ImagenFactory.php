@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class ImagenFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre' => 'default',
+            'url' => '/imagenes/default.png',
+            'user_id' => function () {
+                // Obtener el primer user_id disponible
+                return User::first()->id;
+        }
         ];
     }
 }

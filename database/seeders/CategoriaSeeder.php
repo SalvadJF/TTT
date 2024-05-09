@@ -13,6 +13,8 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        Categoria::factory()->count(10)->create();
+        Categoria::create(['nombre' => 'Modelaje']);
+        Categoria::create(['nombre' => 'Texturas']);
+        Categoria::create(['nombre' => 'Programacion']);
     }
 }
