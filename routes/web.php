@@ -3,15 +3,20 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\NoticiaController;
+use App\Models\Articulo;
+use App\Models\Noticia;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/home', function () {
+    $ultimosArticulos = Articulo::latest()->take(4)->get();
+    $ultimasNoticias = Noticia::latest()->take(4)->get();
+
+    return view('home', compact('ultimosArticulos', 'ultimasNoticias'));
+})->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/nosotros', function () {
     return view('nosotros');
