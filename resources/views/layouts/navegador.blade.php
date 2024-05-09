@@ -1,6 +1,6 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900 h-20 sticky top-0">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
-        <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('imagenes/LogoMono.svg') }}" alt="Logo" class="w-20 h-24">
         </a>
 
