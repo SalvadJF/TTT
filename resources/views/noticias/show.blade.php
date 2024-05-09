@@ -41,49 +41,67 @@
     <section>
 
 
-    {{-- Informacion de la Noticia --}}
-
-    <div>
-        <div>
-            <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                @if ($noticia->imagenes)
-                    @if ($noticia->imagenes->isNotEmpty())
-                        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" 
-                            src="{{ asset($noticia->imagenes->first()->url) }}" 
-                            alt="Imagen de la noticia">
-                    @else
-                        <p>No hay imagen disponible para esta noticia.</p>
-                    @endif
+   {{-- Informacion de la Noticia --}}
+<div class="flex flex-col md:flex-row w-auto">
+    {{-- La noticia --}}
+    <div class="w-full md:w-3/4">
+        <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            @if ($noticia->imagenes)
+                @if ($noticia->imagenes->isNotEmpty())
+                    <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                        src="{{ asset($noticia->imagenes->first()->url) }}"
+                        alt="Imagen de la noticia">
                 @else
-                    <p>No hay imagen disponible para esta noticia.</p>
+                    <p class="w-full md:w-48 text-center">No hay imagen disponible para esta noticia.</p>
                 @endif
+            @else
+                <p class="w-full md:w-48 text-center">No hay imagen disponible para esta noticia.</p>
+            @endif
 
-                <div class="flex flex-col justify-between p-4 leading-normal">
-                    <ul class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        @foreach($noticia->categorias as $categoria)
-                            <li>{{ $categoria->nombre }}</li>
+            <div class="flex flex-col justify-between p-4 leading-normal">
+                <ul class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    @foreach($noticia->categorias as $categoria)
+                        <li>{{ $categoria->nombre }}</li>
+                    @endforeach
+                </ul>
+                <ul>
+                    @if($noticia->etiquetas->count() > 0)
+                        @foreach($noticia->etiquetas as $etiqueta)
+                            <li>{{ $etiqueta->nombre }}</li>
                         @endforeach
-                    </ul>
-                        @if($noticia->etiquetas->count() > 0)
-                        <ul>
-                            @foreach($noticia->etiquetas as $etiqueta)
-                                <li>{{ $etiqueta->nombre }}</li>
-                            @endforeach
-                        </ul>
                     @else
-                        <p>No hay etiquetas asociadas a esta noticia.</p>
+                        <li>No hay etiquetas asociadas a esta noticia.</li>
                     @endif
-                        <ul>
-                        <li> {{ $noticia->created_at}} </li>
-                    </ul>
-                </div>
-                <div>
-                    {{ $noticia->contenido}}
-                    <div>
+                </ul>
+                <ul>
+                    <li>{{ $noticia->created_at }}</li>
+                </ul>
+            </div>
         </div>
-        <div>
+        <div class="w-full p-4">
+            {{ $noticia->contenido }}
+        </div>
+    </div>
 
-        <div>
+    {{-- el usuario creador --}}
+    <div class="w-full md:w-1/4">
+        <div class="bg-white border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 p-4">
+            @if ($noticia->usuario)
+        <div class="flex items-center mb-4">
+            <img src="{{ $noticia->usuario->avatar }}" alt="Avatar del usuario" class="w-12 h-12 rounded-full mr-2">
+            <span>{{ $noticia->usuario->name }}</span>
+        </div>
+        @else
+            <p>No se pudo encontrar al usuario asociado a esta noticia.</p>
+        @endif
+
+        </div>
+    </div>
+</div>
+
+
+
+<div>
 
 
 </x-app-layout>
