@@ -14,7 +14,7 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::all();
+        $articulos = Articulo::paginate(8);
         return view('articulos.index', ['articulos' => $articulos]);
     }
 
