@@ -1,8 +1,8 @@
 import './bootstrap';
 import 'flowbite';
 
-import './componentes/prueba.jsx'
-import './componentes/pruebaBoo.jsx'
+import './components/prueba.jsx'
+import './components/Acordeon.jsx'
 
 //import Alpine from 'alpinejs';
 
