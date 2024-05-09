@@ -1,3 +1,3 @@
 <x-app-layout>
-    Esto es una prueba de Nosotros
+    <div id="prueba"> </div>
 </x-app-layout>
