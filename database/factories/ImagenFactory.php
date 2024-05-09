@@ -19,7 +19,7 @@ class ImagenFactory extends Factory
     {
         return [
             'nombre' => 'default',
-            'url' => 'public/imagenes/default.png',
+            'url' => '/imagenes/default.png',
             'user_id' => function () {
                 // Obtener el primer user_id disponible
                 return User::first()->id;

@@ -26,8 +26,8 @@ class NoticiaFactory extends Factory
     public function definition()
     {
         return [
-            'titulo' => $this->faker->sentence,
-            'contenido' => $this->faker->paragraphs(3, true),
+            'titulo' => $this->faker->title(),
+            'contenido' => $this->faker->paragraphs(2, true),
             'user_id' => function () {
                 // Asigna un usuario existente
                 return User::inRandomOrder()->first()->id;

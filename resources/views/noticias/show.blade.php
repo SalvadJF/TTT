@@ -46,7 +46,18 @@
     <div>
         <div>
             <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/docs/images/blog/image-4.jpg" alt="">
+                @if ($noticia->imagenes)
+                    @if ($noticia->imagenes->isNotEmpty())
+                        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" 
+                            src="{{ asset($noticia->imagenes->first()->url) }}" 
+                            alt="Imagen de la noticia">
+                    @else
+                        <p>No hay imagen disponible para esta noticia.</p>
+                    @endif
+                @else
+                    <p>No hay imagen disponible para esta noticia.</p>
+                @endif
+
                 <div class="flex flex-col justify-between p-4 leading-normal">
                     <ul class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         @foreach($noticia->categorias as $categoria)
