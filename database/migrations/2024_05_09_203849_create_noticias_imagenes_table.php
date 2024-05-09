@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mostrar_imagenes', function (Blueprint $table) {
+        Schema::create('noticias_imagenes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('imagen_id')->constrained('imagenes');
-            $table->morphs('mostrar');
+            $table->foreignId('noticia_id')->constrained('noticias');
             $table->timestamps();
         });
     }

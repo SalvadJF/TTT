@@ -28,4 +28,9 @@ class Noticia extends Model
     {
         return $this->belongsToMany(Categoria::class, 'noticias_categorias', 'noticia_id', 'categoria_id');
     }
+
+    public function imagenes()
+    {
+        return $this->belongsToMany(Imagen::class, 'noticias_imagenes', 'noticia_id', 'imagen_id');
+    }
 }

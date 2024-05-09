@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         $this->call([
+            ModeloSeeder::class,
+            TexturaSeeder::class,
             CategoriaSeeder::class,
             EtiquetaSeeder::class,
             ArticuloSeeder::class,
@@ -38,8 +40,7 @@ class DatabaseSeeder extends Seeder
             // ObjetivoContadorSeeder::class,
             ArticuloSeeder::class,
             // ContadorSeeder::class,
-            ModeloSeeder::class,
-            TexturaSeeder::class,
+            ImagenSeeder::class,
 
         ]);
     }
