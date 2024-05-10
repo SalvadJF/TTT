@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Noticia extends Model
 {
@@ -28,6 +27,11 @@ class Noticia extends Model
     public function categorias()
     {
         return $this->belongsToMany(Categoria::class, 'noticias_categorias', 'noticia_id', 'categoria_id');
+    }
+
+    public function comentarios()
+    {
+        return $this->morphMany(Comentario::class, 'comentable');
     }
 
     public function getImagenUrlAttribute()

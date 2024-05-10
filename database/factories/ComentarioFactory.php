@@ -38,8 +38,8 @@ class ComentarioFactory extends Factory
 
         return [
             'contenido' => $this->faker->paragraph,
-            'origen_type' => $modelType,
-            'origen_id' => function () use ($modelType) {
+            'comentable_type' => $modelType,
+            'comentable_id' => function () use ($modelType) {
                 return $modelType::factory()->create()->id;
             },
             'user_id' => function () {

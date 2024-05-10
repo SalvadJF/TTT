@@ -29,11 +29,11 @@ class ArticuloFactory extends Factory
         return [
             'nombre' => $this->faker->name,
             'descripcion' => $this->faker->sentence,
+            'tipo' => $this->faker->randomElement(['Modelo_3d', 'Textura']),
             'user_id' => function () {
                 // Si deseas asignar un usuario existente
                 return User::inRandomOrder()->first()->id;
             },
-            // Agrega más campos y lógica según sea necesario
         ];
     }
 }

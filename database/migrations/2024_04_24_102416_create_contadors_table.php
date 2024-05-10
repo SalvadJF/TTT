@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('contadores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->enum('nombre', ['Likes', 'Visitas']);
             $table->timestamps();
         });
     }

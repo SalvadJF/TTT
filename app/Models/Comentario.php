@@ -14,14 +14,14 @@ class Comentario extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function origen()
+    public function comentable()
     {
         return $this->morphTo();
     }
 
     public function comentarios()
     {
-        return $this->morphMany(Comentario::class, 'origen');
+        return $this->morphMany(Comentario::class, 'comentable');
     }
 
     public function objetivos_contadores()
