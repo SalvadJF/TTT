@@ -53,6 +53,7 @@
                 </ul>
             </div>
         </div>
+        </div>
 
         <div>
             <h2 class="mb-6 text-sm font-semibold text-gray-300 uppercase dark:text-white">Miembros y Contenido</h2>
