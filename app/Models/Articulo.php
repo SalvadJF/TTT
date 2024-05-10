@@ -41,7 +41,7 @@ class Articulo extends Model
 
     public function getImagenUrlAttribute()
     {
-        return asset('img/modelos/' . $this->imagen);
+        return asset('img/articulos/' . $this->imagen);
     }
 
     public function getModeloUrlAttribute()

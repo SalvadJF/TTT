@@ -15,10 +15,25 @@
     src: url('../../public/fonts/Lato.ttf') format('truetype');
 }
 
+/*
+    Añadido el contorno de los h1.
+    Tailwind no tiene esta funcionalidad incorporada
+    Por ello debemos hacerlo por CSS puro
+*/
+h1 {
+    -webkit-text-stroke: 1.8px black;
+    text-rendering: optimizeLegibility;
+}
+
+/*
+    Fondos de la Aplicacion
+*/
 
 #fondoHome {
-    background-image: url('fondoHome.jpg');
-    background-color: lightsalmon;
-    background-size: cover; /* Ajusta el tamaño del fondo */
-    background-repeat: no-repeat; /* Evita la repetición del fondo */
+    background-image: linear-gradient(white, black);
+    background-color: white;
+    background-size: cover;
+    /* Ajusta el tamaño del fondo */
+    background-repeat: no-repeat;
+    /* Evita la repetición del fondo */
 }
