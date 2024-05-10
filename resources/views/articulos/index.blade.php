@@ -42,28 +42,38 @@
     </ul>
 </div>
 
-{{-- Noticias --}}
+{{-- Articulos --}}
 
-<div class="flex flex-col items-center justify-center mt-5">
-    <div class="flex flex-wrap gap-5 justify-center">
-        @foreach($articulos as $articulo)
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            {{-- Imagen del Articulo --}}
-            <a href="#">
-                <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                {{-- Titulo del Articulo --}}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center mt-5 p-10">
+    @foreach($articulos as $articulo)
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                {{-- Imagen del Articulo --}}
+                <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}">
+                    @if ($articulo->imagen)
+                    <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                        src="{{ asset($articulo->imagen_url) }}"
+                        alt="Imagen de la noticia">
+                @else
+                    <p class="w-full md:w-48 text-center">No hay imagen disponible para este articulo.</p>
+                @endif
+                </a>
+                <div class="p-5">
+                    {{-- Título de la noticia --}}
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $articulo->nombre }}</h5>
-                    {{-- Autor del Articulo --}}
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $articulo->user->name }}</h5>
+                    {{-- Contenido de la noticia --}}
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $articulo->descripcion }}</p>
+                    <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Leer más
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
-        </div>
-        @endforeach
+    @endforeach
     </div>
-    <div class="mt-5">
+    <div class="mt-5 p-5">
         {{ $articulos->links() }}
     </div>
-</div>
 
 </x-app-layout>

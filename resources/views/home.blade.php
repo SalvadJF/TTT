@@ -25,8 +25,14 @@
                         <div
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex-1">
                             {{-- Imagen de la Noticia --}}
-                            <a href="#">
-                                <img class="rounded-t-lg" src="" alt="" />
+                            <a href="{{ route('noticias.show', ['noticia' => $noticia]) }}">
+                                @if ($noticia->imagen)
+                                    <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                                        src="{{ asset($noticia->imagen_url) }}"
+                                        alt="Imagen de la noticia">
+                                @else
+                                    <p class="w-full md:w-48 text-center">No hay imagen disponible para esta noticia.</p>
+                                @endif
                             </a>
                             <div class="p-5">
                                 {{-- Título de la noticia --}}
@@ -50,11 +56,10 @@
                 </div>
 
                 <!-- Botón de "Lea más Noticias" -->
-                <button type="button"
+                <a href="{{ route('noticias.index') }}"
                     class="py-2.5 px-5 mt-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                     Lea más Noticias
-                </button>
-
+                </a>
             </div>
 
             {{-- Ultimas Aportaciones --}}
@@ -65,8 +70,14 @@
                         <div
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex-1">
                             {{-- Imagen del Articulo --}}
-                            <a href="#">
-                                <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+                            <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}">
+                                @if ($articulo->imagen)
+                                    <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                                        src="{{ asset($articulo->imagen_url) }}"
+                                        alt="Imagen de la noticia">
+                                @else
+                                    <p class="w-full md:w-48 text-center">No hay imagen disponible para este articulo.</p>
+                                @endif
                             </a>
                             <div class="p-5">
                                 {{-- Titulo del Articulo --}}
@@ -83,10 +94,10 @@
                     @endforeach
                 </div>
                 <div>
-                    <button type="button"
+                    <a href="{{ route('articulos.index') }}"
                         class="py-2.5 px-5 mt-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                        Ver mas Modelos
-                    </button>
+                        Ver más Modelos
+                    </a>
                     <button type="button"
                         class="py-2.5 px-5 mt-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                         Sube los tuyos

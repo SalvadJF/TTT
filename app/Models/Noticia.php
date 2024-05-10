@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Noticia extends Model
 {
@@ -29,8 +30,9 @@ class Noticia extends Model
         return $this->belongsToMany(Categoria::class, 'noticias_categorias', 'noticia_id', 'categoria_id');
     }
 
-    public function imagenes()
+    public function getImagenUrlAttribute()
     {
-        return $this->belongsToMany(Noticia::class, 'noticias_imagenes', 'noticia_id', 'imagen_id');
+        return asset('img/noticias/' . $this->imagen);
     }
+
 }

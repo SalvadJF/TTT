@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 #fondoHome {
-    background: lightsalmon
+    background-image: url('fondoHome.jpg');
+    background-color: lightsalmon;
+    background-size: cover; /* Ajusta el tamaño del fondo */
+    background-repeat: no-repeat; /* Evita la repetición del fondo */
 }
+

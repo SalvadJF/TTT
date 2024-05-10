@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Noticia;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'salva@salva.es',
             'email_verified_at' => now(),
             'password' => Hash::make('1234werty'),
+            'avatar' => 'avatar.png',
             'remember_token' => Str::random(10),
+        ]);
+
+        Noticia::create([
+            'titulo' => 'Prueba',
+            'contenido' => 'Esto es una prueba',
+            'imagen' => 'imagen.jpg',
+            'user_id' => '1'
         ]);
 
         // Crear usuarios aleatorios
@@ -40,8 +49,6 @@ class DatabaseSeeder extends Seeder
             // ObjetivoContadorSeeder::class,
             ArticuloSeeder::class,
             // ContadorSeeder::class,
-            ImagenSeeder::class,
-
         ]);
     }
 }

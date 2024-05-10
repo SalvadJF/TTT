@@ -44,13 +44,18 @@
 
 {{-- Noticias --}}
 
-<div class="flex flex-col items-center justify-center mt-5">
-    <div class="flex flex-wrap gap-5 justify-center">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center mt-5 p-10">
     @foreach($noticias as $noticia)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 {{-- Imagen de la Noticia --}}
                 <a href="{{ route('noticias.show', ['noticia' => $noticia]) }}">
-                    <img class="rounded-t-lg" src="" alt="" />
+                    @if ($noticia->imagen)
+                    <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                        src="{{ asset($noticia->imagen_url) }}"
+                        alt="Imagen de la noticia">
+                @else
+                    <p class="w-full md:w-48 text-center">No hay imagen disponible para esta noticia.</p>
+                @endif
                 </a>
                 <div class="p-5">
                     {{-- Título de la noticia --}}
@@ -67,9 +72,8 @@
             </div>
     @endforeach
     </div>
-    <div class="mt-5">
+    <div class="mt-5 p-5">
         {{ $noticias->links() }}
     </div>
-</div>
 
 </x-app-layout>
