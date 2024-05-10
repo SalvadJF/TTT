@@ -14,6 +14,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                koulen: ['Koulen', 'sans-serif'],
+                lato: ['Lato', 'sans-serif'],
             },
         },
     },
