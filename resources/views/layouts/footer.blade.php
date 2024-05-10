@@ -1,8 +1,8 @@
-<footer class="bg-white dark:bg-gray-900 ">
+<footer class="bg-black dark:bg-gray-900 ">
     <div class="mx-auto w-full max-w-screen-xl">
       <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
         <div>
-            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Trazos, Texturas y Tecnología 3D</h2>
+            <h2 class="mb-6 text-sm font-semibold text-gray-300 uppercase dark:text-white">Trazos, Texturas y Tecnología 3D</h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
                 <li class="mb-4">
                     <a href="#" class=" hover:underline">© 2024-2024  Todos los derechos reservados</a>
@@ -14,9 +14,9 @@
         </div>
         <div style="display: flex; justify-content: center;">
             <div>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nuestras Redes</h2>
+                <h2 class="mb-6 text-sm font-semibold text-gray-300 uppercase dark:text-white">Nuestras Redes</h2>
                 <div>
-                    <ul class="text-gray-500 dark:text-gray-400 font-medium" style="display: flex; justify-content: center;">
+                    <ul class="text-gray-500 dark:text-gray-400 font-medium" style="display: block; justify-content: center;">
                         <li class="mb-4">
                             <a href="#" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
@@ -33,9 +33,7 @@
                                 <span class="sr-only">Discord community</span>
                             </a>
                         </li>
-                    </ul>
-                </div>
-                <ul style="display: flex; justify-content: center;">
+
                     <li class="mb-4">
                         <a href="#" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
@@ -55,9 +53,10 @@
                 </ul>
             </div>
         </div>
+        </div>
 
         <div>
-            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Miembros y Contenido</h2>
+            <h2 class="mb-6 text-sm font-semibold text-gray-300 uppercase dark:text-white">Miembros y Contenido</h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
                 <li class="mb-4">
                     <a href="#" class="hover:underline">Miembros</a>
