@@ -1,7 +1,7 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900 h-20 sticky top-0">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('imagenes/LogoMono.svg') }}" alt="Logo" class="w-20 h-24">
+            <img src="{{ asset('img/LogoMono.svg') }}" alt="Logo" class="w-20 h-24">
         </a>
 
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -11,9 +11,9 @@
                 data-dropdown-placement="bottom">
                 <span class="sr-only">Abrir Menu</span>
                 @if(Auth::user()->avatar)
-                    <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->avatar }}" alt="user">
+                    <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->avatarUrl }}" alt="user">
                 @else
-                    <img class="w-8 h-8 rounded-full" src="/imagenes/avatar.png" alt="user">
+                    <img class="w-8 h-8 rounded-full" src="/img/users/avatar.png" alt="user">
                 @endif
             </button>
             <!-- Dropdown menu -->

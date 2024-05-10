@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -60,11 +61,6 @@ class User extends Authenticatable
         return $this->hasMany(Noticia::class);
     }
 
-    public function imagenes()
-    {
-        return $this->hasMany(Imagen::class);
-    }
-
     public function facturas()
     {
         return $this->hasMany(Factura::class);
@@ -78,6 +74,11 @@ class User extends Authenticatable
     public function comentario_origen()
     {
         return $this->morphMany(Comentario::class, 'origen');
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return asset('img/users/' . $this->avatar);
     }
 
 
