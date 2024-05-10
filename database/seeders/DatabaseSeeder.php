@@ -22,14 +22,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'salva@salva.es',
             'email_verified_at' => now(),
             'password' => Hash::make('1234werty'),
-            'avatar' => 'avatar.png',
+            'admin' => 'true',
             'remember_token' => Str::random(10),
         ]);
 
         Noticia::create([
             'titulo' => 'Prueba',
             'contenido' => 'Esto es una prueba',
-            'imagen' => 'imagen.jpg',
             'user_id' => '1'
         ]);
 
@@ -37,18 +36,16 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         $this->call([
-            ModeloSeeder::class,
-            TexturaSeeder::class,
+            ContadorSeeder::class,
             CategoriaSeeder::class,
             EtiquetaSeeder::class,
             ArticuloSeeder::class,
             NoticiaSeeder::class,
-            ComentarioSeeder::class,
-            // RolSeeder::class,
-            FacturaSeeder::class,
-            // ObjetivoContadorSeeder::class,
             ArticuloSeeder::class,
-            // ContadorSeeder::class,
+            ComentarioSeeder::class,
+            FacturaSeeder::class,
+            Objetivo_ContadorSeeder::class,
+
         ]);
     }
 }

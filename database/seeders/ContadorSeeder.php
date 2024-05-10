@@ -13,6 +13,10 @@ class ContadorSeeder extends Seeder
      */
     public function run(): void
     {
-        Contador::factory()->count(10)->create();
+        // Crear un contador para Likes
+        Contador::create(['nombre' => 'Likes']);
+
+        // Crear un contador para Visitas
+        Contador::create(['nombre' => 'Visitas']);
     }
 }

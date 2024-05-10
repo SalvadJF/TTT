@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('imagen')->nullable();
+            $table->enum('tipo', ['Modelo_3d', 'Textura']);
+            $table->string('imagen')->default('default.jpg')->nullable();
             $table->string('modelo')->nullable();
             $table->foreignId("user_id")->constrained();
             $table->timestamps();
