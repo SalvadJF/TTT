@@ -45,6 +45,43 @@
 <div class="flex flex-col md:flex-row w-auto">
     {{-- El articulo --}}
     <div class="w-full md:w-3/4">
+        {{-- Modelo 3D --}}
+    <div class="w-full md:w-3/4">
+        <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <canvas id="renderCanvas"></canvas>
+            <script>
+                var canvas = document.getElementById("renderCanvas");
+                var engine = new BABYLON.Engine(canvas, true);
+                var scene;
+
+                var createScene = function () {
+                    var scene = new BABYLON.Scene(engine);
+
+                    var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), scene);
+                    camera.attachControl(canvas, true);
+
+                    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+                    // Cargar el modelo STL localmente
+                    var modeloURL = "{{ $articulo->modelo_url }}";
+                    BABYLON.SceneLoader.ImportMesh("", "", modeloURL, scene, function (newMeshes) {
+                    });
+
+                    return scene;
+                };
+
+                scene = createScene();
+
+                engine.runRenderLoop(function () {
+                    scene.render();
+                });
+
+                window.addEventListener("resize", function () {
+                    engine.resize();
+                });
+            </script>
+        </div>
+    </div>
         <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                 @if ($articulo->imagen)
                     <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
