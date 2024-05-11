@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/modelo', function () {
+    return view('modelo');
+});
+
 Route::resource('articulos', ArticuloController::class)->middleware('auth');
 
 Route::resource('noticias', NoticiaController::class)->middleware('auth');
