@@ -9,6 +9,17 @@ class Noticia extends Model
 {
     use HasFactory;
 
+    protected $table = "noticias";
+
+    protected $fillable = [
+        'titulo',
+        'contenido',
+        'imagen',
+        'user_id'
+    ];
+
+    const MIME_IMAGEN = 'png, jpg, jpeg, webp';
+
     public function usuario()
     {
         return $this->belongsTo(User::class, 'user_id');

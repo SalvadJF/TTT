@@ -75,5 +75,10 @@ class User extends Authenticatable
         return asset('img/users/' . $this->avatar);
     }
 
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
+
 
 }

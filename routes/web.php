@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\AdminController;
 use App\Models\Articulo;
 use App\Models\Noticia;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,15 @@ Route::get('/modelo', function () {
     return view('modelo');
 });
 
+Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticias.update')->middleware('auth');
+
 Route::resource('articulos', ArticuloController::class)->middleware('auth');
 
 Route::resource('noticias', NoticiaController::class)->middleware('auth');
+
+
+Route::resource('admin', AdminController::class)->middleware('auth');
+
+
 
 require __DIR__.'/auth.php';

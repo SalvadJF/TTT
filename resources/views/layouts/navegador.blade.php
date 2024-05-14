@@ -29,16 +29,15 @@
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mi
                             perfil</a>
                     </li>
+                    @if (Auth::check() && Auth::user()->isAdmin())
                     <li>
-                        <a href="#"
-                            class=" font-lato block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Configuracion</a>
+                        <a href="{{ route('admin.index') }}"
+                            class=" font-lato block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Panel de Admin</a>
                     </li>
+                    @endif
+                    {{--
                     <li>
-                        <a href="#"
-                            class=" font-lato block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Likes
-                        </a>
-                    </li>
-                    <li>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -47,7 +46,7 @@
                                 onclick="event.preventDefault();
               this.closest('form').submit();">
                                 {{ __('Salir') }}</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <button data-collapse-toggle="navbar-user" type="button"
