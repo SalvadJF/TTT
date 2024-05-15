@@ -42,45 +42,45 @@
                     var canvas = document.getElementById("renderCanvas");
                     var engine = new BABYLON.Engine(canvas, true);
                     var scene;
-    
+
                     var createScene = function () {
                         var scene = new BABYLON.Scene(engine);
-    
+
                         // Ajustar la posición de la cámara
                         var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 4, 100, BABYLON.Vector3.Zero(), scene);
                         camera.attachControl(canvas, true);
-    
+
                         var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-    
+
                         // Cargar el modelo STL localmente
                         var modeloURL = "{{ $articulo->modelo_url }}";
                         BABYLON.SceneLoader.ImportMesh("", "", modeloURL, scene, function (newMeshes) {
                             // Opcional: Ajustar el target de la cámara si es necesario
                             // camera.target = newMeshes[0].position;
                         });
-    
+
                         return scene;
                     };
-    
+
                     scene = createScene();
-    
+
                     engine.runRenderLoop(function () {
                         scene.render();
                     });
-    
+
                     window.addEventListener("resize", function () {
                         engine.resize();
                     });
                 </script>
-    
+
             </div>
         </div>
-        <div class="flex flex-col justify-between p-4 leading-normal w-full md:w-2/5">
+        <div class="flex flex-col justify-between p-4 leading-normal w-full md:w-2/5 text-center">
             <div class="w-full mb-5">
                 <div class="rounded-lg shadow md:max-w-xl p-4">
                     @if ($articulo->user)
-                    <div class="flex items-center m-auto">
-                        <img src="{{ $articulo->user->avatarURL }}" alt="Avatar del usuario" class="w-12 h-12 rounded-full mr-2">
+                    <div class="flex items-center m-auto justify-center">
+                        <img src="{{ $articulo->user->avatarURL }}" alt="Avatar del usuario" class="w-12 h-12 rounded-full ml-3">
                         <span class="font-koulen ml-3 text-white">{{ $articulo->user->name }}</span>
                     </div>
                     @else
@@ -112,17 +112,17 @@
                     <li class="font-lato">Creada en <b>{{ $articulo->created_at }}<b></li>
                 </ul>
             </div>
-            <div class="flex flex-col items-center w-full shadow md:flex-row p-5 m-3">
+            <div class="flex flex-col items-center w-full shadow md:flex-row p-5 m-3 justify-center">
                 <ul class="text-center">
                     <li class="mb-3 font-lato text-white">{{ $articulo->descripcion }}</li>
                     <a href="" ><li class="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">Comprar</li></a>
                 </ul>
             </div>
-            
-            
+
+
         </div>
     </div>
-    
+
 
     {{-- Funcionalidades De Comentarios --}}
     <div class="w-full p-5">
