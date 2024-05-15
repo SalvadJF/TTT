@@ -24,7 +24,7 @@
 
 {{-- Tabs Para los filtros generales --}}
 <div class="m-10 mb-4 border-b border-gray-200 dark:border-gray-700">
-    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" role="tablist">
+    <ul class="font-koulen flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" role="tablist">
         <li class="me-2" role="presentation">
             <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-white" id="dashboard-styled-tab"  type="button" role="tab" aria-controls="general" aria-selected="false">General</button>
         </li>
