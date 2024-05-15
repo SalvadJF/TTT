@@ -6,6 +6,7 @@ use App\Models\Comentario;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComentarioRequest;
 use App\Http\Requests\UpdateComentarioRequest;
+use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
@@ -28,7 +29,7 @@ class ComentarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreComentarioRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -52,7 +53,7 @@ class ComentarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateComentarioRequest $request, Comentario $comentario)
+    public function update(Request $request, Comentario $comentario)
     {
         //
     }

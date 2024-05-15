@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('contenido');
             $table->morphs('comentable');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

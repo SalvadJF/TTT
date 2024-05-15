@@ -75,9 +75,14 @@
                             <td class="px-6 py-4">
                                 {{ $usuario->created_at }}
                             </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Editar</a>
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Borrar</a>
+                            <td>
+                                <form action="{{ route('usuarios.destroy', ['usuario' => $usuario]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-primary-button class="bg-red-500">
+                                        Borrar
+                                    </x-primary-button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -122,15 +127,29 @@
                             <td class="px-6 py-4">
                                 {{ $noticia->titulo }}
                             </td>
-                            <td class="px-6 py-4">
-                                {{ $noticia->usuario->name }}
-                            </td>
+                            @if ($noticia->usuario == null)
+                                <td class="px-6 py-4">
+                                    Sin autor
+                                </td>
+                            @else
+                                <td class="px-6 py-4">
+                                    {{ $noticia->usuario->name }}
+                                </td>
+                            @endif
                             <td class="px-6 py-4">
                                 {{ $noticia->created_at }}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('noticias.edit', $noticia) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Editar</a>
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Borrar</a>
+                            </td>
+                            <td>
+                                <form action="{{ route('noticias.destroy', ['noticia' => $noticia]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-primary-button class="bg-red-500">
+                                        Borrar
+                                    </x-primary-button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -174,15 +193,29 @@
                         <td class="px-6 py-4">
                             {{ $articulo->nombre }}
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $articulo->user->name }}
-                        </td>
+                        @if ($articulo->user == null)
+                                <td class="px-6 py-4">
+                                    Sin autor
+                                </td>
+                            @else
+                                <td class="px-6 py-4">
+                                    {{ $articulo->user->name }}
+                                </td>
+                            @endif
                         <td class="px-6 py-4">
                             {{ $articulo->created_at }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Editar</a>
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Borrar</a>
+                            <a href="{{ route('articulos.edit', $articulo) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{ route('articulos.destroy', ['articulo' => $articulo]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-primary-button class="bg-red-500">
+                                    Borrar
+                                </x-primary-button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

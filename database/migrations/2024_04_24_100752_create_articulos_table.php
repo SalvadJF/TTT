@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('tipo', ['Modelo_3d', 'Textura']);
             $table->string('imagen')->default('default.jpg')->nullable();
             $table->string('modelo')->default('default.stl')->nullable();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

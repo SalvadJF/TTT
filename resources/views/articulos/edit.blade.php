@@ -1,35 +1,47 @@
 <x-app-layout>
-    <form method="POST" action="{{ route('noticias.update', ['noticia' => $noticia->id]) }}" enctype="multipart/form-data" class="p-20">
+    <form method="POST" action="{{ route('articulos.update', ['articulo' => $articulo->id]) }}" enctype="multipart/form-data" class="p-20">
         @csrf
         @method('PUT')
 
-        <!-- Titulo -->
+        <!-- Nombre -->
         <div>
-            <label for="titulo" :value="'Nombre de la noticia'" />
-            <input id="titulo" class="block mt-1 w-full" type="text" name="titulo" :value="old('titulo', $noticia->titulo)" required autofocus />
+            <label for="nombre" :value="'Nombre del artículo'" />
+            <input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre', $articulo->nombre)" required autofocus />
         </div>
 
-        <!-- Contenido -->
+        <!-- Descripción -->
         <div class="mt-4">
-            <label for="contenido" :value="'Descripción de la noticia'" />
-            <textarea id="contenido" class="block mt-1 w-full" name="contenido" :value="old('contenido', $noticia->contenido)" required ></textarea>
+            <label for="descripcion" :value="'Descripción del artículo'" />
+            <textarea id="descripcion" class="block mt-1 w-full" name="descripcion" required>{{ old('descripcion', $articulo->descripcion) }}</textarea>
+        </div>
+
+        <!-- Tipo -->
+        <div class="mt-4">
+            <label for="tipo" :value="'Tipo del artículo'" />
+            <select name="tipo" id="tipo">
+                <option value="Modelo_3d" @if($articulo->tipo == 'Modelo_3d') selected @endif>Modelo 3D</option>
+                <option value="Textura" @if($articulo->tipo == 'Textura') selected @endif>Textura</option>
+            </select>
         </div>
 
         <!-- Imagen -->
         <div class="mt-4">
-            <label for="imagen" :value="'Imagen de la noticia'" />
-            <input id="imagen" class="block mt-1 w-full" type="file" name="imagen" :value="old('imagen')" />
+            <label for="imagen" :value="'Imagen del artículo'" />
+            <input id="imagen" class="block mt-1 w-full" type="file" name="imagen" />
         </div>
 
-        <div class="flex items-center justify-end mt-">
+        <!-- Modelo -->
+        <div class="mt-4">
+            <label for="modelo" :value="'Modelo del Artículo'" />
+            <input id="modelo" class="block mt-1 w-full" type="file" name="modelo" />
+        </div>
+
+
+        <div class="flex items-center justify-end mt-4">
             <a href="{{ url()->previous() }}">
-                <x-secondary-button class="m-4">
-                    Volver
-                </x-secondary-button>
+                <button type="button" class="m-4">Volver</button>
             </a>
-            <x-primary-button class="ms-4">
-                Editar
-            </x-primary-button>
+            <button type="submit" class="ms-4">Editar</button>
         </div>
     </form>
 </x-app-layout>

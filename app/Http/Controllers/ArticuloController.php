@@ -35,7 +35,7 @@ class ArticuloController extends Controller
             'descripcion' => 'required',
             'tipo' => 'required',
             'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-            'modelo' => 'image|mimes:' . Articulo::MIME_MODELO,
+            'modelo' => 'file',
         ]);
 
         $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
@@ -81,54 +81,77 @@ class ArticuloController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Articulo $articulo)
-    {
-        // Verificar si el usuario autenticado es el creador de la noticia o es administrador
-        if (auth()->id() !== $articulo->user_id && !auth()->user()->isAdmin()) {
-            abort(403); // No autorizado
+{
+    // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+    if (auth()->id() !== $articulo->user_id && !auth()->user()->isAdmin()) {
+        abort(403); // No autorizado
+    }
+
+    $request->validate([
+        'nombre' => 'required',
+        'descripcion' => 'required',
+        'tipo' => 'required',
+        'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+        'modelo' => 'file',
+    ]);
+
+    // Actualizar imagen solo si se proporciona un nuevo archivo de imagen
+    if ($request->hasFile('imagen')) {
+        // Eliminar la imagen anterior si existe
+        if ($articulo->imagen !== 'default.jpg') {
+            unlink(public_path('img/articulos/' . $articulo->imagen));
         }
 
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'tipo' => 'required',
-            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-            'modelo' => 'image|mimes:' . Articulo::MIME_MODELO,
-        ]);
-
-        // Eliminar la imagen anterior si se proporciona una nueva
-        if ($request->hasFile('imagen')) {
-            if ($articulo->imagen !== 'default.jpg') {
-                unlink(public_path('img/noticias/' . $articulo->imagen));
-            }
-
         $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
-        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->modelo->extension();
 
         $request->imagen->move(public_path('img/articulos'), $imagenNombre);
-        $request->modelo->move(public_path('img/modelos'), $modeloNombre);
 
         $articulo->update([
             'imagen' => $imagenNombre,
-            'modelo' => $modeloNombre,
         ]);
+    }
+    // AHora mismo solo se puede actualizar a la vez uno de los archivos o imagen o modelo, debo investigar porque
+    // Actualizar modelo solo si se proporciona un nuevo archivo de modelo
+    if ($request->hasFile('modelo')) {
+        // Eliminar el modelo anterior si existe
+        if ($articulo->modelo !== 'default.stl') {
+            unlink(public_path('img/modelos/' . $articulo->modelo));
         }
 
+        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
+
+        $request->modelo->move(public_path('img/modelos'), $modeloNombre);
+
         $articulo->update([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'tipo' => $request->tipo,
+            'modelo' => $modeloNombre,
         ]);
-        return redirect()->route('articulos.index');
     }
+
+    // Actualizar otros campos
+    $articulo->update([
+        'nombre' => $request->nombre,
+        'descripcion' => $request->descripcion,
+        'tipo' => $request->tipo,
+    ]);
+
+    return redirect()->back()->with('success', 'La noticia se ha actualizado correctamente.');
+}
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Articulo $articulo)
     {
+        // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+        if (auth()->id() !== $articulo->user_id && !auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
         $articulo->delete();
 
         session()->flash('success', 'El artículo se ha eliminado correctamente.');
-        return redirect()->route('articulos.index');
+        return back();
     }
 }
