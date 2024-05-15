@@ -31,7 +31,23 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos del formulario
+        $request->validate([
+            'contenido' => 'required',
+            'comentable_type' => 'required',
+            'comentable_id' => 'required',
+        ]);
+
+        // Crear el comentario
+        $comentario = new Comentario();
+        $comentario->contenido = $request->contenido;
+        $comentario->user_id = auth()->id(); // Asignar el ID del usuario autenticado
+        $comentario->comentable_type = $request->comentable_type;
+        $comentario->comentable_id = $request->comentable_id;
+        $comentario->save();
+
+        // Redireccionar a la página anterior o a donde sea adecuado
+        return redirect()->back()->with('success', 'Comentario agregado correctamente.');
     }
 
     /**
