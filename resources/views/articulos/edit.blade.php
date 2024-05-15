@@ -1,4 +1,5 @@
 <x-app-layout>
+    <div id="fondoArticulo">
     <form method="POST" action="{{ route('articulos.update', ['articulo' => $articulo->id]) }}" enctype="multipart/form-data" class="p-20">
         @csrf
         @method('PUT')
@@ -44,4 +45,5 @@
             <button type="submit" class="ms-4">Editar</button>
         </div>
     </form>
+    <div>
 </x-app-layout>

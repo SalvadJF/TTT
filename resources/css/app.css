@@ -15,25 +15,59 @@
     src: url('../../public/fonts/Lato.ttf') format('truetype');
 }
 
-/*
-    Añadido el contorno de los h1.
-    Tailwind no tiene esta funcionalidad incorporada
-    Por ello debemos hacerlo por CSS puro
-*/
-h1 {
-    -webkit-text-stroke: 1.8px black;
-    text-rendering: optimizeLegibility;
-}
 
 /*
     Fondos de la Aplicacion
 */
 
 #fondoHome {
-    background-image: linear-gradient(white, black);
-    background-color: white;
+    background-color: transparent;
     background-size: cover;
     /* Ajusta el tamaño del fondo */
     background-repeat: no-repeat;
     /* Evita la repetición del fondo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoHome.jpg");
 }
+
+#fondoArticulo {
+    background-color: transparent;
+    background-size: cover;
+    /* Ajusta el tamaño del fondo */
+    background-repeat: no-repeat;
+    /* Evita la repetición del fondo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoArticulo.jpg");
+}
+
+#fondoNoticia {
+    background-color: transparent;
+    background-size: cover;
+    /* Ajusta el tamaño del fondo */
+    background-repeat: no-repeat;
+    /* Evita la repetición del fondo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoNoticias.jpg");
+}
+
+#fondoNosotros {
+    background-color: transparent;
+    background-size: cover;
+    /* Ajusta el tamaño del fondo */
+    background-repeat: no-repeat;
+    /* Evita la repetición del fondo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoNosotros.jpg");
+}
+
+#fondoUser {
+    background-color: transparent;
+    background-size: cover;
+    /* Ajusta el tamaño del fondo */
+    background-repeat: no-repeat;
+    /* Evita la repetición del fondo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoUser.jpg");
+}
+
+
+.div-oscuro {
+    background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
+    padding: auto;
+    margin: auto;
+  }

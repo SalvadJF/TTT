@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-light-gray">
+    <div id="fondoNoticia">
         {{-- El Breadcrum para saber donde estamos --}}
         <nav class="flex pl-10 pt-10" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -29,7 +29,6 @@
               </li>
             </ol>
         </nav>
-    </div>
 
     {{-- Titulo de la noticia --}}
     <section class="bg-white dark:bg-gray-900">
@@ -97,7 +96,7 @@
 
 
 
-<div>
+</div>
 
 
 </x-app-layout>
