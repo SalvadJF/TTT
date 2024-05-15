@@ -48,8 +48,11 @@ Route::resource('comentarios', ComentarioController::class)->middleware('auth');
 
 Route::resource('usuarios', UserController::class)->middleware('auth');
 
-Route::resource('admin', AdminController::class)->middleware('auth');
-
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
+Route::get('/admin/noticias', [AdminController::class, 'noticias'])->name('admin.noticias');
+Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('admin.articulos');
+Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
 
 
 require __DIR__.'/auth.php';

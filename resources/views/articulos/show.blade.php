@@ -79,7 +79,7 @@
             <div class="w-full mb-5">
                 <div class="rounded-lg shadow md:max-w-xl p-4">
                     @if ($articulo->user)
-                    <div class="flex items-center m-auto spacin">
+                    <div class="flex items-center m-auto">
                         <img src="{{ $articulo->user->avatarURL }}" alt="Avatar del usuario" class="w-12 h-12 rounded-full mr-2">
                         <span class="font-koulen ml-3 text-white">{{ $articulo->user->name }}</span>
                     </div>
@@ -128,7 +128,7 @@
     <div class="w-full p-5">
         {{-- Comentarios --}}
         <div class="w-full mb-4">
-            <div class="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 w-full">
+            <div class="p-5 mb-4 border border-gray-100 rounded-lg bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150 w-full">
                 @if($articulo->comentarios->isEmpty())
                     <div class="text-center text-gray-600 dark:text-gray-400">
                         <p>Este artículo no tiene comentarios, ¡sé el primero en comentar!</p>
@@ -139,8 +139,8 @@
                         <li class="flex items-start">
                             <img class="w-12 h-12 mb-3 me-3 rounded-full sm:mb-0" src="{{ $comentario->user->avatar_url }}" alt="Usuario {{ $comentario->user->name }}"/>
                             <div class="text-gray-600 dark:text-gray-400">
-                                <div class="text-base font-lato"><span class="font-medium text-gray-900 dark:text-white">{{ $comentario->user->name }}</span> comentó a <span class="font-medium text-gray-900 dark:text-white">{{ $articulo->nombre }}</span> en <span class="font-medium text-gray-900 dark:text-white">{{ $comentario->created_at }}</span></div>
-                                <div class="text-sm font-lato">{{ $comentario->contenido }}</div>
+                                <div class="text-white font-lato "><span class="font-medium text-white font-koulen">{{ $comentario->user->name }}</span> comentó a <span class="font-lato text-yellow-300">{{ $articulo->nombre }}</span> en <span class="font-medium text-blue-500">{{ $comentario->created_at }}</span></div>
+                                <div class="text-sm font-lato text-blue-200">{{ $comentario->contenido }}</div>
                             </div>
                         </li>
                     </ol>
@@ -156,8 +156,8 @@
                 <label for="message" class="block mb-2 text-sm font-lato text-white">¡Comenta!</label>
                 <input type="hidden" name="comentable_type" value="App\Models\Articulo">
                 <input type="hidden" name="comentable_id" value="{{ $articulo->id }}">
-                <textarea id="contenido" name="contenido" rows="1" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deja tu comentario"></textarea>
-                <button type="submit" class="m-5 p-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar Comentario</button>
+                <textarea id="contenido" name="contenido" rows="1" class="block p-2.5 w-full text-sm text-gray-900 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150" placeholder="Deja tu comentario"></textarea>
+                <button type="submit" class="mt-5 p-5 text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar Comentario</button>
             </form>
         </div>
     </div>
