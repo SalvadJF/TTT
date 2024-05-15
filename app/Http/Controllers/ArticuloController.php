@@ -31,25 +31,27 @@ class ArticuloController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'tipo' => 'required',
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required|max:65535',
+            'tipo' => 'required|in:Modelo_3d,Textura',
             'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
             'modelo' => 'file',
         ]);
 
         $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
-        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->modelo->extension();
 
         $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+
+        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
+
         $request->modelo->move(public_path('img/modelos'), $modeloNombre);
 
         $articulo = Articulo::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'tipo' => $request->tipo,
-            'imagen' => $imagenNombre,
             'modelo' => $modeloNombre,
+            'imagen' => $imagenNombre,
             'user_id' => auth()->id(),
         ]);
 
@@ -88,9 +90,9 @@ class ArticuloController extends Controller
     }
 
     $request->validate([
-        'nombre' => 'required',
-        'descripcion' => 'required',
-        'tipo' => 'required',
+        'nombre' => 'required|max:255',
+        'descripcion' => 'required|max:65535',
+        'tipo' => 'required|in:Modelo_3d,Textura',
         'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
         'modelo' => 'file',
     ]);
