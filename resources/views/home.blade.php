@@ -105,9 +105,6 @@
                                 {{-- Autor del Articulo --}}
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ $articulo->user->name }}</h5>
-                                {{-- Comentarios del Articulo --}}
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    {{ $articulo->Comentarios->count() }}</h5>
                             </div>
                         </a>
                     @endforeach

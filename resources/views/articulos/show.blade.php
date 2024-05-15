@@ -132,6 +132,32 @@
     </div>
 </div>
 
+{{-- Comentarios --}}
+<div>
+    {{-- Mostrar comentarios existentes --}}
+    <h2>Comentarios</h2>
+    @foreach($articulo->comentarios as $comentario)
+        <h5>{{ $comentario->user->name }}</h5>
+        <p>{{ $comentario->contenido }}</p>
+    @endforeach
+
+    {{-- Formulario para agregar comentario --}}
+    <h2>Agregar Comentario</h2>
+    <form method="POST" action="{{ route('comentarios.store') }}">
+        @csrf
+        <input type="hidden" name="comentable_type" value="App\Models\Articulo">
+        <input type="hidden" name="comentable_id" value="{{ $articulo->id }}">
+        <div>
+            <label for="contenido">Contenido:</label><br>
+            <textarea id="contenido" name="contenido" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <button type="submit">Enviar Comentario</button>
+        </div>
+    </form>
+</div>
+
+
 
 
 <div>
