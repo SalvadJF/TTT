@@ -38,7 +38,9 @@ Route::get('/modelo', function () {
 Route::put('/articulos', [ArticuloController::class, 'store'])->name('articulos.store')->middleware('auth');
 Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update')->middleware('auth');
 
+Route::put('/noticias', [NoticiaController::class, 'store'])->name('noticias.store')->middleware('auth');
 Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticias.update')->middleware('auth');
+
 Route::post('/comentarios', 'ComentarioController@store')->name('comentarios.store');
 
 

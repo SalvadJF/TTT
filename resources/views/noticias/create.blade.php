@@ -2,7 +2,6 @@
     <div id="fondoNoticia">
     <form method="POST" action="{{ route('noticias.store') }}" enctype="multipart/form-data" class="p-20">
         @csrf
-        @method('PUT')
 
         <!-- Titulo -->
         <div>
