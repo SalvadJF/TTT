@@ -1,4 +1,5 @@
 <x-app-layout>
+    <div id="fondoArticulo">
     <form method="POST" action="{{ route('articulos.store') }}" enctype="multipart/form-data" class="p-20">
         @csrf
         @method('PUT')
@@ -48,4 +49,5 @@
             </x-primary-button>
         </div>
     </form>
+</div>
 </x-app-layout>
