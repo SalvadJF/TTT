@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreArticuloRequest;
-use App\Http\Requests\UpdateArticuloRequest;
+use Illuminate\Http\Request;
 
 class ArticuloController extends Controller
 {
@@ -29,18 +28,32 @@ class ArticuloController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreArticuloRequest $request)
+    public function store(Request $request)
     {
-        $user = Auth::user();
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'tipo' => 'required',
+            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+            'modelo' => 'image|mimes:' . Articulo::MIME_MODELO,
+        ]);
 
-        $articulo = new Articulo();
-        $articulo->nombre = $request->nombre;
-        $articulo->descripcion = $request->descripcion;
-        $articulo->user_id = $user->id;
-        $articulo->save();
+        $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->modelo->extension();
 
-        session()->flash('success', 'El artículo se ha creado correctamente.');
-        return redirect()->route('articulos.index');
+        $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+        $request->modelo->move(public_path('img/modelos'), $modeloNombre);
+
+        $articulo = Articulo::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'tipo' => $request->tipo,
+            'imagen' => $imagenNombre,
+            'modelo' => $modeloNombre,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('articulos.show', $articulo);
     }
 
     /**
@@ -56,17 +69,55 @@ class ArticuloController extends Controller
      */
     public function edit(Articulo $articulo)
     {
+        // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+        if (auth()->id() !== $articulo->user_id && !auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
         return view('articulos.edit', ['articulo' => $articulo]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateArticuloRequest $request, Articulo $articulo)
+    public function update(Request $request, Articulo $articulo)
     {
-        $articulo->update($request->only('nombre', 'descripcion'));
+        // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+        if (auth()->id() !== $articulo->user_id && !auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
 
-        session()->flash('success', 'El artículo se ha actualizado correctamente.');
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'tipo' => 'required',
+            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+            'modelo' => 'image|mimes:' . Articulo::MIME_MODELO,
+        ]);
+
+        // Eliminar la imagen anterior si se proporciona una nueva
+        if ($request->hasFile('imagen')) {
+            if ($articulo->imagen !== 'default.jpg') {
+                unlink(public_path('img/noticias/' . $articulo->imagen));
+            }
+
+        $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->modelo->extension();
+
+        $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+        $request->modelo->move(public_path('img/modelos'), $modeloNombre);
+
+        $articulo->update([
+            'imagen' => $imagenNombre,
+            'modelo' => $modeloNombre,
+        ]);
+        }
+
+        $articulo->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'tipo' => $request->tipo,
+        ]);
         return redirect()->route('articulos.index');
     }
 

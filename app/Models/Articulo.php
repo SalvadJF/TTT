@@ -9,6 +9,20 @@ class Articulo extends Model
 {
     use HasFactory;
 
+    protected $table = "articulos";
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'tipo',
+        'imagen',
+        'modelo',
+        'user_id'
+    ];
+
+    const MIME_IMAGEN = 'png, jpg, jpeg, webp';
+    const MIME_MODELO = 'stl';
+
     public function user()
     {
         return $this->belongsTo(User::class);
