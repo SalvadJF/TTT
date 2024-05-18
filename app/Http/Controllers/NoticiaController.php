@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Noticia;
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
+use App\Models\Etiqueta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        $noticias = Noticia::paginate(8);
+        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(8);
         return view('noticias.index', ['noticias' => $noticias]);
     }
 
@@ -23,7 +25,9 @@ class NoticiaController extends Controller
      */
     public function create()
     {
-        return view('noticias.create');
+        $categorias = Categoria::all();
+        $etiquetas = Etiqueta::all();
+        return view('noticias.create', ['categorias' => $categorias, 'etiquetas' => $etiquetas]);
     }
 
     /**
@@ -34,7 +38,11 @@ class NoticiaController extends Controller
         $request->validate([
             'titulo' => 'required',
             'contenido' => 'required',
-            'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN, // Validar que la imagen sea del tipo adecuado
+            'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN,
+            'categorias' => 'required|array|max:3',
+            'categorias.*' => 'exists:categorias,id',
+            'etiquetas' => 'required|array|max:3',
+            'etiquetas.*' => 'exists:etiquetas,id',
         ]);
 
         $imagenNombre = 'Noticia_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
@@ -47,6 +55,9 @@ class NoticiaController extends Controller
             'imagen' => $imagenNombre,
             'user_id' => auth()->id(),
         ]);
+
+        $noticia->categorias()->attach($request->categorias);
+        $noticia->etiquetas()->attach($request->etiquetas);
 
         return redirect()->route('noticias.show', $noticia);
     }
@@ -68,8 +79,10 @@ class NoticiaController extends Controller
         if (auth()->id() !== $noticia->user_id && !auth()->user()->isAdmin()) {
             abort(403); // No autorizado
         }
+        $categorias = Categoria::all();
+        $etiquetas = Etiqueta::all();
 
-        return view('noticias.edit', ['noticia' => $noticia]);
+        return view('noticias.edit', ['noticia' => $noticia, 'categorias' => $categorias, 'etiquetas' => $etiquetas]);
     }
 
     /**
@@ -86,7 +99,11 @@ class NoticiaController extends Controller
         $request->validate([
             'titulo' => 'required',
             'contenido' => 'required',
-            'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN, // Validar que la imagen sea del tipo adecuado
+            'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN,
+            'categorias' => 'required|array|max:3',
+            'categorias.*' => 'exists:categorias,id',
+            'etiquetas' => 'required|array|max:3',
+            'etiquetas.*' => 'exists:etiquetas,id',
         ]);
 
         // Eliminar la imagen anterior si se proporciona una nueva
@@ -108,6 +125,10 @@ class NoticiaController extends Controller
             'titulo' => $request->titulo,
             'contenido' => $request->contenido,
         ]);
+
+        // Sincronizar las relaciones de categorías y etiquetas
+        $noticia->categorias()->sync($request->categorias);
+        $noticia->etiquetas()->sync($request->etiquetas);
 
         return redirect()->back()->with('success', 'Noticia actualizada exitosamente.');
     }

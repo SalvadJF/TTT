@@ -60,9 +60,12 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $noticia->id }}
                     </th>
-                    <td class="px-6 py-4">
-                        {{ $noticia->titulo }}
-                    </td>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('noticias.show', ['noticia' => $noticia]) }}" class="text-blue-600">
+                                {{ $noticia->titulo }}
+                            </a>
+                        </td>
+
                     @if ($noticia->usuario == null)
                         <td class="px-6 py-4">
                             Sin autor

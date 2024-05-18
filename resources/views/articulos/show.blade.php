@@ -101,7 +101,7 @@
                 </ul>
                 <ul class="mb-2 text-white">
                     @if($articulo->etiquetas->count() > 0)
-                        @foreach($noticia->etiquetas as $etiqueta)
+                        @foreach($articulo->etiquetas as $etiqueta)
                             <li class="font-koulen">{{ $etiqueta->nombre }}</li>
                         @endforeach
                     @else
