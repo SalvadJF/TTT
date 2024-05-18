@@ -1,36 +1,77 @@
 <x-app-layout>
     <div id="fondo">
-    <form method="POST" action="{{ route('noticias.store') }}" enctype="multipart/form-data" class="p-20">
-        @csrf
 
-        <!-- Titulo -->
-        <div>
-            <label for="titulo" :value="'Nombre de la noticia'" />
-            <input id="titulo" class="block mt-1 w-full" type="text" name="titulo" required autofocus />
-        </div>
+        <form id="noticiaForm" method="POST" action="{{ route('noticias.store') }}" enctype="multipart/form-data"
+            class="max-w-sm mx-auto">
+            @csrf
+            <div class="mb-5 pt-5 pb-5">
+                <label for="titulo" :value="'Titulo de la noticia'"
+                    class="font-koulen block mb-2 text-sm font-medium text-white ">Titulo de la noticia</label>
+                <input type="text" id="titulo"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="titulo" required autofocus />
+            </div>
+            <div class="mb-5 pt-5 pb-5">
+                <label for="contenido" class="font-koulen block mb-2 text-sm font-medium text-white">Contenido de la
+                    Noticia</label>
+                <textarea id="contenido" rows="4"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Describe tu Producto..." name="contenido" required></textarea>
+            </div>
 
-        <!-- Contenido -->
-        <div class="mt-4">
-            <label for="contenido" :value="'Descripción de la noticia'" />
-            <textarea id="contenido" class="block mt-1 w-full" name="contenido" required ></textarea>
-        </div>
+            <div class="mb-5 pt-5 pb-5">
+                <label for="categorias" class="font-koulen block mb-2 text-sm font-medium text-white">Selecciona
+                    Categorías</label>
+                <div>
+                    @foreach ($categorias as $categoria)
+                        <div>
+                            <input type="checkbox" id="categoria_{{ $categoria->id }}" name="categorias[]"
+                                value="{{ $categoria->id }}" class="mr-2">
+                            <label for="categoria_{{ $categoria->id }}"
+                                class="text-white">{{ $categoria->nombre }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
-        <!-- Imagen -->
-        <div class="mt-4">
-            <label for="imagen" :value="'Imagen de la noticia'" />
-            <input id="imagen" class="block mt-1 w-full" type="file" name="imagen" />
-        </div>
+            <div class="mb-5 pt-5 pb-5">
+                <label for="etiquetas" class="font-koulen block mb-2 text-sm font-medium text-white">Selecciona
+                    Etiquetas</label>
+                <div>
+                    @foreach ($etiquetas as $etiqueta)
+                        <div>
+                            <input type="checkbox" id="etiqueta_{{ $etiqueta->id }}" name="etiquetas[]"
+                                value="{{ $etiqueta->id }}" class="mr-2">
+                            <label for="etiqueta_{{ $etiqueta->id }}" class="text-white">{{ $etiqueta->nombre }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
-        <div class="flex items-center justify-end mt-">
-            <a href="{{ url()->previous() }}">
-                <x-secondary-button class="m-4">
-                    Volver
-                </x-secondary-button>
-            </a>
-            <x-primary-button class="ms-4">
-                Crear
-            </x-primary-button>
-        </div>
-    </form>
- </div>
+            <div class="mb-5 pt-5 pb-5">
+                <label for="imagen" :value="'Imagen de la Noticia'"
+                    class="font-koulen block mb-2 text-sm font-medium text-white">Importe la imagen de
+                    Presentacion del articulo</label>
+                <input id="imagen" type="file" name="imagen" accept="image/*" required
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+            </div>
+
+            <div class="flex items-center justify-center p-4 space-x-4">
+                <a href="{{ url()->previous() }}">
+                    <button
+                        class="font-koulen text-white bg-red-900 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Volver
+                    </button>
+                </a>
+                <button type="submit"
+                    class="font-koulen text-white bg-red-900 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Crear
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+
+
 </x-app-layout>
