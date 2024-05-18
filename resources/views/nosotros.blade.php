@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div id="fondoNosotros">
+    <div id="fondo">
         <div id="prueba"> </div>
 
         <p class="font-koulen">Texto con la fuente Koulen</p>
