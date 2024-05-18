@@ -27,6 +27,31 @@
                     <option value="Textura">Textura</option>
                 </select>
             </div>
+
+            <div class="mb-5 pt-5 pb-5">
+                <label for="categorias" class="font-koulen block mb-2 text-sm font-medium text-white">Selecciona Categorías</label>
+                <div>
+                    @foreach($categorias as $categoria)
+                        <div>
+                            <input type="checkbox" id="categoria_{{ $categoria->id }}" name="categorias[]" value="{{ $categoria->id }}" class="mr-2">
+                            <label for="categoria_{{ $categoria->id }}" class="text-white">{{ $categoria->nombre }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="mb-5 pt-5 pb-5">
+                <label for="etiquetas" class="font-koulen block mb-2 text-sm font-medium text-white">Selecciona Etiquetas</label>
+                <div>
+                    @foreach($etiquetas as $etiqueta)
+                        <div>
+                            <input type="checkbox" id="etiqueta_{{ $etiqueta->id }}" name="etiquetas[]" value="{{ $etiqueta->id }}" class="mr-2">
+                            <label for="etiqueta_{{ $etiqueta->id }}" class="text-white">{{ $etiqueta->nombre }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="mb-5 pt-5 pb-5">
                 <label for="imagen" :value="'Imagen del Articulo'"
                     class="font-koulen block mb-2 text-sm font-medium text-white">Importe la imagen de

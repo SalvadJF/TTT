@@ -70,7 +70,7 @@
                 </li>
                 <li class="font-koulen">
                     <x-nav-link :href="route('articulos.index')" :active="request()->routeIs('articulos.index')">
-                        {{ __('Modelos') }}
+                        {{ __('Articulos') }}
                     </x-nav-link>
                 </li>
                 <li class="font-koulen">
