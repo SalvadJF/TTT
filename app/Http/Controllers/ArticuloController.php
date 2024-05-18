@@ -15,7 +15,7 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::paginate(8);
+        $articulos = Articulo::orderBy('created_at', 'desc')->paginate(8);
         return view('articulos.index', ['articulos' => $articulos]);
     }
 
@@ -26,13 +26,13 @@ class ArticuloController extends Controller
     {
         $categorias = Categoria::all();
         $etiquetas = Etiqueta::all();
-        return view('articulos.create', compact('categorias', 'etiquetas'));
+        return view('articulos.create', ['categorias' => $categorias, 'etiquetas' => $etiquetas]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|max:255',
@@ -84,8 +84,10 @@ class ArticuloController extends Controller
         if (auth()->id() !== $articulo->user_id && !auth()->user()->isAdmin()) {
             abort(403); // No autorizado
         }
+        $categorias = Categoria::all();
+        $etiquetas = Etiqueta::all();
 
-        return view('articulos.edit', ['articulo' => $articulo]);
+        return view('articulos.edit', ['articulo' => $articulo, 'categorias' => $categorias, 'etiquetas' => $etiquetas]);
     }
 
     /**
@@ -104,6 +106,10 @@ class ArticuloController extends Controller
             'tipo' => 'required|in:Modelo_3d,Textura',
             'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
             'modelo' => 'file',
+            'categorias' => 'required|array|max:3',
+            'categorias.*' => 'exists:categorias,id',
+            'etiquetas' => 'required|array|max:3',
+            'etiquetas.*' => 'exists:etiquetas,id',
         ]);
 
         // Actualizar imagen solo si se proporciona un nuevo archivo de imagen
@@ -121,7 +127,6 @@ class ArticuloController extends Controller
                 'imagen' => $imagenNombre,
             ]);
         }
-        // AHora mismo solo se puede actualizar a la vez uno de los archivos o imagen o modelo, debo investigar porque
         // Actualizar modelo solo si se proporciona un nuevo archivo de modelo
         if ($request->hasFile('modelo')) {
             // Eliminar el modelo anterior si existe
@@ -145,8 +150,13 @@ class ArticuloController extends Controller
             'tipo' => $request->tipo,
         ]);
 
+        // Sincronizar las relaciones de categorías y etiquetas
+        $articulo->categorias()->sync($request->categorias);
+        $articulo->etiquetas()->sync($request->etiquetas);
+
         return redirect()->back()->with('success', 'La noticia se ha actualizado correctamente.');
     }
+
 
 
 
