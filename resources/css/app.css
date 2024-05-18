@@ -15,56 +15,28 @@
     src: url('../../public/fonts/Lato.ttf') format('truetype');
 }
 
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 2s ease-in-out;
+  }
+
 
 /*
     Fondos de la Aplicacion
 */
 
-#fondoHome {
-    background-color: transparent;
-    background-size: cover;
-    /* Ajusta el tamaño del fondo */
-    background-repeat: no-repeat;
-    /* Evita la repetición del fondo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoHome.jpg");
+#fondo {
+    background: linear-gradient(rgb(102, 3, 3), rgba(0, 0, 0, 1));
 }
 
-#fondoArticulo {
-    background-color: transparent;
-    background-size: cover;
-    /* Ajusta el tamaño del fondo */
-    background-repeat: no-repeat;
-    /* Evita la repetición del fondo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoArticulo.jpg");
-}
-
-#fondoNoticia {
-    background-color: transparent;
-    background-size: cover;
-    /* Ajusta el tamaño del fondo */
-    background-repeat: no-repeat;
-    /* Evita la repetición del fondo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoNoticias.jpg");
-}
-
-#fondoNosotros {
-    background-color: transparent;
-    background-size: cover;
-    /* Ajusta el tamaño del fondo */
-    background-repeat: no-repeat;
-    /* Evita la repetición del fondo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoNosotros.jpg");
-}
-
-#fondoUser {
-    background-color: transparent;
-    background-size: cover;
-    /* Ajusta el tamaño del fondo */
-    background-repeat: no-repeat;
-    /* Evita la repetición del fondo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("fondoUser.jpg");
-
-}
 
 
 .div-oscuro {

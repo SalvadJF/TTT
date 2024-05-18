@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div id="fondoArticulo">
+    <div id="fondo">
         {{-- El Breadcrumb para saber dónde estamos --}}
 <nav class="flex pl-10 pt-10" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">

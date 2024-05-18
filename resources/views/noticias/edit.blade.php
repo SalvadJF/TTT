@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div id="fondoNoticia">
+    <div id="fondo">
     <form method="POST" action="{{ route('noticias.update', ['noticia' => $noticia->id]) }}" enctype="multipart/form-data" class="p-20">
         @csrf
         @method('PUT')
