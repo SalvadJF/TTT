@@ -61,7 +61,9 @@
                         {{ $articulo->id }}
                     </th>
                     <td class="px-6 py-4">
+                        <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}" class="text-blue-600">
                         {{ $articulo->nombre }}
+                        </a>
                     </td>
                     @if ($articulo->user == null)
                             <td class="px-6 py-4">
