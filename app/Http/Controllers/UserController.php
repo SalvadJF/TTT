@@ -37,7 +37,8 @@ class UserController extends Controller
      */
     public function show(User $usuario)
     {
-        //
+        $articulos = $usuario->articulos()->paginate(8);
+        return view('usuarios.show', ['usuario' => $usuario , 'articulos' => $articulos]);
     }
 
     /**
