@@ -38,7 +38,7 @@
 
             <div class="flex flex-col items-center justify-center  p-10">
                 <div class="text-left w-full">
-                    <h1 class="mb-5 text-4xl font-koulen text-white">Ultimas Noticias</h1>
+                    <h1 class="mb-5 text-4xl font-koulen text-white">Novedades</h1>
                 </div>
                 <div class="flex flex-wrap gap-5 justify-center">
                     @foreach ($ultimasNoticias as $noticia)
@@ -93,7 +93,7 @@
                 </h1>
                 </div>
 
-                <div class="flex flex-wrap gap-5 justify-center">
+                <div class="flex flex-wrap gap-5 justify-center ">
                     @foreach ($ultimosArticulos as $articulo)
                         <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}"
                            class="max-w-sm bg-cover bg-center bg-no-repeat bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex-1"

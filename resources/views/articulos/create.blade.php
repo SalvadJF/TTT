@@ -65,6 +65,8 @@
                     articulo</label>
                 <input id="modelo" type="file" name="modelo" accept=".stl" required
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                    <div class="mt-1 text-sm text-gray-200" >Tamaño maximo 50mb</div>
+                    <div class="mt-1 text-sm text-gray-200" >Formatos validos : stl</div>
             </div>
 
             <div class="flex items-center justify-center p-4 space-x-4">
