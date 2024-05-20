@@ -151,7 +151,7 @@
 
         {{-- Formulario para agregar comentario --}}
         <div class="w-full">
-            <form class="max-w-full mx-auto" method="POST" action="{{ route('comentarios.store') }}">
+            <form id="comentarioForm" class="max-w-full mx-auto" method="POST" action="{{ route('comentarios.store') }}">
                 @csrf
                 <label for="message" class="block mb-2 text-sm font-lato text-white">¡Comenta!</label>
                 <input type="hidden" name="comentable_type" value="App\Models\Articulo">
@@ -162,4 +162,33 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#comentarioForm').submit(function(event) {
+            // Limpiar mensajes de error anteriores
+            $('.error-message').remove();
+
+            var contenido = $('#contenido').val().trim();
+            var maxLength = 255;
+
+            var errors = [];
+
+            if (contenido === '') {
+                errors.push('No puedes enviar un comentario vacio');
+                $('#contenido').after('<div class="error-message text-red-500">No puedes enviar un comentario vacio</div>');
+            }
+
+            if (contenido.length > maxLength) {
+                errors.push('El contenido del comentario no puede superar los ' + maxLength + ' caracteres.');
+                $('#contenido').after('<div class="error-message text-red-500">El contenido del comentario no puede superar los ' + maxLength + ' caracteres.</div>');
+            }
+
+            if (errors.length > 0) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
 </x-app-layout>

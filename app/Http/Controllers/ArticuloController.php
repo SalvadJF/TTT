@@ -154,7 +154,7 @@ class ArticuloController extends Controller
         $articulo->categorias()->sync($request->categorias);
         $articulo->etiquetas()->sync($request->etiquetas);
 
-        return redirect()->back()->with('success', 'La noticia se ha actualizado correctamente.');
+        return view('articulos.show', ['articulo' => $articulo]);
     }
 
 

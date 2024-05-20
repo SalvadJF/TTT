@@ -43,7 +43,7 @@
 
 
 <div class="p-10 bg-opacity-10">
-    <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-900 dark:bg-blue-900 text-white m-5">
+    <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-900 dark:bg-blue-900 text-white p-7 font-koulen">
         <h2 id="accordion-color-heading-usuarios">
             <button type="button" class="text-center flex items-center justify-between w-full p-5 font-medium rtl:text-right text-white border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-blue-800 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-700 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-usuarios" aria-expanded="true" aria-controls="accordion-color-body-usuarios">
                 <span>Mis Articulos</span>
@@ -54,9 +54,12 @@
         </h2>
         <div id="accordion-color-body-usuarios" class="hidden" aria-labelledby="accordion-color-heading-usuarios">
             <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
-                <p class="mb-5 text-white dark:text-gray-400">Numero actual de usuarios </p>
-                <p class="mb-5 text-white dark:text-gray-400">Ultimo usuario creado </p>
-                <a href="{{ route('admin.usuarios') }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Usuarios DB</a>
+                @foreach($user->articulos as $articulo)
+
+                    <p class="mb-5 text-white dark:text-gray-400">{{$articulo->id}}. {{$articulo->title}}</p>
+
+                @endforeach
+
             </div>
         </div>
         <h2 id="accordion-color-heading-articulos">
@@ -69,9 +72,11 @@
         </h2>
         <div id="accordion-color-body-articulos" class="hidden" aria-labelledby="accordion-color-heading-articulos">
             <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
-                <p class="mb-5 text-white dark:text-gray-400">Numero actual de articulos </p>
-                <p class="mb-5 text-white dark:text-gray-400">Ultimo articulo creado </p>
-                <a href="{{ route('admin.articulos') }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Articulos DB</a>
+                @foreach($user->comentarios as $comentario)
+
+                    <p class="mb-5 text-white dark:text-gray-400">{{$comentario->id}}. {{$comentario->title}}</p>
+
+                @endforeach
             </div>
         </div>
         <h2 id="accordion-color-heading-noticias">
@@ -86,7 +91,7 @@
             <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
                 <p class="mb-5 text-white dark:text-gray-400">Número actual de noticias </p>
                 <p class="mb-5 text-white dark:text-gray-400">Última noticia creada </p>
-                <a href="{{ route('admin.noticias') }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Noticias DB</a>
+                <a href="{{ route('profile.edit', $user) }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Noticias DB</a>
             </div>
         </div>
     </div>

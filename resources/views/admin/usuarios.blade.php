@@ -48,6 +48,9 @@
                         Email
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Rol
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Fecha de Creacion
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -68,16 +71,27 @@
                         {{ $usuario->email }}
                     </td>
                     <td class="px-6 py-4">
+                        @if ($usuario->isAdmin())
+                        Admin
+                        @else
+                        Usuario
+                        @endif
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $usuario->created_at }}
                     </td>
                     <td>
-                        <form action="{{ route('usuarios.destroy', ['usuario' => $usuario]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <x-primary-button class="bg-red-500">
-                                Borrar
-                            </x-primary-button>
-                        </form>
+                        @if ($usuario->isAdmin() || $usuario->id == Auth::user()->id)
+
+                        @else
+                            <form action="{{ route('usuarios.destroy', ['usuario' => $usuario]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-primary-button class="bg-red-500">
+                                    Borrar
+                                </x-primary-button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

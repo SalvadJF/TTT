@@ -9,7 +9,7 @@
                 class="font-koulen block mb-2 text-sm font-medium text-white ">Titulo de la noticia</label>
             <input type="text" id="titulo"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="titulo" required autofocus value="{{ old('nombre', $noticia->titulo) }}"/>
+                name="titulo" required autofocus value="{{ old('titulo', $noticia->titulo) }}"/>
         </div>
         <div class="mb-5 pt-5 pb-5">
             <label for="contenido" class="font-koulen block mb-2 text-sm font-medium text-white">Contenido de la
@@ -51,6 +51,8 @@
                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
         </div>
 
+        <div id="errorContainer" class="text-red-500"></div>
+
         <div class="flex items-center justify-center p-4 space-x-4">
             <a href="{{ url()->previous() }}">
                 <button
@@ -66,4 +68,56 @@
     </form>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#noticiaForm').submit(function(event) {
+            $('.error-message').remove(); // Eliminar mensajes de error anteriores
+
+            var titulo = $('#titulo').val().trim();
+            var contenido = $('#contenido').val().trim();
+            var categorias = $('input[name="categorias[]"]:checked').length;
+            var etiquetas = $('input[name="etiquetas[]"]:checked').length;
+
+            var errors = [];
+
+            if (titulo === '') {
+                errors.push('El título de la noticia es requerido.');
+            }
+
+            if (contenido === '') {
+                errors.push('El contenido de la noticia es requerido.');
+            }
+
+            if (categorias < 1) {
+                errors.push('Debe seleccionar al menos una categoría.');
+            }
+
+            if (categorias > 3) {
+                errors.push('Solo puede seleccionar hasta tres categorías.');
+            }
+
+            if (etiquetas < 1) {
+                errors.push('Debe seleccionar al menos una etiqueta.');
+            }
+
+            if (etiquetas > 3) {
+                errors.push('Solo puede seleccionar hasta tres etiquetas.');
+            }
+
+            if (errors.length > 0) {
+                event.preventDefault();
+                var errorMessage = '<div class="error-message text-red-500 mb-4">Por favor, corrija los siguientes errores:</div>';
+                errorMessage += '<ul class="error-list">';
+                errors.forEach(function(error) {
+                    errorMessage += '<li>' + error + '</li>';
+                });
+                errorMessage += '</ul>';
+                $('#errorContainer').html(errorMessage);
+            }
+        });
+    });
+</script>
+
 </x-app-layout>

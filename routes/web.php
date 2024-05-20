@@ -9,9 +9,16 @@ use App\Http\Controllers\UserController;
 use App\Models\Articulo;
 use App\Models\Noticia;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
+use Inertia\Inertia;
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/example', function () {
+    return Inertia::render('Example');
 });
 
 Route::get('/home', function () {
