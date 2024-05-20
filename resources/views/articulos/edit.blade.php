@@ -9,14 +9,14 @@
                     class="font-koulen block mb-2 text-sm font-medium text-white ">Nombre del Articulo</label>
                 <input type="text" id="titulo"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="nombre" required autofocus value="{{ old('nombre', $articulo->nombre) }}">
+                    name="nombre"  autofocus value="{{ old('nombre', $articulo->nombre) }}">
             </div>
             <div class="mb-5 pt-5 pb-5">
                 <label for="descripcion" class="font-koulen block mb-2 text-sm font-medium text-white">Descripcion del
                     Articulo</label>
                 <textarea id="descripcion" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Describe tu Producto..." name="descripcion" required>{{ old('descripcion', $articulo->descripcion) }}</textarea>
+                    placeholder="Describe tu Producto..." name="descripcion" >{{ old('descripcion', $articulo->descripcion) }}</textarea>
             </div>
             <div class="mb-5 pt-5 pb-5">
                 <label for="tipo" class="font-koulen block mb-2 text-sm font-medium text-white">Seleciona el
@@ -68,6 +68,8 @@
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
             </div>
 
+            <div id="errorContainer" class="text-red-500"></div>
+
             <div class="flex items-center justify-center p-4 space-x-4">
                 <a href="{{ url()->previous() }}">
                     <button
@@ -83,5 +85,63 @@
         </form>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#articuloForm').submit(function(event) {
+                // Limpiar mensajes de error anteriores
+                $('.error-message').remove();
+
+                var nombre = $('#nombre').val().trim();
+                var descripcion = $('#descripcion').val().trim();
+                var tipo = $('#tipo').val();
+                var categorias = $('input[name="categorias[]"]:checked').length;
+                var etiquetas = $('input[name="etiquetas[]"]:checked').length;
+
+                var errors = [];
+
+                if (nombre === '') {
+                    errors.push('El nombre del artículo es requerido.');
+                }
+
+                if (descripcion === '') {
+                    errors.push('La descripción del artículo es requerida.');
+                }
+
+                if (tipo === '') {
+                    errors.push('El tipo del artículo es requerido.');
+                }
+
+                if (categorias < 1) {
+                    errors.push('Debe seleccionar al menos una categoría.');
+                }
+
+                if (categorias > 3) {
+                    errors.push('Solo puede seleccionar hasta tres categorías.');
+                }
+
+                if (etiquetas < 1) {
+                    errors.push('Debe seleccionar al menos una etiqueta.');
+                }
+
+                if (etiquetas > 3) {
+                    errors.push('Solo puede seleccionar hasta tres etiquetas.');
+                }
+
+                if (errors.length > 0) {
+                    event.preventDefault();
+                    var errorMessage = '<div class="error-message text-red-500">Por favor, corrija los siguientes errores:</div>';
+                    errorMessage += '<ul class="error-list">';
+                    errors.forEach(function(error) {
+                        errorMessage += '<li>' + error + '</li>';
+                    });
+                    errorMessage += '</ul>';
+                    $('#errorContainer').html(errorMessage);
+                }
+            });
+        });
+    </script>
+
 
 </x-app-layout>

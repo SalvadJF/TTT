@@ -1,29 +1,50 @@
-function validateForm(event) {
-    const nombre = document.getElementById('titulo');
-    const descripcion = document.getElementById('descripcion');
-    const tipo = document.getElementById('tipo');
-    const imagen = document.getElementById('imagen');
-    const modelo = document.getElementById('modelo');
+$(document).ready(function() {
+    $('#articuloForm').submit(function(event) {
+        var nombre = $('#nombre').val();
+        var descripcion = $('#descripcion').val();
+        var tipo = $('#tipo').val();
+        var imagen = $('#imagen').val();
+        var modelo = $('#modelo').val();
+        var categorias = $('input[name="categorias[]"]:checked').length;
+        var etiquetas = $('input[name="etiquetas[]"]:checked').length;
 
-    if (!nombre.value || !descripcion.value || !tipo.value || !imagen.value || !modelo.value) {
-        event.preventDefault();
-        alert("Por favor, complete todos los campos.");
-        return false;
-    }
+        var errors = [];
 
-    const imagenExtension = imagen.value.split('.').pop().toLowerCase();
-    if (!['jpg', 'jpeg', 'png'].includes(imagenExtension)) {
-        event.preventDefault();
-        alert("El archivo de imagen debe tener una extensión válida (jpg, jpeg, png).");
-        return false;
-    }
+        if (nombre.trim() === '') {
+            errors.push('El nombre del artículo es requerido.');
+        }
 
-    const modeloExtension = modelo.value.split('.').pop().toLowerCase();
-    if (modeloExtension !== 'stl') {
-        event.preventDefault();
-        alert("El archivo de modelo debe tener una extensión válida (.stl).");
-        return false;
-    }
+        if (descripcion.trim() === '') {
+            errors.push('La descripción del artículo es requerida.');
+        }
 
-    return true;
-}
+        if (tipo.trim() === '') {
+            errors.push('El tipo del artículo es requerido.');
+        }
+
+        if (imagen === '' && modelo === '') {
+            errors.push('Debe subir al menos una imagen o un modelo del artículo.');
+        }
+
+        if (categorias < 1) {
+            errors.push('Debe seleccionar al menos una categoría.');
+        }
+
+        if (categorias > 3) {
+            errors.push('Solo puede seleccionar hasta tres categorías.');
+        }
+
+        if (etiquetas < 1) {
+            errors.push('Debe seleccionar al menos una etiqueta.');
+        }
+
+        if (etiquetas > 3) {
+            errors.push('Solo puede seleccionar hasta tres etiquetas.');
+        }
+
+        if (errors.length > 0) {
+            event.preventDefault();
+            alert(errors.join('\n'));
+        }
+    });
+});
