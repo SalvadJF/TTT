@@ -43,7 +43,7 @@
 
 
 <div class="p-10 bg-opacity-10">
-    <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-900 dark:bg-blue-900 text-white m-5">
+    <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-900 dark:bg-blue-900 text-white p-7 font-koulen">
         <h2 id="accordion-color-heading-usuarios">
             <button type="button" class="text-center flex items-center justify-between w-full p-5 font-medium rtl:text-right text-white border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-blue-800 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-700 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-usuarios" aria-expanded="true" aria-controls="accordion-color-body-usuarios">
                 <span>Usuarios</span>

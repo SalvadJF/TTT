@@ -26,16 +26,15 @@
                 </div>
                 <h1 class="font-koulen text-6xl font-bold text-white mb-4">Trazos, Texturas y Tecnología 3D</h1>
                 <h2 class="font-koulen text-4xl font-bold text-white mb-4">Bienvenido</h2>
-                <p class=" font-lato text-lg text-white mb-8">Únete a nuestra comunidad y explora una amplia colección de modelos 3D de alta calidad.</p>
-                <p class=" font-lato text-lg text-white mb-8">Regístrate ahora y empieza a crear, comprar y vender tus diseños</p>
+                <p class=" font-lato text-lg text-white mb-8">Únete a nuestra comunidad y explora una amplia colección de modelos 3D de alta calidad</p>
+                <p class=" font-lato text-lg text-white mb-8">¡Regístrate ahora y empieza a comprar, vender y compartir tus diseños!</p>
                 @if (Route::has('login'))
                     <nav class="flex justify-center space-x-4">
                         @auth
                         <div class="flex-col justify-center">
-                            <p class=" font-lato text-lg text-white mb-8">Ya estas Registrado</p>
                             <a
                                 href="{{ url('/home') }}"
-                                class=" font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-gray-700 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700"
+                                class=" font-koulen rounded-md px-10 py-4 text-white bg-black hover:hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700"
                             >
                                 Home
                             </a>
@@ -45,7 +44,7 @@
                         @else
                             <a
                                 href="{{ route('login') }}"
-                                class="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-gray-300 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700"
+                                class="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700"
                             >
                                 Log in
                             </a>
@@ -53,7 +52,7 @@
                             @if (Route::has('register'))
                                 <a
                                     href="{{ route('register') }}"
-                                    class="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-gray-300 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700"
+                                    class="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700"
                                 >
                                     Registrate
                                 </a>
