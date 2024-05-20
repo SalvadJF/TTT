@@ -9,9 +9,16 @@ use App\Http\Controllers\UserController;
 use App\Models\Articulo;
 use App\Models\Noticia;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
+use Inertia\Inertia;
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/example', function () {
+    return Inertia::render('Example');
 });
 
 Route::get('/home', function () {
@@ -25,14 +32,14 @@ Route::get('/nosotros', function () {
     return view('nosotros');
 })->middleware(['auth', 'verified'])->name('nosotros');
 
-
+/*
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+*/
 Route::resource('profile',  ProfileController::class)->middleware('auth');
 
 Route::get('/modelo', function () {
