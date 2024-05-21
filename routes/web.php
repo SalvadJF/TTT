@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
@@ -40,5 +41,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::put('/articulos', [ArticuloController::class, 'store'])->name('articulos.store')->middleware('auth');
+Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update')->middleware('auth');
+
+Route::put('/noticias', [NoticiaController::class, 'store'])->name('noticias.store')->middleware('auth');
+Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticias.update')->middleware('auth');
+
+Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store')->middleware('auth');
 
 require __DIR__.'/auth.php';
