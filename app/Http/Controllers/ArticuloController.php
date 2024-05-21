@@ -111,8 +111,10 @@ use Inertia\Inertia;
          }
          $categorias = Categoria::all();
          $etiquetas = Etiqueta::all();
+         $categoriasArticulo = $articulo->categorias;
+        $etiquetasArticulo = $articulo->etiquetas;
 
-        return Inertia::render('Articulos/Edit', ['articulo' => $articulo, 'categorias' => $categorias, 'etiquetas' => $etiquetas]);
+        return Inertia::render('Articulos/Edit', ['articulo' => $articulo, 'categorias' => $categorias, 'etiquetas' => $etiquetas , 'categoriasArticulo' => $categoriasArticulo, 'etiquetasArticulo' => $etiquetasArticulo]);
      }
 
      /**
@@ -126,15 +128,15 @@ use Inertia\Inertia;
          }
 
          $request->validate([
-             'nombre' => 'required|max:255',
-             'descripcion' => 'required|max:65535',
-             'tipo' => 'required|in:Modelo_3d,Textura',
-             'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-             'modelo' => 'file',
-             'categorias' => 'required|array|max:3',
-             'categorias.*' => 'exists:categorias,id',
-             'etiquetas' => 'required|array|max:3',
-             'etiquetas.*' => 'exists:etiquetas,id',
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required|max:65535',
+            'tipo' => 'required|in:Modelo_3d,Textura',
+            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+            'modelo' => 'file',
+            'categorias' => 'required|array|max:3',
+            'categorias.*' => 'exists:categorias,id',
+            'etiquetas' => 'required|array|max:3',
+            'etiquetas.*' => 'exists:etiquetas,id',
         ]);
 
         $articulo->update([
@@ -153,9 +155,10 @@ use Inertia\Inertia;
              $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
 
              $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+             $imagenPath = ('img/articulos/' . $imagenNombre);
 
              $articulo->update([
-                 'imagen' => $imagenNombre,
+                 'imagen' => $imagenPath,
              ]);
          }
          // Actualizar modelo solo si se proporciona un nuevo archivo de modelo
