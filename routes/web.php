@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DashboardController;
@@ -54,6 +55,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
+Route::get('/admin/noticias', [AdminController::class, 'noticias'])->name('admin.noticias');
+Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('admin.articulos');
+Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
 
 
 require __DIR__.'/auth.php';

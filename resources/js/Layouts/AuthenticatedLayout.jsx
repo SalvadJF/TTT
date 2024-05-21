@@ -12,7 +12,7 @@ export default function Authenticated({ user, header, children }) {
 
     return (
         <div id="fondo" className="min-h-screen">
-            <NavBar auth={user}  />
+            <NavBar user={user}  />
 
             {header && (
                 <header className=" hidden bg-white shadow">

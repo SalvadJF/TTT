@@ -13,7 +13,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
         <header>
             <nav className="bg-white border-gray-200 dark:bg-gray-900 h-32  w-full fixed top-0">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <Link href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <ApplicationLogo className="w-20 h-20" />
                     </Link>
                     <div className="flex items-center md:order-2 space-x-3 rtl:space-x-reverse">
@@ -25,7 +25,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                             onClick={() => setShowUserDropdown(!showUserDropdown)}
                         >
                             <span className="sr-only">Abrir Menu</span>
-                            {user?.avatarUrl ? (
+                            {user?.avatar ? (
                                 <img className="w-8 h-8 rounded-full" src={user.avatar} alt="user" />
                             ) : (
                                 <img className="w-8 h-8 rounded-full" src="/img/users/avatar.png" alt="user" />
@@ -46,7 +46,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                                             Mi perfil
                                         </Link>
                                     </li>
-                                    {user?.isAdmin && (
+                                    {user?.admin && (
                                         <li>
                                             <Link
                                                 href={route('admin.index')}
