@@ -1,24 +1,24 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-import ArticuloExposicion from '@/Components/ArticuloExposicion';
+import NoticiasExposicion from '@/Components/NoticiaExposicion';
 import Encabezado from '@/Components/Encabezado';
 import  Boton  from '@/Components/Botones';
 
-export default function Index({ auth, articulos }) {
+export default function Index({ auth, noticias }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Articulos</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Noticias</h2>}
         >
-            <Head title="Articulos" />
-                <div class="p-20">
-                    <ArticuloExposicion articulos={articulos} />
-                </div>
+            <Head title="Noticias" />
+            <div class="p-20">
+                <NoticiasExposicion noticias={noticias} />
+            </div>
 
                 <div className="mt-4">
                 <nav aria-label="Page navigation">
                     <ul className="inline-flex items-center -space-x-px">
-                        {articulos.links.map((link, index) => (
+                        {noticias.links.map((link, index) => (
                             <li key={index}>
                                 <Link
                                     href={link.url || '#'}

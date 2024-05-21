@@ -5,7 +5,7 @@ export default function NoticiaCarta ({ noticia }) {
                 {noticia.imagen ? (
                     <img
                         className="object-cover w-full rounded-t-lg md:h-auto md:w-auto md:rounded-lg"
-                        src={noticia.imagen_URL}
+                        src={noticia.imagen_url}
                         alt="Imagen de la noticia"
                     />
                 ) : (

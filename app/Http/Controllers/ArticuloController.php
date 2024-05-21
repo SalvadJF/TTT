@@ -17,7 +17,7 @@ use Inertia\Inertia;
     public function index()
 
      {
-         $articulos = Articulo::orderBy('created_at', 'desc')->paginate(8);
+        $articulos = Articulo::with('user')->orderBy('created_at', 'desc')->latest()->paginate(8);
         return Inertia::render('Articulos/Index', ['articulos' => $articulos]);
 
      }
