@@ -32,6 +32,18 @@ Route::get('/modelo', function () {
 });
 
 
+Route::middleware('auth')->group(function () {
+    Route::get('/articulos/create', [ArticuloController::class, 'create'])->name('articulos.create');
+    Route::post('/articulos', [ArticuloController::class, 'store'])->name('articulos.store');
+    Route::get('/articulos/{articulo}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
+    Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update');
+});
+
+Route::put('/noticias', [NoticiaController::class, 'store'])->name('noticias.store')->middleware('auth');
+Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticias.update')->middleware('auth');
+
+Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store')->middleware('auth');
+
 Route::resource('articulos', ArticuloController::class);
 
 Route::resource('noticias', NoticiaController::class);
@@ -42,12 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::put('/articulos', [ArticuloController::class, 'store'])->name('articulos.store')->middleware('auth');
-Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update')->middleware('auth');
 
-Route::put('/noticias', [NoticiaController::class, 'store'])->name('noticias.store')->middleware('auth');
-Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticias.update')->middleware('auth');
-
-Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store')->middleware('auth');
 
 require __DIR__.'/auth.php';

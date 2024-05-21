@@ -36,34 +36,41 @@ use Inertia\Inertia;
      /**
       * Store a newly created resource in storage.
       */
-    public function store(Request $request)
-     {
-         $request->validate([
-             'nombre' => 'required|max:255',
-             'descripcion' => 'required|max:65535',
-             'tipo' => 'required|in:Modelo_3d,Textura',
-             'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-             'modelo' => 'file',
-             'categorias' => 'required|array|max:3',
-             'categorias.*' => 'exists:categorias,id',
-             'etiquetas' => 'required|array|max:3',
-             'etiquetas.*' => 'exists:etiquetas,id',
-         ]);
-         $articulo = Articulo::create([
-             'nombre' => $request->nombre,
-             'descripcion' => $request->descripcion,
-             'tipo' => $request->tipo,
-            'modelo' => '',
-            'imagen' => '',
+      public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required|max:65535',
+            'tipo' => 'required|in:Modelo_3d,Textura',
+            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+            'modelo' => 'file',
+            'categorias' => 'required|array|max:3',
+            'categorias.*' => 'exists:categorias,id',
+            'etiquetas' => 'required|array|max:3',
+            'etiquetas.*' => 'exists:etiquetas,id',
+        ]);
 
-             'user_id' => auth()->id(),
-         ]);
+        $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+        $request->imagen->move(public_path('img/articulos'), $imagenNombre);
 
-         $articulo->categorias()->attach($request->categorias);
-         $articulo->etiquetas()->attach($request->etiquetas);
+        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
+        $request->modelo->move(public_path('img/modelos'), $modeloNombre);
 
-         return redirect()->route('articulos.show', $articulo);
-     }
+        $articulo = Articulo::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'tipo' => $request->tipo,
+            'modelo' => $modeloNombre,
+            'imagen' => $imagenNombre,
+            'user_id' => auth()->id(),
+        ]);
+
+        $articulo->categorias()->attach($request->categorias);
+        $articulo->etiquetas()->attach($request->etiquetas);
+
+        return redirect()->route('articulos.show', $articulo);
+    }
+
 
      /**
       * Display the specified resource.
