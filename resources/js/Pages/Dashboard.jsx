@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import NoticiaCarta from '@/Components/NoticiaCarta';
 
 export default function Dashboard({ auth, noticias, articulos }) {
     return (
@@ -21,7 +22,6 @@ export default function Dashboard({ auth, noticias, articulos }) {
                         <tr key={noticia.id}>
                             <td>{noticia.titulo}</td>
                             <td>{noticia.contenido}</td>
-                            <td>{new Date(noticia.created_at).toLocaleDateString()}</td>
                         </tr>
                     ))}</div>
 

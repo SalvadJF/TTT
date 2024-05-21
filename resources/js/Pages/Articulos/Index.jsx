@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import { useEffect } from 'react';
 import { BreadcrumbArticulos } from '@/Components/BreadCrumb';
 import Modelo3D from '@/Components/Modelo3D';
-import ArticulosLista from '@/Components/ArticulosLista';
+import ArticuloCarta from '@/Components/ArticuloCarta';
 
 export default function Index({ auth, articulos }) {
 
@@ -14,7 +14,9 @@ export default function Index({ auth, articulos }) {
         >
             <Head title="Dashboard" />
             <BreadcrumbArticulos />
-            <ArticulosLista articulos={articulos} />
+            {articulos.data.map(articulo =>(
+            <ArticuloCarta articulos={articulos} />
+            )) }
         </AuthenticatedLayout>
     );
 }

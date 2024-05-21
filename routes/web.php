@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
@@ -31,6 +32,8 @@ Route::get('/modelo', function () {
 
 
 Route::resource('articulos', ArticuloController::class);
+
+Route::resource('noticias', NoticiaController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
