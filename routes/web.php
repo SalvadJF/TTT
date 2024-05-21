@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
@@ -16,9 +17,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+->middleware(['auth'])
+->name('dashboard');
 
 Route::get('/nosotros', function () {
     return Inertia::render('Nosotros');
