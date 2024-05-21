@@ -2,7 +2,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 function Breadcrumbs() {
   return (
-    <Breadcrumb >
+    <Breadcrumb class='ml-5 font-koulen'>
       <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
     </Breadcrumb>
   );
@@ -19,23 +19,23 @@ function BreadcrumbArticulos() {
     );
   }
 
-  function BreadcrumbArticulosShow( $articulo) {
+  function BreadcrumbArticulosShow({articulo}) {
     return (
-      <Breadcrumb>
+      <Breadcrumb class='ml-5 font-koulen'>
         <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item href="/articulos">
           Articulos
         </Breadcrumb.Item>
         <Breadcrumb.Item href="">
-          $articulo
+          {articulo.nombre}
         </Breadcrumb.Item>
       </Breadcrumb>
     );
   }
 
-  function BreadcrumbNoticias( $articulo) {
+  function BreadcrumbNoticias() {
     return (
-      <Breadcrumb>
+      <Breadcrumb class='ml-5 font-koulen'>
         <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item href="">
           Noticias
@@ -44,15 +44,15 @@ function BreadcrumbArticulos() {
     );
   }
 
-  function BreadcrumbNoticiasShow( $noticia) {
+  function BreadcrumbNoticiasShow( {noticia}) {
     return (
-      <Breadcrumb>
+      <Breadcrumb class='ml-5 font-koulen'>
         <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href="/articulos">
+        <Breadcrumb.Item href="/noticias">
           Noticias
         </Breadcrumb.Item>
         <Breadcrumb.Item href="">
-          $noticia
+          {noticia.titulo}
         </Breadcrumb.Item>
       </Breadcrumb>
     );
@@ -60,7 +60,7 @@ function BreadcrumbArticulos() {
 
   function BreadcrumbNosotros() {
     return (
-      <Breadcrumb>
+      <Breadcrumb class='ml-5 font-koulen'>
         <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item href="">
           Nosotros

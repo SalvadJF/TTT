@@ -26,7 +26,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                         >
                             <span className="sr-only">Abrir Menu</span>
                             {user?.avatarUrl ? (
-                                <img className="w-8 h-8 rounded-full" src={user.avatarUrl} alt="user" />
+                                <img className="w-8 h-8 rounded-full" src={user.avatar} alt="user" />
                             ) : (
                                 <img className="w-8 h-8 rounded-full" src="/img/users/avatar.png" alt="user" />
                             )}

@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 import ArticuloExposicion from '@/Components/ArticuloExposicion';
 import Encabezado from '@/Components/Encabezado';
 import  Boton  from '@/Components/Botones';
+import { BreadcrumbArticulos } from '@/Components/BreadCrumb';
 
 export default function Index({ auth, articulos }) {
     return (
@@ -11,7 +12,10 @@ export default function Index({ auth, articulos }) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Articulos</h2>}
         >
             <Head title="Articulos" />
-                <div class="p-20">
+            <div class=" ml-20 pt-40">
+                <BreadcrumbArticulos />
+            </div>
+                <div>
                     <ArticuloExposicion articulos={articulos} />
                 </div>
 

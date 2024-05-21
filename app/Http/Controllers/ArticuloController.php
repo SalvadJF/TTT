@@ -68,10 +68,28 @@ use Inertia\Inertia;
      /**
       * Display the specified resource.
       */
-    public function show(Articulo $articulo)
-     {
-        return Inertia::render('Articulos/Show', ['articulo' => $articulo]);
-     }
+      public function show(Articulo $articulo)
+      {
+          // Obtener las categorías asociadas al artículo
+          $categorias = $articulo->categorias()->get();
+
+          // Obtener las etiquetas asociadas al artículo
+          $etiquetas = $articulo->etiquetas()->get();
+
+          // Obtener los comentarios asociados al artículo
+          $comentarios = $articulo->comentarios()->get();
+
+          // Obtener el usuario asociado al artículo
+          $user = $articulo->user()->first();
+
+          return Inertia::render('Articulos/Show', [
+              'articulo' => $articulo,
+              'categorias' => $categorias,
+              'etiquetas' => $etiquetas,
+              'comentarios' => $comentarios,
+              'user' => $user,
+          ]);
+      }
 
      /**
       * Show the form for editing the specified resource.
