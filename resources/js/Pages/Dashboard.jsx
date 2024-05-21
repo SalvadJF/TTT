@@ -16,6 +16,15 @@ export default function Dashboard({ auth, noticias, articulos }) {
                     </div>
                 </div>
             </div>
+
+            <div>  {noticias.data.map(noticia => (
+                        <tr key={noticia.id}>
+                            <td>{noticia.titulo}</td>
+                            <td>{noticia.contenido}</td>
+                            <td>{new Date(noticia.created_at).toLocaleDateString()}</td>
+                        </tr>
+                    ))}</div>
+
         </AuthenticatedLayout>
     );
 }
