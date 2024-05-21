@@ -1,6 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import NoticiaCarta from '@/Components/NoticiaCarta';
+import NoticiaLista from '@/Components/NoticiaLista';
+import ArticuloLista from '@/Components/ArticuloLista';
+import Encabezado from '@/Components/Encabezado';
+import  Boton  from '@/Components/Botones';
 
 export default function Dashboard({ auth, noticias, articulos }) {
     return (
@@ -18,12 +21,24 @@ export default function Dashboard({ auth, noticias, articulos }) {
                 </div>
             </div>
 
-            <div>  {noticias.data.map(noticia => (
-                        <tr key={noticia.id}>
-                            <td>{noticia.titulo}</td>
-                            <td>{noticia.contenido}</td>
-                        </tr>
-                    ))}</div>
+            <div>
+                <div class="flex flex-col items-center justify-center  p-10">
+                <Encabezado texto="Novedades" />
+                <NoticiaLista noticias={noticias} />
+
+            </div>
+
+            <Boton ruta="/noticias" texto="Leer mas" />
+
+            </div>
+
+            <div>
+                <div class="flex flex-col items-center justify-center  p-10">
+                <Encabezado texto="Ultimas Aportaciones" />
+                <ArticuloLista articulos={articulos} />
+                </div>
+            <Boton ruta="/articulos" texto="Ver Galeria" />
+            </div>
 
         </AuthenticatedLayout>
     );

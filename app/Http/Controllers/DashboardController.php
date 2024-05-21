@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $articulos = Articulo::orderBy('created_at', 'desc')->latest()->paginate(4);
+        $articulos = Articulo::with('user')->orderBy('created_at', 'desc')->latest()->paginate(4);
 
         $noticias = Noticia::orderBy('created_at', 'desc')->latest()->paginate(4);
 

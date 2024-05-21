@@ -14,9 +14,11 @@ export default function Index({ auth, articulos }) {
         >
             <Head title="Dashboard" />
             <BreadcrumbArticulos />
-            {articulos.data.map(articulo =>(
-            <ArticuloCarta articulos={articulos} />
-            )) }
+
+
+
+
+
         </AuthenticatedLayout>
     );
 }
