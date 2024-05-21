@@ -1,6 +1,8 @@
 import { useForm } from '@inertiajs/react';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import {BreadcrumbArticulos} from "@/Components/BreadCrumb";
 
-const CreateArticulo = ({ categorias, etiquetas }) => {
+const CreateArticulo = ({ auth,  categorias, etiquetas }) => {
   const { data, setData, errors, post } = useForm({
     nombre: '',
     descripcion: '',
@@ -21,6 +23,15 @@ const CreateArticulo = ({ categorias, etiquetas }) => {
   };
 
   return (
+    <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Articulos</h2>}
+        >
+        <div>
+            <div class=" ml-20 pt-40">
+                <BreadcrumbArticulos />
+            </div>
+        </div>
     <div>
       <h1>Crear Artículo</h1>
       <form onSubmit={handleSubmit}>
@@ -116,6 +127,7 @@ const CreateArticulo = ({ categorias, etiquetas }) => {
         <button type="submit">Guardar</button>
       </form>
     </div>
+    </AuthenticatedLayout>
   );
 };
 

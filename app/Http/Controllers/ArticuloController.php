@@ -52,6 +52,8 @@ use Inertia\Inertia;
 
         $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
         $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+        $imagenPath = ('img/articulos/' . $imagenNombre);
+
 
         $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
         $request->modelo->move(public_path('img/modelos'), $modeloNombre);
@@ -61,7 +63,7 @@ use Inertia\Inertia;
             'descripcion' => $request->descripcion,
             'tipo' => $request->tipo,
             'modelo' => $modeloNombre,
-            'imagen' => $imagenNombre,
+            'imagen' => $imagenPath,
             'user_id' => auth()->id(),
         ]);
 
