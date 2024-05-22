@@ -131,8 +131,6 @@ use Inertia\Inertia;
             'nombre' => 'required|max:255',
             'descripcion' => 'required|max:65535',
             'tipo' => 'required|in:Modelo_3d,Textura',
-            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-            'modelo' => 'file',
             'categorias' => 'required|array|max:3',
             'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
@@ -145,43 +143,11 @@ use Inertia\Inertia;
             'tipo' => $request->tipo,
          ]);
 
-         // Actualizar imagen solo si se proporciona un nuevo archivo de imagen
-         if ($request->hasFile('imagen')) {
-             // Eliminar la imagen anterior si existe
-             if ($articulo->imagen !== 'default.jpg') {
-                 unlink(public_path($articulo->imagen));
-             }
-
-             $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
-
-             $request->imagen->move(public_path('img/articulos'), $imagenNombre);
-             $imagenPath = ('img/articulos/' . $imagenNombre);
-
-             $articulo->update([
-                 'imagen' => $imagenPath,
-             ]);
-         }
-         // Actualizar modelo solo si se proporciona un nuevo archivo de modelo
-         if ($request->hasFile('modelo')) {
-             // Eliminar el modelo anterior si existe
-             if ($articulo->modelo !== 'default.stl') {
-                 unlink(public_path('img/modelos/' . $articulo->modelo));
-             }
-
-             $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
-
-             $request->modelo->move(public_path('img/modelos'), $modeloNombre);
-
-             $articulo->update([
-                 'modelo' => $modeloNombre,
-             ]);
-         }
-
          // Sincronizar las relaciones de categorías y etiquetas
          $articulo->categorias()->sync($request->categorias);
          $articulo->etiquetas()->sync($request->etiquetas);
 
-         return redirect()->back()->with('success', 'La noticia se ha actualizado correctamente.');
+         return redirect()->route('articulos.show', $articulo);
      }
 
      /**

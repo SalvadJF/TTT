@@ -8,8 +8,6 @@ const EditarArticulo = () => {
         nombre: articulo.nombre,
         descripcion: articulo.descripcion,
         tipo: articulo.tipo,
-        imagen: null,
-        modelo: null,
         categorias: categoriasArticulo.map(categoria => categoria.id),
         etiquetas: etiquetasArticulo.map(etiqueta => etiqueta.id),
     });
@@ -121,7 +119,6 @@ const EditarArticulo = () => {
                             </span>
                         )}
                     </div>
-                    // Dentro del formulario
 <div>
     <label htmlFor="categorias" className="font-koulen block mb-2 text-sm font-medium text-white">
         Selecciona Categorías
@@ -166,46 +163,6 @@ const EditarArticulo = () => {
     </div>
     {errors.etiquetas && <p className="text-red-500">{errors.etiquetas}</p>}
 </div>
-
-                    {/* Campos para la imagen y el modelo */}
-                    <div>
-                        <label
-                            htmlFor="imagen"
-                            className="font-koulen block mb-2 text-sm font-medium text-white"
-                        >
-                            Imagen:
-                        </label>
-                        <input
-                            id="imagen"
-                            type="file"
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            onChange={(e) => setData("imagen", e.target.files[0])}
-                        />
-                        {errors.imagen && (
-                            <span className="error text-red-500">
-                                {errors.imagen}
-                            </span>
-                        )}
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="modelo"
-                            className="font-koulen block mb-2 text-sm font-medium text-white"
-                        >
-                            Modelo:
-                        </label>
-                        <input
-                            id="modelo"
-                            type="file"
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            onChange={(e) => setData("modelo", e.target.files[0])}
-                        />
-                        {errors.modelo && (
-                            <span className="error text-red-500">
-                                {errors.modelo}
-                            </span>
-                        )}
-                    </div>
                     {/* Campos para seleccionar categorías y etiquetas */}
                     <div className="flex items-center justify-center p-4 space-x-4">
                         <button
