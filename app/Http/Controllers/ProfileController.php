@@ -18,8 +18,14 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
+        $articulos = $user->articulos;
+
+        $comentarios = $user->comentarios;
+
         return Inertia::render('Profile/Index', [
             'user' => $user,
+            'articulos' => $articulos,
+            'comentarios' => $comentarios
         ]);
     }
 
