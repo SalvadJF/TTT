@@ -110,6 +110,7 @@ class AdminController extends Controller
 
         $comentarios = Comentario::orderBy('id')->paginate(10);
 
+
         return Inertia::render('Admin/Comentarios', [
             'comentarios' => $comentarios,
             'admin' => $admin,

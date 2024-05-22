@@ -45,6 +45,8 @@ Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('n
 
 Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store')->middleware('auth');
 
+Route::resource('comentarios', ComentarioController::class);
+
 Route::resource('articulos', ArticuloController::class);
 
 Route::resource('noticias', NoticiaController::class);

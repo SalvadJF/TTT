@@ -3,6 +3,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Breadcrumbs } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
+import Encabezado from '@/Components/Encabezado';
+import ComentariosTable from '@/Components/ComentariosTable';
 
 export default function Comentarios ({
     auth,
@@ -21,6 +23,10 @@ return (
         </div>
 
         <AdminHeader admin={admin} />
+
+        <Encabezado texto="Comentarios en la Base de datos" />
+
+        <ComentariosTable comentarios={comentarios} />
 
     </AuthenticatedLayout>
     )

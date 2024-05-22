@@ -83,6 +83,13 @@ class ComentarioController extends Controller
      */
     public function destroy(Comentario $comentario)
     {
-        //
+         // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+         if (auth()->id() !== $comentario->user_id && !auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
+        $comentario->delete();
+
+       return;
     }
 }
