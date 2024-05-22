@@ -149,7 +149,7 @@ use Inertia\Inertia;
          if ($request->hasFile('imagen')) {
              // Eliminar la imagen anterior si existe
              if ($articulo->imagen !== 'default.jpg') {
-                 unlink(public_path('img/articulos/' . $articulo->imagen));
+                 unlink(public_path($articulo->imagen));
              }
 
              $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();

@@ -55,11 +55,12 @@ class NoticiaController extends Controller
         $imagenNombre = 'Noticia_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
 
         $request->imagen->move(public_path('img/noticias'), $imagenNombre);
+        $imagenPath = ('img/articulos/' . $imagenNombre);
 
         $noticia = Noticia::create([
             'titulo' => $request->titulo,
             'contenido' => $request->contenido,
-            'imagen' => $imagenNombre,
+            'imagen' => $imagenPath,
             'user_id' => auth()->id(),
         ]);
 
@@ -74,8 +75,20 @@ class NoticiaController extends Controller
      */
     public function show(Noticia $noticia)
     {
+        // Obtener las categorías asociadas al artículo
+        $categorias = $noticia->categorias()->get();
+
+        // Obtener las etiquetas asociadas al artículo
+        $etiquetas = $noticia->etiquetas()->get();
+
+        // Obtener el usuario asociado al artículo
+        $user = $noticia->user;
+
         return Inertia::render('Noticias/Show', [
-            'noticia' => $noticia
+            'noticia' => $noticia,
+            'categorias' => $categorias,
+            'etiquetas' => $etiquetas,
+            'user' => $user,
         ]);
 
     }
