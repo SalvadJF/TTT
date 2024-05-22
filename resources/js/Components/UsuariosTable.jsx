@@ -1,7 +1,7 @@
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 
-export default function NoticiasTable({ noticias }) {
+export default function UsuariosTable({ usuarios }) {
     const { delete: handleDelete } = useForm();
 
     return (
@@ -15,63 +15,67 @@ export default function NoticiasTable({ noticias }) {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-6 py-3">
-                            ID de la Noticia
+                            ID del Usuario
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Titulo
+                            Nombre
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Email
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Rol
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Fecha de Creacion
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            <span className="sr-only">Edit</span>
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {noticias.data.map((noticia) => (
+                    {usuarios.data.map((usuario) => (
                         <tr
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                            key={noticia.id}
+                            key={usuario.id}
                         >
                             <th
                                 scope="row"
                                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                {noticia.id}
+                                {usuario.id}
                             </th>
                             <td className="px-6 py-4">
                                 <a
-                                    href={`/noticias/${noticia.id}`}
+                                    href={`/usuarios/${usuario.id}`}
                                     className="text-blue-600"
                                 >
-                                    {noticia.nombre}
+                                    {usuario.name}
                                 </a>
                             </td>
-                            <td className="px-6 py-4">{noticia.created_at}</td>
+                            <td className="px-6 py-4">{usuario.email}</td>
+                            <td className="px-6 py-4">
+                                {usuario.admin == true
+                                    ? "Administrador"
+                                    : "Usuario"}
+                            </td>
+                            <td className="px-6 py-4">{usuario.created_at}</td>
+                            <td className="px-6 py-4 text-right"></td>
                             <td className="px-6 py-4 text-right">
-                                <a
-                                    href={`/noticias/${noticia.id}/edit`}
-                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2"
-                                >
-                                    Editar
-                                </a>
-                            </td>
-                            <td>
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        handleDelete(
-                                            route(
-                                                "noticias.destroy",
-                                                noticia.id
+                                {usuario.admin === false && (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            handleDelete(
+                                                route(
+                                                    "user.destroy",
+                                                    usuario.id
+                                                )
                                             )
-                                        )
-                                    }
-                                    className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
-                                >
-                                    Borrar
-                                </button>
+                                        }
+                                        className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
+                                    >
+                                        Borrar
+                                    </button>
+                                )}
                             </td>
                         </tr>
                     ))}
@@ -80,7 +84,7 @@ export default function NoticiasTable({ noticias }) {
             <div className="mt-5 p-5">
                 <nav aria-label="Page navigation">
                     <ul className="inline-flex items-center -space-x-px">
-                        {noticias.links.map((link, index) => (
+                        {usuarios.links.map((link, index) => (
                             <li key={index}>
                                 <Link
                                     href={link.url || "#"}

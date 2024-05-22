@@ -3,6 +3,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Breadcrumbs } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
+import Encabezado from '@/Components/Encabezado';
+import UsuariosTable from '@/Components/UsuariosTable';
 
 export default function Usuarios ({
     auth,
@@ -21,6 +23,10 @@ return (
         </div>
 
         <AdminHeader admin={admin} />
+
+        <Encabezado texto="Usuarios en la Base de datos" />
+
+        <UsuariosTable usuarios={usuarios} />
 
     </AuthenticatedLayout>
     )
