@@ -29,26 +29,30 @@ class ComentarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'contenido' => 'required',
-            'comentable_type' => 'required',
-            'comentable_id' => 'required',
-        ]);
 
-        // Crear el comentario
-        $comentario = new Comentario();
-        $comentario->contenido = $request->contenido;
-        $comentario->user_id = auth()->id(); // Asignar el ID del usuario autenticado
-        $comentario->comentable_type = $request->comentable_type;
-        $comentario->comentable_id = $request->comentable_id;
-        $comentario->save();
+     public function store(Request $request)
+     {
+       // Validate form data
 
-        // Redireccionar a la página anterior o a donde sea adecuado
-        return redirect()->back()->with('success', 'Comentario agregado correctamente.');
-    }
+         $request->validate([
+             'contenido' => 'required',
+             'comentable_type' => 'required',
+             'comentable_id' => 'required',
+         ]);
+
+       // Create the comment
+       Comentario::create([
+           'contenido' => $request->contenido,
+           'user_id' => auth()->id(), // Assign the authenticated user's ID
+           'comentable_type' => $request->comentable_type,
+           'comentable_id' => $request->comentable_id,
+       ]);
+
+       // Redirect back or to the appropriate page
+       return redirect()->back()->with('success', 'Comment added successfully.');
+
+     }
+
 
     /**
      * Display the specified resource.
@@ -79,6 +83,13 @@ class ComentarioController extends Controller
      */
     public function destroy(Comentario $comentario)
     {
-        //
+         // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+         if (auth()->id() !== $comentario->user_id && !auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
+        $comentario->delete();
+
+       return;
     }
 }

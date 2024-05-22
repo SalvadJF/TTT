@@ -9,6 +9,13 @@ class Comentario extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'contenido',
+        'user_id',
+        'comentable_type',
+        'comentable_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

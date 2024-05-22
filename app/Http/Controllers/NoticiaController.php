@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Noticia;
-use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
 class NoticiaController extends Controller
@@ -17,7 +17,10 @@ class NoticiaController extends Controller
     public function index()
     {
         $noticias = Noticia::orderBy('created_at', 'desc')->paginate(8);
-        return view('noticias.index', ['noticias' => $noticias]);
+        return Inertia::render('Noticias/Index', [
+            'noticias' => $noticias
+        ]);
+
     }
 
     /**
@@ -27,7 +30,11 @@ class NoticiaController extends Controller
     {
         $categorias = Categoria::all();
         $etiquetas = Etiqueta::all();
-        return view('noticias.create', ['categorias' => $categorias, 'etiquetas' => $etiquetas]);
+        return Inertia::render('Noticias/Create', [
+            'categorias' => $categorias,
+            'etiquetas' => $etiquetas
+        ]);
+
     }
 
     /**
@@ -48,11 +55,12 @@ class NoticiaController extends Controller
         $imagenNombre = 'Noticia_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
 
         $request->imagen->move(public_path('img/noticias'), $imagenNombre);
+        $imagenPath = ('img/noticias/' . $imagenNombre);
 
         $noticia = Noticia::create([
             'titulo' => $request->titulo,
             'contenido' => $request->contenido,
-            'imagen' => $imagenNombre,
+            'imagen' => $imagenPath,
             'user_id' => auth()->id(),
         ]);
 
@@ -67,7 +75,22 @@ class NoticiaController extends Controller
      */
     public function show(Noticia $noticia)
     {
-        return view('noticias.show', ['noticia' => $noticia]);
+        // Obtener las categorías asociadas al artículo
+        $categorias = $noticia->categorias()->get();
+
+        // Obtener las etiquetas asociadas al artículo
+        $etiquetas = $noticia->etiquetas()->get();
+
+        // Obtener el usuario asociado al artículo
+        $user = $noticia->user;
+
+        return Inertia::render('Noticias/Show', [
+            'noticia' => $noticia,
+            'categorias' => $categorias,
+            'etiquetas' => $etiquetas,
+            'user' => $user,
+        ]);
+
     }
 
     /**
@@ -81,14 +104,17 @@ class NoticiaController extends Controller
         }
         $categorias = Categoria::all();
         $etiquetas = Etiqueta::all();
+        $categoriasNoticia = $noticia->categorias;
+        $etiquetasNoticia = $noticia->etiquetas;
 
-        return view('noticias.edit', ['noticia' => $noticia, 'categorias' => $categorias, 'etiquetas' => $etiquetas]);
+       return Inertia::render('Noticias/Edit', ['noticia' => $noticia, 'categorias' => $categorias, 'etiquetas' => $etiquetas , 'categoriasNoticia' => $categoriasNoticia, 'etiquetasNoticia' => $etiquetasNoticia]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, noticia $noticia)
+    public function update(Request $request, Noticia $noticia)
     {
 
         // Verificar si el usuario autenticado es el creador de la noticia o es administrador
@@ -130,17 +156,19 @@ class NoticiaController extends Controller
         $noticia->categorias()->sync($request->categorias);
         $noticia->etiquetas()->sync($request->etiquetas);
 
-        return redirect()->back()->with('success', 'Noticia actualizada exitosamente.');
+        return redirect()->route('noticias.show', $noticia);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(noticia $noticia)
+    public function destroy(Noticia $noticia)
     {
         $noticia->delete();
 
         session()->flash('success', 'La noticia se ha eliminado correctamente.');
-        return redirect()->route('noticias.index');
+        return ;
     }
 }
+

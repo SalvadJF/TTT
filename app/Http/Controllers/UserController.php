@@ -35,10 +35,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(User $usuario)
     {
         $articulos = $usuario->articulos()->paginate(8);
-        return view('usuarios.show', ['usuario' => $usuario , 'articulos' => $articulos]);
+        return inertia('Usuarios/Show', [
+            'usuario' => $usuario,
+            'articulos' => $articulos,
+        ]);
     }
 
     /**
@@ -59,13 +63,13 @@ class UserController extends Controller
     public function destroy(User $usuario)
     {
         // Verificar si el usuario autenticado es el creador de la noticia o es administrador
-        if  (!auth()->user()->isAdmin()) {
+        if (!auth()->user()->isAdmin()) {
             abort(403); // No autorizado
         }
 
         $usuario->delete();
 
-        session()->flash('success', 'El usuario ha sido eliminado.');
-        return back();
+        return ;
     }
+
 }
