@@ -163,7 +163,7 @@ use Inertia\Inertia;
 
          $articulo->delete();
 
-        return redirect()->route('articulos.index')->with('success', 'El artículo se ha eliminado correctamente.');
+        return;
 
      }
  }

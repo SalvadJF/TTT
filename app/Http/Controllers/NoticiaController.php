@@ -168,7 +168,7 @@ class NoticiaController extends Controller
         $noticia->delete();
 
         session()->flash('success', 'La noticia se ha eliminado correctamente.');
-        return redirect()->route('noticias.index');
+        return ;
     }
 }
 

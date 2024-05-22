@@ -58,6 +58,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Usuarios', [
             'usuarios' => $usuarios,
+            'admin' => $admin,
         ]);
 
     }
@@ -75,6 +76,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Noticias', [
             'noticias' => $noticias,
+            'admin' => $admin,
         ]);
 
     }
@@ -92,6 +94,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Articulos', [
             'articulos' => $articulos,
+            'admin' => $admin,
         ]);
 
     }
@@ -109,6 +112,7 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Comentarios', [
             'comentarios' => $comentarios,
+            'admin' => $admin,
         ]);
 
     }
