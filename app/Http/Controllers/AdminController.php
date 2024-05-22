@@ -32,7 +32,7 @@ class AdminController extends Controller
         $comentarios = Comentario::all();
         $ultimoComentario = Comentario::latest()->first();
 
-        return Inertia::render('admin/index', [
+        return Inertia::render('Admin/Index', [
             'admin' => $admin,
             'usuarios' => $usuarios,
             'ultimoUsuario' => $ultimoUsuario,
@@ -56,7 +56,7 @@ class AdminController extends Controller
 
         $usuarios = User::orderBy('id')->paginate(10);
 
-        return Inertia::render('admin/usuarios', [
+        return Inertia::render('Admin/Usuarios', [
             'usuarios' => $usuarios,
         ]);
 
@@ -73,7 +73,7 @@ class AdminController extends Controller
 
         $noticias = Noticia::orderBy('id')->paginate(10);
 
-        return Inertia::render('admin/noticias', [
+        return Inertia::render('Admin/Noticias', [
             'noticias' => $noticias,
         ]);
 
@@ -90,7 +90,7 @@ class AdminController extends Controller
 
         $articulos = Articulo::orderBy('id')->paginate(10);
 
-        return Inertia::render('admin/articulos', [
+        return Inertia::render('Admin/Articulos', [
             'articulos' => $articulos,
         ]);
 
@@ -107,7 +107,7 @@ class AdminController extends Controller
 
         $comentarios = Comentario::orderBy('id')->paginate(10);
 
-        return Inertia::render('admin/comentarios', [
+        return Inertia::render('Admin/Comentarios', [
             'comentarios' => $comentarios,
         ]);
 
