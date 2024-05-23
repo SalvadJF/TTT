@@ -206,5 +206,18 @@ use Inertia\Inertia;
         return response()->json(['likes' => $contadorLikes->cantidad]);
     }
 
+    public function decrementarLikes(Articulo $articulo)
+    {
+        $contadorLikes = $articulo->contadores()->where('nombre', 'Likes')->first();
+        if ($contadorLikes && $contadorLikes->cantidad > 0) {
+            $contadorLikes->cantidad -= 1;
+            $contadorLikes->save();
+            return response()->json(['likes' => $contadorLikes->cantidad]);
+        } else {
+            return response()->json(['error' => 'Articulo not found or likes already zero'], 404);
+        }
+    }
+
+
  }
 
