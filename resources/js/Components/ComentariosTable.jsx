@@ -1,11 +1,52 @@
-import { useForm } from "@inertiajs/react";
+import React, { useState, useMemo } from "react";
 import { Head, Link } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
 export default function ComentariosTable({ comentarios }) {
     const { delete: handleDelete } = useForm();
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(10);
+
+    const filteredComentarios = useMemo(() => {
+        return comentarios.data.filter(comentario =>
+            comentario.contenido.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [comentarios.data, searchTerm]);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredComentarios.slice(indexOfFirstItem, indexOfLastItem);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        return formattedDate;
+    };
+
+    const getComentableName = (comentario) => {
+        if (comentario.comentable_type === "App\\Models\\Articulo") {
+            return comentario.comentable.nombre;
+        } else if (comentario.comentable_type === "App\\Models\\Noticia") {
+            return comentario.comentable.titulo;
+        } else {
+            return "Desconocido";
+        }
+    };
 
     return (
         <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="px-4 py-2 border rounded-md mb-4"
+            />
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -24,10 +65,13 @@ export default function ComentariosTable({ comentarios }) {
                         <th scope="col" className="px-6 py-3">
                             Fecha de Creacion
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            <span className="sr-only">Acciones</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {comentarios.data.map((comentario) => (
+                    {currentItems.map((comentario) => (
                         <tr
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                             key={comentario.id}
@@ -39,16 +83,16 @@ export default function ComentariosTable({ comentarios }) {
                                 {comentario.id}
                             </th>
                             <td className="px-6 py-4">
-                                {comentario.comentable_type}
+                                {getComentableName(comentario)}
                             </td>
                             <td className="px-6 py-4">
-                                {comentario.user_id}
+                                {comentario.user.name}
                             </td>
                             <td className="px-6 py-4">
                                 {comentario.contenido}
                             </td>
                             <td className="px-6 py-4">
-                                {comentario.created_at}
+                                {formatDate(comentario.created_at)}
                             </td>
                             <td>
                                 <button
@@ -70,27 +114,15 @@ export default function ComentariosTable({ comentarios }) {
                     ))}
                 </tbody>
             </table>
-            <div className="mt-5 p-5">
-                <nav aria-label="Page navigation">
-                    <ul className="inline-flex items-center -space-x-px">
-                        {comentarios.links.map((link, index) => (
-                            <li key={index}>
-                                <Link
-                                    href={link.url || "#"}
-                                    className={`px-3 py-2 leading-tight ${
-                                        link.active
-                                            ? "text-blue-600"
-                                            : "text-gray-500"
-                                    } ${link.url ? "hover:bg-gray-200" : ""}`}
-                                    dangerouslySetInnerHTML={{
-                                        __html: link.label,
-                                    }}
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
+            {/* Paginación */}
+            <div className="flex justify-center mt-4">
+                {Array.from({ length: Math.ceil(filteredComentarios.length / itemsPerPage) }).map((_, index) => (
+                    <button key={index} onClick={() => paginate(index + 1)} className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                        {index + 1}
+                    </button>
+                ))}
             </div>
         </div>
     );
 }
+
