@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
+import { setCookie, getCookie, eraseCookie } from "@/Utils/cookieUtils";
 
 
 export default function Show({
@@ -22,13 +23,35 @@ export default function Show({
 }) {
 
     const [likes, setLikes] = useState(contadorLikes.cantidad);
+    const [hasLiked, setHasLiked] = useState(false);
+
+    useEffect(() => {
+        // Verificar si el usuario ya ha dado like
+        const liked = getCookie(`liked_articulo_${articulo.id}`);
+        if (liked) {
+            setHasLiked(true);
+        }
+    }, [articulo.id]);
 
     const handleLikeClick = async () => {
-        try {
-            const response = await axios.post(`/articulos/${articulo.id}/incrementarLikes`);
-            setLikes(response.data.likes);
-        } catch (error) {
-            console.error("Error al incrementar los likes:", error);
+        if (hasLiked) {
+            try {
+                const response = await axios.post(`/articulos/${articulo.id}/decrementarLikes`);
+                setLikes(response.data.likes);
+                eraseCookie(`liked_articulo_${articulo.id}`);
+                setHasLiked(false);
+            } catch (error) {
+                console.error("Error al decrementar los likes:", error);
+            }
+        } else {
+            try {
+                const response = await axios.post(`/articulos/${articulo.id}/incrementarLikes`);
+                setLikes(response.data.likes);
+                setCookie(`liked_articulo_${articulo.id}`, true, 365);
+                setHasLiked(true);
+            } catch (error) {
+                console.error("Error al incrementar los likes:", error);
+            }
         }
     };
 
@@ -172,8 +195,10 @@ export default function Show({
                             <li className="mb-3 font-lato text-white">
                                 {articulo.descripcion}
                             </li>
-                                <div>
-                                <button onClick={handleLikeClick}>Like</button>
+                            <div>
+                                <button onClick={handleLikeClick}>
+                                    {hasLiked ? "Unlike" : "Like"}
+                                </button>
                                 <p>Likes: {likes}</p>
                                 </div>
                             <a href="">
