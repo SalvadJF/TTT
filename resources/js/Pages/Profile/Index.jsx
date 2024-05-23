@@ -1,10 +1,43 @@
-import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Breadcrumbs } from '@/Components/BreadCrumb';
+import React, { useState, useMemo } from 'react';
+
 
 export default function Index({ auth, user, articulos, comentarios }) {
     const [openAccordion, setOpenAccordion] = useState("usuarios");
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5); // Número de elementos por página
+
+    const filteredArticulos = useMemo(() => {
+        let filtered = articulos.filter(articulo =>
+            articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        return filtered;
+    }, [searchTerm, articulos]);
+
+    const filteredComentarios = useMemo(() => {
+        let filtered = comentarios.filter(comentario =>
+            comentario.contenido.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        return filtered;
+    }, [searchTerm, comentarios]);
+
+    const paginate = (pageNumber, category) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastItem = (category) => currentPage * itemsPerPage;
+    const indexOfFirstItem = (category) => indexOfLastItem() - itemsPerPage;
+    const currentItems = (category) => {
+        if (category === "articulos") {
+            return filteredArticulos.slice(indexOfFirstItem(), indexOfLastItem());
+        } else if (category === "comentarios") {
+            return filteredComentarios.slice(indexOfFirstItem(), indexOfLastItem());
+        }
+    };
+
 
     const toggleAccordion = (id) => {
         setOpenAccordion(openAccordion === id ? "" : id);
@@ -29,33 +62,71 @@ export default function Index({ auth, user, articulos, comentarios }) {
                 >
                     <AccordionItem
                         title="Mis Articulos"
-                        linkText="Crear Articulo"
-                        linkHref="/articulos/create"
                         isOpen={openAccordion === "usuarios"}
                         onToggle={() => toggleAccordion("usuarios")}
                     >
-                        {articulos.map(articulo => (
-                            <div key={articulo.id} className="mt-4  p-2 bg-white dark:bg-gray-800 mb-2 rounded-md shadow-md">
+                        <div>
+                        <div >
+                            <a
+                                href="/articulos/create"
+                                className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                            >
+                                Crear Articulo
+                            </a>
+                        </div>
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="mt-4 px-4 py-2 border rounded-md"
+                            />
+                        </div>
+                        {currentItems("articulos").map(articulo => (
+                            <div key={articulo.id} className="mt-4 p-2 bg-white dark:bg-gray-800 mb-2 rounded-md shadow-md">
                                 <Link href={`/articulos/${articulo.id}`} className="text-blue-600 dark:text-blue-400">
                                     Articulo {articulo.id}
                                 </Link>
                             </div>
                         ))}
+                        {/* Paginación */}
+                        <div className="flex justify-center mt-4">
+                            {Array.from({ length: Math.ceil(filteredArticulos.length / itemsPerPage) }).map((_, index) => (
+                                <button key={index} onClick={() => paginate(index + 1, "articulos")} className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                                    {index + 1}
+                                </button>
+                            ))}
+                        </div>
                     </AccordionItem>
                     <AccordionItem
                         title="Mis Comentarios"
-                        linkText="Crear Comentario"
-                        linkHref="/comentarios/create"
                         isOpen={openAccordion === "comentarios"}
                         onToggle={() => toggleAccordion("comentarios")}
                     >
-                        {comentarios.map(comentario => (
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="mt-4 px-4 py-2 border rounded-md"
+                            />
+                        </div>
+                        {currentItems("comentarios").map(comentario => (
                             <div key={comentario.id} className="mt-4 p-2 bg-white dark:bg-gray-800 mb-2 rounded-md shadow-md">
                                 <Link href={`/comentarios/${comentario.id}`} className="text-blue-600 dark:text-blue-400">
                                     Comentario {comentario.id}
                                 </Link>
                             </div>
                         ))}
+                        {/* Paginación */}
+                        <div className="flex justify-center mt-4">
+                            {Array.from({ length: Math.ceil(filteredComentarios.length / itemsPerPage) }).map((_, index) => (
+                                <button key={index} onClick={() => paginate(index + 1, "comentarios")} className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                                    {index + 1}
+                                </button>
+                            ))}
+                        </div>
                     </AccordionItem>
                     <AccordionItem
                         title="Mi Informacion"
@@ -70,7 +141,7 @@ export default function Index({ auth, user, articulos, comentarios }) {
     );
 }
 
-function AccordionItem({ title, linkText, linkHref, isOpen, onToggle, children }) {
+function AccordionItem({ title, isOpen, onToggle, children }) {
     return (
         <div>
             <h2 id={`accordion-color-heading-${title}`}>
@@ -93,12 +164,6 @@ function AccordionItem({ title, linkText, linkHref, isOpen, onToggle, children }
                 aria-labelledby={`accordion-color-heading-${title}`}
             >
                 <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
-                    <a
-                        href={linkHref}
-                        className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    >
-                        {linkText}
-                    </a>
                     {children}
                 </div>
             </div>

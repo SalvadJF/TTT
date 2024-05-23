@@ -3,72 +3,50 @@ import { Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 
 export default function NavBar({ user, className = '', children, ...props }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-    const [showUserDropdown, setShowUserDropdown] = useState(false);
 
     return (
         <header>
-            <nav className="bg-white border-gray-200 dark:bg-gray-900 h-32  w-full fixed top-0">
+            <nav className="bg-white border-gray-200 dark:bg-gray-900 h-32 w-full fixed top-0">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <ApplicationLogo className="w-20 h-20" />
                     </Link>
                     <div className="flex items-center md:order-2 space-x-3 rtl:space-x-reverse">
-                        <button
-                            type="button"
-                            className="font-koulen flex text-sm bg-cyan-100 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            id="user-menu-button"
-                            aria-expanded={showUserDropdown}
-                            onClick={() => setShowUserDropdown(!showUserDropdown)}
-                        >
-                            <span className="sr-only">Abrir Menu</span>
-                            {user?.avatar ? (
-                                <img className="w-8 h-8 rounded-full" src={user.avatar} alt="user" />
-                            ) : (
-                                <img className="w-8 h-8 rounded-full" src="/img/users/avatar.png" alt="user" />
-                            )}
-                        </button>
-                        {showUserDropdown && (
-                            <div className="z-50 absolute mt-10 right-0 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-                                <div className="px-4 py-3">
-                                    <div className="font-lato">{user?.name}</div>
-                                    <div className="font-lato">{user?.email}</div>
-                                </div>
-                                <ul className="py-2" aria-labelledby="user-menu-button">
-                                    <li>
-                                        <Link
-                                            href="/profile"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                        >
-                                            Mi perfil
-                                        </Link>
-                                    </li>
-                                    {user?.admin && (
-                                        <li>
-                                            <Link
-                                                href={route('admin.index')}
-                                                className="font-lato block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                            >
-                                                Panel de Admin
-                                            </Link>
-                                        </li>
-                                    )}
-                                    <li>
-                                        <form method="POST" action={route('logout')}>
+                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                            <div className="ms-3 relative">
+                                <Dropdown>
+                                    <Dropdown.Trigger>
+                                        <span className="inline-flex rounded-md">
                                             <button
-                                                type="submit"
-                                                className="w-full text-left font-lato block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                type="button"
+                                                className="font-koulen flex text-sm bg-cyan-100 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                                id="user-menu-button"
                                             >
-                                                Salir
+                                                <span className="sr-only">Abrir Menu</span>
+                                                {user?.avatar ? (
+                                                    <img className="w-8 h-8 rounded-full" src={user.avatar} alt="user" />
+                                                ) : (
+                                                    <img className="w-8 h-8 rounded-full" src="/img/users/avatar.png" alt="user" />
+                                                )}
                                             </button>
-                                        </form>
-                                    </li>
-                                </ul>
+                                        </span>
+                                    </Dropdown.Trigger>
+
+                                    <Dropdown.Content>
+                                        <Dropdown.Link href="/profile">Mi Perfil</Dropdown.Link>
+                                        {user?.admin && (
+                                            <Dropdown.Link href={route('admin.index')}>Menu Admin</Dropdown.Link>
+                                        )}
+                                        <Dropdown.Link href={route('logout')} method="post" as="button">
+                                            Cerrar sesión
+                                        </Dropdown.Link>
+                                    </Dropdown.Content>
+                                </Dropdown>
                             </div>
-                        )}
+                        </div>
                         <button
                             data-collapse-toggle="navbar-user"
                             type="button"
@@ -84,7 +62,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                         </button>
                     </div>
                     <div className={`items-center justify-between ${showingNavigationDropdown ? 'block' : 'hidden'} w-full md:flex md:w-auto md:order-1`} id="navbar-user">
-                        <ul className="flex flex-col font-medium p-4 md:p-0 mt-4  rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li className="font-koulen">
                                 <NavLink href="/noticias">Noticias</NavLink>
                             </li>

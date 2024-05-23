@@ -14,13 +14,31 @@ use Inertia\Inertia;
      /**
       * Display a listing of the resource.
       */
-    public function index()
+      public function index(Request $request)
+      {
+          $searchTerm = $request->input('search');
+          $filterType = $request->input('type');
 
-     {
-        $articulos = Articulo::with('user')->orderBy('created_at', 'desc')->latest()->paginate(8);
-        return Inertia::render('Articulos/Index', ['articulos' => $articulos]);
+          $query = Articulo::with('user')->orderBy('created_at', 'desc');
 
-     }
+          if ($searchTerm) {
+              $query->where(function($q) use ($searchTerm) {
+                  $q->where('nombre', 'like', '%' . $searchTerm . '%');
+              });
+          }
+
+          if ($filterType) {
+              if ($filterType === 'Modelo_3D') {
+                  $query->where('tipo', 'Modelo_3D');
+              } elseif ($filterType === 'Textura') {
+                  $query->where('tipo', 'Textura');
+              }
+          }
+
+          $articulos = $query->paginate(0); // Cambia el valor 10 al número deseado de artículos por página
+
+          return Inertia::render('Articulos/Index', ['articulos' => $articulos, 'search' => $searchTerm, 'type' => $filterType]);
+      }
 
      /**
       * Show the form for creating a new resource.
