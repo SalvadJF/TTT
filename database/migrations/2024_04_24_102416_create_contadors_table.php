@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('contadores', function (Blueprint $table) {
             $table->id();
             $table->enum('nombre', ['Likes', 'Visitas']);
+            $table->morphs('objetivo');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }

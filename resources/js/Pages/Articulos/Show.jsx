@@ -16,6 +16,7 @@ export default function Show({
     etiquetas,
     comentarios,
     user,
+    contadorLikes
 }) {
     useEffect(() => {
         var canvas = document.getElementById("renderCanvas");
@@ -157,6 +158,9 @@ export default function Show({
                             <li className="mb-3 font-lato text-white">
                                 {articulo.descripcion}
                             </li>
+                                <div>
+                                    <p>Likes: {contadorLikes.cantidad}</p>
+                                </div>
                             <a href="">
                                 <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
                                     Comprar

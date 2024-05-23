@@ -11,9 +11,11 @@ class Contador extends Model
 
     protected $table = "contadores";
 
-    public function objetivos()
+    protected $fillable = ['nombre', 'cantidad'];
+
+    public function objetivo()
     {
-        return $this->hasMany(Objetivo_Contador::class);
+        return $this->morphTo();
     }
 
 }

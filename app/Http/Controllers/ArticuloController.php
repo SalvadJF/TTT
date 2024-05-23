@@ -5,7 +5,8 @@
  use App\Models\Articulo;
  use App\Http\Controllers\Controller;
  use App\Models\Categoria;
- use App\Models\Etiqueta;
+use App\Models\Contador;
+use App\Models\Etiqueta;
  use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -85,6 +86,13 @@ use Inertia\Inertia;
             'user_id' => auth()->id(),
         ]);
 
+        // Crear un contador de Likes asociado al artículo con una cantidad inicial de 0
+        // Crear contadores para el artículo
+        $articulo->contadores()->createMany([
+            ['nombre' => 'Likes', 'cantidad' => 0],
+            ['nombre' => 'Visitas', 'cantidad' => 0],
+        ]);
+
         $articulo->categorias()->attach($request->categorias);
         $articulo->etiquetas()->attach($request->etiquetas);
 
@@ -97,17 +105,20 @@ use Inertia\Inertia;
       */
       public function show(Articulo $articulo)
       {
-          // Obtener las categorías asociadas al artículo
-          $categorias = $articulo->categorias()->get();
+            // Obtener las categorías asociadas al artículo
+            $categorias = $articulo->categorias()->get();
 
-          // Obtener las etiquetas asociadas al artículo
-          $etiquetas = $articulo->etiquetas()->get();
+            // Obtener las etiquetas asociadas al artículo
+            $etiquetas = $articulo->etiquetas()->get();
 
-          // Obtener los comentarios asociados al artículo
-          $comentarios = $articulo->comentarios()->get();
+            // Obtener los comentarios asociados al artículo
+            $comentarios = $articulo->comentarios()->get();
 
-          // Obtener el usuario asociado al artículo
-          $user = $articulo->user()->first();
+            // Obtener el usuario asociado al artículo
+            $user = $articulo->user()->first();
+
+           // Obtener los contadores asociados al artículo
+            $contadorLikes = $articulo->contadores()->where('nombre', 'Likes')->first();
 
           return Inertia::render('Articulos/Show', [
               'articulo' => $articulo,
@@ -115,6 +126,7 @@ use Inertia\Inertia;
               'etiquetas' => $etiquetas,
               'comentarios' => $comentarios,
               'user' => $user,
+              'contadorLikes' => $contadorLikes,
           ]);
       }
 
