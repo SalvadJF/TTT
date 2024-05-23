@@ -196,5 +196,15 @@ use Inertia\Inertia;
         return;
 
      }
+
+     public function incrementarLikes(Articulo $articulo)
+    {
+        $contadorLikes = $articulo->contadores()->where('nombre', 'Likes')->first();
+        $contadorLikes->cantidad += 1;
+        $contadorLikes->save();
+
+        return response()->json(['likes' => $contadorLikes->cantidad]);
+    }
+
  }
 

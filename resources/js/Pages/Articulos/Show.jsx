@@ -6,8 +6,10 @@ import Boton from "@/Components/Botones";
 import { BreadcrumbArticulosShow } from "@/Components/BreadCrumb";
 import ComentariosArticulo from "./Partials/ComentariosArticulo";
 import { useEffect } from "react";
+import { useState } from "react";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
+
 
 export default function Show({
     auth,
@@ -18,6 +20,18 @@ export default function Show({
     user,
     contadorLikes
 }) {
+
+    const [likes, setLikes] = useState(contadorLikes.cantidad);
+
+    const handleLikeClick = async () => {
+        try {
+            const response = await axios.post(`/articulos/${articulo.id}/incrementarLikes`);
+            setLikes(response.data.likes);
+        } catch (error) {
+            console.error("Error al incrementar los likes:", error);
+        }
+    };
+
     useEffect(() => {
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
@@ -159,7 +173,8 @@ export default function Show({
                                 {articulo.descripcion}
                             </li>
                                 <div>
-                                    <p>Likes: {contadorLikes.cantidad}</p>
+                                <button onClick={handleLikeClick}>Like</button>
+                                <p>Likes: {likes}</p>
                                 </div>
                             <a href="">
                                 <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">

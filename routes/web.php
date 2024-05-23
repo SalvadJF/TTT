@@ -61,5 +61,7 @@ Route::get('/admin/noticias', [AdminController::class, 'noticias'])->name('admin
 Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('admin.articulos');
 Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
 
+Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class, 'incrementarLikes'])->name('articulos.incrementarLikes');
+
 
 require __DIR__.'/auth.php';
