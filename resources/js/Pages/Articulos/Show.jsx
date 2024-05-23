@@ -5,9 +5,11 @@ import Encabezado from "@/Components/Encabezado";
 import Boton from "@/Components/Botones";
 import { BreadcrumbArticulosShow } from "@/Components/BreadCrumb";
 import ComentariosArticulo from "./Partials/ComentariosArticulo";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
+import { setCookie, getCookie, eraseCookie } from "@/Utils/cookieUtils";
 
 export default function Show({
     auth,
@@ -16,7 +18,37 @@ export default function Show({
     etiquetas,
     comentarios,
     user,
+    contadorLikes
 }) {
+    const [likes, setLikes] = useState(contadorLikes.cantidad);
+    const [hasLiked, setHasLiked] = useState(false);
+
+    useEffect(() => {
+        // Verificar si el usuario ya ha dado like
+        const liked = getCookie(`liked_articulo_${articulo.id}`);
+        if (liked) {
+            setHasLiked(true);
+        }
+    }, [articulo.id]);
+
+    const handleLikeClick = async () => {
+        try {
+            let response;
+            if (hasLiked) {
+                response = await axios.post(`/articulos/${articulo.id}/decrementarLikes`);
+                setHasLiked(false);
+                eraseCookie(`liked_articulo_${articulo.id}`);
+            } else {
+                response = await axios.post(`/articulos/${articulo.id}/incrementarLikes`);
+                setHasLiked(true);
+                setCookie(`liked_articulo_${articulo.id}`, true, 365);
+            }
+            setLikes(response.data.likes);
+        } catch (error) {
+            console.error("Error al actualizar los likes:", error);
+        }
+    };
+
     useEffect(() => {
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
@@ -70,7 +102,7 @@ export default function Show({
             });
             engine.dispose();
         };
-    }, []);
+    }, [articulo.modelo]);
 
     return (
         <AuthenticatedLayout
@@ -85,15 +117,15 @@ export default function Show({
             <div className="ml-20 pt-40">
                 <BreadcrumbArticulosShow articulo={articulo} />
             </div>
-            <div class="flex flex-col items-center w-full shadow md:flex-row p-5 m-3 div-oscuro">
-                <div class="w-full md:w-2/3">
+            <div className="flex flex-col items-center w-full shadow md:flex-row p-5 m-3 div-oscuro">
+                <div className="w-full md:w-2/3">
                     <canvas
                         id="renderCanvas"
                         style={{ width: "100%", height: "70%" }}
                     ></canvas>
                 </div>
-                <div class="flex flex-col justify-between p-4 leading-normal w-full md:w-2/5 text-center">
-                    <div class="w-full mb-5">
+                <div className="flex flex-col justify-between p-4 leading-normal w-full md:w-2/5 text-center">
+                    <div className="w-full mb-5">
                         <div className="rounded-lg shadow md:max-w-xl p-4">
                             {user ? (
                                 <div className="flex items-center m-auto justify-center">
@@ -157,6 +189,12 @@ export default function Show({
                             <li className="mb-3 font-lato text-white">
                                 {articulo.descripcion}
                             </li>
+                            <div>
+                                <button onClick={handleLikeClick}>
+                                    {hasLiked ? "Unlike" : "Like"}
+                                </button>
+                                <p>Likes: {likes}</p>
+                            </div>
                             <a href="">
                                 <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
                                     Comprar
@@ -167,7 +205,7 @@ export default function Show({
                 </div>
             </div>
             <div className="w-full p-5">
-            <ComentariosArticulo comentarios={comentarios} articulo={articulo} user={user} />
+                <ComentariosArticulo comentarios={comentarios} articulo={articulo} user={user} />
             </div>
         </AuthenticatedLayout>
     );

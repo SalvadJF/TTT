@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         $this->call([
-            ContadorSeeder::class,
+
             CategoriaSeeder::class,
             EtiquetaSeeder::class,
             ArticuloSeeder::class,
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             ArticuloSeeder::class,
             ComentarioSeeder::class,
             FacturaSeeder::class,
-            Objetivo_ContadorSeeder::class,
+            ContadorSeeder::class,
 
         ]);
     }

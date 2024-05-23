@@ -27,7 +27,7 @@ class Noticia extends Model
 
     public function objetivos_contadores()
     {
-        return $this->morphMany(Objetivo_Contador::class, 'objetivo');
+        return $this->morphMany(Contador::class, 'objetivo');
     }
 
     public function etiquetas()

@@ -21,8 +21,8 @@ export default function Index({ auth, articulos }) {
                 )
             );
         }
-        if (filterType === 'Modelo_3D') {
-            filtered = filtered.filter(articulo => articulo.tipo === 'Modelo_3D');
+        if (filterType === 'Modelo_3d') {
+            filtered = filtered.filter(articulo => articulo.tipo === 'Modelo_3d');
         } else if (filterType === 'Textura') {
             filtered = filtered.filter(articulo => articulo.tipo === 'Textura');
         }
@@ -63,8 +63,8 @@ export default function Index({ auth, articulos }) {
                     Todos
                 </button>
                 <button
-                    onClick={() => setFilterType('3D')}
-                    className={`px-4 py-2 mr-2 rounded-md ${filterType === '3D' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setFilterType('Modelo_3d')} // Cambiar '3D' a 'Modelo_3d'
+                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Modelo_3d' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                 >
                     Modelo 3D
                 </button>

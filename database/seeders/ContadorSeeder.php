@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Articulo;
 use App\Models\Contador;
+use App\Models\Noticia;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,10 +15,46 @@ class ContadorSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear un contador para Likes
-        Contador::create(['nombre' => 'Likes']);
+        // Obtener todos los artículos y noticias
+        $articulos = Articulo::all();
+        $noticias = Noticia::all();
 
-        // Crear un contador para Visitas
-        Contador::create(['nombre' => 'Visitas']);
+        // Crear contadores para cada artículo
+        foreach ($articulos as $articulo) {
+            // Crear contador para Likes
+            $contadorLikes = Contador::create([
+                'nombre' => 'Likes',
+                'cantidad' => 0,
+                'objetivo_type' => Articulo::class,
+                'objetivo_id' => $articulo->id,
+            ]);
+
+            // Crear contador para Visitas
+            $contadorVisitas = Contador::create([
+                'nombre' => 'Visitas',
+                'cantidad' => 0,
+                'objetivo_type' => Articulo::class,
+                'objetivo_id' => $articulo->id,
+            ]);
+        }
+
+        // Crear contadores para cada noticia
+        foreach ($noticias as $noticia) {
+            // Crear contador para Likes
+            $contadorLikes = Contador::create([
+                'nombre' => 'Likes',
+                'cantidad' => 0,
+                'objetivo_type' => Noticia::class,
+                'objetivo_id' => $noticia->id,
+            ]);
+
+            // Crear contador para Visitas
+            $contadorVisitas = Contador::create([
+                'nombre' => 'Visitas',
+                'cantidad' => 0,
+                'objetivo_type' => Noticia::class,
+                'objetivo_id' => $noticia->id,
+            ]);
+        }
     }
 }

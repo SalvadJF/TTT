@@ -33,9 +33,9 @@ class Articulo extends Model
         return $this->morphMany(Comentario::class, 'comentable');
     }
 
-    public function objetivos_contadores()
+    public function contadores()
     {
-        return $this->morphMany(Objetivo_Contador::class, 'objetivo');
+        return $this->morphMany(Contador::class, 'objetivo');
     }
 
     public function etiquetas()
