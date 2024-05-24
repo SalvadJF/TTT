@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->float('precio_venta', 2);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('articulo_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

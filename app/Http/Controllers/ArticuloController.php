@@ -63,6 +63,7 @@ use Inertia\Inertia;
             'tipo' => 'required|in:Modelo_3d,Textura',
             'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
             'modelo' => 'file',
+            'precio' => 'numeric|max:999.99',
             'categorias' => 'required|array|max:3',
             'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
@@ -81,6 +82,7 @@ use Inertia\Inertia;
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'tipo' => $request->tipo,
+            'precio' => $request->precio,
             'modelo' => $modeloNombre,
             'imagen' => $imagenPath,
             'user_id' => auth()->id(),
@@ -161,6 +163,7 @@ use Inertia\Inertia;
             'nombre' => 'required|max:255',
             'descripcion' => 'required|max:65535',
             'tipo' => 'required|in:Modelo_3d,Textura',
+            'precio' => 'numeric|max:999.99',
             'categorias' => 'required|array|max:3',
             'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
@@ -171,6 +174,7 @@ use Inertia\Inertia;
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'tipo' => $request->tipo,
+            'precio' => $request->precio,
          ]);
 
          // Sincronizar las relaciones de categorías y etiquetas
@@ -214,7 +218,7 @@ use Inertia\Inertia;
             $contadorLikes->save();
             return response()->json(['likes' => $contadorLikes->cantidad]);
         } else {
-            return response()->json(['error' => 'Articulo not found or likes already zero'], 404);
+            return response()->json(['error' => 'No se encontro el Articulo o los Likes son 0'], 404);
         }
     }
 

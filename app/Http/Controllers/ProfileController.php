@@ -22,10 +22,13 @@ class ProfileController extends Controller
 
         $comentarios = $user->comentarios;
 
+        $facturas = $user->facturas;
+
         return Inertia::render('Profile/Index', [
             'user' => $user,
             'articulos' => $articulos,
-            'comentarios' => $comentarios
+            'comentarios' => $comentarios,
+            'facturas' => $facturas
         ]);
     }
 
