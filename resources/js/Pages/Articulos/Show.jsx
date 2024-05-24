@@ -195,7 +195,11 @@ export default function Show({
                                 </button>
                                 <p>Likes: {likes}</p>
                             </div>
+                            <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
+                                    Precio : ${articulo.precio}
+                                </li>
                             <a href="">
+
                                 <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
                                     Comprar
                                 </li>
