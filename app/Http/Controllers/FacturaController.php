@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FacturaController extends Controller
@@ -42,19 +43,31 @@ class FacturaController extends Controller
 
     public function simularCompra(Request $request)
     {
-        // Supongamos que recibes el ID del artículo y el precio de venta desde el cliente
-        $articuloId = $request->input('articulo_id');
+        // Simulación de la compra
         $precioVenta = $request->input('precio_venta');
+        $articuloId = $request->input('articulo_id');
+        $userId = auth()->user()->id;
 
-        // Crea una nueva factura en la base de datos
-        Factura::create([
-            'precio_venta' => $precioVenta,
-            'user_id' => auth()->id(), // Opcional: si quieres registrar el usuario que realiza la compra
-            'articulo_id' => $articuloId,
-        ]);
+        // Simula la compra y crea la factura
+        $user = User::findOrFail($userId);
 
-        // Puedes devolver una respuesta JSON indicando el éxito de la operación
-        return response()->json(['message' => 'Compra simulada con éxito']);
+        // Verifica si el usuario tiene suficiente dinero en su monedero
+        if ($user->monedero >= $precioVenta) {
+            // Realiza la compra y actualiza el monedero del usuario
+            $user->monedero -= $precioVenta;
+            $user->save();
+
+            // Crea la factura
+            $factura = new Factura();
+            $factura->precio_venta = $precioVenta;
+            $factura->user_id = $userId;
+            $factura->articulo_id = $articuloId;
+            $factura->save();
+
+            return response()->json(['message' => 'Compra realizada con éxito']);
+        } else {
+            return response()->json(['message' => 'Saldo insuficiente en el monedero']);
+        }
     }
 
 }

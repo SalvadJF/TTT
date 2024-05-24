@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('1234werty'),
             'admin' => 'true',
+            'monedero' => '5000',
             'remember_token' => Str::random(10),
         ]);
 

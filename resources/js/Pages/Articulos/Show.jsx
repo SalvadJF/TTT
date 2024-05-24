@@ -10,6 +10,7 @@ import axios from "axios";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import { setCookie, getCookie, eraseCookie } from "@/Utils/cookieUtils";
+import SimuladorCompra from './Partials/SimularCompra';
 
 export default function Show({
     auth,
@@ -22,6 +23,7 @@ export default function Show({
 }) {
     const [likes, setLikes] = useState(contadorLikes.cantidad);
     const [hasLiked, setHasLiked] = useState(false);
+    const [mostrarModalCompra, setMostrarModalCompra] = useState(false);
 
     useEffect(() => {
         // Verificar si el usuario ya ha dado like
@@ -55,10 +57,14 @@ export default function Show({
             // Descarga el modelo
             window.location.href = `/img/modelos/${articulo.modelo}`;
         } else {
-            // Si el precio no es 0, muestra el simulador de compra
-            // Abre el simulador de compra
-            // Puedes implementar una lógica adicional aquí, como abrir un modal
+            // Si el precio no es 0, abre el modal
+            setMostrarModalCompra(true);
         }
+    };
+
+    const handleCerrarModalCompra = () => {
+        // Cierra el modal de compra
+        setMostrarModalCompra(false);
     };
 
     useEffect(() => {
@@ -214,7 +220,7 @@ export default function Show({
                         {parseFloat(articulo.precio) === 0 ? (
                             <button onClick={handleCompraClick}>Gratis</button>
                         ) : (
-                            <button onClick={handleCompraClick}>Comprar</button>
+                            <button onClick={handleCompraClick}>{articulo.precio}</button>
                         )}
                     </li>
                     </li>
@@ -225,6 +231,22 @@ export default function Show({
             <div className="w-full p-5">
                 <ComentariosArticulo comentarios={comentarios} articulo={articulo} user={user} />
             </div>
+             {/* Modal de compra */}
+             {mostrarModalCompra && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="absolute inset-0 bg-black opacity-75"></div>
+                    <div className="z-50 bg-white p-8 max-w-lg rounded-lg shadow-lg">
+                    <SimuladorCompra
+                        articuloId={articulo.id}
+                        articuloPrecio={articulo.precio}
+                        monedero={user.monedero}
+                        modelo={articulo.modelo}
+                        onClose={handleCerrarModalCompra} // Pasamos la función handleCerrarModalCompra como prop
+                    />
+
+                    </div>
+                </div>
+            )}
         </AuthenticatedLayout>
     );
 }
