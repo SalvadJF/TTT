@@ -6,6 +6,7 @@ use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FacturaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,11 @@ Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name(
 
 Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class, 'incrementarLikes'])->name('articulos.incrementarLikes');
 Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class, 'decrementarLikes'])->name('articulos.decrementarLikes');
+
+
+
+Route::post('/simular-compra', [FacturaController::class, 'simularCompra'])->name('simularCompra');
+
 
 
 

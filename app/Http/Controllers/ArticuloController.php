@@ -218,7 +218,7 @@ use Inertia\Inertia;
             $contadorLikes->save();
             return response()->json(['likes' => $contadorLikes->cantidad]);
         } else {
-            return response()->json(['error' => 'Articulo not found or likes already zero'], 404);
+            return response()->json(['error' => 'No se encontro el Articulo o los Likes son 0'], 404);
         }
     }
 

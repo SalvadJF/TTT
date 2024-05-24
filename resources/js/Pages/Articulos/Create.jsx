@@ -165,6 +165,26 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
                     </div>
                     <div>
                         <label
+                            htmlFor="precio"
+                            className="font-koulen block mb-2 text-sm font-medium text-white"
+                        >
+                            Precio:
+                        </label>
+                        <input
+                            type="number"
+                            id="precio"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={data.precio}
+                            onChange={(e) => setData("precio", e.target.value)}
+                        />
+                        {errors.precio && (
+                            <span className="error text-red-500">
+                                {errors.precio}
+                            </span>
+                        )}
+                    </div>
+                    <div>
+                        <label
                             htmlFor="imagen"
                             className="font-koulen block mb-2 text-sm font-medium text-white"
                         >
@@ -198,26 +218,6 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
                         {errors.modelo && (
                             <span className="error text-red-500">
                                 {errors.modelo}
-                            </span>
-                        )}
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="precio"
-                            className="font-koulen block mb-2 text-sm font-medium text-white"
-                        >
-                            Precio:
-                        </label>
-                        <input
-                            type="number"
-                            id="precio"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            value={data.precio}
-                            onChange={(e) => setData("precio", e.target.value)}
-                        />
-                        {errors.precio && (
-                            <span className="error text-red-500">
-                                {errors.precio}
                             </span>
                         )}
                     </div>

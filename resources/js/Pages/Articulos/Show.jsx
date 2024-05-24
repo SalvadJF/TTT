@@ -49,6 +49,18 @@ export default function Show({
         }
     };
 
+    const handleCompraClick = () => {
+        // Si el precio del artículo es 0, descarga el modelo
+        if (parseFloat(articulo.precio) === 0) {
+            // Descarga el modelo
+            window.location.href = `/img/modelos/${articulo.modelo}`;
+        } else {
+            // Si el precio no es 0, muestra el simulador de compra
+            // Abre el simulador de compra
+            // Puedes implementar una lógica adicional aquí, como abrir un modal
+        }
+    };
+
     useEffect(() => {
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
@@ -196,14 +208,16 @@ export default function Show({
                                 <p>Likes: {likes}</p>
                             </div>
                             <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
-                                    Precio : ${articulo.precio}
-                                </li>
-                            <a href="">
-
-                                <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
-                                    Comprar
-                                </li>
-                            </a>
+                        {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
+                        <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
+                        {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
+                        {parseFloat(articulo.precio) === 0 ? (
+                            <button onClick={handleCompraClick}>Gratis</button>
+                        ) : (
+                            <button onClick={handleCompraClick}>Comprar</button>
+                        )}
+                    </li>
+                    </li>
                         </ul>
                     </div>
                 </div>

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFacturaRequest;
-use App\Http\Requests\UpdateFacturaRequest;
+use Illuminate\Http\Request;
 
 class FacturaController extends Controller
 {
@@ -28,7 +27,7 @@ class FacturaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFacturaRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -41,27 +40,21 @@ class FacturaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Factura $factura)
+    public function simularCompra(Request $request)
     {
-        //
+        // Supongamos que recibes el ID del artículo y el precio de venta desde el cliente
+        $articuloId = $request->input('articulo_id');
+        $precioVenta = $request->input('precio_venta');
+
+        // Crea una nueva factura en la base de datos
+        Factura::create([
+            'precio_venta' => $precioVenta,
+            'user_id' => auth()->id(), // Opcional: si quieres registrar el usuario que realiza la compra
+            'articulo_id' => $articuloId,
+        ]);
+
+        // Puedes devolver una respuesta JSON indicando el éxito de la operación
+        return response()->json(['message' => 'Compra simulada con éxito']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFacturaRequest $request, Factura $factura)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Factura $factura)
-    {
-        //
-    }
 }
