@@ -6,6 +6,7 @@ use App\Models\Factura;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FacturaController extends Controller
 {
@@ -38,7 +39,11 @@ class FacturaController extends Controller
      */
     public function show(Factura $factura)
     {
-        //
+        $datosfactura = Factura::with(['user', 'articulo'])->find($factura->id);
+
+        return Inertia::render('Facturas/Show', [
+            'factura' => $datosfactura,
+        ]);
     }
 
     public function simularCompra(Request $request)

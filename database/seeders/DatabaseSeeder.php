@@ -44,7 +44,6 @@ class DatabaseSeeder extends Seeder
             NoticiaSeeder::class,
             ArticuloSeeder::class,
             ComentarioSeeder::class,
-            FacturaSeeder::class,
             ContadorSeeder::class,
 
         ]);

@@ -76,7 +76,7 @@ use Inertia\Inertia;
 
 
         $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
-        $request->modelo->move(public_path('img/modelos'), $modeloNombre);
+        $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
 
         $articulo = Articulo::create([
             'nombre' => $request->nombre,

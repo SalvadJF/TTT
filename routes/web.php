@@ -69,7 +69,7 @@ Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class
 
 Route::post('/simular-compra', [FacturaController::class, 'simularCompra'])->name('simularCompra');
 
-
+Route::resource('facturas', FacturaController::class);
 
 
 require __DIR__.'/auth.php';

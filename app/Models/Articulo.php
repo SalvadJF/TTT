@@ -51,7 +51,7 @@ class Articulo extends Model
 
     public function facturas()
     {
-        return $this->belongsToMany(Factura::class, 'articulos_facturas', 'factura_id', 'articulo_id');
+        return $this->HasMany(Factura::class);
     }
 
     public function getImagenUrlAttribute()

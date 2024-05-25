@@ -9,13 +9,13 @@ class Factura extends Model
 {
     use HasFactory;
 
-    public function usuario()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function articulos()
+    public function articulo()
     {
-        return $this->belongsToMany(Articulo::class, 'articulos_facturas', 'factura_id', 'articulo_id');
+        return $this->belongsTo(Articulo::class);
     }
 }
