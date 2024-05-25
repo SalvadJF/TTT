@@ -40,12 +40,13 @@ export default function Show({ auth, factura }) {
                             Autor: {factura.user.name}
                         </li>
                     </ul>
-                    <Link
+                    <a
                         href={`/img/modelos/${factura.articulo.modelo}`}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        download
                     >
                         Descargar Modelo
-                    </Link>
+                    </a>
                 </div>
             </div>
         </AuthenticatedLayout>

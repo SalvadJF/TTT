@@ -10,6 +10,7 @@ use App\Models\Etiqueta;
  use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
  class ArticuloController extends Controller
  {
      /**

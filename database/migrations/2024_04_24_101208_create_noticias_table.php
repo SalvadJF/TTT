@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('noticias', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
+            $table->string('resumen');
             $table->text('contenido');
+            $table->enum('tipo', ['Noticia', 'Entrevista', 'Informacion']);
             $table->string('imagen')->default('/img/noticias/default.jpg')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

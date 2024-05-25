@@ -39,11 +39,12 @@ class FacturaController extends Controller
      */
     public function show(Factura $factura)
     {
-        $datosfactura = Factura::with(['user', 'articulo'])->find($factura->id);
+        $factura->load(['user', 'articulo']);
 
-        return Inertia::render('Facturas/Show', [
-            'factura' => $datosfactura,
-        ]);
+    // Renderiza la vista con los datos de la factura y sus relaciones
+    return Inertia::render('Facturas/Show', [
+        'factura' => $factura,
+    ]);
     }
 
     public function simularCompra(Request $request)
@@ -69,10 +70,19 @@ class FacturaController extends Controller
             $factura->articulo_id = $articuloId;
             $factura->save();
 
-            return response()->json(['message' => 'Compra realizada con éxito']);
+            // Cargar la factura con sus relaciones
+            $factura->load(['user', 'articulo']);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Compra realizada con éxito',
+                'factura' => $factura // Enviamos el objeto completo de la factura
+            ]);
         } else {
-            return response()->json(['message' => 'Saldo insuficiente en el monedero']);
+            return response()->json(['success' => false, 'message' => 'Saldo insuficiente en el monedero']);
         }
     }
+
+
 
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, modelo, onClose }) => {
+const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, onClose }) => {
     const [mensaje, setMensaje] = useState('');
 
     const handleSimularCompra = async () => {
@@ -12,12 +12,11 @@ const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, modelo, onClose
                 articulo_id: articuloId,
             });
 
-            // Si la compra se realiza con éxito, muestra un mensaje y descarga el modelo
+            // Si la compra se realiza con éxito, muestra un mensaje
+            // y abre una nueva ventana con el show de factura
             setMensaje(response.data.message);
             if (response.data.success) {
-                // Descarga el modelo
-                window.location.href = `/img/modelos/${modelo}`;
-                // Cierra el modal después de la compra
+                window.open(route('facturas.show', { factura: response.data.factura.id }), '_blank');
                 onClose(); // Aquí se llama a la función para cerrar el modal
             }
 
@@ -36,6 +35,7 @@ const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, modelo, onClose
                 <p className="mb-1">Precio del Artículo: {articuloPrecio}</p>
             </div>
             <button
+                type="button"
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
                 onClick={handleSimularCompra}
             >

@@ -18,14 +18,6 @@ class NoticiaSeeder extends Seeder
         // Crear noticias y obtenerlas
         $noticias = Noticia::factory()->count(10)->create();
 
-        // Asignar categorías a las noticias
-        $categorias = Categoria::all();
-        foreach ($noticias as $noticia) {
-            $noticia->categorias()->attach(
-                $categorias->random(rand(1, 3))->pluck('id')->toArray()
-            );
-        }
-
         // Asignar etiquetas a las noticias
         $etiquetas = Etiqueta::all();
         foreach ($noticias as $noticia) {
