@@ -5,7 +5,7 @@ import Encabezado from "@/Components/Encabezado";
 import Boton from "@/Components/Botones";
 import { useEffect } from "react";
 
-export default function Show({ auth, noticia, categorias, etiquetas, user }) {
+export default function Show({ auth, noticia, etiquetas }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -27,18 +27,8 @@ export default function Show({ auth, noticia, categorias, etiquetas, user }) {
 
                 <div className="p-40 div-oscuro justify-center text-center">
                     <Encabezado texto={noticia.titulo} />
-                    <h5>Categorias</h5>
-                    <ul className="mb-2 text-white">
-                        {categorias.length > 0 ? (
-                            categorias.map((categoria) => (
-                                <li key={categoria.id} className="font-koulen">
-                                    {categoria.nombre}
-                                </li>
-                            ))
-                        ) : (
-                            <li>Sin Categorias</li>
-                        )}
-                    </ul>
+                    <h5>Tipo</h5>
+                    <p>{noticia.tipo}</p>
                     <h5>Etiquetas</h5>
                     <ul className="mb-2 text-white">
                         {etiquetas.length > 0 ? (

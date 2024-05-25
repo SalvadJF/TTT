@@ -27,12 +27,6 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        Noticia::create([
-            'titulo' => 'Prueba',
-            'contenido' => 'Esto es una prueba',
-            'user_id' => '1'
-        ]);
-
         // Crear usuarios aleatorios
         User::factory(10)->create();
 
@@ -44,7 +38,6 @@ class DatabaseSeeder extends Seeder
             NoticiaSeeder::class,
             ArticuloSeeder::class,
             ComentarioSeeder::class,
-            FacturaSeeder::class,
             ContadorSeeder::class,
 
         ]);

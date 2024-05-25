@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Articulo extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
 
     protected $table = "articulos";
 
@@ -51,7 +54,7 @@ class Articulo extends Model
 
     public function facturas()
     {
-        return $this->belongsToMany(Factura::class, 'articulos_facturas', 'factura_id', 'articulo_id');
+        return $this->HasMany(Factura::class);
     }
 
     public function getImagenUrlAttribute()

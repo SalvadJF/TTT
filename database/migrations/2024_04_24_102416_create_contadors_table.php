@@ -17,6 +17,7 @@ return new class extends Migration
             $table->morphs('objetivo');
             $table->integer('cantidad');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

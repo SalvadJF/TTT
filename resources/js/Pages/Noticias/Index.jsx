@@ -1,13 +1,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import NoticiasExposicion from '@/Components/NoticiaExposicion';
-import Encabezado from '@/Components/Encabezado';
-import Boton from '@/Components/Botones';
 import { BreadcrumbNoticias } from '@/Components/BreadCrumb';
 import React, { useState, useMemo } from 'react';
 
 export default function Index({ auth, noticias }) {
     const [searchTerm, setSearchTerm] = useState('');
+    const [filterType, setFilterType] = useState('all'); // Agregamos el estado del filtro
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(4); // Número de elementos por página
 
@@ -20,8 +19,11 @@ export default function Index({ auth, noticias }) {
                 )
             );
         }
+        if (filterType !== 'all') { // Aplicamos el filtro
+            filtered = filtered.filter(noticia => noticia.tipo === filterType);
+        }
         return filtered;
-    }, [searchTerm, noticias.data]);
+    }, [searchTerm, filterType, noticias.data]);
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -47,6 +49,34 @@ export default function Index({ auth, noticias }) {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="px-4 py-2 border rounded-md"
                 />
+            </div>
+
+            {/* Agregamos los botones de filtro */}
+            <div className="my-4">
+                <button
+                    onClick={() => setFilterType('all')}
+                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                >
+                    Todos
+                </button>
+                <button
+                    onClick={() => setFilterType('Noticia')}
+                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Noticia' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                >
+                    Noticias
+                </button>
+                <button
+                    onClick={() => setFilterType('Entrevista')}
+                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Entrevista' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                >
+                    Entrevistas
+                </button>
+                <button
+                    onClick={() => setFilterType('Informacion')}
+                    className={`px-4 py-2 rounded-md ${filterType === 'Informacion' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                >
+                    Información
+                </button>
             </div>
 
             <div>

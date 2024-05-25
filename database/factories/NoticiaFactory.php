@@ -27,7 +27,9 @@ class NoticiaFactory extends Factory
     {
         return [
             'titulo' => $this->faker->name(),
+            'resumen' => $this->faker->name(),
             'contenido' => $this->faker->paragraphs(1, true),
+            'tipo' => $this->faker->randomElement(['Noticia', 'Entrevista', 'Informacion']),
             'user_id' => function () {
                 // Asigna un usuario existente
                 return User::inRandomOrder()->first()->id;

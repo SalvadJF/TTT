@@ -6,6 +6,7 @@ use App\Models\Factura;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FacturaController extends Controller
 {
@@ -38,7 +39,12 @@ class FacturaController extends Controller
      */
     public function show(Factura $factura)
     {
-        //
+        $factura->load(['user', 'articulo']);
+
+    // Renderiza la vista con los datos de la factura y sus relaciones
+    return Inertia::render('Facturas/Show', [
+        'factura' => $factura,
+    ]);
     }
 
     public function simularCompra(Request $request)
@@ -64,10 +70,19 @@ class FacturaController extends Controller
             $factura->articulo_id = $articuloId;
             $factura->save();
 
-            return response()->json(['message' => 'Compra realizada con éxito']);
+            // Cargar la factura con sus relaciones
+            $factura->load(['user', 'articulo']);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Compra realizada con éxito',
+                'factura' => $factura // Enviamos el objeto completo de la factura
+            ]);
         } else {
-            return response()->json(['message' => 'Saldo insuficiente en el monedero']);
+            return response()->json(['success' => false, 'message' => 'Saldo insuficiente en el monedero']);
         }
     }
+
+
 
 }

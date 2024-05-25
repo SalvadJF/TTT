@@ -43,11 +43,11 @@ class NoticiaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required',
-            'contenido' => 'required',
+            'titulo' => 'required|max:255',
+            'resumen' => 'required|max:1255',
+            'contenido' => 'required|max:65535',
+            'tipo' => 'required|in:Noticia,Entrevista,Informacion',
             'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN,
-            'categorias' => 'required|array|max:3',
-            'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
             'etiquetas.*' => 'exists:etiquetas,id',
         ]);
@@ -55,16 +55,17 @@ class NoticiaController extends Controller
         $imagenNombre = 'Noticia_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
 
         $request->imagen->move(public_path('img/noticias'), $imagenNombre);
-        $imagenPath = ('img/noticias/' . $imagenNombre);
+        $imagenPath = ('/img/noticias/' . $imagenNombre);
 
         $noticia = Noticia::create([
             'titulo' => $request->titulo,
+            'resumen' => $request->resumen,
             'contenido' => $request->contenido,
+            'tipo' => $request->tipo,
             'imagen' => $imagenPath,
             'user_id' => auth()->id(),
         ]);
 
-        $noticia->categorias()->attach($request->categorias);
         $noticia->etiquetas()->attach($request->etiquetas);
 
         return redirect()->route('noticias.show', $noticia);
@@ -75,20 +76,12 @@ class NoticiaController extends Controller
      */
     public function show(Noticia $noticia)
     {
-        // Obtener las categorías asociadas al artículo
-        $categorias = $noticia->categorias()->get();
-
         // Obtener las etiquetas asociadas al artículo
         $etiquetas = $noticia->etiquetas()->get();
 
-        // Obtener el usuario asociado al artículo
-        $user = $noticia->user;
-
         return Inertia::render('Noticias/Show', [
             'noticia' => $noticia,
-            'categorias' => $categorias,
             'etiquetas' => $etiquetas,
-            'user' => $user,
         ]);
 
     }
@@ -102,12 +95,11 @@ class NoticiaController extends Controller
         if (auth()->id() !== $noticia->user_id && !auth()->user()->isAdmin()) {
             abort(403); // No autorizado
         }
-        $categorias = Categoria::all();
+
         $etiquetas = Etiqueta::all();
-        $categoriasNoticia = $noticia->categorias;
         $etiquetasNoticia = $noticia->etiquetas;
 
-       return Inertia::render('Noticias/Edit', ['noticia' => $noticia, 'categorias' => $categorias, 'etiquetas' => $etiquetas , 'categoriasNoticia' => $categoriasNoticia, 'etiquetasNoticia' => $etiquetasNoticia]);
+       return Inertia::render('Noticias/Edit', ['noticia' => $noticia, 'etiquetas' => $etiquetas , 'etiquetasNoticia' => $etiquetasNoticia]);
 
     }
 
@@ -124,10 +116,10 @@ class NoticiaController extends Controller
 
         $request->validate([
             'titulo' => 'required',
+            'resumen' => 'required',
             'contenido' => 'required',
+            'tipo' => 'required|in:Noticia,Entrevista,Informacion',
             'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN,
-            'categorias' => 'required|array|max:3',
-            'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
             'etiquetas.*' => 'exists:etiquetas,id',
         ]);
@@ -149,11 +141,12 @@ class NoticiaController extends Controller
 
         $noticia->update([
             'titulo' => $request->titulo,
+            'resumen' => $request->resumen,
             'contenido' => $request->contenido,
+            'tipo' => $request->tipo,
         ]);
 
         // Sincronizar las relaciones de categorías y etiquetas
-        $noticia->categorias()->sync($request->categorias);
         $noticia->etiquetas()->sync($request->etiquetas);
 
         return redirect()->route('noticias.show', $noticia);

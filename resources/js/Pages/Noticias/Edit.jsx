@@ -6,15 +6,14 @@ const EditarNoticia = () => {
     const {
         auth,
         noticia,
-        categorias,
         etiquetas,
-        categoriasNoticia,
         etiquetasNoticia,
     } = usePage().props;
     const { data, setData, errors, put } = useForm({
         titulo: noticia.titulo,
+        resumen: noticia.resumen, // Nuevo campo: Resumen
         contenido: noticia.contenido,
-        categorias: categoriasNoticia.map((categoria) => categoria.id),
+        tipo: noticia.tipo, // Nuevo campo: Tipo
         etiquetas: etiquetasNoticia.map((etiqueta) => etiqueta.id),
     });
 
@@ -25,16 +24,6 @@ const EditarNoticia = () => {
                 // Manejar éxito, redireccionar o mostrar un mensaje
             },
         });
-    };
-
-    const handleCategoriaChange = (e) => {
-        const value = parseInt(e.target.value);
-        setData(
-            "categorias",
-            data.categorias.includes(value)
-                ? data.categorias.filter((id) => id !== value)
-                : [...data.categorias, value]
-        );
     };
 
     const handleEtiquetaChange = (e) => {
@@ -86,6 +75,26 @@ const EditarNoticia = () => {
                     </div>
                     <div>
                         <label
+                            htmlFor="resumen"
+                            className="font-koulen block mb-2 text-sm font-medium text-white"
+                        >
+                            Resumen:
+                        </label>
+                        <textarea
+                            id="resumen"
+                            rows="2"
+                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={data.resumen}
+                            onChange={(e) => setData("resumen", e.target.value)}
+                        ></textarea>
+                        {errors.resumen && (
+                            <span className="error text-red-500">
+                                {errors.resumen}
+                            </span>
+                        )}
+                    </div>
+                    <div>
+                        <label
                             htmlFor="contenido"
                             className="font-koulen block mb-2 text-sm font-medium text-white"
                         >
@@ -108,38 +117,26 @@ const EditarNoticia = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor="categorias"
+                            htmlFor="tipo"
                             className="font-koulen block mb-2 text-sm font-medium text-white"
                         >
-                            Selecciona Categorías
+                            Tipo:
                         </label>
-                        <div
-                            className={
-                                errors.categorias ? "border-red-500" : ""
-                            }
+                        <select
+                            id="tipo"
+                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={data.tipo}
+                            onChange={(e) => setData("tipo", e.target.value)}
                         >
-                            {categorias.map((categoria) => (
-                                <div key={categoria.id}>
-                                    <input
-                                        type="checkbox"
-                                        id={`categoria-${categoria.id}`}
-                                        value={categoria.id}
-                                        checked={data.categorias.includes(
-                                            categoria.id
-                                        )}
-                                        onChange={handleCategoriaChange}
-                                    />
-                                    <label
-                                        htmlFor={`categoria-${categoria.id}`}
-                                        className="ml-2 text-sm text-white"
-                                    >
-                                        {categoria.titulo}
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
-                        {errors.categorias && (
-                            <p className="text-red-500">{errors.categorias}</p>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="Noticia">Noticia</option>
+                            <option value="Entrevista">Entrevista</option>
+                            <option value="Informacion">Información</option>
+                        </select>
+                        {errors.tipo && (
+                            <span className="error text-red-500">
+                                {errors.tipo}
+                            </span>
                         )}
                     </div>
                     <div>
@@ -167,7 +164,7 @@ const EditarNoticia = () => {
                                         htmlFor={`etiqueta-${etiqueta.id}`}
                                         className="ml-2 text-sm text-white"
                                     >
-                                        {etiqueta.titulo}
+                                        {etiqueta.nombre}
                                     </label>
                                 </div>
                             ))}
@@ -192,3 +189,4 @@ const EditarNoticia = () => {
 };
 
 export default EditarNoticia;
+

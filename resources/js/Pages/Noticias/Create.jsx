@@ -2,10 +2,12 @@ import { useForm } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { BreadcrumbArticulos } from "@/Components/BreadCrumb";
 
-const CreateNoticia = ({ auth, categorias, etiquetas }) => {
+const CreateNoticia = ({ auth, etiquetas }) => {
     const { data, setData, errors, post } = useForm({
         titulo: "",
+        resumen: "", // Nuevo campo: Resumen
         contenido: "",
+        tipo: "", // Nuevo campo: Tipo
         imagen: null,
         categorias: [],
         etiquetas: [],
@@ -20,18 +22,10 @@ const CreateNoticia = ({ auth, categorias, etiquetas }) => {
         });
     };
 
-    const handleCategoriaChange = (e) => {
-        const value = parseInt(e.target.value);
-        setData("categorias",
-            data.categorias.includes(value)
-                ? data.categorias.filter((id) => id !== value)
-                : [...data.categorias, value]
-        );
-    };
-
     const handleEtiquetaChange = (e) => {
         const value = parseInt(e.target.value);
-        setData("etiquetas",
+        setData(
+            "etiquetas",
             data.etiquetas.includes(value)
                 ? data.etiquetas.filter((id) => id !== value)
                 : [...data.etiquetas, value]
@@ -77,6 +71,26 @@ const CreateNoticia = ({ auth, categorias, etiquetas }) => {
                     </div>
                     <div>
                         <label
+                            htmlFor="resumen"
+                            className="font-koulen block mb-2 text-sm font-medium text-white"
+                        >
+                            Resumen:
+                        </label>
+                        <textarea
+                            id="resumen"
+                            rows="2"
+                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={data.resumen}
+                            onChange={(e) => setData("resumen", e.target.value)}
+                        ></textarea>
+                        {errors.resumen && (
+                            <span className="error text-red-500">
+                                {errors.resumen}
+                            </span>
+                        )}
+                    </div>
+                    <div>
+                        <label
                             htmlFor="contenido"
                             className="font-koulen block mb-2 text-sm font-medium text-white"
                         >
@@ -87,7 +101,9 @@ const CreateNoticia = ({ auth, categorias, etiquetas }) => {
                             rows="4"
                             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             value={data.contenido}
-                            onChange={(e) => setData("contenido", e.target.value)}
+                            onChange={(e) =>
+                                setData("contenido", e.target.value)
+                            }
                         ></textarea>
                         {errors.contenido && (
                             <span className="error text-red-500">
@@ -96,31 +112,39 @@ const CreateNoticia = ({ auth, categorias, etiquetas }) => {
                         )}
                     </div>
                     <div>
-                        <label htmlFor="categorias" className="font-koulen block mb-2 text-sm font-medium text-white">
-                            Selecciona Categorías
+                        <label
+                            htmlFor="tipo"
+                            className="font-koulen block mb-2 text-sm font-medium text-white"
+                        >
+                            Tipo:
                         </label>
-                        <div className={errors.categorias ? 'border-red-500' : ''}>
-                            {categorias.map((categoria) => (
-                                <div key={categoria.id}>
-                                    <input
-                                        type="checkbox"
-                                        id={`categoria-${categoria.id}`}
-                                        value={categoria.id}
-                                        onChange={handleCategoriaChange}
-                                    />
-                                    <label htmlFor={`categoria-${categoria.id}`} className="ml-2 text-sm text-white">
-                                        {categoria.titulo}
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
-                        {errors.categorias && <p className="text-red-500">{errors.categorias}</p>}
+                        <select
+                            id="tipo"
+                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={data.tipo}
+                            onChange={(e) => setData("tipo", e.target.value)}
+                        >
+                            <option value="">Selecciona un tipo</option>
+                            <option value="Noticia">Noticia</option>
+                            <option value="Entrevista">Entrevista</option>
+                            <option value="Informacion">Información</option>
+                        </select>
+                        {errors.tipo && (
+                            <span className="error text-red-500">
+                                {errors.tipo}
+                            </span>
+                        )}
                     </div>
                     <div>
-                        <label htmlFor="etiquetas" className="font-koulen block mb-2 text-sm font-medium text-white">
+                        <label
+                            htmlFor="etiquetas"
+                            className="font-koulen block mb-2 text-sm font-medium text-white"
+                        >
                             Selecciona Etiquetas
                         </label>
-                        <div className={errors.etiquetas ? 'border-red-500' : ''}>
+                        <div
+                            className={errors.etiquetas ? "border-red-500" : ""}
+                        >
                             {etiquetas.map((etiqueta) => (
                                 <div key={etiqueta.id}>
                                     <input
@@ -129,13 +153,18 @@ const CreateNoticia = ({ auth, categorias, etiquetas }) => {
                                         value={etiqueta.id}
                                         onChange={handleEtiquetaChange}
                                     />
-                                    <label htmlFor={`etiqueta-${etiqueta.id}`} className="ml-2 text-sm text-white">
-                                        {etiqueta.titulo}
+                                    <label
+                                        htmlFor={`etiqueta-${etiqueta.id}`}
+                                        className="ml-2 text-sm text-white"
+                                    >
+                                        {etiqueta.nombre}
                                     </label>
                                 </div>
                             ))}
                         </div>
-                        {errors.etiquetas && <p className="text-red-500">{errors.etiquetas}</p>}
+                        {errors.etiquetas && (
+                            <p className="text-red-500">{errors.etiquetas}</p>
+                        )}
                     </div>
                     <div>
                         <label
@@ -148,7 +177,9 @@ const CreateNoticia = ({ auth, categorias, etiquetas }) => {
                             id="imagen"
                             type="file"
                             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            onChange={(e) => setData("imagen", e.target.files[0])}
+                            onChange={(e) =>
+                                setData("imagen", e.target.files[0])
+                            }
                         />
                         {errors.imagen && (
                             <span className="error text-red-500">

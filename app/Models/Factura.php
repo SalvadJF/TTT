@@ -4,18 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Factura extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    public function usuario()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
-    public function articulos()
+    public function articulo()
     {
-        return $this->belongsToMany(Articulo::class, 'articulos_facturas', 'factura_id', 'articulo_id');
+        return $this->belongsTo(Articulo::class)->withTrashed();
     }
 }

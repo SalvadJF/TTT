@@ -16,6 +16,7 @@ export default function NoticiaCarta ({ noticia }) {
                 <h5 className="font-koulen mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {noticia.titulo}
                 </h5>
+                <p className="mb-3 font-lato text-gray-700 dark:text-gray-400">{noticia.resumen}</p>
                 <a
                     href={`/noticias/${noticia.id}`}
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
