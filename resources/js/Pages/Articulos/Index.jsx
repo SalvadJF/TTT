@@ -2,21 +2,28 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import ArticuloExposicion from '@/Components/ArticuloExposicion';
 import Encabezado from '@/Components/Encabezado';
-import  Boton  from '@/Components/Botones';
+import Boton from '@/Components/Botones';
 import { BreadcrumbArticulos } from '@/Components/BreadCrumb';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 export default function Index({ auth, articulos }) {
+
+
     const [searchTerm, setSearchTerm] = useState('');
     const [filterType, setFilterType] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8); // Número de elementos por página
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, filterType]);
 
     const filteredArticulos = useMemo(() => {
         let filtered = articulos.data;
         if (searchTerm) {
             filtered = filtered.filter(articulo =>
                 Object.values(articulo).some(value =>
+                    value &&
                     value.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 )
             );
@@ -38,24 +45,14 @@ export default function Index({ auth, articulos }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Articulos</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Artículos</h2>}
         >
-            <Head title="Articulos" />
+            <Head title="Artículos" />
             <div className="ml-20 pt-40">
                 <BreadcrumbArticulos />
             </div>
 
-            <div className="my-4">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="px-4 py-2 border rounded-md"
-                />
-            </div>
-
-            <div className="my-4">
+            <div className="flex my-4 p-4">
                 <button
                     onClick={() => setFilterType('all')}
                     className={`px-4 py-2 mr-2 rounded-md ${filterType === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
@@ -74,10 +71,21 @@ export default function Index({ auth, articulos }) {
                 >
                     Textura
                 </button>
+                <input
+                    type="text"
+                    placeholder="Buscar..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="px-4 py-2 border rounded-md ml-4"
+                />
             </div>
 
             <div>
-                <ArticuloExposicion articulos={{ data: currentItems }} />
+                {currentItems.length > 0 ? (
+                    <ArticuloExposicion articulos={{ data: currentItems }} />
+                ) : (
+                    <p className="text-center text-gray-500">No se han encontrado Resultados</p>
+                )}
             </div>
 
             {/* Paginación */}
