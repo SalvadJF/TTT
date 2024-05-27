@@ -17,8 +17,8 @@ export default function NoticiaDash({ noticia }) {
 
   const tipoStyle = {
     position: "absolute",
-    top: "10px",
-    left: "10px",
+    top: "30px",
+    left: "30px",
     padding: "5px 10px",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     color: "#ffffff",
@@ -30,7 +30,7 @@ export default function NoticiaDash({ noticia }) {
 
   const tituloStyle = {
     position: "absolute",
-    bottom: "20px",
+    bottom: "5px",
     left: "50%",
     transform: "translateX(-50%)",
     textAlign: "center",
@@ -44,10 +44,10 @@ export default function NoticiaDash({ noticia }) {
 
   return (
     <a href={`/noticias/${noticia.id}`}>
-      <Card className="max-w-sm flex-1" style={cardStyle}>
+      <Card className="max-w-sm flex-1 bg-black" style={cardStyle}>
         <img src={noticia.imagen} alt="Noticia" style={imagenStyle} />
-        <div style={tipoStyle}>{noticia.tipo}</div>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white" style={tituloStyle}>
+        <div className="font-koulen" style={tipoStyle}>{noticia.tipo}</div>
+        <h5 className="text-2xl font-koulen tracking-tight" style={tituloStyle}>
           {noticia.titulo}
         </h5>
       </Card>

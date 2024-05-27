@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Encabezado from '@/Components/Encabezado';
+import { BreadcrumbOtros } from '@/Components/BreadCrumb';
 
 export default function Derechos({ auth }) {
     return (
@@ -10,10 +11,15 @@ export default function Derechos({ auth }) {
         >
             <Head title="Derechos" />
 
+            <div class=" ml-20 pt-40">
+                <BreadcrumbOtros nombre="Derechos" />
+            </div>
+
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
+                <Encabezado texto="Derechos Reservados" />
+                    <div className="bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-white font-lato">
                             <p>
                                 Todo el contenido presente en este sitio web, incluyendo pero no limitado a los diseños 3D, imágenes, textos, gráficos y cualquier otro material, es propiedad exclusiva de TTT y está protegido por las leyes de derechos de autor y otras leyes de propiedad intelectual aplicables.
                             </p>
@@ -25,7 +31,7 @@ export default function Derechos({ auth }) {
                                 <li>Política de Enlaces: No se permite enlazar nuestro contenido en otros sitios web sin nuestra autorización previa y por escrito.</li>
                             </ul>
                             <p>
-                                <Encabezado texto="Protección de Datos" />
+                                <Encabezado texto="Proteccion de Datos" />
                                 Nos comprometemos a proteger la privacidad de nuestros usuarios. Toda la información personal recopilada se utilizará de acuerdo con nuestra Política de Privacidad.
                             </p>
                             <Encabezado texto="Actualizaciones y Cambios" />

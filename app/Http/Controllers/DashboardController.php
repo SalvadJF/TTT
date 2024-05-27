@@ -11,13 +11,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $articulos = Articulo::with('user')->orderBy('created_at', 'desc')->latest()->paginate(4);
+        $articulos = Articulo::with(['user', 'contadores' => function ($query) {
+            $query->where('nombre', 'Likes');
+        }])->orderBy('created_at', 'desc')->latest()->paginate(4);
 
         $noticias = Noticia::orderBy('created_at', 'desc')->latest()->paginate(4);
 
-        return Inertia::render( 'Dashboard', [
+        return Inertia::render('Dashboard', [
             'noticias' => $noticias,
             'articulos' => $articulos,
         ]);
     }
+
 }

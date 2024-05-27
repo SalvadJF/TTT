@@ -1,48 +1,54 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import Encabezado from "@/Components/Encabezado";
-import { useEffect } from "react";
+import { BreadcrumbNoticiasShow } from "@/Components/BreadCrumb";
 
 export default function Show({ auth, noticia, etiquetas }) {
-    return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Noticia
-                </h2>
-            }
-        >
-            <Head title="noticia" />
-            <div className="p-40">
-                <div className="w-full h-80 flex justify-center items-center">
-                    <img
-                        src={noticia.imagen}
-                        className="m-auto max-h-40vh"
-                        style={{ maxWidth: "100%" }}
-                    />
-                </div>
+  return (
+    <AuthenticatedLayout
+      user={auth.user}
+      header={
+        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+          Noticia
+        </h2>
+      }
+    >
+      <Head title="noticia" />
 
-                <div className="p-10">
-                    <Encabezado texto={noticia.titulo} />
-                    <h5>Tipo</h5>
-                    <p>{noticia.tipo}</p>
-                    <h5>Etiquetas</h5>
-                    <ul className="mb-2 text-white">
-                        {etiquetas.length > 0 ? (
-                            etiquetas.map((etiqueta) => (
-                                <li key={etiqueta.id} className="font-koulen">
-                                    {etiqueta.nombre}
-                                </li>
-                            ))
-                        ) : (
-                            <li>Sin etiquetas</li>
-                        )}
-                    </ul>
+      <div class=" ml-20 pt-40">
+          <BreadcrumbNoticiasShow noticia={noticia.titulo} />
+          </div>
 
-                    <p className="mt-5 text-2xl">{noticia.contenido}</p>
-                </div>
-            </div>
-        </AuthenticatedLayout>
-    );
+      <div className="flex flex-col items-center p-5 sm:p-10 lg:p-20 w-full">
+        <div className="w-full max-w-[1500px]">
+          <div className="w-full h-auto flex justify-center items-center mb-2">
+            <img
+              src={noticia.imagen}
+              className="max-h-[40vh] w-full object-cover rounded-lg shadow-lg"
+              alt={noticia.titulo}
+            />
+          </div>
+          <div className="p-5 sm:p-10 bg-gray-900 text-white rounded-lg shadow-lg">
+            <Encabezado texto={noticia.titulo} />
+            <h5 className="mt-4 text-lg font-bold">Tipo</h5>
+            <p className="mb-4">{noticia.tipo}</p>
+            <h5 className="mt-4 text-lg font-bold">Etiquetas</h5>
+            <ul className="mb-4 text-white">
+              {etiquetas.length > 0 ? (
+                etiquetas.map((etiqueta) => (
+                  <li key={etiqueta.id} className="font-koulen">
+                    {etiqueta.nombre}
+                  </li>
+                ))
+              ) : (
+                <li>Sin etiquetas</li>
+              )}
+            </ul>
+            <p className="mt-5 text-xl font-lato">{noticia.resumen}</p>
+            <p className="mt-5 text-xl font-lato">{noticia.contenido}</p>
+          </div>
+        </div>
+      </div>
+    </AuthenticatedLayout>
+  );
 }
