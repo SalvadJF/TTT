@@ -11,6 +11,7 @@ import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import { setCookie, getCookie, eraseCookie } from "@/Utils/cookieUtils";
 import SimuladorCompra from './Partials/SimularCompra';
+import LikeBoton from "@/Components/LikeBoton";
 
 export default function Show({
     auth,
@@ -21,35 +22,7 @@ export default function Show({
     user,
     contadorLikes
 }) {
-    const [likes, setLikes] = useState(contadorLikes.cantidad);
-    const [hasLiked, setHasLiked] = useState(false);
     const [mostrarModalCompra, setMostrarModalCompra] = useState(false);
-
-    useEffect(() => {
-        // Verificar si el usuario ya ha dado like
-        const liked = getCookie(`liked_articulo_${articulo.id}`);
-        if (liked) {
-            setHasLiked(true);
-        }
-    }, [articulo.id]);
-
-    const handleLikeClick = async () => {
-        try {
-            let response;
-            if (hasLiked) {
-                response = await axios.post(`/articulos/${articulo.id}/decrementarLikes`);
-                setHasLiked(false);
-                eraseCookie(`liked_articulo_${articulo.id}`);
-            } else {
-                response = await axios.post(`/articulos/${articulo.id}/incrementarLikes`);
-                setHasLiked(true);
-                setCookie(`liked_articulo_${articulo.id}`, true, 365);
-            }
-            setLikes(response.data.likes);
-        } catch (error) {
-            console.error("Error al actualizar los likes:", error);
-        }
-    };
 
     const handleCompraClick = () => {
         // Si el precio del artículo es 0, descarga el modelo
@@ -208,12 +181,8 @@ export default function Show({
                                 {articulo.descripcion}
                             </li>
                             <div>
-                                <button onClick={handleLikeClick}>
-                                    {hasLiked ? "Unlike" : "Like"}
-                                </button>
-                                <p>Likes: {likes}</p>
+                            <LikeBoton articuloId={articulo.id} initialLikes={contadorLikes.cantidad} />
                             </div>
-                            <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
                         {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
                         <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
                         {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
@@ -222,7 +191,6 @@ export default function Show({
                         ) : (
                             <button onClick={handleCompraClick}>{articulo.precio}</button>
                         )}
-                    </li>
                     </li>
                         </ul>
                     </div>
