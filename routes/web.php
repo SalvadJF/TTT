@@ -29,6 +29,10 @@ Route::get('/nosotros', function () {
     return Inertia::render('Nosotros');
 })->middleware(['auth', 'verified'])->name('nosotros');
 
+Route::get('/derechos', function () {
+    return Inertia::render('Derechos');
+})->middleware(['auth', 'verified'])->name('derechos');
+
 Route::get('/modelo', function () {
     return Inertia::render('Modelo');
 });

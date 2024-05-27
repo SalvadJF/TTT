@@ -9,10 +9,14 @@ export default function Footer() {
                         <h2 className="mb-6 text-sm font-semibold text-gray-300 uppercase dark:text-white">Trazos, Texturas y Tecnología 3D</h2>
                         <ul className="text-gray-500 dark:text-gray-400 font-medium">
                             <li className="mb-4">
-                                <p className="hover:underline">© 2024-2024 Todos los derechos reservados</p>
+                                <a href='/derechos'>
+                                <p className="hover:underline">© 2024 Todos los derechos reservados</p>
+                                </a>
                             </li>
                             <li className="mb-4">
+                            <a href='/derechos'>
                                 <p className="hover:underline">Al usar esta Pagina, Usted esta de acuerdo con los Terminos de Servicio y nuestra politica de Privacidad</p>
+                                </a>
                             </li>
                         </ul>
                     </div>
