@@ -80,7 +80,7 @@ export default function Index({ auth, noticias }) {
                 />
             </div>
 
-            <div>
+            <div className='w-full flex justify-center'>
                 {currentItems.length > 0 ? (
                     <NoticiasLista noticias={{ data: currentItems }} />
                 ) : (

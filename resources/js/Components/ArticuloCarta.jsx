@@ -18,8 +18,8 @@ export default function ArticuloCarta({ articulo }) {
 
   const tipoStyle = {
     position: "absolute",
-    top: "10px",
-    left: "10px",
+    top: "30px",
+    left: "30px",
     padding: "5px 10px",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     color: "#ffffff",
@@ -31,24 +31,24 @@ export default function ArticuloCarta({ articulo }) {
 
   const tituloStyle = {
     position: "absolute",
-    bottom: "20px",
+    bottom: "0px",
     left: "50%",
     transform: "translateX(-50%)",
     textAlign: "center",
     width: "90%",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
     color: "#ffffff",
-    padding: "10px",
+    padding: "5px",
     borderRadius: "5px",
     zIndex: 1, // Asegura que el título esté encima de la imagen
   };
 
   return (
     <a href={`/articulos/${articulo.id}`}>
-      <Card className="max-w-sm flex-1" style={cardStyle}>
+      <Card className="max-w-sm flex-1 bg-black" style={cardStyle}>
         <img src={articulo.imagen} alt="Artículo" style={imagenStyle} />
-        <div style={tipoStyle}>{articulo.tipo}</div>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white" style={tituloStyle}>
+        <div className='font-koulen' style={tipoStyle}>{articulo.tipo}</div>
+        <h5 className="text-2xl font-koulen tracking-tight " style={tituloStyle}>
           {articulo.nombre}
         </h5>
       </Card>

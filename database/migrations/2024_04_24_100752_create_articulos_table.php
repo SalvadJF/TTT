@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->enum('tipo', ['Modelo_3d', 'Textura']);
-            $table->string('imagen')->default('/img/articulos/default.jpg')->nullable();
+            $table->string('imagen')->default('/img/articulos/default.png')->nullable();
             $table->string('modelo')->default('default.stl')->nullable();
             $table->decimal('precio', 8, 2)->default(0);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');

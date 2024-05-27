@@ -71,17 +71,17 @@ function BreadcrumbNoticiasShow({ noticia }) {
   );
 }
 
-function BreadcrumbNosotros() {
+function BreadcrumbOtros( {nombre} ) {
   return (
     <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
       <Breadcrumb.Item href="">
-        Nosotros
+        {nombre}
       </Breadcrumb.Item>
     </Breadcrumb>
   );
 }
 
-export { Breadcrumbs, BreadcrumbArticulos, BreadcrumbArticulosShow, BreadcrumbNoticias, BreadcrumbNoticiasShow, BreadcrumbNosotros };
+export { Breadcrumbs, BreadcrumbArticulos, BreadcrumbArticulosShow, BreadcrumbNoticias, BreadcrumbNoticiasShow, BreadcrumbOtros };
