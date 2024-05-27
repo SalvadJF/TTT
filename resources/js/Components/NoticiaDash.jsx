@@ -1,9 +1,8 @@
-import React from 'react';
 import { Card } from "flowbite-react";
 
-export default function ArticuloCarta({ articulo }) {
+export default function NoticiaDash({ noticia }) {
   const cardStyle = {
-    position: "relative", // Añadido para contener elementos superpuestos
+    position: "relative",
     minWidth: "100%",
     maxWidth: "25em",
     minHeight: "100%",
@@ -11,9 +10,9 @@ export default function ArticuloCarta({ articulo }) {
   };
 
   const imagenStyle = {
-    width: "100%", // La imagen ocupará todo el ancho del contenedor
-    height: "100%", // La imagen ocupará todo el alto del contenedor
-    objectFit: "cover", // La imagen se ajustará para cubrir el contenedor
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   };
 
   const tipoStyle = {
@@ -26,7 +25,7 @@ export default function ArticuloCarta({ articulo }) {
     borderRadius: "5px",
     fontWeight: "bold",
     fontSize: "14px",
-    zIndex: 1, // Asegura que el tipo de noticia esté encima de la imagen
+    zIndex: 1,
   };
 
   const tituloStyle = {
@@ -40,16 +39,16 @@ export default function ArticuloCarta({ articulo }) {
     color: "#ffffff",
     padding: "10px",
     borderRadius: "5px",
-    zIndex: 1, // Asegura que el título esté encima de la imagen
+    zIndex: 1,
   };
 
   return (
-    <a href={`/articulos/${articulo.id}`}>
+    <a href={`/noticias/${noticia.id}`}>
       <Card className="max-w-sm flex-1" style={cardStyle}>
-        <img src={articulo.imagen} alt="Artículo" style={imagenStyle} />
-        <div style={tipoStyle}>{articulo.tipo}</div>
+        <img src={noticia.imagen} alt="Noticia" style={imagenStyle} />
+        <div style={tipoStyle}>{noticia.tipo}</div>
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white" style={tituloStyle}>
-          {articulo.nombre}
+          {noticia.titulo}
         </h5>
       </Card>
     </a>

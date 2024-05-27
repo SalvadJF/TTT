@@ -1,10 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import NoticiaLista from '@/Components/NoticiaLista';
+import NoticiasIndex from '@/Components/NoticiasIndex';
 import ArticuloLista from '@/Components/ArticuloLista';
 import Encabezado from '@/Components/Encabezado';
 import  Boton  from '@/Components/Botones';
 import { Breadcrumbs } from '@/Components/BreadCrumb';
+import Carrusel from '@/Components/Carrusel';
 
 export default function Dashboard({ auth, noticias, articulos, }) {
     return (
@@ -18,11 +19,11 @@ export default function Dashboard({ auth, noticias, articulos, }) {
                 <Breadcrumbs />
             </div>
 
-
+            <Carrusel />
             <div>
                 <div class="flex flex-col items-center justify-center  p-10">
                 <Encabezado texto="Novedades" />
-                <NoticiaLista noticias={noticias} />
+                <NoticiasIndex noticias={noticias} />
 
             </div>
 

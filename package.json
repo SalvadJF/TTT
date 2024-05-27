@@ -24,6 +24,7 @@
         "babylonjs": "^7.7.0",
         "babylonjs-loaders": "^7.7.0",
         "bootstrap": "^5.3.3",
+        "flowbite-react": "^0.9.0",
         "react-bootstrap": "^2.10.2"
     }
 }
