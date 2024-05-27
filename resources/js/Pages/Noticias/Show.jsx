@@ -1,8 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import ArticuloExposicion from "@/Components/ArticuloExposicion";
 import Encabezado from "@/Components/Encabezado";
-import Boton from "@/Components/Botones";
 import { useEffect } from "react";
 
 export default function Show({ auth, noticia, etiquetas }) {
@@ -11,21 +9,21 @@ export default function Show({ auth, noticia, etiquetas }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Articulos
+                    Noticia
                 </h2>
             }
         >
-            <Head title="Articulos" />
+            <Head title="noticia" />
             <div className="p-40">
-                <div className="w-full h-1/2 flex justify-center div-oscuro">
+                <div className="w-full h-80 flex justify-center items-center">
                     <img
                         src={noticia.imagen}
-                        className="m-auto"
+                        className="m-auto max-h-40vh"
                         style={{ maxWidth: "100%" }}
-                    ></img>
+                    />
                 </div>
 
-                <div className="p-40 div-oscuro justify-center text-center">
+                <div className="p-10">
                     <Encabezado texto={noticia.titulo} />
                     <h5>Tipo</h5>
                     <p>{noticia.tipo}</p>
