@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Models\Comentario;
+use App\Models\Factura;
 use App\Models\Noticia;
 use App\Models\User;
 use Inertia\Inertia;
@@ -20,29 +21,35 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $usuarios = User::all();
+        $usuariosCount = User::count();
         $ultimoUsuario = User::latest()->first();
 
-        $noticias = Noticia::all();
+        $noticiasCount = Noticia::count();
         $ultimaNoticia = Noticia::latest()->first();
 
-        $articulos = Articulo::all();
+        $articulosCount = Articulo::count();
         $ultimoArticulo = Articulo::latest()->first();
 
-        $comentarios = Comentario::all();
+        $comentariosCount = Comentario::count();
         $ultimoComentario = Comentario::latest()->first();
+
+        $facturasCount = Factura::count();
+        $ultimaFactura = Factura::latest()->first();
 
         return Inertia::render('Admin/Index', [
             'admin' => $admin,
-            'usuarios' => $usuarios,
+            'usuariosCount' => $usuariosCount,
             'ultimoUsuario' => $ultimoUsuario,
-            'noticias' => $noticias,
+            'noticiasCount' => $noticiasCount,
             'ultimaNoticia' => $ultimaNoticia,
-            'articulos' => $articulos,
+            'articulosCount' => $articulosCount,
             'ultimoArticulo' => $ultimoArticulo,
-            'comentarios' => $comentarios,
+            'comentariosCount' => $comentariosCount,
             'ultimoComentario' => $ultimoComentario,
+            'facturasCount' => $facturasCount,
+            'ultimaFactura' => $ultimaFactura
         ]);
+
     }
 
     public function usuarios()
@@ -114,6 +121,24 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Comentarios', [
             'comentarios' => $comentarios,
+            'admin' => $admin,
+        ]);
+
+    }
+
+    public function facturas()
+    {
+        $admin = Auth::user();
+
+        // Verificar si el usuario es administrador
+        if (!$admin->isAdmin()) {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
+
+        $facturas = Factura::with(['user , articulo'])->orderBy('id')->paginate(0);
+
+        return Inertia::render('Admin/Facturas', [
+            'facturas' => $facturas,
             'admin' => $admin,
         ]);
 

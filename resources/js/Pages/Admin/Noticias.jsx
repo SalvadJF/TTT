@@ -25,7 +25,9 @@ return (
 
         <AdminHeader admin={admin} />
 
-        <Encabezado texto="Noticias en la Base de datos" />
+        <div class=" ml-20">
+            <Encabezado texto="Noticias en la Base de datos" />
+        </div>
 
         <NoticiasTable noticias={noticias} />
 

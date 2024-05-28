@@ -21,10 +21,10 @@ export default function Nosotros({ auth }) {
                     <div className="bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
 
                         <div className="p-6 text-white font-lato">
+                            <Encabezado texto="Quienes Somos" />
                             <p>
                                 Bienvenido a TTT, tu plataforma en línea de confianza para comprar y vender diseños 3D de alta calidad. Nos especializamos en proporcionar un espacio donde los creadores pueden compartir sus modelos 3D y los usuarios pueden adquirirlos para diversas aplicaciones, desde proyectos personales hasta necesidades profesionales.
                             </p>
-                            <Encabezado texto="Quienes Somos" />
                             <p>
                                 TTT es una plataforma innovadora dedicada a la comercialización de diseños 3D creados por una comunidad global de talentosos diseñadores. Fundada con la misión de hacer accesibles los modelos 3D de calidad superior a usuarios de todo el mundo, operamos exclusivamente en línea, lo que nos permite ofrecer una amplia variedad de modelos a precios competitivos y con la máxima comodidad para nuestros usuarios.
                             </p>

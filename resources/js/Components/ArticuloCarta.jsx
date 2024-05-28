@@ -12,8 +12,8 @@ export default function ArticuloCarta({ articulo }) {
   };
 
   const imagenStyle = {
-    width: "100%",
-    height: "100%",
+    width: "50em",
+    height: "20em",
     objectFit: "cover",
   };
 

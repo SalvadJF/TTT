@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import Encabezado from "@/Components/Encabezado";
+import { Breadcrumbs } from "@/Components/BreadCrumb";
 
 export default function Show({ auth, factura }) {
     return (
@@ -12,41 +12,53 @@ export default function Show({ auth, factura }) {
                 </h2>
             }
         >
-            <Head title="Articulos" />
-            <div className="p-40">
-                <div className="w-full h-1/2 flex justify-center div-oscuro">
-                    <img
-                        src={`/${factura.articulo.imagen}`}
-                        className="m-auto"
-                        style={{ maxWidth: "30%" }}
-                        alt="Imagen del artículo"
-                    />
-                </div>
+            <Head title="Factura" />
+            <div className="ml-20 pt-40">
+                <Breadcrumbs />
+            </div>
 
-                <div className="p-40 div-oscuro justify-center text-center">
-                    <Encabezado texto={factura.articulo.nombre} />
-                    <h5>Datos</h5>
-                    <ul className="mb-2 text-white">
-                        <li className="font-koulen">
-                            Numero de Factura: {factura.id}
-                        </li>
-                        <li className="font-koulen">
-                            Fecha de Emision: {new Date(factura.created_at).toLocaleDateString()}
-                        </li>
-                        <li className="font-koulen">
-                            Precio de Compra: {factura.precio_venta}
-                        </li>
-                        <li className="font-koulen">
-                            Autor: {factura.user.name}
-                        </li>
-                    </ul>
-                    <a
-                        href={`/img/modelos/${factura.articulo.modelo}`}
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        download
-                    >
-                        Descargar Modelo
-                    </a>
+            <div className="max-w-screen-md mx-auto p-4 md:p-8">
+                <div className="bg-gray-800 rounded-lg shadow-xl p-4 md:p-8 lg:p-12">
+                    <div className="text-center mb-4 md:mb-8">
+                        <h1 className="text-xl md:text-3xl lg:text-4xl font-Koulen text-white">
+                            Factura Nº {factura.id}
+                        </h1>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                        <div className="text-white text-center">
+                            <img
+                                src={`${factura.articulo.imagen}`}
+                                className="m-auto"
+                                style={{ maxWidth: "100%" }}
+                                alt="Imagen del artículo"
+                            />
+                        </div>
+                        <div className="text-white text-center">
+                            <ul>
+                                <li className="font-koulen p-2">
+                                    Numero de Factura: {factura.id}
+                                </li>
+                                <li className="font-koulen p-2">
+                                    Fecha de Emision: {new Date(factura.created_at).toLocaleDateString()}
+                                </li>
+                                <li className="font-koulen p-2">
+                                    Precio de Compra: {factura.precio_venta} €
+                                </li>
+                                <li className="font-koulen p-2">
+                                    Autor: {factura.user.name}
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="text-white text-center">
+                            <a
+                                href={`/img/modelos/${factura.articulo.modelo}`}
+                                className="bg-red-500 hover:bg-red-700 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block"
+                                download
+                            >
+                                Descargar Modelo
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>

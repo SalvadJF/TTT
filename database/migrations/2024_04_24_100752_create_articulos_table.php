@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->enum('tipo', ['Modelo_3d', 'Textura']);
             $table->string('imagen')->default('/img/articulos/default.png')->nullable();
             $table->string('modelo')->default('default.stl')->nullable();

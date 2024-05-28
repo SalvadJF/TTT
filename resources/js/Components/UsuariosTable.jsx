@@ -30,7 +30,7 @@ export default function UsuariosTable({ usuarios }) {
 
     return (
         <div
-            className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+            className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
             id="settings"
             role="tabpanel"
             aria-labelledby="settings-tab"
