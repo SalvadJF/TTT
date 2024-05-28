@@ -50,8 +50,7 @@ class DatabaseSeeder extends Seeder
             EtiquetaSeeder::class,
             ArticuloSeeder::class,
             NoticiaSeeder::class,
-            ArticuloSeeder::class,
-            ComentarioSeeder::class,
+            // ComentarioSeeder::class,
             ContadorSeeder::class,
 
         ]);

@@ -18,10 +18,6 @@ class ArticuloSeeder extends Seeder
     {
         Articulo::factory()->count(10)->create();
 
-        // Obtener todas las categorías y etiquetas
-        $categorias = Categoria::all();
-        $etiquetas = Etiqueta::all();
-
         Articulo::create([
             'nombre' => 'Tapon de botella',
             'descripcion' => 'Este tapón de botella reutilizable no solo es una solución práctica y eficiente, sino también una apuesta por un estilo de vida más sostenible y responsable con el medio ambiente. Únete a nosotros en esta iniciativa y contribuye a reducir el desperdicio de plásticos de un solo uso',
@@ -98,6 +94,10 @@ class ArticuloSeeder extends Seeder
             'user_id' => 2,
         ]);
 
+
+        // Obtener todas las categorías y etiquetas
+        $categorias = Categoria::all();
+        $etiquetas = Etiqueta::all();
 
         // Obtener todos los artículos
         $articulos = Articulo::all();

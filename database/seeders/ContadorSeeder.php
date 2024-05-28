@@ -40,6 +40,7 @@ class ContadorSeeder extends Seeder
         }
 
         // Crear contadores para cada noticia
+        /*
         foreach ($noticias as $noticia) {
             // Crear contador para Likes
             $cantidadLikes = rand(600, 3000); // Generar cantidad aleatoria de likes
@@ -58,5 +59,6 @@ class ContadorSeeder extends Seeder
                 'objetivo_id' => $noticia->id,
             ]);
         }
+        */
     }
 }
