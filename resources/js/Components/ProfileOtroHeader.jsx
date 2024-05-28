@@ -4,7 +4,6 @@ export default function ProfileHeader({user}) {
             <img class="text-white w-20 h-20 rounded-full" src={user.avatar} alt="imagen del Administrador" />
             <div class="font-medium text-white">
                 <div class="font-koulen">{user.name}</div>
-                <div class="font-lato text-sm text-gray-100 dark:text-gray-400">Monedero {user.monedero}</div>
             </div>
           </div>
     );

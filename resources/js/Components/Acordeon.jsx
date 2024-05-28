@@ -1,6 +1,6 @@
 function Acordeon({ title, isOpen, onToggle, children }) {
     return (
-        <div>
+        <div className=" ml-20 mr-20 border-0 border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
             <h2 id={`accordion-color-heading-${title}`}>
                 <button
                     type="button"

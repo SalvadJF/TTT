@@ -4,7 +4,7 @@ import { Head, Link } from '@inertiajs/react';
 import { Breadcrumbs } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
 
-function AccordionItem({ title, count, createdAt, linkText, linkHref }) {
+function AccordionItem({ title, count, createdAt, linkText, linkHref, children }) {
     const [isOpen, setIsOpen] = useState(false);
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -36,10 +36,12 @@ function AccordionItem({ title, count, createdAt, linkText, linkHref }) {
                 <p className="mb-5 text-white dark:text-gray-400 font-koulen">Numero actual de {title.toLowerCase()} {count}</p>
                 <p className="mb-5 text-white dark:text-gray-400 font-koulen">Ultimo {title.toLowerCase()} creado : {createdAt}</p>
                 <a href={linkHref} className="font-koulen text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">{linkText}</a>
+                {children}
             </div>
         </div>
     );
 }
+
 
 
 export default function Index ({
@@ -47,7 +49,7 @@ export default function Index ({
     admin,
     usuariosCount,
     ultimoUsuario,
-    noticiasCount ,
+    noticiasCount,
     ultimaNoticia,
     articulosCount,
     ultimoArticulo,
@@ -55,9 +57,7 @@ export default function Index ({
     ultimoComentario,
     facturasCount,
     ultimaFactura
-})
-
-{
+}) {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -71,49 +71,51 @@ export default function Index ({
         >
             <Head title="Admin" />
 
-            <div class=" ml-20 pt-40">
+            <div className="ml-20 pt-40">
                 <Breadcrumbs />
             </div>
 
             <AdminHeader admin={admin} />
 
             <div id="accordion-color" data-accordion="collapse">
-            <AccordionItem
-                title="Usuarios"
-                count={usuariosCount}
-                createdAt={ultimoUsuario ? formatDate(ultimoUsuario.created_at) : 'No hay usuarios'}
-                linkText="Usuarios DB"
-                linkHref={route('admin.usuarios')}
-            />
-            <AccordionItem
-                title="Articulos"
-                count={articulosCount}
-                createdAt={ultimoArticulo ? formatDate(ultimoArticulo.created_at) : 'No hay artículos'}
-                linkText="Artículos DB"
-                linkHref={route('admin.articulos')}
-            />
-            <AccordionItem
-                title="Noticias"
-                count={noticiasCount}
-                createdAt={ultimaNoticia ? formatDate(ultimaNoticia.created_at) : 'No hay noticias'}
-                linkText="Noticias DB"
-                linkHref={route('admin.noticias')}
-            />
-            <AccordionItem
-                title="Comentarios"
-                count={comentariosCount}
-                createdAt={ultimoComentario ? formatDate(ultimoComentario.created_at) : 'No hay comentarios'}
-                linkText="Comentarios DB"
-                linkHref={route('admin.comentarios')}
-            />
-            <AccordionItem
-                title="Facturas"
-                count={facturasCount}
-                createdAt={ultimaFactura ? formatDate(ultimaFactura.created_at) : 'No hay facturas'}
-                linkText="Facturas DB"
-                linkHref={route('admin.facturas')}
-            />
+                <AccordionItem
+                    title="Usuarios"
+                    count={usuariosCount}
+                    createdAt={ultimoUsuario ? formatDate(ultimoUsuario.created_at) : 'No hay usuarios'}
+                    linkText="Usuarios DB"
+                    linkHref={route('admin.usuarios')}
+                />
+                <AccordionItem
+                    title="Articulos"
+                    count={articulosCount}
+                    createdAt={ultimoArticulo ? formatDate(ultimoArticulo.created_at) : 'No hay artículos'}
+                    linkText="Artículos DB"
+                    linkHref={route('admin.articulos')}
+                />
+                <AccordionItem
+                    title="Noticias"
+                    count={noticiasCount}
+                    createdAt={ultimaNoticia ? formatDate(ultimaNoticia.created_at) : 'No hay noticias'}
+                    linkText="Noticias DB"
+                    linkHref={route('admin.noticias')}
+                >
+                    <a href="noticias/create" className="font-koulen text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Crear Nueva Noticia</a>
+                </AccordionItem>
+                <AccordionItem
+                    title="Comentarios"
+                    count={comentariosCount}
+                    createdAt={ultimoComentario ? formatDate(ultimoComentario.created_at) : 'No hay comentarios'}
+                    linkText="Comentarios DB"
+                    linkHref={route('admin.comentarios')}
+                />
+                <AccordionItem
+                    title="Facturas"
+                    count={facturasCount}
+                    createdAt={ultimaFactura ? formatDate(ultimaFactura.created_at) : 'No hay facturas'}
+                    linkText="Facturas DB"
+                    linkHref={route('admin.facturas')}
+                />
             </div>
         </AuthenticatedLayout>
-        )
-    }
+    );
+}

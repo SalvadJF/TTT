@@ -36,14 +36,21 @@ class UserController extends Controller
      * Display the specified resource.
      */
 
-    public function show(User $usuario)
-    {
-        $articulos = $usuario->articulos()->paginate(8);
-        return inertia('Usuarios/Show', [
-            'usuario' => $usuario,
-            'articulos' => $articulos,
-        ]);
-    }
+     public function show(User $usuario)
+     {
+         $articulos = $usuario->articulos()
+             ->with(['contadores' => function ($query) {
+                 $query->where('nombre', 'Likes');
+             }])
+             ->orderBy('created_at', 'desc')
+             ->paginate(-2);
+
+         return inertia('Usuarios/Show', [
+             'usuario' => $usuario,
+             'articulos' => $articulos,
+         ]);
+     }
+
 
     /**
      * Show the form for editing the specified resource.

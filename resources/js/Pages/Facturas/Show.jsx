@@ -20,7 +20,7 @@ export default function Show({ auth, factura }) {
             <div className="max-w-screen-md mx-auto p-4 md:p-8">
                 <div className="bg-gray-800 rounded-lg shadow-xl p-4 md:p-8 lg:p-12">
                     <div className="text-center mb-4 md:mb-8">
-                        <h1 className="text-xl md:text-3xl lg:text-4xl font-Koulen text-white">
+                        <h1 className="text-xl md:text-3xl lg:text-4xl font-koulen text-white">
                             Factura Nº {factura.id}
                         </h1>
                     </div>
@@ -45,7 +45,7 @@ export default function Show({ auth, factura }) {
                                     Precio de Compra: {factura.precio_venta} €
                                 </li>
                                 <li className="font-koulen p-2">
-                                    Autor: {factura.user.name}
+                                    Comprador: {factura.user.name}
                                 </li>
                             </ul>
                         </div>
