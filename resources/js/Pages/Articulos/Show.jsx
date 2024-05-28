@@ -2,7 +2,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import ArticuloExposicion from "@/Components/ArticuloExposicion";
 import Encabezado from "@/Components/Encabezado";
-import Boton from "@/Components/Botones";
 import { BreadcrumbArticulosShow } from "@/Components/BreadCrumb";
 import ComentariosArticulo from "./Partials/ComentariosArticulo";
 import { useEffect, useState } from "react";

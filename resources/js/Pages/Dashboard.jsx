@@ -3,9 +3,9 @@ import { Head } from '@inertiajs/react';
 import NoticiasIndex from '@/Components/NoticiasIndex';
 import ArticuloLista from '@/Components/ArticuloLista';
 import Encabezado from '@/Components/Encabezado';
-import  Boton  from '@/Components/Botones';
 import { Breadcrumbs } from '@/Components/BreadCrumb';
 import Carrusel from '@/Components/Carrusel';
+import { BotonPrincipal } from '@/Components/Botones';
 
 export default function Dashboard({ auth, noticias, articulos, }) {
     return (
@@ -27,7 +27,7 @@ export default function Dashboard({ auth, noticias, articulos, }) {
 
             </div>
 
-            <Boton ruta="/noticias" texto="Leer mas" />
+            <BotonPrincipal ruta="/noticias" texto="Leer mas" />
 
             </div>
 
@@ -36,7 +36,7 @@ export default function Dashboard({ auth, noticias, articulos, }) {
                 <Encabezado texto="Ultimas Aportaciones" />
                 <ArticuloLista articulos={articulos} />
                 </div>
-            <Boton ruta="/articulos" texto="Ver Galeria" />
+            <BotonPrincipal ruta="/articulos" texto="Ver Galeria" />
             </div>
 
         </AuthenticatedLayout>
