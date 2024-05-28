@@ -15,7 +15,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                         <ApplicationLogo className="w-20 h-20" />
                     </Link>
                     <div className="flex items-center md:order-2 space-x-3 rtl:space-x-reverse">
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                        <div className=" sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -27,9 +27,9 @@ export default function NavBar({ user, className = '', children, ...props }) {
                                             >
                                                 <span className="sr-only">Abrir Menu</span>
                                                 {user?.avatar ? (
-                                                    <img className="w-8 h-8 rounded-full" src={user.avatar} alt="user" />
+                                                    <img className="w-12 h-12 rounded-full" src={user.avatar} alt="user" />
                                                 ) : (
-                                                    <img className="w-8 h-8 rounded-full" src="/img/users/avatar.png" alt="user" />
+                                                    <img className="w-12 h-12 rounded-full" src="/img/users/avatar.png" alt="user" />
                                                 )}
                                             </button>
                                         </span>

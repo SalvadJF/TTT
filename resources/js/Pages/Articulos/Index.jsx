@@ -23,7 +23,7 @@ export default function Index({ auth, articulos, search, type }) {
         if (filterType === 'all') {
             return true;
         }
-        return articulo.type === filterType;
+        return articulo.tipo === filterType;
     }).filter(articulo =>
         articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
         articulo.descripcion.toLowerCase().includes(searchTerm.toLowerCase())

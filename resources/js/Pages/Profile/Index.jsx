@@ -196,7 +196,7 @@ export default function Index({
                     data-accordion="collapse"
                     data-active-classes="bg-blue-900 dark:bg-blue-900 text-white p-7 font-koulen"
                 >
-                    <ProfileHeader admin={auth.user} />
+                    <ProfileHeader user={auth.user} />
                     <Acordeon
                         title="Mis Articulos"
                         isOpen={openAccordion === "usuarios"}

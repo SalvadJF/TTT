@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComentarioRequest;
 use App\Http\Requests\UpdateComentarioRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ComentarioController extends Controller
 {
@@ -40,10 +41,12 @@ class ComentarioController extends Controller
              'comentable_id' => 'required',
          ]);
 
-       // Create the comment
+         $user = Auth::user()->id;
+
+
        Comentario::create([
            'contenido' => $request->contenido,
-           'user_id' => auth()->id(), // Assign the authenticated user's ID
+           'user_id' => $user,
            'comentable_type' => $request->comentable_type,
            'comentable_id' => $request->comentable_id,
        ]);

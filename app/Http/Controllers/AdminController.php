@@ -61,7 +61,7 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $usuarios = User::orderBy('id')->paginate(0);
+        $usuarios = User::orderBy('id')->paginate(-2);
 
         return Inertia::render('Admin/Usuarios', [
             'usuarios' => $usuarios,
@@ -79,7 +79,7 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $noticias = Noticia::with('usuario')->orderBy('id')->paginate(0);
+        $noticias = Noticia::with('usuario')->orderBy('id')->paginate(-2);
 
 
         return Inertia::render('Admin/Noticias', [
@@ -98,7 +98,7 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $articulos = Articulo::with('user')->orderBy('id')->paginate(0);
+        $articulos = Articulo::with('user')->orderBy('id')->paginate(-2);
 
         return Inertia::render('Admin/Articulos', [
             'articulos' => $articulos,
@@ -116,7 +116,7 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $comentarios = Comentario::with('user', 'comentable')->orderBy('id')->paginate(0);
+        $comentarios = Comentario::with('user', 'comentable')->orderBy('id')->paginate(-2);
 
 
         return Inertia::render('Admin/Comentarios', [
@@ -135,7 +135,8 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $facturas = Factura::with(['user , articulo'])->orderBy('id')->paginate(0);
+        $facturas = Factura::with(['user', 'articulo'])->orderBy('id')->paginate(-2);
+
 
         return Inertia::render('Admin/Facturas', [
             'facturas' => $facturas,
