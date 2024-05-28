@@ -23,6 +23,12 @@ export default function Index({
         );
     }, [searchTerm, articulos]);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        return formattedDate;
+    };
+
     const filteredComentarios = useMemo(() => {
         return comentarios.filter((comentario) =>
             comentario.contenido
@@ -66,6 +72,111 @@ export default function Index({
         setOpenAccordion(openAccordion === id ? "" : id);
     };
 
+    const generarTabla = (data, category) => {
+        switch (category) {
+            case 'articulos':
+                if (data.length === 0) {
+                    return <p className="text-center mt-4 font-koulen text-white">No se han encontrado resultados</p>;
+                }
+                return (
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Titulo
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Fecha de Creacion
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Likes
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((articulo) => (
+                                <tr
+                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                    key={articulo.id}
+                                >
+                                    <td className="px-6 py-4">
+                                        <Link
+                                            href={`/articulos/${articulo.id}`}
+                                            className="text-blue-600"
+                                        >
+                                            {articulo.nombre}
+                                        </Link>
+                                    </td>
+                                    <td className="px-6 py-4">{formatDate(articulo.created_at)}</td>
+                                    <td className="px-6 py-4">
+                                        {articulo.contadores[0].cantidad}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                );
+            case 'comentarios':
+                return null; // No mostramos comentarios en la tabla
+            case 'facturas':
+                if (data.length === 0) {
+                    return <p className="text-center mt-4 font-koulen text-white">No se han encontrado resultados</p>;
+                }
+                return (
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    ID de la Factura
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Nombre del Articulo
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Precio de Venta
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((factura) => (
+                                <tr
+                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                    key={factura.id}
+                                >
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        <Link
+                                            href={`/facturas/${factura.id}`}
+                                            className="text-blue-600"
+                                        >
+                                            {factura.id}
+                                        </Link>
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        <Link
+                                            href={`/articulos/${factura.articulo.id}`}
+                                            className="text-blue-600"
+                                        >
+                                            {factura.articulo.nombre}
+                                        </Link>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {factura.precio_venta}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                );
+            default:
+                return null;
+        }
+    };
+
+
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -108,19 +219,8 @@ export default function Index({
                                 className="mt-4 px-4 py-2 border rounded-md"
                             />
                         </div>
-                        {currentItems("articulos").map((articulo) => (
-                            <div
-                                key={articulo.id}
-                                className="mt-4 p-2 bg-white dark:bg-gray-800 mb-2 rounded-md shadow-md"
-                            >
-                                <Link
-                                    href={`/articulos/${articulo.id}`}
-                                    className="text-blue-600 dark:text-blue-400"
-                                >
-                                    Articulo {articulo.id}
-                                </Link>
-                            </div>
-                        ))}
+                        {/* Mostrar la tabla de artículos */}
+                        {generarTabla(currentItems("articulos"), "articulos")}
                         {/* Paginación */}
                         <div className="flex justify-center mt-4">
                             {Array.from({
@@ -144,6 +244,7 @@ export default function Index({
                             ))}
                         </div>
                     </Acordeon>
+                    {/* Comentarios
                     <Acordeon
                         title="Mis Comentarios"
                         isOpen={openAccordion === "comentarios"}
@@ -171,7 +272,6 @@ export default function Index({
                                 </Link>
                             </div>
                         ))}
-                        {/* Paginación */}
                         <div className="flex justify-center mt-4">
                             {Array.from({
                                 length: Math.ceil(
@@ -194,6 +294,7 @@ export default function Index({
                             ))}
                         </div>
                     </Acordeon>
+                    */}
                     <Acordeon
                         title="Mis Facturas"
                         isOpen={openAccordion === "facturas"}
@@ -208,19 +309,8 @@ export default function Index({
                                 className="mt-4 px-4 py-2 border rounded-md"
                             />
                         </div>
-                        {currentItems("facturas").map((factura) => (
-                            <div
-                                key={factura.id}
-                                className="mt-4 p-2 bg-white dark:bg-gray-800 mb-2 rounded-md shadow-md"
-                            >
-                                <Link
-                                    href={`/facturas/${factura.id}`}
-                                    className="text-blue-600 dark:text-blue-400"
-                                >
-                                    Factura {factura.id}
-                                </Link>
-                            </div>
-                        ))}
+                        {/* Mostrar la tabla de facturas */}
+                        {generarTabla(currentItems("facturas"), "facturas")}
                         {/* Paginación */}
                         <div className="flex justify-center mt-4">
                             {Array.from({

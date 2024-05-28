@@ -4,37 +4,30 @@ import ArticuloExposicion from '@/Components/ArticuloExposicion';
 import Encabezado from '@/Components/Encabezado';
 import Boton from '@/Components/Botones';
 import { BreadcrumbArticulos } from '@/Components/BreadCrumb';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function Index({ auth, articulos }) {
-
-
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filterType, setFilterType] = useState('all');
+export default function Index({ auth, articulos, search, type }) {
+    const [searchTerm, setSearchTerm] = useState(search || '');
+    const [filterType, setFilterType] = useState(type || 'all');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(8); // Número de elementos por página
+    const itemsPerPage = 8; // Número de elementos por página
 
     useEffect(() => {
         setCurrentPage(1);
     }, [searchTerm, filterType]);
 
-    const filteredArticulos = useMemo(() => {
-        let filtered = articulos.data;
-        if (searchTerm) {
-            filtered = filtered.filter(articulo =>
-                Object.values(articulo).some(value =>
-                    value &&
-                    value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-                )
-            );
+    // Ordenar los artículos por fecha de creación de más nuevo a más antiguo
+    const sortedArticulos = articulos.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    const filteredArticulos = sortedArticulos.filter(articulo => {
+        if (filterType === 'all') {
+            return true;
         }
-        if (filterType === 'Modelo_3d') {
-            filtered = filtered.filter(articulo => articulo.tipo === 'Modelo_3d');
-        } else if (filterType === 'Textura') {
-            filtered = filtered.filter(articulo => articulo.tipo === 'Textura');
-        }
-        return filtered;
-    }, [searchTerm, filterType, articulos.data]);
+        return articulo.type === filterType;
+    }).filter(articulo =>
+        articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        articulo.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -60,7 +53,7 @@ export default function Index({ auth, articulos }) {
                     Todos
                 </button>
                 <button
-                    onClick={() => setFilterType('Modelo_3d')} // Cambiar '3D' a 'Modelo_3d'
+                    onClick={() => setFilterType('Modelo_3d')}
                     className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Modelo_3d' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                 >
                     Modelo 3D
@@ -91,7 +84,7 @@ export default function Index({ auth, articulos }) {
             {/* Paginación */}
             <div className="flex justify-center mt-4">
                 {Array.from({ length: Math.ceil(filteredArticulos.length / itemsPerPage) }).map((_, index) => (
-                    <button key={index} onClick={() => paginate(index + 1)} className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                    <button key={index} onClick={() => paginate(index + 1)} className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
                         {index + 1}
                     </button>
                 ))}

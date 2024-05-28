@@ -39,7 +39,7 @@ use Inertia\Inertia;
 
           $articulos = Articulo::with(['user', 'contadores' => function ($query) {
             $query->where('nombre', 'Likes');
-        }])->orderBy('created_at', 'desc')->paginate(0); // Cambia el valor 10 al número deseado de artículos por página
+        }])->orderBy('created_at', 'desc')->paginate(-2);
 
           return Inertia::render('Articulos/Index', ['articulos' => $articulos, 'search' => $searchTerm, 'type' => $filterType]);
       }

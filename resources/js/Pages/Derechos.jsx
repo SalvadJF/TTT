@@ -20,10 +20,10 @@ export default function Derechos({ auth }) {
                 <Encabezado texto="Derechos Reservados" />
                     <div className="bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-white font-lato">
+                            <Encabezado texto="Normas de Uso" />
                             <p>
                                 Todo el contenido presente en este sitio web, incluyendo pero no limitado a los diseños 3D, imágenes, textos, gráficos y cualquier otro material, es propiedad exclusiva de TTT y está protegido por las leyes de derechos de autor y otras leyes de propiedad intelectual aplicables.
                             </p>
-                            <Encabezado texto="Normas de Uso" />
                             <ul className="list-disc list-inside">
                                 <li>Respeto y cortesía: No se permite el uso de lenguaje ofensivo, insultos, acoso o cualquier comportamiento que promueva el odio o la discriminación en cualquier parte de nuestro sitio web, incluidos los comentarios y foros de discusión.</li>
                                 <li>Prohibición de plagio: Queda estrictamente prohibido copiar, reproducir, distribuir, transmitir o utilizar de cualquier manera los contenidos de este sitio web sin la autorización expresa y por escrito del Usuario dueño de esta.</li>

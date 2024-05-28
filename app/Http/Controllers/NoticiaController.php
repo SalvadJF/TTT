@@ -16,7 +16,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(0);
+        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(-2);
         return Inertia::render('Noticias/Index', [
             'noticias' => $noticias
         ]);

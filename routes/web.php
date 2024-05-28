@@ -65,6 +65,7 @@ Route::get('/admin/usuarios', [AdminController::class, 'usuarios'])->name('admin
 Route::get('/admin/noticias', [AdminController::class, 'noticias'])->name('admin.noticias');
 Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('admin.articulos');
 Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
+Route::get('/admin/facturas', [AdminController::class, 'facturas'])->name('admin.facturas');
 
 Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class, 'incrementarLikes'])->name('articulos.incrementarLikes');
 Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class, 'decrementarLikes'])->name('articulos.decrementarLikes');

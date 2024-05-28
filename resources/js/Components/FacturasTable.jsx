@@ -2,17 +2,17 @@ import React, { useState, useMemo } from "react";
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 
-export default function ComentariosTable({ comentarios }) {
+export default function FacturasTable({ facturas }) {
     const { delete: handleDelete } = useForm();
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10);
 
-    const filteredComentarios = useMemo(() => {
-        return comentarios.data.filter(comentario =>
-            comentario.contenido.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredFacturas = useMemo(() => {
+        return facturas.data.filter(factura =>
+            factura.nombre.toLowerCase().includes(searchTerm.toLowerCase())
         );
-    }, [comentarios.data, searchTerm]);
+    }, [facturas.data, searchTerm]);
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -20,7 +20,7 @@ export default function ComentariosTable({ comentarios }) {
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredComentarios.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = filteredFacturas.slice(indexOfFirstItem, indexOfLastItem);
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -28,18 +28,13 @@ export default function ComentariosTable({ comentarios }) {
         return formattedDate;
     };
 
-    const getComentableName = (comentario) => {
-        if (comentario.comentable_type === "App\\Models\\Articulo") {
-            return comentario.comentable.nombre;
-        } else if (comentario.comentable_type === "App\\Models\\Noticia") {
-            return comentario.comentable.titulo;
-        } else {
-            return "Desconocido";
-        }
-    };
-
     return (
-        <div className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+        <div
+            className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+            id="settings"
+            role="tabpanel"
+            aria-labelledby="settings-tab"
+        >
             <input
                 type="text"
                 placeholder="Buscar..."
@@ -51,57 +46,76 @@ export default function ComentariosTable({ comentarios }) {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-6 py-3">
-                            ID del Comentario
+                            ID de Factura
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Lugar
+                            Articulo
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Autor
+                            Comprador
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Contenido
+                            Vendedor
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Fecha de Creacion
+                            Precio de Compra
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            <span className="sr-only">Acciones</span>
+                            Fecha de compra
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            <span className="sr-only">Edit</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {currentItems.map((comentario) => (
+                    {currentItems.map((factura) => (
                         <tr
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                            key={comentario.id}
+                            key={factura.id}
                         >
                             <th
                                 scope="row"
                                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                {comentario.id}
+                                {factura.id}
                             </th>
                             <td className="px-6 py-4">
-                                {getComentableName(comentario)}
+                                <a
+                                    href={`/facturas/${factura.id}`}
+                                    className="text-blue-600"
+                                >
+                                    {factura.articulo.nombre}
+                                </a>
                             </td>
-                            <td className="px-6 py-4">
-                                {comentario.user.name}
-                            </td>
-                            <td className="px-6 py-4">
-                                {comentario.contenido}
-                            </td>
-                            <td className="px-6 py-4">
-                                {formatDate(comentario.created_at)}
-                            </td>
-                            <td>
+                            <th
+                                scope="row"
+                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                                {factura.user.name}
+                            </th>
+                            <th
+                                scope="row"
+                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                                {factura.articulo.user.name}
+                            </th>
+                            <td className="px-6 py-4">{factura.precio_venta}</td>
+                            <td className="px-6 py-4">{formatDate(factura.created_at)}</td>
+                            <td className="px-6 py-4 text-right">
+                                <a
+                                    href={`/facturas/${factura.id}/edit`}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2"
+                                >
+                                    Editar
+                                </a>
                                 <button
                                     type="button"
                                     onClick={() =>
                                         handleDelete(
                                             route(
-                                                "comentarios.destroy",
-                                                comentario.id
+                                                "facturas.destroy",
+                                                factura.id
                                             )
                                         )
                                     }
@@ -116,7 +130,7 @@ export default function ComentariosTable({ comentarios }) {
             </table>
             {/* Paginación */}
             <div className="flex justify-center mt-4">
-                {Array.from({ length: Math.ceil(filteredComentarios.length / itemsPerPage) }).map((_, index) => (
+                {Array.from({ length: Math.ceil(filteredFacturas.length / itemsPerPage) }).map((_, index) => (
                     <button key={index} onClick={() => paginate(index + 1)} className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
                         {index + 1}
                     </button>
@@ -125,4 +139,3 @@ export default function ComentariosTable({ comentarios }) {
         </div>
     );
 }
-

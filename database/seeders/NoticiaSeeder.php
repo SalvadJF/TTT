@@ -16,7 +16,13 @@ class NoticiaSeeder extends Seeder
     public function run()
     {
         // Crear noticias y obtenerlas
-        $noticias = Noticia::factory()->count(10)->create();
+        $factoryNoticias = Noticia::factory()->count(10)->create();
+
+        // Obtener la fecha de creación del último artículo creado por la factoría
+        $lastFactoryCreatedAt = $factoryNoticias->last()->created_at;
+
+        // Incrementar la fecha en un día para los artículos creados manualmente
+        $manualCreatedAt = $lastFactoryCreatedAt->copy()->addDay();
 
 
         Noticia::create([
@@ -28,6 +34,8 @@ class NoticiaSeeder extends Seeder
             'tipo' => 'Noticia',
             'imagen' => '/img/noticias/noticia_agujeronegro.webp',
             'user_id' => 1,
+            'created_at' => $manualCreatedAt,
+            'updated_at' => $manualCreatedAt,
 
         ]);
 
@@ -41,6 +49,8 @@ class NoticiaSeeder extends Seeder
             'tipo' => 'Noticia',
             'imagen' => '/img/noticias/cerebro-medicina.webp',
             'user_id' => 1,
+            'created_at' => $manualCreatedAt,
+            'updated_at' => $manualCreatedAt,
 
         ]);
 
@@ -54,6 +64,8 @@ class NoticiaSeeder extends Seeder
             'tipo' => 'Entrevista',
             'imagen' => '/img/noticias/guillermo-3d.webp',
             'user_id' => 1,
+            'created_at' => $manualCreatedAt,
+            'updated_at' => $manualCreatedAt,
 
         ]);
 
@@ -66,9 +78,11 @@ class NoticiaSeeder extends Seeder
             'tipo' => 'Informacion',
             'imagen' => '/img/noticias/inaguracion.png',
             'user_id' => 1,
+            'created_at' => $manualCreatedAt,
+            'updated_at' => $manualCreatedAt,
         ]);
 
-
+        $noticias = Noticia::all();
         // Asignar etiquetas a las noticias
         $etiquetas = Etiqueta::all();
         foreach ($noticias as $noticia) {

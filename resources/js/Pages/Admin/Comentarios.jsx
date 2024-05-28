@@ -24,7 +24,9 @@ return (
 
         <AdminHeader admin={admin} />
 
-        <Encabezado texto="Comentarios en la Base de datos" />
+        <div class=" ml-20">
+            <Encabezado texto="Comentarios en la Base de datos" />
+        </div>
 
         <ComentariosTable comentarios={comentarios} />
 
