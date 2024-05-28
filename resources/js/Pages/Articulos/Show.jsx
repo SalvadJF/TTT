@@ -11,6 +11,7 @@ import "babylonjs-loaders";
 import { setCookie, getCookie, eraseCookie } from "@/Utils/cookieUtils";
 import SimuladorCompra from './Partials/SimularCompra';
 import LikeBoton from "@/Components/LikeBoton";
+import { BotonEtiqueta, BotonCategoria, BotonPrincipal } from "@/Components/Botones";
 
 export default function Show({
     auth,
@@ -24,19 +25,26 @@ export default function Show({
     const [mostrarModalCompra, setMostrarModalCompra] = useState(false);
 
     const handleCompraClick = () => {
-        // Si el precio del artículo es 0, descarga el modelo
         if (parseFloat(articulo.precio) === 0) {
-            // Descarga el modelo
             window.location.href = `/img/modelos/${articulo.modelo}`;
         } else {
-            // Si el precio no es 0, abre el modal
             setMostrarModalCompra(true);
         }
     };
 
     const handleCerrarModalCompra = () => {
-        // Cierra el modal de compra
         setMostrarModalCompra(false);
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    };
+
+    const formatText = (text) => {
+        return text.split(".").map((sentence, index, array) =>
+            index < array.length - 1 ? sentence + ".\n" : sentence
+        ).join("");
     };
 
     useEffect(() => {
@@ -62,7 +70,6 @@ export default function Show({
                 scene
             );
 
-            // Cargar el modelo desde la ruta absoluta
             await BABYLON.SceneLoader.ImportMeshAsync(
                 "",
                 "/img/modelos/",
@@ -85,7 +92,6 @@ export default function Show({
             engine.resize();
         });
 
-        // Cleanup on component unmount
         return () => {
             scenePromise.then((scene) => {
                 scene.dispose();
@@ -99,15 +105,15 @@ export default function Show({
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Articulos
+                    Artículos
                 </h2>
             }
         >
-            <Head title="Articulos" />
+            <Head title="Artículos" />
             <div className="ml-20 pt-40">
                 <BreadcrumbArticulosShow articulo={articulo} />
             </div>
-            <div className="flex flex-col items-center w-full shadow md:flex-row p-5 m-3 div-oscuro">
+            <div className="flex flex-col md:flex-row items-center w-full shadow p-5 m-3 div-oscuro">
                 <div className="w-full md:w-2/3">
                     <canvas
                         id="renderCanvas"
@@ -115,105 +121,92 @@ export default function Show({
                     ></canvas>
                 </div>
                 <div className="flex flex-col justify-between p-4 leading-normal w-full md:w-2/5 text-center">
-                    <div className="w-full mb-5">
-                        <div className="rounded-lg shadow md:max-w-xl p-4">
-                            {user ? (
-                                <div className="flex items-center m-auto justify-center">
-                                    <img
-                                        src={user.avatar}
-                                        alt="Avatar del usuario"
-                                        className="w-12 h-12 rounded-full ml-3"
-                                    />
-                                    <span className="font-koulen ml-3 text-white">
-                                        {user.name}
-                                    </span>
-                                </div>
-                            ) : (
-                                <p className="text-white">
-                                    No se pudo encontrar al usuario asociado a
-                                    este articulo.
-                                </p>
-                            )}
+                    <div className="flex items-center justify-center md:justify-center mb-4 md:mb-0">
+                        <h1 className="text-white font-koulen">{articulo.nombre}</h1>
+                        <div className="ml-3 pb-1 text-white">
+                            <LikeBoton articuloId={articulo.id} initialLikes={contadorLikes.cantidad} />
                         </div>
                     </div>
-                    <h5 className="p-4 mb-2 text-2xl font-koulen tracking-tight text-white">
-                        {articulo.nombre}
-                    </h5>
-                    <div className="flex flex-col justify-between p-4 leading-normal">
-                        <ul className="mb-2 text-white">
-                            {categorias.length > 0 ? (
-                                categorias.map((categoria) => (
-                                    <li
-                                        key={categoria.id}
-                                        className="font-koulen"
-                                    >
-                                        {categoria.nombre}
-                                    </li>
-                                ))
-                            ) : (
-                                <li>Sin Categorias</li>
-                            )}
-                        </ul>
-                        <ul className="mb-2 text-white">
-                            {etiquetas.length > 0 ? (
-                                etiquetas.map((etiqueta) => (
-                                    <li
-                                        key={etiqueta.id}
-                                        className="font-koulen"
-                                    >
-                                        {etiqueta.nombre}
-                                    </li>
-                                ))
-                            ) : (
-                                <li>Sin etiquetas</li>
-                            )}
-                        </ul>
-                        <ul className="text-white">
-                            <li className="font-lato">
-                                Creada en <b>{articulo.created_at}</b>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="flex flex-col items-center w-full shadow md:flex-row p-5 m-3 justify-center">
-                        <ul className="text-center">
-                            <li className="mb-3 font-lato text-white">
-                                {articulo.descripcion}
-                            </li>
-                            <div>
-                            <LikeBoton articuloId={articulo.id} initialLikes={contadorLikes.cantidad} />
+                    {user ? (
+                        <div className="flex items-center justify-center md:justify-center mb-4 md:mb-0">
+                            <img
+                                src={user.avatar}
+                                alt="Avatar del usuario"
+                                className="w-16 h-16 rounded-full ml-3"
+                            />
+                            <span className="font-koulen ml-3 text-white">
+                                {user.name}
+                            </span>
+                        </div>
+                    ) : (
+                        <p className="text-white">
+                            No se pudo encontrar al usuario asociado a este artículo.
+                        </p>
+                    )}
+                    <p className="text-white">Creada en <b>{formatDate(articulo.created_at)}</b></p>
+                    <div className="flex flex-col justify-between mb-4">
+                        <div className="text-white mb-2">
+                            <h6 className="font-koulen">Categorías:</h6>
+                            <div className="flex flex-wrap justify-center">
+                                {categorias.length > 0 ? (
+                                    categorias.map((categoria) => (
+                                        <BotonCategoria
+                                            key={categoria.id}
+                                            texto={categoria.nombre}
+                                            className="m-1"
+                                        />
+                                    ))
+                                ) : (
+                                    <span>Sin categorías</span>
+                                )}
                             </div>
-                        {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
-                        <li className="font-lato p-2 mt-2 bg-red-700 w-full w-1/3 text-center rounded-lg text-white text-sm">
+                        </div>
+                        <div className="text-white">
+                            <h6 className="font-koulen">Etiquetas:</h6>
+                            <div className="flex flex-wrap justify-center">
+                                {etiquetas.length > 0 ? (
+                                    etiquetas.map((etiqueta) => (
+                                        <BotonEtiqueta
+                                            key={etiqueta.id}
+                                            texto={etiqueta.nombre}
+                                            className="m-1"
+                                        />
+                                    ))
+                                ) : (
+                                    <span>Sin etiquetas</span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <p className="text-white">{formatText(articulo.descripcion)}</p>
+                    <div className="flex flex-col items-center shadow md:flex-row p-5 m-3 justify-center text-2xl">
                         {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
                         {parseFloat(articulo.precio) === 0 ? (
-                            <button onClick={handleCompraClick}>Gratis</button>
+                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-700 w-1/2 text-center rounded-lg text-white text-sm">Gratis</button>
                         ) : (
-                            <button onClick={handleCompraClick}>{articulo.precio}</button>
+                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-700  w-1/2 text-center rounded-lg text-white text-sm">Precio {articulo.precio}€</button>
                         )}
-                    </li>
-                        </ul>
                     </div>
                 </div>
             </div>
             <div className="w-full p-5">
                 <ComentariosArticulo comentarios={comentarios} articulo={articulo} user={user} />
             </div>
-             {/* Modal de compra */}
-             {mostrarModalCompra && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="absolute inset-0 bg-black opacity-75"></div>
-                    <div className="z-50 bg-white p-8 max-w-lg rounded-lg shadow-lg">
-                    <SimuladorCompra
-                        articuloId={articulo.id}
-                        articuloPrecio={articulo.precio}
-                        monedero={user.monedero}
-                        modelo={articulo.modelo}
-                        onClose={handleCerrarModalCompra} // Pasamos la función handleCerrarModalCompra como prop
-                    />
-
-                    </div>
-                </div>
-            )}
-        </AuthenticatedLayout>
-    );
+            {mostrarModalCompra && (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="absolute inset-0 bg-black opacity-75"></div>
+        <div className="z-50 bg-white p-8 max-w-lg rounded-lg shadow-lg">
+            <SimuladorCompra
+                articuloId={articulo.id}
+                articuloPrecio={articulo.precio}
+                monedero={user.monedero}
+                modelo={articulo.modelo}
+                onClose={handleCerrarModalCompra}
+            />
+        </div>
+    </div>
+)}
+</AuthenticatedLayout>
+);
 }
+

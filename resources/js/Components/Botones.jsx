@@ -42,5 +42,13 @@ const BotonEtiqueta = ({ texto }) => {
     );
 }
 
+const BotonCategoria = ({ texto }) => {
+    return (
+        <div className="flex p-2 m-4  font-koulen bg-blue-900 rounded-lg border border-white focus:z-10 focus:ring-4 focus:ring-gray-100 text-white">
+                {texto}
+        </div>
+    );
+}
 
-export { BotonPrincipal, BotonSecundario, BotonTipo, BotonEtiqueta };
+
+export { BotonPrincipal, BotonSecundario, BotonTipo, BotonEtiqueta, BotonCategoria };
