@@ -16,15 +16,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear el usuario fijo
+        // Crear el usuarios fijos
+
         User::create([
-            'name' => 'Salva',
-            'email' => 'salva@salva.es',
+            'name' => 'admin',
+            'email' => 'admin@admin.es',
             'email_verified_at' => now(),
             'password' => Hash::make('1234werty'),
             'admin' => 'true',
             'monedero' => '5000',
             'remember_token' => Str::random(10),
+            'avatar' => '/img/users/admin.png'
+        ]);
+
+
+        User::create([
+            'name' => 'salva',
+            'email' => 'salva@salva.es',
+            'email_verified_at' => now(),
+            'password' => Hash::make('1234werty'),
+            'admin' => 'false',
+            'monedero' => '5000',
+            'remember_token' => Str::random(10),
+            'avatar' => '/img/users/salva.png'
         ]);
 
         // Crear usuarios aleatorios
@@ -36,8 +50,7 @@ class DatabaseSeeder extends Seeder
             EtiquetaSeeder::class,
             ArticuloSeeder::class,
             NoticiaSeeder::class,
-            ArticuloSeeder::class,
-            ComentarioSeeder::class,
+            // ComentarioSeeder::class,
             ContadorSeeder::class,
 
         ]);
