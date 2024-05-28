@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Articulo;
+use App\Models\Categoria;
+use App\Models\Etiqueta;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,6 +17,10 @@ class ArticuloSeeder extends Seeder
     public function run(): void
     {
         Articulo::factory()->count(10)->create();
+
+        // Obtener todas las categorías y etiquetas
+        $categorias = Categoria::all();
+        $etiquetas = Etiqueta::all();
 
         Articulo::create([
             'nombre' => 'Tapon de botella',
@@ -91,5 +97,20 @@ class ArticuloSeeder extends Seeder
             'precio' => 18.00,
             'user_id' => 2,
         ]);
+
+
+        // Obtener todos los artículos
+        $articulos = Articulo::all();
+
+        // Asignar categorías y etiquetas aleatorias a cada artículo
+        foreach ($articulos as $articulo) {
+            // Asignar categorías aleatorias
+            $categoriasAleatorias = $categorias->random(rand(1, 3));
+            $articulo->categorias()->attach($categoriasAleatorias);
+
+            // Asignar etiquetas aleatorias
+            $etiquetasAleatorias = $etiquetas->random(rand(1, 3));
+            $articulo->etiquetas()->attach($etiquetasAleatorias);
+        }
     }
 }
