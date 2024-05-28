@@ -13,8 +13,9 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        Categoria::create(['nombre' => 'Modelaje']);
-        Categoria::create(['nombre' => 'Texturas']);
-        Categoria::create(['nombre' => 'Programacion']);
+        Categoria::create(['nombre' => 'Videojuegos']);
+        Categoria::create(['nombre' => 'Prototipos']);
+        Categoria::create(['nombre' => 'Ensamblaje']);
+        Categoria::create(['nombre' => 'Fantasia']);
     }
 }
