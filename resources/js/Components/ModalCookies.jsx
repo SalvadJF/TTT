@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ApplicationLogo from "./ApplicationLogo";
+import {ApplicationLogo} from "./ApplicationLogo";
 
 const ModalCookies = ({ onClose }) => {
   const [showModal, setShowModal] = useState(true);

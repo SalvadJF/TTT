@@ -14,7 +14,7 @@ export default function Show({ auth, factura }) {
         >
             <Head title="Factura" />
             <div className="ml-20 pt-40">
-                <BreadcrumbPerfilOtros nombre={`Factura Nº {factura.id}`} />
+            <BreadcrumbPerfilOtros nombre={`Factura Nº ${factura.id}`} />
             </div>
 
             <div className="max-w-screen-md mx-auto p-4 md:p-8">
