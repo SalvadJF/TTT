@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import { Breadcrumbs } from "@/Components/BreadCrumb";
+import { BreadcrumbPerfilOtros } from "@/Components/BreadCrumb";
 
 export default function Show({ auth, factura }) {
     return (
@@ -14,7 +14,7 @@ export default function Show({ auth, factura }) {
         >
             <Head title="Factura" />
             <div className="ml-20 pt-40">
-                <Breadcrumbs />
+                <BreadcrumbPerfilOtros nombre={`Factura Nº {factura.id}`} />
             </div>
 
             <div className="max-w-screen-md mx-auto p-4 md:p-8">

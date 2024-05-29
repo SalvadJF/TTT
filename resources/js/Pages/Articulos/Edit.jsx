@@ -1,6 +1,6 @@
 import { useForm, usePage } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { BreadcrumbArticulos } from "@/Components/BreadCrumb";
+import { BreadcrumbArticulosFunciones } from "@/Components/BreadCrumb";
 
 const EditarArticulo = () => {
     const { auth, articulo, categorias, etiquetas, categoriasArticulo, etiquetasArticulo } = usePage().props;
@@ -50,7 +50,7 @@ const EditarArticulo = () => {
             }
         >
             <div className="ml-20 pt-40">
-                <BreadcrumbArticulos />
+                <BreadcrumbArticulosFunciones lugar="Editar Articulo" />
             </div>
             <div className="max-w-sm mx-auto">
                 <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-5">

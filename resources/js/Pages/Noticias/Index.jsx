@@ -93,7 +93,7 @@ export default function Index({ auth, noticias }) {
                     <button
                         key={index}
                         onClick={() => paginate(index + 1)}
-                        className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                        className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-red-600 text-white' : 'bg-black text-white'}`}
                     >
                         {index + 1}
                     </button>

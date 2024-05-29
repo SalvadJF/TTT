@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ApplicationLogo from "./ApplicationLogo";
 
 const ModalCookies = ({ onClose }) => {
   const [showModal, setShowModal] = useState(true);
@@ -29,14 +30,18 @@ const ModalCookies = ({ onClose }) => {
     <div className="fixed inset-0 z-50">
       <div className="fixed inset-0 bg-gray-900 bg-opacity-50"></div>
       <div className="fixed inset-0 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-lg font-semibold mb-4">Aviso de cookies</h2>
-          <p className="mb-4">
-            Utilizamos cookies para mejorar tu experiencia en nuestro sitio web. Al hacer clic en Aceptar, aceptas el uso de cookies.
+        <div className="bg-gray-200 p-8 rounded-lg shadow-lg">
+        <ApplicationLogo />
+          <h2 className="text-lg font-koulen mb-4">Aviso de cookies</h2>
+          <p className="mb-4 font-lato">
+            Utilizamos cookies para mejorar tu experiencia en nuestro sitio web.
+          </p>
+          <p className="mb-4 font-lato">
+            Al hacer clic en Aceptar, aceptas el uso de cookies.
           </p>
           <div className="flex justify-end">
             <button
-              className="mr-2 px-4 py-2 bg-blue-500 text-white rounded"
+              className="mr-2 px-4 py-2 bg-red-500 text-white rounded"
               onClick={handleAcceptCookies}
             >
               Aceptar

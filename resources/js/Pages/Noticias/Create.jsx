@@ -1,6 +1,6 @@
 import { useForm } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { BreadcrumbArticulos } from "@/Components/BreadCrumb";
+import { BreadcrumbNoticiasFunciones } from "@/Components/BreadCrumb";
 
 const CreateNoticia = ({ auth, etiquetas }) => {
     const { data, setData, errors, post } = useForm({
@@ -42,7 +42,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
             }
         >
             <div className="ml-20 pt-40">
-                <BreadcrumbArticulos />
+                <BreadcrumbNoticiasFunciones lugar="Crear Noticia" />
             </div>
             <div className="max-w-sm mx-auto">
                 <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-5">

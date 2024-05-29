@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-import { Breadcrumbs } from '@/Components/BreadCrumb';
+import { BreadcrumbAdminShows } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
 import ArticulosTable from '@/Components/ArticulosTable';
 import Encabezado from '@/Components/Encabezado';
@@ -19,7 +19,7 @@ return (
         <Head title="Admin" />
 
         <div class=" ml-20 pt-40">
-            <Breadcrumbs />
+            <BreadcrumbAdminShows shows="Articulos" ruta={route('admin.articulos')} />
         </div>
 
         <AdminHeader admin={admin} />
