@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-import { Breadcrumbs } from '@/Components/BreadCrumb';
+import { BreadcrumbAdmin } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
 
 function AccordionItem({ title, count, createdAt, linkText, linkHref, children }) {
@@ -72,7 +72,7 @@ export default function Index ({
             <Head title="Admin" />
 
             <div className="ml-20 pt-40">
-                <Breadcrumbs />
+                <BreadcrumbAdmin />
             </div>
 
             <AdminHeader admin={admin} />

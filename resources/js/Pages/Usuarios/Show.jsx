@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "@inertiajs/react";
-import { Breadcrumbs } from "@/Components/BreadCrumb";
+import { BreadcrumbOtros } from "@/Components/BreadCrumb";
 import ProfileOtroHeader from "@/Components/ProfileOtroHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import ArticuloExposicion from "@/Components/ArticuloExposicion";
@@ -41,7 +41,7 @@ const Show = ({ auth, usuario, articulos }) => {
         >
             <div className="p-10 bg-opacity-10">
                 <div className="ml-20 pt-40">
-                    <Breadcrumbs />
+                    <BreadcrumbOtros nombre={usuario.name} />
                 </div>
                 <div className="p-10 bg-opacity-10">
                     <ProfileOtroHeader user={usuario} />

@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import { Breadcrumbs } from "@/Components/BreadCrumb";
+import { BreadcrumbOtros } from "@/Components/BreadCrumb";
 import React, { useState, useMemo } from "react";
 import ProfileHeader from "@/Components/ProfileHeader";
 import Acordeon  from "@/Components/Acordeon";
@@ -188,7 +188,7 @@ export default function Index({
         >
             <Head title="Mi perfil" />
             <div className="ml-20 pt-40">
-                <Breadcrumbs />
+                <BreadcrumbOtros nombre="Mi perfil" />
             </div>
             <div className="p-10 bg-opacity-10">
                 <div

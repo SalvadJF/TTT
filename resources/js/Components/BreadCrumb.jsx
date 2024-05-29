@@ -1,11 +1,9 @@
-"use client";
-
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 
 function Breadcrumbs() {
   return (
-    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
+    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
@@ -15,7 +13,7 @@ function Breadcrumbs() {
 
 function BreadcrumbArticulos() {
   return (
-    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
+    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
@@ -28,7 +26,7 @@ function BreadcrumbArticulos() {
 
 function BreadcrumbArticulosShow({ articulo }) {
   return (
-    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
+    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
@@ -42,13 +40,29 @@ function BreadcrumbArticulosShow({ articulo }) {
   );
 }
 
+function BreadcrumbArticulosFunciones({ lugar }) {
+    return (
+      <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
+        <Breadcrumb.Item href="/dashboard" icon={HiHome}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="/articulos">
+          Articulos
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="">
+          {lugar}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+    );
+  }
+
 function BreadcrumbNoticias() {
   return (
-    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
+    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
-      <Breadcrumb.Item href="">
+      <Breadcrumb.Item href="/noticias">
         Noticias
       </Breadcrumb.Item>
     </Breadcrumb>
@@ -57,7 +71,7 @@ function BreadcrumbNoticias() {
 
 function BreadcrumbNoticiasShow({ noticia }) {
   return (
-    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
+    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
@@ -71,9 +85,25 @@ function BreadcrumbNoticiasShow({ noticia }) {
   );
 }
 
+function BreadcrumbNoticiasFunciones({ lugar }) {
+    return (
+      <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
+        <Breadcrumb.Item href="/dashboard" icon={HiHome}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="/noticias">
+          Noticias
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="">
+          {lugar}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+    );
+  }
+
 function BreadcrumbOtros( {nombre} ) {
   return (
-    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen">
+    <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
       <Breadcrumb.Item href="/dashboard" icon={HiHome}>
         Home
       </Breadcrumb.Item>
@@ -84,4 +114,59 @@ function BreadcrumbOtros( {nombre} ) {
   );
 }
 
-export { Breadcrumbs, BreadcrumbArticulos, BreadcrumbArticulosShow, BreadcrumbNoticias, BreadcrumbNoticiasShow, BreadcrumbOtros };
+function BreadcrumbAdmin() {
+    return (
+      <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
+        <Breadcrumb.Item href="/dashboard" icon={HiHome}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/index">
+          Admin
+        </Breadcrumb.Item>
+      </Breadcrumb>
+    );
+  }
+
+  function BreadcrumbPerfilEditar() {
+    return (
+      <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
+        <Breadcrumb.Item href="/dashboard" icon={HiHome}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="/profile/index">
+          Mi Perfil
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="">
+          Editar
+        </Breadcrumb.Item>
+      </Breadcrumb>
+    );
+  }
+
+  function BreadcrumbAdminShows( {shows , ruta} ) {
+    return (
+      <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
+        <Breadcrumb.Item href="/dashboard" icon={HiHome}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/index">
+          Admin
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href={ruta}>
+          {shows}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+    );
+  }
+
+export { Breadcrumbs,
+    BreadcrumbArticulos,
+    BreadcrumbArticulosShow,
+    BreadcrumbArticulosFunciones,
+    BreadcrumbNoticias,
+    BreadcrumbNoticiasShow,
+    BreadcrumbNoticiasFunciones,
+    BreadcrumbOtros,
+    BreadcrumbAdmin,
+    BreadcrumbAdminShows,
+    BreadcrumbPerfilEditar };

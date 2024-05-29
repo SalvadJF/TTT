@@ -34,11 +34,6 @@ Route::get('/derechos', function () {
     return Inertia::render('Derechos');
 })->middleware(['auth', 'verified'])->name('derechos');
 
-Route::get('/modelo', function () {
-    return Inertia::render('Modelo');
-});
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/articulos/create', [ArticuloController::class, 'create'])->name('articulos.create');
     Route::post('/articulos', [ArticuloController::class, 'store'])->name('articulos.store');
