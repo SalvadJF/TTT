@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from "flowbite-react";
-import LikeBoton from './LikeBoton'; // Importamos el componente LikeBoton
+import LikeBoton from './LikeBoton';
 
 export default function ArticuloCarta({ articulo }) {
   const cardStyle = {

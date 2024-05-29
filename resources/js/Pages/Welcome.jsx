@@ -1,4 +1,5 @@
 import { Link, Head } from '@inertiajs/react';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -15,7 +16,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             <div id="fondo" className="flex items-center justify-center min-h-screen">
                 <div className="text-center p-10 rounded-lg shadow-lg fade-in w-3/4 bg-opacity-10 bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
                     <div className="mb-8">
-                        <img src="path/to/your/logo.png" alt="Logo" className="mx-auto w-48 h-48 object-contain" />
+                        <ApplicationLogo />
                     </div>
                     <h1 className="font-koulen text-6xl font-bold text-white mb-4">Trazos, Texturas y Tecnología 3D</h1>
                     <h2 className="font-koulen text-4xl font-bold text-white mb-4">Bienvenido</h2>
