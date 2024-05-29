@@ -127,7 +127,7 @@ function BreadcrumbAdmin() {
     );
   }
 
-  function BreadcrumbPerfilEditar() {
+  function BreadcrumbPerfilOtros( { nombre }) {
     return (
       <Breadcrumb aria-label="breadcrumb" className="ml-5 font-koulen text-white">
         <Breadcrumb.Item href="/dashboard" icon={HiHome}>
@@ -137,7 +137,7 @@ function BreadcrumbAdmin() {
           Mi Perfil
         </Breadcrumb.Item>
         <Breadcrumb.Item href="">
-          Editar
+          {nombre}
         </Breadcrumb.Item>
       </Breadcrumb>
     );
@@ -169,4 +169,4 @@ export { Breadcrumbs,
     BreadcrumbOtros,
     BreadcrumbAdmin,
     BreadcrumbAdminShows,
-    BreadcrumbPerfilEditar };
+    BreadcrumbPerfilOtros };

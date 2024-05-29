@@ -3,7 +3,7 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import { Head } from '@inertiajs/react';
-import { BreadcrumbPerfilEditar } from "@/Components/BreadCrumb";
+import { BreadcrumbPerfilOtros } from "@/Components/BreadCrumb";
 
 export default function Edit({ auth, mustVerifyEmail, status }) {
     return (
@@ -14,7 +14,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
             <Head title="Editar perfil" />
 
             <div className="ml-20 pt-40">
-                <BreadcrumbPerfilEditar/>
+                <BreadcrumbPerfilOtros nombre="Editar Perfil" />
             </div>
 
             <div className="py-12">

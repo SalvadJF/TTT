@@ -22,19 +22,19 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <p className="font-lato text-lg text-white mb-8">Únete a nuestra comunidad y explora una amplia colección de modelos 3D de alta calidad</p>
                     <p className="font-lato text-lg text-white mb-8">¡Regístrate ahora y empieza a comprar, vender y compartir tus diseños!</p>
                     {auth.user ? (
-                        <Link href="/dashboard" className="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700">
+                        <Link href="/dashboard" className="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20]">
                             Home
                         </Link>
                     ) : (
                         <>
-                            <Link href="/login" className="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700">
+                            <Link href="/login" className="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20]">
                                 Log in
                             </Link>
-                            {auth.canRegister && (
-                                <Link href="/register" className="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:bg-gray-700">
-                                    Registrate
-                                </Link>
-                            )}
+
+                            <Link href="/register" className="font-koulen rounded-md px-10 py-4 text-white bg-black hover:bg-red-900 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20]">
+                                Registrate
+                            </Link>
+
                         </>
                     )}
                 </div>
