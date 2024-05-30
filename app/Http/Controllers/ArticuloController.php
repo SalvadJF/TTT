@@ -60,50 +60,54 @@ use Inertia\Inertia;
       * Store a newly created resource in storage.
       */
       public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|max:255',
-            'descripcion' => 'required|max:65535',
-            'tipo' => 'required|in:Modelo_3d,Textura',
-            'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-            'modelo' => 'file',
-            'precio' => 'numeric|max:999.99',
-            'categorias' => 'required|array|max:3',
-            'categorias.*' => 'exists:categorias,id',
-            'etiquetas' => 'required|array|max:3',
-            'etiquetas.*' => 'exists:etiquetas,id',
-        ]);
+        {
+            $validatedData = $request->validate([
+                'nombre' => 'required|max:255',
+                'descripcion' => 'required|max:65535',
+                'tipo' => 'required|in:Modelo_3d,Textura',
+                'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+                'modelo' => 'file',
+                'precio' => 'numeric|min:0|max:999.99',
+                'categorias' => 'required|array|max:3',
+                'categorias.*' => 'exists:categorias,id',
+                'etiquetas' => 'required|array|max:3',
+                'etiquetas.*' => 'exists:etiquetas,id',
+            ]);
 
-        $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
-        $request->imagen->move(public_path('img/articulos'), $imagenNombre);
-        $imagenPath = ('img/articulos/' . $imagenNombre);
+            $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+            $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+            $imagenPath = 'img/articulos/' . $imagenNombre;
+
+            $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
+            $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
+
+            $articulo = Articulo::create([
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'tipo' => $request->tipo,
+                'precio' => $request->precio,
+                'modelo' => $modeloNombre,
+                'imagen' => $imagenPath,
+                'user_id' => auth()->id(),
+            ]);
+
+            // Crear un contador de Likes asociado al artículo con una cantidad inicial de 0
+            // Crear contadores para el artículo
+            $articulo->contadores()->createMany([
+                ['nombre' => 'Likes', 'cantidad' => 0],
+                ['nombre' => 'Visitas', 'cantidad' => 0],
+            ]);
+
+            $articulo->categorias()->attach($request->categorias);
+            $articulo->etiquetas()->attach($request->etiquetas);
+
+            // Mensaje flash para éxito
+            session()->flash('success', 'Artículo creado con éxito.');
+
+            return redirect()->route('articulos.show', $articulo);
+        }
 
 
-        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
-        $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
-
-        $articulo = Articulo::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'tipo' => $request->tipo,
-            'precio' => $request->precio,
-            'modelo' => $modeloNombre,
-            'imagen' => $imagenPath,
-            'user_id' => auth()->id(),
-        ]);
-
-        // Crear un contador de Likes asociado al artículo con una cantidad inicial de 0
-        // Crear contadores para el artículo
-        $articulo->contadores()->createMany([
-            ['nombre' => 'Likes', 'cantidad' => 0],
-            ['nombre' => 'Visitas', 'cantidad' => 0],
-        ]);
-
-        $articulo->categorias()->attach($request->categorias);
-        $articulo->etiquetas()->attach($request->etiquetas);
-
-        return redirect()->route('articulos.show', $articulo);
-    }
 
 
      /**

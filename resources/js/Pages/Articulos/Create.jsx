@@ -1,8 +1,9 @@
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { BreadcrumbArticulosFunciones } from "@/Components/BreadCrumb";
 
 const CreateArticulo = ({ auth, categorias, etiquetas }) => {
+    const { flash } = usePage().props; // Obtener flash messages desde props
     const { data, setData, errors, post } = useForm({
         nombre: "",
         descripcion: "",
@@ -11,7 +12,7 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
         modelo: null,
         categorias: [],
         etiquetas: [],
-        precio: 0, // Añadir el campo precio al estado inicial
+        precio: 0,
     });
 
     const handleSubmit = (e) => {
@@ -57,6 +58,11 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
                 <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-5">
                     Crear Artículo
                 </h1>
+                {flash.success && (
+                    <div className="mb-4 text-green-500">
+                        {flash.success}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label
