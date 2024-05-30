@@ -196,12 +196,12 @@ export default function Show({
                         ) : comprado ? (
                             <button
                                 onClick={() => window.location.href = `/facturas/${facturaId}`}
-                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm"
+                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-2/3 text-center rounded-lg text-white text-sm"
                             >
                                 Ya has comprado este artículo
                             </button>
                         ) : (
-                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm">
+                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-full text-center rounded-lg text-white text-lg">
                                 {parseFloat(articulo.precio) === 0 ? "Descargar" : "Comprar"}
                             </button>
                         )}
