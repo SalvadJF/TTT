@@ -10,6 +10,7 @@ export default function UsuariosTable({ usuarios }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [usuarioToDelete, setUsuarioToDelete] = useState(null);
 
+
     const filteredUsuarios = useMemo(() => {
         return usuarios.data.filter(usuario =>
             usuario.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -35,11 +36,50 @@ export default function UsuariosTable({ usuarios }) {
         setShowDeleteModal(true);
     };
 
-    const handleConfirmDelete = () => {
-        if (usuarioToDelete) {
-            handleDelete(route("user.destroy", usuarioToDelete.id));
-            setShowDeleteModal(false);
-        }
+    const handleBlockUser = (userId) => {
+        fetch(`/admin/blockUser/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                // Puedes enviar cualquier dato adicional necesario aquí
+            })
+        }).then(response => {
+            if (response.ok) {
+                // Actualizar la lista de usuarios después de bloquear al usuario
+                // Por ejemplo, puedes volver a cargar la página completa
+                window.location.reload();
+            } else {
+                console.error('Error al bloquear al usuario');
+            }
+        }).catch(error => {
+            console.error('Error al bloquear al usuario:', error);
+        });
+    };
+
+    const handleUnblockUser = (userId) => {
+        fetch(`/admin/unBlockUser/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                // Puedes enviar cualquier dato adicional necesario aquí
+            })
+        }).then(response => {
+            if (response.ok) {
+                // Actualizar la lista de usuarios después de desbloquear al usuario
+                // Por ejemplo, puedes volver a cargar la página completa
+                window.location.reload();
+            } else {
+                console.error('Error al desbloquear al usuario');
+            }
+        }).catch(error => {
+            console.error('Error al desbloquear al usuario:', error);
+        });
     };
 
     return (
@@ -53,6 +93,7 @@ export default function UsuariosTable({ usuarios }) {
                         <th scope="col" className="px-6 py-3">Nombre</th>
                         <th scope="col" className="px-6 py-3">Email</th>
                         <th scope="col" className="px-6 py-3">Rol</th>
+                        <th scope="col" className="px-6 py-3">Estado</th>
                         <th scope="col" className="px-6 py-3">Fecha de Creacion</th>
                         <th scope="col" className="px-6 py-3">Acciones</th>
                     </tr>
@@ -68,12 +109,26 @@ export default function UsuariosTable({ usuarios }) {
                             <td className="px-6 py-4">
                                 {usuario.admin ? "Administrador" : "Usuario"}
                             </td>
+                            <td className="px-6 py-4">
+                                {usuario.blocked ? "Bloqueado" : "Libre"}
+                            </td>
                             <td className="px-6 py-4">{formatDate(usuario.created_at)}</td>
                             <td className="px-6 py-4 text-center">
                                 {usuario.admin === false && (
-                                    <button type="button" onClick={() => handleShowDeleteModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
-                                    <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
-                                    </button>
+                                    <>
+                                        {usuario.blocked ? (
+                                            <button onClick={() => handleUnblockUser(usuario.id)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                            <img src="/img/iconos/unlock.svg" alt="Icono Desbloquear" className="w-4 h-4" />
+                                            </button>
+                                        ) : (
+                                            <button onClick={() => handleBlockUser(usuario.id)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                            <img src="/img/iconos/lock.svg" alt="Icono Bloquear" className="w-4 h-4" />
+                                            </button>
+                                        )}
+                                        <button type="button" onClick={() => handleShowDeleteModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none ml-2">
+                                            <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
+                                        </button>
+                                    </>
                                 )}
                             </td>
                         </tr>
@@ -93,7 +148,7 @@ export default function UsuariosTable({ usuarios }) {
                     <div className="bg-white p-4 rounded-lg">
                         <p className="text-lg font-semibold mb-4">¿Estás seguro de que quieres borrar este usuario?</p>
                         <div className="flex justify-center">
-                            <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleConfirmDelete()}>Borrar</button>
+                        <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleConfirmDelete()}>Borrar</button>
                             <button className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400" onClick={() => setShowDeleteModal(false)}>Cancelar</button>
                         </div>
                     </div>

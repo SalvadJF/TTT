@@ -85,7 +85,7 @@ class FacturaController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Compra realizada con éxito',
-                'factura' => $factura // Enviamos el objeto completo de la factura
+                'factura' => $factura
             ]);
         } else {
             return response()->json(['success' => false, 'message' => 'Saldo insuficiente en el monedero']);
