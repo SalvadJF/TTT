@@ -7,7 +7,8 @@
  use App\Models\Categoria;
 use App\Models\Contador;
 use App\Models\Etiqueta;
- use Illuminate\Http\Request;
+use App\Models\Factura;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 
@@ -109,31 +110,47 @@ use Inertia\Inertia;
       * Display the specified resource.
       */
       public function show(Articulo $articulo)
-      {
-            // Obtener las categorías asociadas al artículo
-            $categorias = $articulo->categorias()->get();
+    {
+        // Obtener las categorías asociadas al artículo
+        $categorias = $articulo->categorias()->get();
 
-            // Obtener las etiquetas asociadas al artículo
-            $etiquetas = $articulo->etiquetas()->get();
+        // Obtener las etiquetas asociadas al artículo
+        $etiquetas = $articulo->etiquetas()->get();
 
-            // Obtener los comentarios asociados al artículo
-            $comentarios = $articulo->comentarios()->get();
+        // Obtener los comentarios asociados al artículo
+        $comentarios = $articulo->comentarios()->get();
 
-            // Obtener el usuario asociado al artículo
-            $user = $articulo->user()->first();
+        // Obtener el usuario asociado al artículo
+        $user = $articulo->user()->first();
 
-           // Obtener los contadores asociados al artículo
-            $contadorLikes = $articulo->contadores()->where('nombre', 'Likes')->first();
+        // Obtener los contadores asociados al artículo
+        $contadorLikes = $articulo->contadores()->where('nombre', 'Likes')->first();
 
-          return Inertia::render('Articulos/Show', [
-              'articulo' => $articulo,
-              'categorias' => $categorias,
-              'etiquetas' => $etiquetas,
-              'comentarios' => $comentarios,
-              'user' => $user,
-              'contadorLikes' => $contadorLikes,
-          ]);
-      }
+        // Verificar si el usuario ha comprado este artículo
+        $comprado = false;
+        $facturaId = null;
+        if (auth()->check()) {
+            $factura = Factura::where('articulo_id', $articulo->id)
+                            ->where('user_id', auth()->id())
+                            ->first();
+            if ($factura) {
+                $comprado = true;
+                $facturaId = $factura->id;
+            }
+        }
+
+        return Inertia::render('Articulos/Show', [
+            'articulo' => $articulo,
+            'categorias' => $categorias,
+            'etiquetas' => $etiquetas,
+            'comentarios' => $comentarios,
+            'user' => $user,
+            'contadorLikes' => $contadorLikes,
+            'comprado' => $comprado,
+            'facturaId' => $facturaId,
+        ]);
+    }
+
 
      /**
       * Show the form for editing the specified resource.

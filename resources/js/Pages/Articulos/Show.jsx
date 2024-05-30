@@ -20,7 +20,9 @@ export default function Show({
     etiquetas,
     comentarios,
     user,
-    contadorLikes
+    contadorLikes,
+    comprado,
+    facturaId
 }) {
     const [mostrarModalCompra, setMostrarModalCompra] = useState(false);
 
@@ -179,12 +181,29 @@ export default function Show({
                         </div>
                     </div>
                     <p className="text-white">{formatText(articulo.descripcion)}</p>
+                    <div className="text-white text-2xl mb-2">
+                        {parseFloat(articulo.precio) === 0 ? "Gratis" : `Precio ${articulo.precio}€`}
+                    </div>
                     <div className="flex flex-col items-center shadow md:flex-row p-5 m-3 justify-center text-2xl">
-                        {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
-                        {parseFloat(articulo.precio) === 0 ? (
-                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm">Gratis</button>
+                        {auth.user.id === articulo.user_id ? (
+                            <button
+                                disabled
+                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm"
+                                title="Este artículo te pertenece"
+                            >
+                               Este artículo te pertenece
+                            </button>
+                        ) : comprado ? (
+                            <button
+                                onClick={() => window.location.href = `/facturas/${facturaId}`}
+                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm"
+                            >
+                                Ya has comprado este artículo
+                            </button>
                         ) : (
-                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900  w-1/2 text-center rounded-lg text-white text-sm">Precio {articulo.precio}€</button>
+                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm">
+                                {parseFloat(articulo.precio) === 0 ? "Descargar" : "Comprar"}
+                            </button>
                         )}
                     </div>
                 </div>
@@ -193,20 +212,19 @@ export default function Show({
                 <ComentariosArticulo comentarios={comentarios} articulo={articulo} user={user} />
             </div>
             {mostrarModalCompra && (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="absolute inset-0 bg-black opacity-75"></div>
-        <div className="z-50 bg-white p-8 max-w-lg rounded-lg shadow-lg">
-            <SimuladorCompra
-                articuloId={articulo.id}
-                articuloPrecio={articulo.precio}
-                monedero={user.monedero}
-                modelo={articulo.modelo}
-                onClose={handleCerrarModalCompra}
-            />
-        </div>
-    </div>
-)}
-</AuthenticatedLayout>
-);
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="absolute inset-0 bg-black opacity-75"></div>
+                    <div className="z-50 bg-white p-8 max-w-lg rounded-lg shadow-lg">
+                        <SimuladorCompra
+                            articuloId={articulo.id}
+                            articuloPrecio={articulo.precio}
+                            monedero={user.monedero}
+                            modelo={articulo.modelo}
+                            onClose={handleCerrarModalCompra}
+                        />
+                    </div>
+                </div>
+            )}
+        </AuthenticatedLayout>
+    );
 }
-
