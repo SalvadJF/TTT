@@ -182,9 +182,9 @@ export default function Show({
                     <div className="flex flex-col items-center shadow md:flex-row p-5 m-3 justify-center text-2xl">
                         {/* Si el precio es 0, muestra "Gratis" y descarga el modelo */}
                         {parseFloat(articulo.precio) === 0 ? (
-                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-700 w-1/2 text-center rounded-lg text-white text-sm">Gratis</button>
+                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm">Gratis</button>
                         ) : (
-                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-700  w-1/2 text-center rounded-lg text-white text-sm">Precio {articulo.precio}€</button>
+                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900  w-1/2 text-center rounded-lg text-white text-sm">Precio {articulo.precio}€</button>
                         )}
                     </div>
                 </div>

@@ -27,8 +27,8 @@ export default function Welcome({ auth }) {
                     <div className="flex justify-center mb-4">
                         <ApplicationLogoGrande className="text-white" /> {/* Uso del logotipo grande */}
                     </div>
-                    <h1 className="font-koulen text-6xl font-bold text-white mb-4">Trazos, Texturas y Tecnología 3D</h1>
-                    <h2 className="font-koulen text-4xl font-bold text-white mb-4">Bienvenido</h2>
+                    <h1 className="font-koulen text-4xl font-bold text-white mb-4">Trazos, Texturas y Tecnología 3D</h1>
+                    <h2 className="font-koulen text-3xl font-bold text-white mb-4">Bienvenido</h2>
                     <p className="font-lato text-lg text-white mb-8">Únete a nuestra comunidad y explora una amplia colección de modelos 3D de alta calidad</p>
                     <p className="font-lato text-lg text-white mb-8">¡Regístrate ahora y empieza a comprar, vender y compartir tus diseños!</p>
                     {auth.user ? (

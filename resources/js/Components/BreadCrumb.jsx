@@ -93,7 +93,7 @@ function BreadcrumbOtros({ nombre }) {
 function BreadcrumbAdmin() {
   const items = [
     { href: "/dashboard", icon: HiHome, text: "Home" },
-    { href: "/admin/index", text: "Admin" }
+    { href: "/admin", text: "Admin" }
   ];
   return <Breadcrumb items={items} />;
 }
@@ -110,7 +110,7 @@ function BreadcrumbPerfilOtros({ nombre }) {
 function BreadcrumbAdminShows({ shows, ruta }) {
   const items = [
     { href: "/dashboard", icon: HiHome, text: "Home" },
-    { href: "/admin/index", text: "Admin" },
+    { href: "/admin", text: "Admin" },
     { href: ruta, text: shows }
   ];
   return <Breadcrumb items={items} />;

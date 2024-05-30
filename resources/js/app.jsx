@@ -9,7 +9,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'TTT';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

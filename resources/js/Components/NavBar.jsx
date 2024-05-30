@@ -67,7 +67,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                                 <NavLink href="/noticias">Noticias</NavLink>
                             </li>
                             <li className="font-koulen">
-                                <NavLink href="/articulos">Artículos</NavLink>
+                                <NavLink href="/articulos">Articulos</NavLink>
                             </li>
                             <li className="font-koulen">
                                 <NavLink href="/nosotros">Nosotros</NavLink>

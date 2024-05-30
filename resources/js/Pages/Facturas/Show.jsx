@@ -52,7 +52,7 @@ export default function Show({ auth, factura }) {
                         <div className="text-white text-center">
                             <a
                                 href={`/img/modelos/${factura.articulo.modelo}`}
-                                className="bg-red-500 hover:bg-red-700 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block"
+                                className="bg-red-800 hover:bg-red-900 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block"
                                 download
                             >
                                 Descargar Modelo

@@ -83,7 +83,7 @@ export default function Index({ auth, articulos, search, type }) {
             {/* Paginación */}
             <div className="flex justify-center mt-4">
                 {Array.from({ length: Math.ceil(filteredArticulos.length / itemsPerPage) }).map((_, index) => (
-                    <button key={index} onClick={() => paginate(index + 1)} className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-red-600 text-white' : 'bg-black text-white'}`}>
+                    <button key={index} onClick={() => paginate(index + 1)} className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-red-600 text-white' : 'bg-gray-500 text-white'}`}>
                         {index + 1}
                     </button>
                 ))}

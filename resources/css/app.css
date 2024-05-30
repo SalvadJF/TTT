@@ -6,35 +6,34 @@
     Direccion de la Fonts descargadas
 */
 @font-face {
-    font-family: 'Koulen';
-    src: url('../../public/fonts/Koulen.ttf') format('truetype');
+    font-family: "Koulen";
+    src: url("../../public/fonts/Koulen.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'Lato';
-    src: url('../../public/fonts/Lato.ttf') format('truetype');
+    font-family: "Lato";
+    src: url("../../public/fonts/Lato.ttf") format("truetype");
 }
 
 @keyframes fadeIn {
     from {
-      opacity: 0;
+        opacity: 0;
     }
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}
 
-  .animate-fadeIn {
+.animate-fadeIn {
     animation: fadeIn 2s ease-in-out;
-  }
-
+}
 
 /*
     Fondos de la Aplicacion
 */
 
 #fondo {
-    background: linear-gradient(rgb(102, 3, 3), rgba(0, 0, 0, 1));
+    background: linear-gradient(rgb(75, 0, 0), rgba(0, 0, 0, 1));
 }
 
 /*
@@ -45,10 +44,25 @@ nav {
     z-index: 10; /* o cualquier valor mayor que el de los otros elementos */
 }
 
-
 .div-oscuro {
     background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
     padding: auto;
     margin: auto;
     z-index: -3;
-  }
+}
+
+.buttonStyle {
+    font-family: "Koulen, sans-serif";
+    border-radius: "0.375rem";
+    padding: "1rem 2.5rem";
+    color: "white";
+    background-color: "black";
+    border: "1px solid transparent";
+    transition: "background-color 0.3s; border-color 0.3s";
+    cursor: "pointer";
+}
+
+.buttonHoverStyle {
+    background-color: "#7b0000";
+    border-color: "#ff2d20";
+}
