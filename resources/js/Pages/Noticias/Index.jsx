@@ -54,10 +54,10 @@ export default function Index({ auth, noticias }) {
                     Todos
                 </button>
                 <button
-                    onClick={() => setFilterType('Noticia')}
-                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Noticia' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setFilterType('Cronica')}
+                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Cronica' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                 >
-                    Noticias
+                    Cronicas
                 </button>
                 <button
                     onClick={() => setFilterType('Entrevista')}
@@ -93,7 +93,7 @@ export default function Index({ auth, noticias }) {
                     <button
                         key={index}
                         onClick={() => paginate(index + 1)}
-                        className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-red-600 text-white' : 'bg-black text-white'}`}
+                        className={`mb-5 px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-red-600 text-white' : 'bg-gray-500 text-white'}`}
                     >
                         {index + 1}
                     </button>

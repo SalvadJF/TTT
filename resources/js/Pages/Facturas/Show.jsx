@@ -14,11 +14,11 @@ export default function Show({ auth, factura }) {
         >
             <Head title="Factura" />
             <div className="ml-20 pt-40">
-                <BreadcrumbPerfilOtros nombre={`Factura Nº {factura.id}`} />
+            <BreadcrumbPerfilOtros nombre={`Factura Nº ${factura.id}`} />
             </div>
 
             <div className="max-w-screen-md mx-auto p-4 md:p-8">
-                <div className="bg-gray-800 rounded-lg shadow-xl p-4 md:p-8 lg:p-12">
+                <div className="bg-gray-800 rounded-lg shadow-xl p-4 md:p-8 lg:p-14">
                     <div className="text-center mb-4 md:mb-8">
                         <h1 className="text-xl md:text-3xl lg:text-4xl font-koulen text-white">
                             Factura Nº {factura.id}
@@ -45,6 +45,9 @@ export default function Show({ auth, factura }) {
                                     Precio de Compra: {factura.precio_venta} €
                                 </li>
                                 <li className="font-koulen p-2">
+                                    Vendedor: {factura.articulo.user.name}
+                                </li>
+                                <li className="font-koulen p-2">
                                     Comprador: {factura.user.name}
                                 </li>
                             </ul>
@@ -52,10 +55,16 @@ export default function Show({ auth, factura }) {
                         <div className="text-white text-center">
                             <a
                                 href={`/img/modelos/${factura.articulo.modelo}`}
-                                className="bg-red-500 hover:bg-red-700 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block"
+                                className="bg-red-800 hover:bg-red-900 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block m-3"
                                 download
                             >
                                 Descargar Modelo
+                            </a>
+                            <a
+                                href={`/facturas/${factura.id}/pdf`}
+                                className="bg-green-800 hover:bg-green-900 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block m-3"
+                            >
+                                Descargar Factura PDF
                             </a>
                         </div>
                     </div>

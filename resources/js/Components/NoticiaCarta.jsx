@@ -2,6 +2,16 @@ import { BotonSecundario, BotonTipo } from "./Botones";
 
 
 export default function NoticiaCarta({ noticia }) {
+
+    const formatText = (text) => {
+        return text
+            .split(".")
+            .map((sentence, index, array) =>
+                index < array.length - 1 ? sentence + ".\n" : sentence
+            )
+            .join("");
+    };
+
     return (
       <div className="w-full max-w-[1500px] flex flex-col md:flex-row bg-gray-950 text-white rounded-lg shadow-md overflow-hidden">
         <div className="w-full md:w-[50%]">
@@ -21,9 +31,9 @@ export default function NoticiaCarta({ noticia }) {
             <div className="ml-10 mt-2 font-koulen p-30">
             <BotonTipo texto={noticia.tipo} />
             </div>
-            <div className="font-lato m-4 p-4 text-xl">
+            <div className="font-lato m-4 p-4 text-2xl">
                 <p>
-                {noticia.resumen}
+                {formatText(noticia.resumen)}
                 </p>
             </div>
 

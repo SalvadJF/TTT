@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FacturaController extends Controller
 {
@@ -39,12 +40,20 @@ class FacturaController extends Controller
      */
     public function show(Factura $factura)
     {
-        $factura->load(['user', 'articulo']);
+        $factura->load(['user', 'articulo.user']);
 
     // Renderiza la vista con los datos de la factura y sus relaciones
     return Inertia::render('Facturas/Show', [
         'factura' => $factura,
     ]);
+    }
+
+    public function descargarPdf(Factura $factura)
+    {
+        $factura->load(['user', 'articulo.user']);
+
+        $pdf = Pdf::loadView('pdf.factura', compact('factura'));
+        return $pdf->download('factura.pdf');
     }
 
     public function simularCompra(Request $request)
