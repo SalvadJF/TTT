@@ -31,7 +31,7 @@ class NoticiaSeeder extends Seeder
             'contenido' => 'Este hito supone la primera vez que se consigue una recreación tridimensional del movimiento del gas en las proximidades de un agujero negro.
                             El equipo, liderado por la profesora Katie Bouman, utilizó redes neuronales y datos del radiotelescopio ALMA en Chile para generar un modelo 3D de una erupción ocurrida el 11 de abril de 2017.
                             La estructura reconstruida muestra dos regiones brillantes y compactas orbitando el agujero negro, conocido como Sagitario A*, a una distancia de unos 75 millones de kilómetros, aproximadamente la mitad de la distancia entre la Tierra y el Sol.',
-            'tipo' => 'Noticia',
+            'tipo' => 'Cronica',
             'imagen' => '/img/noticias/noticia_agujeronegro.webp',
             'user_id' => 1,
             'created_at' => $manualCreatedAt,
@@ -46,7 +46,7 @@ class NoticiaSeeder extends Seeder
                             Según el estudio, publicado en la revista científica Cell, es capaz de desarrollarse y establecer conexiones del mismo modo que lo haría un tejido cerebral humano real.
                             Anteriormente, se habían conseguido grandes avances en medicina con la impresión 3D, sin embargo, es la primera vez que crea un tejido cerebral funcional.
                             Esto es un gran hito para el sector de la neurociencia y podría ser clave en el tratamiento de pacientes con enfermedades neurodegenerativas.',
-            'tipo' => 'Noticia',
+            'tipo' => 'Cronica',
             'imagen' => '/img/noticias/cerebro-medicina.webp',
             'user_id' => 1,
             'created_at' => $manualCreatedAt,

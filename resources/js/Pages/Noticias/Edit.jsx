@@ -129,7 +129,7 @@ const EditarNoticia = () => {
                             onChange={(e) => setData("tipo", e.target.value)}
                         >
                             <option value="">Selecciona un tipo</option>
-                            <option value="Noticia">Noticia</option>
+                            <option value="Cronica">Cronica</option>
                             <option value="Entrevista">Entrevista</option>
                             <option value="Informacion">Información</option>
                         </select>

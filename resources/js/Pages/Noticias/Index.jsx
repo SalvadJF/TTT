@@ -54,10 +54,10 @@ export default function Index({ auth, noticias }) {
                     Todos
                 </button>
                 <button
-                    onClick={() => setFilterType('Noticia')}
-                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Noticia' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setFilterType('Cronica')}
+                    className={`px-4 py-2 mr-2 rounded-md ${filterType === 'Cronica' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                 >
-                    Noticias
+                    Cronicas
                 </button>
                 <button
                     onClick={() => setFilterType('Entrevista')}
