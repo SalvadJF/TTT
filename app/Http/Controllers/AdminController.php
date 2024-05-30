@@ -144,5 +144,29 @@ class AdminController extends Controller
         ]);
 
     }
+
+    public function blockUser($id){
+        $user = User::find($id);
+        $user->blocked = true;
+        $user->save();
+
+        // Devolver solo los datos de los usuarios después de bloquear al usuario
+        $usuarios = User::orderBy('id')->paginate(-2);
+        return response()->json([
+            'susccess' => true,
+            'usuarios' => $usuarios]);
+    }
+
+    public function unBlockUser($id){
+        $user = User::find($id);
+        $user->blocked = false;
+        $user->save();
+
+        // Devolver solo los datos de los usuarios después de desbloquear al usuario
+        $usuarios = User::orderBy('id')->paginate(-2);
+        return response()->json([
+            'susccess' => true,
+            'usuarios' => $usuarios]);
+    }
 }
 

@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
+    // Verificar si el usuario está bloqueado
+    if (auth()->check() && auth()->user()->blocked) {
+        return redirect()->route('bloqueado');
+    }
+
+    // Si el usuario no está bloqueado, renderizar la vista 'Welcome'
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -22,9 +28,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-->middleware(['auth'])
-->name('dashboard');
+Route::get('/dashboard', function () {
+    // Verificar si el usuario está bloqueado
+    if (auth()->check() && auth()->user()->blocked) {
+        return redirect()->route('bloqueado');
+    }
+
+    // Si el usuario no está bloqueado, dirigirlo al controlador 'DashboardController'
+    return app(DashboardController::class)->index();
+})->middleware(['auth'])->name('dashboard');
+
+
+Route::get('/bloqueado', function () {
+    return Inertia::render('Bloqueado');
+})->name('bloqueado');
+
 
 Route::get('/nosotros', function () {
     return Inertia::render('Nosotros');
@@ -62,6 +80,10 @@ Route::get('/admin/noticias', [AdminController::class, 'noticias'])->name('admin
 Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('admin.articulos');
 Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
 Route::get('/admin/facturas', [AdminController::class, 'facturas'])->name('admin.facturas');
+
+// Rutas para bloquear y desbloquear usuarios
+Route::post('/admin/blockUser/{id}', [AdminController::class, 'blockUser'])->name('admin.blockUser');
+Route::post('/admin/unBlockUser/{id}', [AdminController::class, 'unBlockUser'])->name('admin.unBlockUser');
 
 Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class, 'incrementarLikes'])->name('articulos.incrementarLikes');
 Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class, 'decrementarLikes'])->name('articulos.decrementarLikes');
