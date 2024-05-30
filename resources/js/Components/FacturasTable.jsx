@@ -67,7 +67,7 @@ export default function FacturasTable({ facturas }) {
                                 <a href={`/articulos/${factura.articulo.id}`} className="text-blue-600">{factura.articulo.nombre}</a>
                             </td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{factura.user.name}</th>
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{factura.articulo.user_id}</th>
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{factura.articulo.user.name}</th>
                             <td className="px-6 py-4">{factura.precio_venta}€</td>
                             <td className="px-6 py-4">{formatDate(factura.created_at)}</td>
                             <td className="px-6 py-4 text-center">

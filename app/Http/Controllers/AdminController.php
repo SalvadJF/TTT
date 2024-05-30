@@ -135,7 +135,7 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $facturas = Factura::with(['user', 'articulo'])->orderBy('id')->paginate(-2);
+        $facturas = Factura::with(['user', 'articulo.user'])->orderBy('id')->paginate(-2);
 
 
         return Inertia::render('Admin/Facturas', [

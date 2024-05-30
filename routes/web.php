@@ -70,6 +70,8 @@ Route::resource('usuarios', UserController::class)->middleware('auth');
 
 Route::post('/simular-compra', [FacturaController::class, 'simularCompra'])->name('simularCompra');
 
+Route::get('/facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf'])->name('facturas.pdf');
+
 Route::resource('facturas', FacturaController::class);
 
 
