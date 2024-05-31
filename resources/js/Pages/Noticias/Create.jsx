@@ -59,7 +59,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                         <input
                             type="text"
                             id="titulo"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.titulo ? 'border-red-500' : ''}`}
                             value={data.titulo}
                             onChange={(e) => setData("titulo", e.target.value)}
                         />
@@ -79,7 +79,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                         <textarea
                             id="resumen"
                             rows="2"
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.resumen ? 'border-red-500' : ''}`}
                             value={data.resumen}
                             onChange={(e) => setData("resumen", e.target.value)}
                         ></textarea>
@@ -99,7 +99,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                         <textarea
                             id="contenido"
                             rows="4"
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.contenido ? 'border-red-500' : ''}`}
                             value={data.contenido}
                             onChange={(e) =>
                                 setData("contenido", e.target.value)
@@ -120,7 +120,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                         </label>
                         <select
                             id="tipo"
-                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.tipo ? 'border-red-500' : ''}`}
                             value={data.tipo}
                             onChange={(e) => setData("tipo", e.target.value)}
                         >
@@ -176,7 +176,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                         <input
                             id="imagen"
                             type="file"
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className={`block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ${errors.imagen ? 'border-red-500' : ''}`}
                             onChange={(e) =>
                                 setData("imagen", e.target.files[0])
                             }
@@ -202,3 +202,4 @@ const CreateNoticia = ({ auth, etiquetas }) => {
 };
 
 export default CreateNoticia;
+

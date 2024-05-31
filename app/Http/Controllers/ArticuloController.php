@@ -9,6 +9,7 @@ use App\Models\Contador;
 use App\Models\Etiqueta;
 use App\Models\Factura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 
@@ -183,29 +184,26 @@ use Inertia\Inertia;
              abort(403); // No autorizado
          }
 
-         $request->validate([
+         $validatedData = $request->validate([
             'nombre' => 'required|max:255',
             'descripcion' => 'required|max:65535',
             'tipo' => 'required|in:Modelo_3d,Textura',
-            'precio' => 'numeric|max:999.99',
+            'precio' => 'numeric|min:0|max:999.99',
             'categorias' => 'required|array|max:3',
             'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
             'etiquetas.*' => 'exists:etiquetas,id',
         ]);
 
-        $articulo->update([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'tipo' => $request->tipo,
-            'precio' => $request->precio,
-         ]);
+        $articulo->update($validatedData);
 
-         // Sincronizar las relaciones de categorías y etiquetas
-         $articulo->categorias()->sync($request->categorias);
-         $articulo->etiquetas()->sync($request->etiquetas);
+        $articulo->categorias()->sync($request->categorias);
+        $articulo->etiquetas()->sync($request->etiquetas);
 
-         return redirect()->route('articulos.show', $articulo);
+        // Mensaje flash para éxito
+        session()->flash('success', 'Artículo actualizado con éxito.');
+
+        return redirect()->route('articulos.show', $articulo);
      }
 
      /**
@@ -224,6 +222,55 @@ use Inertia\Inertia;
         return;
 
      }
+
+
+     public function cambiarImagen(Request $request, Articulo $articulo)
+    {
+        $request->validate([
+            'imagen' => 'required|image|mimes:' . Articulo::MIME_IMAGEN,
+        ]);
+
+        // Eliminar la imagen anterior si existe
+        if ($articulo->imagen) {
+            Storage::delete($articulo->imagen);
+        }
+
+        // Guardar la nueva imagen
+        $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+        $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+        $imagenPath = 'img/articulos/' . $imagenNombre;
+
+        $articulo->update(['imagen' => $imagenPath]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Imagen Cambiada exitosamente',
+        ]);
+    }
+
+    public function cambiarModelo(Request $request, Articulo $articulo)
+    {
+        $request->validate([
+            'modelo' => 'required|file',
+        ]);
+
+
+        // Eliminar el modelo anterior si existe
+        if ($articulo->modelo) {
+            Storage::delete($articulo->modelo);
+        }
+
+        // Guardar el nuevo modelo
+        $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
+        $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
+
+        $articulo->update(['modelo' => $modeloNombre]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Modelo Cambiado exitosamente',
+        ]);
+    }
 
      public function incrementarLikes(Articulo $articulo)
     {

@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { BreadcrumbArticulosFunciones } from "@/Components/BreadCrumb";
 
 const EditarArticulo = () => {
-    const { auth, articulo, categorias, etiquetas, categoriasArticulo, etiquetasArticulo } = usePage().props;
+    const { auth, articulo, categorias, etiquetas, categoriasArticulo, etiquetasArticulo, flash } = usePage().props;
     const { data, setData, errors, put } = useForm({
         nombre: articulo.nombre,
         descripcion: articulo.descripcion,
@@ -56,6 +56,11 @@ const EditarArticulo = () => {
                 <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-5">
                     Editar Artículo
                 </h1>
+                {flash.success && (
+                    <div className="mb-4 text-green-500">
+                        {flash.success}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label
@@ -140,51 +145,51 @@ const EditarArticulo = () => {
                             </span>
                         )}
                     </div>
-<div>
-    <label htmlFor="categorias" className="font-koulen block mb-2 text-sm font-medium text-white">
-        Selecciona Categorías
-    </label>
-    <div className={errors.categorias ? 'border-red-500' : ''}>
-        {categorias.map((categoria) => (
-            <div key={categoria.id}>
-                <input
-                    type="checkbox"
-                    id={`categoria-${categoria.id}`}
-                    value={categoria.id}
-                    checked={data.categorias.includes(categoria.id)}
-                    onChange={handleCategoriaChange}
-                />
-                <label htmlFor={`categoria-${categoria.id}`} className="ml-2 text-sm text-white">
-                    {categoria.nombre}
-                </label>
-            </div>
-        ))}
-    </div>
-    {errors.categorias && <p className="text-red-500">{errors.categorias}</p>}
-</div>
-<div>
-    <label htmlFor="etiquetas" className="font-koulen block mb-2 text-sm font-medium text-white">
-        Selecciona Etiquetas
-    </label>
-    <div className={errors.etiquetas ? 'border-red-500' : ''}>
-        {etiquetas.map((etiqueta) => (
-            <div key={etiqueta.id}>
-                <input
-                    type="checkbox"
-                    id={`etiqueta-${etiqueta.id}`}
-                    value={etiqueta.id}
-                    checked={data.etiquetas.includes(etiqueta.id)}
-                    onChange={handleEtiquetaChange}
-                />
-                <label htmlFor={`etiqueta-${etiqueta.id}`} className="ml-2 text-sm text-white">
-                    {etiqueta.nombre}
-                </label>
-            </div>
-        ))}
-    </div>
-    {errors.etiquetas && <p className="text-red-500">{errors.etiquetas}</p>}
-</div>
-                    {/* Campos para seleccionar categorías y etiquetas */}
+                    <div>
+                        <label htmlFor="categorias" className="font-koulen block mb-2 text-sm font-medium text-white">
+                            Selecciona Categorías
+                        </label>
+                        <div className={errors.categorias ? 'border-red-500' : ''}>
+                            {categorias.map((categoria) => (
+                                <div key={categoria.id}>
+                                    <input
+                                        type="checkbox"
+                                        id={`categoria-${categoria.id}`}
+                                        value={categoria.id}
+                                        checked={data.categorias.includes(categoria.id)}
+                                        onChange={handleCategoriaChange}
+                                    />
+                                    <label htmlFor={`categoria-${categoria.id}`} className="ml-2 text-sm text-white">
+                                        {categoria.nombre}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                        {errors.categorias && <p className="text-red-500">{errors.categorias}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="etiquetas" className="font-koulen block mb-2 text-sm font-medium text-white">
+                            Selecciona Etiquetas
+                        </label>
+                        <div className={errors.etiquetas ? 'border-red-500' : ''}>
+                            {etiquetas.map((etiqueta) => (
+                                <div key={etiqueta.id}>
+                                    <input
+                                        type="checkbox"
+                                        id={`etiqueta-${etiqueta.id}`}
+                                        value={etiqueta.id}
+                                        checked={data.etiquetas.includes(etiqueta.id)}
+                                        onChange={handleEtiquetaChange}
+                                    />
+                                    <label htmlFor={`etiqueta-${etiqueta.id}`} className="ml-2 text-sm text-white">
+                                        {etiqueta.nombre}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                        {errors.etiquetas && <p className="text-red-500">{errors.etiquetas}</p>}
+                    </div>
+
                     <div className="flex items-center justify-center p-4 space-x-4">
                         <button
                             type="submit"
