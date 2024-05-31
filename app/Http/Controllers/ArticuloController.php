@@ -242,8 +242,11 @@ use Inertia\Inertia;
 
         $articulo->update(['imagen' => $imagenPath]);
 
-        return redirect()->back()->with('success', 'Imagen del artículo actualizada con éxito.');
-}
+        return response()->json([
+            'success' => true,
+            'message' => 'Imagen Cambiada exitosamente',
+        ]);
+    }
 
     public function cambiarModelo(Request $request, Articulo $articulo)
     {
@@ -260,11 +263,13 @@ use Inertia\Inertia;
         // Guardar el nuevo modelo
         $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
         $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
-        $modeloPath = 'img/modelos/' . $modeloNombre;
 
-        $articulo->update(['modelo' => $modeloPath]);
+        $articulo->update(['modelo' => $modeloNombre]);
 
-        return redirect()->back()->with('success', 'Modelo del artículo actualizado con éxito.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Modelo Cambiado exitosamente',
+        ]);
     }
 
      public function incrementarLikes(Articulo $articulo)

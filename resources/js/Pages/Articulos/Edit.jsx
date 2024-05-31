@@ -1,7 +1,6 @@
 import { useForm, usePage } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { BreadcrumbArticulosFunciones } from "@/Components/BreadCrumb";
-import CambiarImagenModal from "@/Components/CambiarImagen";
 
 const EditarArticulo = () => {
     const { auth, articulo, categorias, etiquetas, categoriasArticulo, etiquetasArticulo, flash } = usePage().props;
@@ -200,7 +199,6 @@ const EditarArticulo = () => {
                         </button>
                     </div>
                 </form>
-                <CambiarImagenModal articuloId={articulo.id} />
             </div>
         </AuthenticatedLayout>
     );
