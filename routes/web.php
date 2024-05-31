@@ -34,7 +34,6 @@ Route::get('/dashboard', function () {
         return redirect()->route('bloqueado');
     }
 
-    // Si el usuario no está bloqueado, dirigirlo al controlador 'DashboardController'
     return app(DashboardController::class)->index();
 })->middleware(['auth'])->name('dashboard');
 
@@ -87,6 +86,8 @@ Route::post('/admin/unBlockUser/{id}', [AdminController::class, 'unBlockUser'])-
 
 Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class, 'incrementarLikes'])->name('articulos.incrementarLikes');
 Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class, 'decrementarLikes'])->name('articulos.decrementarLikes');
+Route::post('/articulos/{articulo}/cambiarImagen', [ArticuloController::class, 'cambiarImagen'])->name('articulos.cambiarImagen');
+Route::post('/articulos/{articulo}/cambiarModelo', [ArticuloController::class, 'cambiarModelo'])->name('articulos.cambiarModelo');
 
 Route::resource('usuarios', UserController::class)->middleware('auth');
 
