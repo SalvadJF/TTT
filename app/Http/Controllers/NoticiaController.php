@@ -8,6 +8,7 @@ use App\Models\Etiqueta;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NoticiaController extends Controller
 {
@@ -119,25 +120,9 @@ class NoticiaController extends Controller
             'resumen' => 'required',
             'contenido' => 'required',
             'tipo' => 'required|in:Cronica,Entrevista,Informacion',
-            'imagen' => 'image|mimes:' . Noticia::MIME_IMAGEN,
             'etiquetas' => 'required|array|max:3',
             'etiquetas.*' => 'exists:etiquetas,id',
         ]);
-
-        // Eliminar la imagen anterior si se proporciona una nueva
-        if ($request->hasFile('imagen')) {
-            if ($noticia->imagen !== 'default.jpg') {
-                unlink(public_path('img/noticias/' . $noticia->imagen));
-            }
-
-            $imagenNombre = 'Noticia_' . $noticia->id . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
-
-            $request->imagen->move(public_path('img/noticias'), $imagenNombre);
-
-            $noticia->update([
-                'imagen' => $imagenNombre,
-            ]);
-        }
 
         $noticia->update([
             'titulo' => $request->titulo,
@@ -161,6 +146,29 @@ class NoticiaController extends Controller
         $noticia->delete();
 
         return ;
+    }
+
+    public function cambiarImagen(Request $request, Noticia $noticia)
+    {
+        $request->validate([
+            'imagen' => 'required|image|mimes:' . Noticia::MIME_IMAGEN,
+        ]);
+
+        // Eliminar la imagen anterior si existe
+        if ($noticia->imagen) {
+            Storage::delete($noticia->imagen);
+        }
+
+        $imagenNombre = 'Noticia_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+        $request->imagen->move(public_path('img/noticias'), $imagenNombre);
+        $imagenPath = ('/img/noticias/' . $imagenNombre);
+
+        $noticia->update(['imagen' => $imagenPath]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Imagen Cambiada exitosamente',
+        ]);
     }
 }
 

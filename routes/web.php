@@ -88,6 +88,7 @@ Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class
 Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class, 'decrementarLikes'])->name('articulos.decrementarLikes');
 Route::post('/articulos/{articulo}/cambiarImagen', [ArticuloController::class, 'cambiarImagen'])->name('articulos.cambiarImagen');
 Route::post('/articulos/{articulo}/cambiarModelo', [ArticuloController::class, 'cambiarModelo'])->name('articulos.cambiarModelo');
+Route::post('/noticias/{noticia}/cambiarImagen', [NoticiaController::class, 'cambiarImagen'])->name('noticias.cambiarImagen');
 
 Route::resource('usuarios', UserController::class)->middleware('auth');
 

@@ -20,6 +20,7 @@ const EditarNoticia = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         put(route("noticias.update", noticia.id), {
+            data,
             onSuccess: () => {
                 // Manejar éxito, redireccionar o mostrar un mensaje
             },
@@ -63,7 +64,7 @@ const EditarNoticia = () => {
                         <input
                             type="text"
                             id="titulo"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.titulo ? 'border-red-500' : ''}`}
                             value={data.titulo}
                             onChange={(e) => setData("titulo", e.target.value)}
                         />
@@ -83,7 +84,7 @@ const EditarNoticia = () => {
                         <textarea
                             id="resumen"
                             rows="2"
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.resumen ? 'border-red-500' : ''}`}
                             value={data.resumen}
                             onChange={(e) => setData("resumen", e.target.value)}
                         ></textarea>
@@ -103,7 +104,7 @@ const EditarNoticia = () => {
                         <textarea
                             id="contenido"
                             rows="4"
-                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.contenido ? 'border-red-500' : ''}`}
                             value={data.contenido}
                             onChange={(e) =>
                                 setData("contenido", e.target.value)
@@ -124,7 +125,7 @@ const EditarNoticia = () => {
                         </label>
                         <select
                             id="tipo"
-                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className={`block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.tipo ? 'border-red-500' : ''}`}
                             value={data.tipo}
                             onChange={(e) => setData("tipo", e.target.value)}
                         >
@@ -175,7 +176,7 @@ const EditarNoticia = () => {
                     </div>
                     {/* Campos para seleccionar categorías y etiquetas */}
                     <div className="flex items-center justify-center p-4 space-x-4">
-                        <button
+                    <button
                             type="submit"
                             className="font-koulen text-white bg-red-900 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
@@ -189,4 +190,3 @@ const EditarNoticia = () => {
 };
 
 export default EditarNoticia;
-
