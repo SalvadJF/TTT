@@ -24,14 +24,11 @@ class ProfileController extends Controller
             $query->where('nombre', 'Likes');
         }])->where('user_id', $user->id)->get();
 
-        $comentarios = $user->comentarios;
-
-        $facturas = Factura::with(['user', 'articulo'])->where('user_id', $user->id)->get();
+        $facturas = Factura::with(['user', 'articulo.user'])->where('user_id', $user->id)->get();
 
         return Inertia::render('Profile/Index', [
             'user' => $user,
             'articulos' => $articulos,
-            'comentarios' => $comentarios,
             'facturas' => $facturas
         ]);
     }
