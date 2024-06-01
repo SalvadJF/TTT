@@ -100,5 +100,7 @@ Route::get('/facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf']
 
 Route::resource('facturas', FacturaController::class);
 
+Route::get('/paypal/pay', 'PaymentController@payWithPayPal');
+Route::get('/paypal/status', 'PaymentController@payPalStatus');
 
 require __DIR__.'/auth.php';
