@@ -24,7 +24,7 @@ return (
 
         <AdminHeader admin={admin} />
 
-        <div class=" ml-20">
+        <div className=" ml-20">
             <Encabezado texto="Usuarios en la Base de datos" />
         </div>
 

@@ -43,7 +43,7 @@ class UserController extends Controller
                  $query->where('nombre', 'Likes');
              }])
              ->orderBy('created_at', 'desc')
-             ->paginate(-2);
+             ->paginate(0);
 
          return inertia('Usuarios/Show', [
              'usuario' => $usuario,
@@ -77,6 +77,23 @@ class UserController extends Controller
         $usuario->delete();
 
         return ;
+    }
+
+
+    public function blockUser(User  $usuario){
+        $usuario->blocked = true;
+        $usuario->update();
+
+        return response()->json([
+            'success' => true,]);
+    }
+
+    public function unBlockUser(User  $usuario){
+        $usuario->blocked = false;
+        $usuario->update();
+
+        return response()->json([
+            'success' => true,]);
     }
 
 }

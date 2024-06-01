@@ -80,15 +80,17 @@ Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('adm
 Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
 Route::get('/admin/facturas', [AdminController::class, 'facturas'])->name('admin.facturas');
 
-// Rutas para bloquear y desbloquear usuarios
-Route::post('/admin/blockUser/{id}', [AdminController::class, 'blockUser'])->name('admin.blockUser');
-Route::post('/admin/unBlockUser/{id}', [AdminController::class, 'unBlockUser'])->name('admin.unBlockUser');
+
 
 Route::post('/articulos/{articulo}/incrementarLikes', [ArticuloController::class, 'incrementarLikes'])->name('articulos.incrementarLikes');
 Route::post('/articulos/{articulo}/decrementarLikes', [ArticuloController::class, 'decrementarLikes'])->name('articulos.decrementarLikes');
 Route::post('/articulos/{articulo}/cambiarImagen', [ArticuloController::class, 'cambiarImagen'])->name('articulos.cambiarImagen');
 Route::post('/articulos/{articulo}/cambiarModelo', [ArticuloController::class, 'cambiarModelo'])->name('articulos.cambiarModelo');
 Route::post('/noticias/{noticia}/cambiarImagen', [NoticiaController::class, 'cambiarImagen'])->name('noticias.cambiarImagen');
+
+// Rutas para bloquear y desbloquear usuarios
+Route::post('/usuarios/blockUser/{id}', [UserController::class, 'blockUser'])->name('usuarios.blockUser');
+Route::post('/usuarios/unBlockUser/{id}', [UserController::class, 'unBlockUser'])->name('usuarios.unBlockUser');
 
 Route::resource('usuarios', UserController::class)->middleware('auth');
 
@@ -98,5 +100,7 @@ Route::get('/facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf']
 
 Route::resource('facturas', FacturaController::class);
 
+Route::get('/paypal/pay', 'PaymentController@payWithPayPal');
+Route::get('/paypal/status', 'PaymentController@payPalStatus');
 
 require __DIR__.'/auth.php';
