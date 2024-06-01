@@ -48,23 +48,15 @@ export default function UsuariosTable({ usuarios }) {
         setShowBlockModal(true);
     };
 
-    const handleBlockUser = (userId) => {
-        axios.post(`/admin/blockUser/${userId}`, null, {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        })
-        .then(response => {
-            if (response.status === 200) {
-                window.location.reload();
-            } else {
-                console.error('Error al bloquear al usuario');
-            }
-        })
-        .catch(error => {
-            console.error('Error al bloquear al usuario:', error);
-        });
+    const handleBlockUser = async () => {
+        try {
+            await axios.post(`/usuarios/blockUser/${usuarioToBlock}`);
+            setShowBlockModal(false);
+            // Actualiza el estado del usuario bloqueado
+            usuarioToBlock.blocked = true;
+        } catch (error) {
+            console.error('Error blocking user:', error);
+        }
     };
 
     const handleShowUnblockModal = (usuario) => {
@@ -72,23 +64,15 @@ export default function UsuariosTable({ usuarios }) {
         setShowUnblockModal(true);
     };
 
-    const handleUnblockUser = (userId) => {
-        axios.post(`/admin/unBlockUser/${userId}`, null, {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        })
-        .then(response => {
-            if (response.status === 200) {
-                window.location.reload();
-            } else {
-                console.error('Error al desbloquear al usuario');
-            }
-        })
-        .catch(error => {
-            console.error('Error al desbloquear al usuario:', error);
-        });
+    const handleUnblockUser = async () => {
+        try {
+            await axios.post(`/usuarios/unBlockUser/${usuarioToUnblock}`);
+            setShowUnblockModal(false);
+            // Actualiza el estado del usuario desbloqueado
+            usuarioToUnblock.blocked = false;
+        } catch (error) {
+            console.error('Error unblocking user:', error);
+        }
     };
 
     return (
@@ -134,7 +118,7 @@ export default function UsuariosTable({ usuarios }) {
                                                     <img src="/img/iconos/lock.svg" alt="Icono Bloquear" className="w-4 h-4" />
                                                 </button>
                                             )}
-                                            <button type="button" onClick={() => handleShowDeleteModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled :pointer-events-none ml-2">
+                                            <button type="button" onClick={() => handleShowDeleteModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none ml-2">
                                                 <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
                                             </button>
                                         </>
@@ -170,7 +154,7 @@ export default function UsuariosTable({ usuarios }) {
                     <div className="bg-white p-4 rounded-lg">
                         <p className="text-lg font-semibold mb-4">¿Estás seguro de que quieres bloquear a este usuario?</p>
                         <div className="flex justify-center">
-                            <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleBlockUser(usuarioToBlock.id)}>Bloquear</button>
+                            <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={handleBlockUser}>Bloquear</button>
                             <button className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400" onClick={() => setShowBlockModal(false)}>Cancelar</button>
                         </div>
                     </div>
@@ -183,7 +167,7 @@ export default function UsuariosTable({ usuarios }) {
                     <div className="bg-white p-4 rounded-lg">
                         <p className="text-lg font-semibold mb-4">¿Estás seguro de que quieres desbloquear a este usuario?</p>
                         <div className="flex justify-center">
-                            <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleUnblockUser(usuarioToUnblock.id)}>Desbloquear</button>
+                            <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={handleUnblockUser}>Desbloquear</button>
                             <button className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400" onClick={() => setShowUnblockModal(false)}>Cancelar</button>
                         </div>
                     </div>
@@ -192,4 +176,3 @@ export default function UsuariosTable({ usuarios }) {
         </div>
     );
 }
-

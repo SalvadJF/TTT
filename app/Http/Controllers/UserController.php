@@ -79,4 +79,21 @@ class UserController extends Controller
         return ;
     }
 
+
+    public function blockUser(User  $usuario){
+        $usuario->blocked = true;
+        $usuario->update();
+
+        return response()->json([
+            'success' => true,]);
+    }
+
+    public function unBlockUser(User  $usuario){
+        $usuario->blocked = false;
+        $usuario->update();
+
+        return response()->json([
+            'success' => true,]);
+    }
+
 }
