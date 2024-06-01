@@ -43,7 +43,7 @@ class UserController extends Controller
                  $query->where('nombre', 'Likes');
              }])
              ->orderBy('created_at', 'desc')
-             ->paginate(-2);
+             ->paginate(0);
 
          return inertia('Usuarios/Show', [
              'usuario' => $usuario,

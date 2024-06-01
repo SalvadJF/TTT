@@ -48,6 +48,20 @@ class FacturaController extends Controller
     ]);
     }
 
+    public function destroy(Factura $factura)
+
+    {
+        // Verificar si el usuario autenticado es el creador de la noticia o es administrador
+        if (auth()->id() !== $factura->user_id && !auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
+        $factura->delete();
+
+       return;
+
+    }
+
     public function descargarPdf(Factura $factura)
     {
         $factura->load(['user', 'articulo.user']);

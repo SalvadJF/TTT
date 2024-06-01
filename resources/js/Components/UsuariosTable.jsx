@@ -92,7 +92,7 @@ export default function UsuariosTable({ usuarios }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentItems.map((usuario) => (
+                    {currentItems.map((usuario) => (
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={usuario.id}>
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{usuario.id}</th>
                                 <td className="px-6 py-4">
@@ -110,17 +110,32 @@ export default function UsuariosTable({ usuarios }) {
                                     {usuario.admin === false && (
                                         <>
                                             {usuario.blocked ? (
-                                                <button onClick={() => handleShowUnblockModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none">
-                                                    <img src="/img/iconos/unlock.svg" alt="Icono Desbloquear" className="w-4 h-4" />
-                                                </button>
+                                                <div className="relative group inline-block">
+                                                    <button onClick={() => handleShowUnblockModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                        <img src="/img/iconos/unlock.svg" alt="Icono Desbloquear" className="w-4 h-4" />
+                                                    </button>
+                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                        Desbloquear usuario
+                                                    </span>
+                                                </div>
                                             ) : (
-                                                <button onClick={() => handleShowBlockModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none">
-                                                    <img src="/img/iconos/lock.svg" alt="Icono Bloquear" className="w-4 h-4" />
-                                                </button>
+                                                <div className="relative group inline-block">
+                                                    <button onClick={() => handleShowBlockModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                        <img src="/img/iconos/lock.svg" alt="Icono Bloquear" className="w-4 h-4" />
+                                                    </button>
+                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                        Bloquear usuario
+                                                    </span>
+                                                </div>
                                             )}
-                                            <button type="button" onClick={() => handleShowDeleteModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none ml-2">
-                                                <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
-                                            </button>
+                                            <div className="relative group inline-block">
+                                                <button type="button" onClick={() => handleShowDeleteModal(usuario)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none ml-2">
+                                                    <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
+                                                </button>
+                                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                    Borrar usuario
+                                                </span>
+                                            </div>
                                         </>
                                     )}
                                 </td>

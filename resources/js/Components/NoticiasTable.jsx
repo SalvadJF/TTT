@@ -106,7 +106,7 @@ export default function NoticiasTable({ noticias }) {
                                 </td>
                                 <td className="px-6 py-4">
                                     <a
-                                        href={`/noticias/${noticia.id}`}
+                                        href={`/usuarios/${noticia.user_id}`}
                                         className="text-blue-600"
                                     >
                                         {noticia.usuario.name}
@@ -117,9 +117,15 @@ export default function NoticiasTable({ noticias }) {
                                 </td>
                                 <td className="px-6 py-4 text-center">
                                     <div className="flex justify-center space-x-2">
+                                        <div className="relative group inline-block">
                                         <CambiarImagenModal
                                             noticiaId={noticia.id}
                                         />
+                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Cambiar Archivos
+                                            </span>
+                                        </div>
+                                        <div className="relative group inline-block">
                                         <a
                                             href={`/noticias/${noticia.id}/edit`}
                                             className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none"
@@ -130,6 +136,11 @@ export default function NoticiasTable({ noticias }) {
                                                 className="w-4 h-4"
                                             />
                                         </a>
+                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Editar Noticia
+                                            </span>
+                                        </div>
+                                        <div className="relative group inline-block">
                                         <button
                                             type="button"
                                             onClick={() =>
@@ -143,6 +154,10 @@ export default function NoticiasTable({ noticias }) {
                                                 className="w-4 h-4"
                                             />
                                         </button>
+                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Borrar Noticia
+                                            </span>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

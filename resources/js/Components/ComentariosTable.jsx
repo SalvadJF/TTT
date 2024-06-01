@@ -87,7 +87,12 @@ export default function ComentariosTable({ comentarios }) {
                                 {getComentableName(comentario)}
                             </td>
                             <td className="px-6 py-4">
+                                    <a
+                                        href={`/usuarios/${comentario.user_id}`}
+                                        className="text-blue-600"
+                                    >
                                 {comentario.user.name}
+                                    </a>
                             </td>
                             <td className="px-6 py-4">
                                 {comentario.contenido}
@@ -96,6 +101,7 @@ export default function ComentariosTable({ comentarios }) {
                                 {formatDate(comentario.created_at)}
                             </td>
                             <td>
+                            <div className="relative group inline-block">
                                 <button
                                     type="button"
                                     onClick={() => handleDeleteClick(comentario)}
@@ -103,6 +109,10 @@ export default function ComentariosTable({ comentarios }) {
                                 >
                                     <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
                                 </button>
+                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Borrar Comentario
+                                            </span>
+                                </div>
                             </td>
                         </tr>
                     ))}

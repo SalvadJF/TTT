@@ -73,10 +73,16 @@ export default function ArticulosTable({ articulos }) {
                                 Titulo
                             </th>
                             <th scope="col" className="px-6 py-3">
+                                Tipo
+                            </th>
+                            <th scope="col" className="px-6 py-3">
                                 Autor
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Fecha de Creacion
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Likes
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Acciones
@@ -103,43 +109,71 @@ export default function ArticulosTable({ articulos }) {
                                         {articulo.nombre}
                                     </a>
                                 </td>
+                                <td className="px-6 py-4">{articulo.tipo}</td>
                                 <th
                                     scope="row"
                                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
-                                    {articulo.user.name}
+                                    <a
+                                        href={`/usuarios/${articulo.user_id}`}
+                                        className="text-blue-600"
+                                    >
+                                        {articulo.user.name}
+                                    </a>
                                 </th>
+
                                 <td className="px-6 py-4">
                                     {formatDate(articulo.created_at)}
                                 </td>
+                                <td className="px-6 py-4">
+                                    {articulo.contadores[0].cantidad}
+                                </td>
+
                                 <td className="px-6 py-4 text-center">
                                     <div className="flex justify-center space-x-2">
-                                        <CambiarImagenYModeloModal
-                                            articuloId={articulo.id}
-                                        />
-                                        <a
-                                            href={`/articulos/${articulo.id}/edit`}
-                                            className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none"
-                                        >
-                                            <img
-                                                src="/img/iconos/edit.svg"
-                                                alt="Icono Editar"
-                                                className="w-4 h-4"
+                                        <div className="relative group inline-block">
+                                            <CambiarImagenYModeloModal
+                                                articuloId={articulo.id}
                                             />
-                                        </a>
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                handleShowDeleteModal(articulo)
-                                            }
-                                            className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-400 disabled:opacity-50 disabled:pointer-events-none"
-                                        >
-                                            <img
-                                                src="/img/iconos/trash.svg"
-                                                alt="Icono Borrar"
-                                                className="w-4 h-4"
-                                            />
-                                        </button>
+                                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Cambiar Archivos
+                                            </span>
+                                        </div>
+                                        <div className="relative group inline-block">
+                                            <a
+                                                href={`/articulos/${articulo.id}/edit`}
+                                                className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none"
+                                            >
+                                                <img
+                                                    src="/img/iconos/edit.svg"
+                                                    alt="Icono Editar"
+                                                    className="w-4 h-4"
+                                                />
+                                            </a>
+                                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Editar Articulo
+                                            </span>
+                                        </div>
+                                        <div className="relative group inline-block">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleShowDeleteModal(
+                                                        articulo
+                                                    )
+                                                }
+                                                className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-400 disabled:opacity-50 disabled:pointer-events-none"
+                                            >
+                                                <img
+                                                    src="/img/iconos/trash.svg"
+                                                    alt="Icono Borrar"
+                                                    className="w-4 h-4"
+                                                />
+                                            </button>
+                                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                Borrar Artículo
+                                            </span>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

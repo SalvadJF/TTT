@@ -98,7 +98,9 @@ class AdminController extends Controller
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
 
-        $articulos = Articulo::with('user')->orderBy('id')->paginate(-2);
+        $articulos = Articulo::with(['user', 'contadores' => function ($query) {
+            $query->where('nombre', 'Likes');
+        }])->orderBy('id')->paginate(-2);
 
         return Inertia::render('Admin/Articulos', [
             'articulos' => $articulos,
