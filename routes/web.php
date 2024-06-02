@@ -93,6 +93,12 @@ Route::post('/noticias/{noticia}/cambiarImagen', [NoticiaController::class, 'cam
 Route::post('/usuarios/blockUser/{id}', [UserController::class, 'blockUser'])->name('usuarios.blockUser');
 Route::post('/usuarios/unBlockUser/{id}', [UserController::class, 'unBlockUser'])->name('usuarios.unBlockUser');
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::patch('/user/{usuario}/update-description', [UserController::class, 'updateDescription'])->name('user.update-description');
+    Route::patch('/user/{usuario}/update-birthdate', [UserController::class, 'updateBirthdate'])->name('user.update-birthdate');
+});
+
+
 Route::resource('usuarios', UserController::class)->middleware('auth');
 
 Route::post('/simular-compra', [FacturaController::class, 'simularCompra'])->name('simularCompra');

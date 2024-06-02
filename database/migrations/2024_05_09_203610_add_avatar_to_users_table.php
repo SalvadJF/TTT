@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('avatar')->default('/img/users/avatar.png')->nullable()->after('password');
+            $table->text('descripcion')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
         });
     }
 
@@ -23,6 +25,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
+            $table->dropColumn('descripcion');
+            $table->dropColumn('fecha_nacimiento');
         });
     }
 };

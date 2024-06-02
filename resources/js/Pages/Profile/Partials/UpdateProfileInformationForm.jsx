@@ -15,24 +15,19 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     const submit = (e) => {
         e.preventDefault();
-
         patch(route('profile.update'));
     };
 
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-koulen ">Informacion de Cuenta</h2>
-
-                <p className="mt-1 text-sm font-lato">
-                    Actualiza tu informacion personal o tu email.
-                </p>
+                <h2 className="text-lg font-koulen">Información de Cuenta</h2>
+                <p className="mt-1 text-sm font-lato">Actualiza tu información personal o tu email.</p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
                     <InputLabel htmlFor="name" value="Nombre" />
-
                     <TextInput
                         id="name"
                         className="mt-1 block w-full text-black"
@@ -42,13 +37,11 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         isFocused
                         autoComplete="name"
                     />
-
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -58,27 +51,25 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         required
                         autoComplete="username"
                     />
-
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="text-sm mt-2">
-                            Tu correo no esta verificado
+                            Tu correo no está verificado
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
                                 className="underline text-sm hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
-                                Haz click aqui para verificar tu correo.
+                                Haz click aquí para verificar tu correo.
                             </Link>
                         </p>
-
                         {status === 'verification-link-sent' && (
                             <div className="mt-2 font-lato text-sm text-green-600">
-                                Se ha enviado un nuevo email de verificacion.
+                                Se ha enviado un nuevo email de verificación.
                             </div>
                         )}
                     </div>
@@ -86,7 +77,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Guardar</PrimaryButton>
-
                     <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"
@@ -94,7 +84,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm">Saved.</p>
+                        <p className="text-sm">Guardado.</p>
                     </Transition>
                 </div>
             </form>
