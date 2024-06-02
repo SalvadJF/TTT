@@ -28,6 +28,7 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::get('/dashboard', function () {
     // Verificar si el usuario está bloqueado
     if (auth()->check() && auth()->user()->blocked) {
@@ -35,7 +36,7 @@ Route::get('/dashboard', function () {
     }
 
     return app(DashboardController::class)->index();
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/bloqueado', function () {
