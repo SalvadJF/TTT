@@ -28,6 +28,7 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::get('/dashboard', function () {
     // Verificar si el usuario está bloqueado
     if (auth()->check() && auth()->user()->blocked) {
@@ -35,7 +36,7 @@ Route::get('/dashboard', function () {
     }
 
     return app(DashboardController::class)->index();
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/bloqueado', function () {
@@ -91,6 +92,13 @@ Route::post('/noticias/{noticia}/cambiarImagen', [NoticiaController::class, 'cam
 // Rutas para bloquear y desbloquear usuarios
 Route::post('/usuarios/blockUser/{id}', [UserController::class, 'blockUser'])->name('usuarios.blockUser');
 Route::post('/usuarios/unBlockUser/{id}', [UserController::class, 'unBlockUser'])->name('usuarios.unBlockUser');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::patch('/user/{usuario}/update-description', [UserController::class, 'updateDescription'])->name('user.update-description');
+    Route::patch('/user/{usuario}/update-birthdate', [UserController::class, 'updateBirthdate'])->name('user.update-birthdate');
+    Route::patch('/user/{usuario}/update-avatar', [UserController::class, 'updateAvatar'])->name('user.update-avatar');
+});
+
 
 Route::resource('usuarios', UserController::class)->middleware('auth');
 

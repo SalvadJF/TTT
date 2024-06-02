@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -94,6 +96,55 @@ class UserController extends Controller
 
         return response()->json([
             'success' => true,]);
+    }
+
+    public function updateDescription(Request $request, User $usuario)
+    {
+        $request->validate([
+            'descripcion' => 'nullable|string|max:6555',
+        ]);
+
+        $usuario->descripcion = $request->descripcion;
+        $usuario->save();
+
+        return redirect()->back()->with('success', 'Descripción actualizada correctamente.');
+    }
+
+    public function updateBirthdate(Request $request, User $usuario)
+    {
+        $request->validate([
+            'fecha_nacimiento' => 'nullable|date|before:'.Carbon::now()->subYears(18)->format('Y-m-d').'|after:'.Carbon::now()->subYears(100)->format('Y-m-d'),
+        ], [
+            'fecha_nacimiento.before' => 'Debes tener al menos 18 años.',
+            'fecha_nacimiento.after' => 'La fecha de nacimiento no puede ser de hace más de 100 años.',
+        ]);
+
+        $usuario->fecha_nacimiento = $request->fecha_nacimiento;
+        $usuario->save();
+
+        return redirect()->back()->with('success', 'Fecha de nacimiento actualizada correctamente.');
+    }
+
+    public function updateAvatar(Request $request, User $usuario)
+    {
+        $request->validate([
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            // Eliminar el avatar anterior si existe
+            if ($usuario->avatar) {
+                Storage::delete($usuario->avatar);
+            }
+
+            // Guardar el nuevo avatar
+            $avatarNombre = 'Usuario_' . uniqid() . '.' . $request->avatar->extension();
+            $request->avatar->storeAs('public/img/users', $avatarNombre);
+            $usuario->avatar = 'img/users/' . $avatarNombre;
+            $usuario->save();
+        }
+
+        return redirect()->back()->with('success', 'Avatar actualizado correctamente.');
     }
 
 }

@@ -101,7 +101,7 @@ function BreadcrumbAdmin() {
 function BreadcrumbPerfilOtros({ nombre }) {
   const items = [
     { href: "/dashboard", icon: HiHome, text: "Home" },
-    { href: "/profile/index", text: "Mi Perfil" },
+    { href: "/profile", text: "Mi Perfil" },
     { href: "", text: nombre }
   ];
   return <Breadcrumb items={items} />;
