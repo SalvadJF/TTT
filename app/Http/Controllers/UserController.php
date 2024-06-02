@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -122,6 +123,28 @@ class UserController extends Controller
         $usuario->save();
 
         return redirect()->back()->with('success', 'Fecha de nacimiento actualizada correctamente.');
+    }
+
+    public function updateAvatar(Request $request, User $usuario)
+    {
+        $request->validate([
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            // Eliminar el avatar anterior si existe
+            if ($usuario->avatar) {
+                Storage::delete($usuario->avatar);
+            }
+
+            // Guardar el nuevo avatar
+            $avatarNombre = 'Usuario_' . uniqid() . '.' . $request->avatar->extension();
+            $request->avatar->storeAs('public/img/users', $avatarNombre);
+            $usuario->avatar = 'img/users/' . $avatarNombre;
+            $usuario->save();
+        }
+
+        return redirect()->back()->with('success', 'Avatar actualizado correctamente.');
     }
 
 }

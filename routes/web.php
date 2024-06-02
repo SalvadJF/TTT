@@ -96,6 +96,7 @@ Route::post('/usuarios/unBlockUser/{id}', [UserController::class, 'unBlockUser']
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/user/{usuario}/update-description', [UserController::class, 'updateDescription'])->name('user.update-description');
     Route::patch('/user/{usuario}/update-birthdate', [UserController::class, 'updateBirthdate'])->name('user.update-birthdate');
+    Route::patch('/user/{usuario}/update-avatar', [UserController::class, 'updateAvatar'])->name('user.update-avatar');
 });
 
 

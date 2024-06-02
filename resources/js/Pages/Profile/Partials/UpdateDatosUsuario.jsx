@@ -15,10 +15,12 @@ export default function UpdateDatosUsuario({
     const { data, setData, patch, errors, processing } = useForm({
         descripcion: user.descripcion || "",
         fecha_nacimiento: user.fecha_nacimiento || "",
+        avatar: null,
     });
 
     const [descriptionSaved, setDescriptionSaved] = useState(false);
     const [birthdateSaved, setBirthdateSaved] = useState(false);
+    const [avatarSaved, setAvatarSaved] = useState(false);
 
     const submitDescription = (e) => {
         e.preventDefault();
@@ -40,6 +42,16 @@ export default function UpdateDatosUsuario({
         });
     };
 
+    const submitAvatar = (e) => {
+        e.preventDefault();
+        patch(route("user.update-avatar", user.id), {
+            onSuccess: () => {
+                setAvatarSaved(true);
+                setTimeout(() => setAvatarSaved(false), 2000); // Reset after 2 seconds
+            },
+        });
+    };
+
     return (
         <section className={className}>
             <header>
@@ -48,6 +60,34 @@ export default function UpdateDatosUsuario({
                     Informacion que quieras compartir con otros usuarios
                 </p>
             </header>
+
+            <form onSubmit={submitAvatar} className="mt-6 space-y-6">
+                <div>
+                    <InputLabel htmlFor="avatar" value="Avatar" />
+                    <input
+                        id="avatar"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setAvatar(e.target.files[0])}
+                        className="mt-1 block w-full text-black"
+                    />
+                    <InputError className="mt-2" message={errors.avatar} />
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <PrimaryButton disabled={processing}>Guardar</PrimaryButton>
+                    <Transition
+                        show={avatarSaved}
+                        enter="transition ease-in-out"
+                        enterFrom="opacity-0"
+                        leave="transition ease-in-out"
+                        leaveTo="opacity-0"
+                    >
+                        <p className="text-sm">Guardado.</p>
+                    </Transition>
+                </div>
+            </form>
+
 
             <form onSubmit={submitDescription} className="mt-6 space-y-6">
                 <div>
