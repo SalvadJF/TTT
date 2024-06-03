@@ -38,20 +38,22 @@ class UserController extends Controller
      * Display the specified resource.
      */
 
-     public function show(User $usuario)
-     {
-         $articulos = $usuario->articulos()
-             ->with(['contadores' => function ($query) {
-                 $query->where('nombre', 'Likes');
-             }])
-             ->orderBy('created_at', 'desc')
-             ->paginate(0);
+    public function show(User $usuario)
+    {
+        $articulos = $usuario->articulos()
+            ->with([
+                'contadores' => function ($query) {
+                    $query->where('nombre', 'Likes');
+                }
+            ])
+            ->orderBy('created_at', 'desc')
+            ->paginate(0);
 
-         return inertia('Usuarios/Show', [
-             'usuario' => $usuario,
-             'articulos' => $articulos,
-         ]);
-     }
+        return inertia('Usuarios/Show', [
+            'usuario' => $usuario,
+            'articulos' => $articulos,
+        ]);
+    }
 
 
     /**
@@ -78,27 +80,31 @@ class UserController extends Controller
 
         $usuario->delete();
 
-        return ;
+        return;
     }
 
 
-    public function blockUser(User  $usuario){
+    public function blockUser(User $usuario)
+    {
         $usuario->blocked = true;
         $usuario->update();
 
         return response()->json([
-            'success' => true,]);
+            'success' => true,
+        ]);
     }
 
-    public function unBlockUser(User  $usuario){
+    public function unBlockUser(User $usuario)
+    {
         $usuario->blocked = false;
         $usuario->update();
 
         return response()->json([
-            'success' => true,]);
+            'success' => true,
+        ]);
     }
 
-    public function updateDescription(Request $request, User $usuario)
+    public function cambiarDescripcion(Request $request, User $usuario)
     {
         $request->validate([
             'descripcion' => 'nullable|string|max:6555',
@@ -110,10 +116,10 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Descripción actualizada correctamente.');
     }
 
-    public function updateBirthdate(Request $request, User $usuario)
+    public function cambiarCumple(Request $request, User $usuario)
     {
         $request->validate([
-            'fecha_nacimiento' => 'nullable|date|before:'.Carbon::now()->subYears(18)->format('Y-m-d').'|after:'.Carbon::now()->subYears(100)->format('Y-m-d'),
+            'fecha_nacimiento' => 'nullable|date|before:' . Carbon::now()->subYears(18)->format('Y-m-d') . '|after:' . Carbon::now()->subYears(100)->format('Y-m-d'),
         ], [
             'fecha_nacimiento.before' => 'Debes tener al menos 18 años.',
             'fecha_nacimiento.after' => 'La fecha de nacimiento no puede ser de hace más de 100 años.',
@@ -125,7 +131,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Fecha de nacimiento actualizada correctamente.');
     }
 
-    public function updateAvatar(Request $request, User $usuario)
+    public function cambiarAvatar(Request $request, User $usuario)
     {
         $request->validate([
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -133,18 +139,19 @@ class UserController extends Controller
 
         if ($request->hasFile('avatar')) {
             // Eliminar el avatar anterior si existe
-            if ($usuario->avatar) {
-                Storage::delete($usuario->avatar);
+            if ($usuario->avatar && file_exists(public_path($usuario->avatar))) {
+                unlink(public_path($usuario->avatar));
             }
 
             // Guardar el nuevo avatar
             $avatarNombre = 'Usuario_' . uniqid() . '.' . $request->avatar->extension();
-            $request->avatar->storeAs('public/img/users', $avatarNombre);
-            $usuario->avatar = 'img/users/' . $avatarNombre;
+            $request->avatar->move(public_path('img/users'), $avatarNombre);
+            $usuario->avatar = '/img/users/' . $avatarNombre;
             $usuario->save();
         }
 
         return redirect()->back()->with('success', 'Avatar actualizado correctamente.');
     }
+
 
 }

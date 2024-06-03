@@ -94,9 +94,9 @@ Route::post('/usuarios/blockUser/{id}', [UserController::class, 'blockUser'])->n
 Route::post('/usuarios/unBlockUser/{id}', [UserController::class, 'unBlockUser'])->name('usuarios.unBlockUser');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::patch('/user/{usuario}/update-description', [UserController::class, 'updateDescription'])->name('user.update-description');
-    Route::patch('/user/{usuario}/update-birthdate', [UserController::class, 'updateBirthdate'])->name('user.update-birthdate');
-    Route::patch('/user/{usuario}/update-avatar', [UserController::class, 'updateAvatar'])->name('user.update-avatar');
+    Route::post('/user/{usuario}/cambiardescripcion', [UserController::class, 'cambiarDescripcion'])->name('user.cambiardescripcion');
+    Route::post('/user/{usuario}/cambiarcumple', [UserController::class, 'cambiarCumple'])->name('user.cambiarcumple');
+    Route::post('/user/{usuario}/cambiaravatar', [UserController::class, 'cambiarAvatar'])->name('user.cambiaravatar');
 });
 
 

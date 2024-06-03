@@ -12,7 +12,7 @@ export default function UpdateDatosUsuario({
 }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing } = useForm({
+    const { data, setData, post, errors, processing } = useForm({
         descripcion: user.descripcion || "",
         fecha_nacimiento: user.fecha_nacimiento || "",
         avatar: null,
@@ -24,7 +24,7 @@ export default function UpdateDatosUsuario({
 
     const submitDescription = (e) => {
         e.preventDefault();
-        patch(route("user.update-description", user.id), {
+        post(route("user.cambiardescripcion", user.id), {
             onSuccess: () => {
                 setDescriptionSaved(true);
                 setTimeout(() => setDescriptionSaved(false), 2000); // Reset after 2 seconds
@@ -34,7 +34,7 @@ export default function UpdateDatosUsuario({
 
     const submitBirthdate = (e) => {
         e.preventDefault();
-        patch(route("user.update-birthdate", user.id), {
+        post(route("user.cambiarcumple", user.id), {
             onSuccess: () => {
                 setBirthdateSaved(true);
                 setTimeout(() => setBirthdateSaved(false), 2000); // Reset after 2 seconds
@@ -44,7 +44,13 @@ export default function UpdateDatosUsuario({
 
     const submitAvatar = (e) => {
         e.preventDefault();
-        patch(route("user.update-avatar", user.id), {
+        const formData = new FormData();
+        formData.append('avatar', data.avatar);
+        formData.append('_method', 'post');
+
+        post(route("user.cambiaravatar", user.id), {
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
             onSuccess: () => {
                 setAvatarSaved(true);
                 setTimeout(() => setAvatarSaved(false), 2000); // Reset after 2 seconds
@@ -68,7 +74,7 @@ export default function UpdateDatosUsuario({
                         id="avatar"
                         type="file"
                         accept="image/*"
-                        onChange={(e) => setAvatar(e.target.files[0])}
+                        onChange={(e) => setData("avatar", e.target.files[0])}
                         className="mt-1 block w-full text-black"
                     />
                     <InputError className="mt-2" message={errors.avatar} />
