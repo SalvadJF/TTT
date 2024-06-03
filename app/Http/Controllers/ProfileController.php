@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Articulo;
 use App\Models\Factura;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class ProfileController extends Controller
 {
@@ -80,4 +82,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }

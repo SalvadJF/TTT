@@ -113,5 +113,9 @@ Route::post('/simular-compra-paypal', [FacturaController::class, 'simularCompraP
 Route::get('/paypal-return', [FacturaController::class, 'paypalReturn'])->name('paypalReturn');
 Route::get('/paypal-cancel', [FacturaController::class, 'paypalCancel'])->name('paypalCancel');
 
+Route::post('/recargar-monedero', [FacturaController::class, 'recargarMonedero'])->name('recargarMonedero');
+Route::get('/paypal-recarga-return', [FacturaController::class, 'paypalRecargaReturn'])->name('paypalRecargaReturn');
+Route::get('/paypal-recarga-cancel', [FacturaController::class, 'paypalRecargaCancel'])->name('paypalRecargaCancel');
+
 
 require __DIR__.'/auth.php';

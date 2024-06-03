@@ -4,6 +4,13 @@ export function ApplicationLogo(props) {
     );
 }
 
+
+export function ApplicationLogoMedio(props) {
+    return (
+        <img src="/img/iconos/logo.svg" alt="Logo de la aplicación" className="w-24 h-24 text-white" />
+    );
+}
+
 // Componente de logotipo grande
 export function ApplicationLogoGrande(props) {
     return (
