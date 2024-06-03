@@ -109,9 +109,9 @@ Route::get('/facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf']
 
 Route::resource('facturas', FacturaController::class);
 
-Route::post('paypal', [PaypalController::class, 'paypal'])->name('paypal');
-Route::post('paypal/success', [PaypalController::class, 'success'])->name('paypal.success');
-Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
+Route::post('/simular-compra-paypal', [FacturaController::class, 'simularCompraPaypal'])->name('simularCompraPaypal');
+Route::get('/paypal-return', [FacturaController::class, 'paypalReturn'])->name('paypalReturn');
+Route::get('/paypal-cancel', [FacturaController::class, 'paypalCancel'])->name('paypalCancel');
 
 
 require __DIR__.'/auth.php';
