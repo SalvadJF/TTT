@@ -1,27 +1,23 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, onClose }) => {
     const [mensaje, setMensaje] = useState('');
 
     const handleSimularCompra = async () => {
         try {
-            // Envía una solicitud al servidor para simular la compra
             const response = await axios.post(route('simularCompra'), {
                 precio_venta: articuloPrecio,
                 articulo_id: articuloId,
             });
 
-            // Si la compra se realiza con éxito, muestra un mensaje
-            // y abre una nueva ventana con el show de factura
             setMensaje(response.data.message);
             if (response.data.success) {
                 window.open(route('facturas.show', { factura: response.data.factura.id }), '_blank');
-                onClose(); // Aquí se llama a la función para cerrar el modal
+                onClose();
             }
-
         } catch (error) {
-            // Maneja cualquier error que ocurra durante la simulación de compra
             console.error('Error al simular compra:', error);
             setMensaje('Error al simular compra');
         }
@@ -43,10 +39,41 @@ const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, onClose }) => {
             </button>
             <button
                 className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                onClick={onClose} // Esta función se llamará al hacer clic en el botón "Cerrar"
+                onClick={onClose}
             >
                 Cerrar
             </button>
+            <PayPalScriptProvider options={{ "client-id": "AXxUfKk1G3Jr3SIJMlGeLoa_bm3pBUq7Y2aBpA-bs-5UufBU2kpLFwpihiMkEX8AuSEZjpHnraYn61dH" }}>
+                <PayPalButtons
+                    createOrder={(data, actions) => {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: articuloPrecio
+                                }
+                            }]
+                        });
+                    }}
+                    onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                            axios.post(route('paypal.success'), { orderID: data.orderID })
+                                .then(response => {
+                                    if (response.data.success) {
+                                        setMensaje('Pago realizado con éxito.');
+                                        window.open(route('facturas.show', { factura: response.data.factura.id }), '_blank');
+                                        onClose();
+                                    } else {
+                                        setMensaje('Error en el pago.');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error en el pago:', error);
+                                    setMensaje('Error en el pago.');
+                                });
+                        });
+                    }}
+                />
+            </PayPalScriptProvider>
             {mensaje && <p className="mt-4">{mensaje}</p>}
         </div>
     );

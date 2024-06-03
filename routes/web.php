@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
@@ -108,7 +109,9 @@ Route::get('/facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf']
 
 Route::resource('facturas', FacturaController::class);
 
-Route::get('/paypal/pay', 'PaymentController@payWithPayPal');
-Route::get('/paypal/status', 'PaymentController@payPalStatus');
+Route::post('paypal', [PaypalController::class, 'paypal'])->name('paypal');
+Route::post('paypal/success', [PaypalController::class, 'success'])->name('paypal.success');
+Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
+
 
 require __DIR__.'/auth.php';
