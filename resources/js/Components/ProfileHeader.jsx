@@ -7,7 +7,6 @@ const ProfileHeader = ({ user }) => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    // Formatea la fecha de nacimiento
     const formattedDate = user.fecha_nacimiento
         ? new Date(user.fecha_nacimiento).toLocaleDateString('es-ES', {
             day: '2-digit',
@@ -16,17 +15,26 @@ const ProfileHeader = ({ user }) => {
         })
         : 'Sin información';
 
-    const handleRecargarMonedero = async (amount) => {
+    const handleRecargarMonedero = (amount) => {
         setSelectedAmount(amount);
         setModalOpen(true);
     };
 
     const handleRecargaConfirmada = async () => {
-
-    };
-
-    const handlePaypalRedirect = async () => {
-
+        setLoading(true);
+        setErrorMessage('');
+        try {
+            const response = await axios.post('/recargar-monedero', { monto: selectedAmount });
+            if (response.data.success) {
+                window.location.href = response.data.redirect_url;
+            } else {
+                setErrorMessage(response.data.message);
+            }
+        } catch (error) {
+            setErrorMessage('Error al procesar la recarga');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -49,19 +57,18 @@ const ProfileHeader = ({ user }) => {
                     <p>{user.descripcion ? user.descripcion : 'Sin información'}</p>
                 </div>
 
-                {/* Modal de confirmación de recarga */}
                 {modalOpen && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
                         <div className="bg-gray-900 p-8 rounded-lg">
                             <h2 className="text-2xl font-koulen mb-4 text-center">Recarga de Monedero</h2>
                             <div className="font-koulen flex items-center gap-4 mb-2 mt-2">
-                                <button onClick={() => handleRecargarMonedero(10)} className='rounded-lg bg-green-500 p-2 hover:bg-green-700'>Recargar 10€</button>
-                                <button onClick={() => handleRecargarMonedero(20)} className='rounded-lg bg-yellow-500 p-2 hover:bg-yellow-700'>Recargar 20€</button>
-                                <button onClick={() => handleRecargarMonedero(50)} className='rounded-lg bg-blue-500 p-2 hover:bg-blue-700'>Recargar 50€</button>
+                                <button onClick={() => setSelectedAmount(10)} className='rounded-lg bg-green-500 p-2 hover:bg-green-700'>Recargar 10€</button>
+                                <button onClick={() => setSelectedAmount(20)} className='rounded-lg bg-yellow-500 p-2 hover:bg-yellow-700'>Recargar 20€</button>
+                                <button onClick={() => setSelectedAmount(50)} className='rounded-lg bg-blue-500 p-2 hover:bg-blue-700'>Recargar 50€</button>
                             </div>
                             <p className='font-lato text-center'>¿Deseas recargar {selectedAmount}€ en tu monedero?</p>
                             <div className="flex justify-end mt-6">
-                                <button className="rounded-lg font-koulen mr-4 bg-slate-500 p-2 hover:bg-slate-700"  onClick={() => setModalOpen(false)}>Cancelar</button>
+                                <button className="rounded-lg font-koulen mr-4 bg-slate-500 p-2 hover:bg-slate-700" onClick={() => setModalOpen(false)}>Cancelar</button>
                                 <button className="rounded-lg font-koulen mr-4 bg-red-800 p-2 hover:bg-red-900" disabled={loading} onClick={handleRecargaConfirmada}>
                                     {loading ? 'Cargando...' : 'Confirmar'}
                                 </button>

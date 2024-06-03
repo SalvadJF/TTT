@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Srmklive\PayPal\Facades\PayPal;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class FacturaController extends Controller
@@ -171,7 +170,68 @@ public function paypalReturn(Request $request)
 
 public function paypalCancel()
 {
-    return redirect()->route('home')->with('error', 'Compra cancelada');
+    return redirect()->route('dashboard')->with('error', 'Compra cancelada');
+}
+
+public function recargarMonedero(Request $request)
+{
+    $provider = new PayPalClient;
+    $provider->setApiCredentials(config('paypal'));
+    $provider->getAccessToken();
+
+    session()->put('recarga_monto', $request->input('monto'));
+
+    $response = $provider->createOrder([
+        "intent" => "CAPTURE",
+        "application_context" => [
+            "return_url" => route('paypalRecargaReturn'),
+            "cancel_url" => route('paypalRecargaCancel')
+        ],
+        "purchase_units" => [
+            [
+                "amount" => [
+                    "currency_code" => "EUR",
+                    "value" => $request->input('monto')
+                ],
+                "description" => "Recarga de monedero"
+            ]
+        ]
+    ]);
+
+    if (isset($response['id']) && $response['id'] != null) {
+        return response()->json([
+            'success' => true,
+            'redirect_url' => collect($response['links'])->firstWhere('rel', 'approve')['href']
+        ]);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Error al crear el pedido con PayPal']);
+    }
+}
+
+public function paypalRecargaReturn(Request $request)
+{
+    $provider = new PayPalClient;
+    $provider->setApiCredentials(config('paypal'));
+    $provider->getAccessToken();
+    $response = $provider->capturePaymentOrder($request->input('token'));
+
+    if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+        $monto = session()->pull('recarga_monto');
+        $user = auth()->user();
+
+        // Recargar el monedero del usuario
+        $user->monedero += $monto;
+        $user->save();
+
+        return redirect()->route('profile.index')->with('success', 'Recarga de monedero realizada con éxito');
+    } else {
+        return redirect()->route('profile.index')->with('error', 'Error en la recarga de monedero con PayPal');
+    }
+}
+
+public function paypalRecargaCancel()
+{
+    return redirect()->route('profile.index')->with('error', 'Recarga cancelada');
 }
 
 
