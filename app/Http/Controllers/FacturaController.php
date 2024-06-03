@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Srmklive\PayPal\Facades\PayPal;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class FacturaController extends Controller
 {
@@ -105,6 +107,73 @@ class FacturaController extends Controller
             return response()->json(['success' => false, 'message' => 'Saldo insuficiente en el monedero']);
         }
     }
+
+    public function simularCompraPaypal(Request $request)
+{
+    $provider = new PayPalClient;
+    $provider->setApiCredentials(config('paypal'));
+    $provider->getAccessToken();
+
+    session()->put('articulo_id', $request->input('articulo_id'));
+    session()->put('precio_venta', $request->input('precio_venta'));
+
+    $response = $provider->createOrder([
+        "intent" => "CAPTURE",
+        "application_context" => [
+            "return_url" => route('paypalReturn'),
+            "cancel_url" => route('paypalCancel')
+        ],
+        "purchase_units" => [
+            [
+                "amount" => [
+                    "currency_code" => "EUR",
+                    "value" => $request->input('precio_venta')
+                ],
+                "description" => "Compra del artículo ID: " . $request->input('articulo_id')
+            ]
+        ]
+    ]);
+
+    if (isset($response['id']) && $response['id'] != null) {
+        return response()->json([
+            'success' => true,
+            'redirect_url' => collect($response['links'])->firstWhere('rel', 'approve')['href']
+        ]);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Error al crear el pedido con PayPal']);
+    }
+}
+
+public function paypalReturn(Request $request)
+{
+    $provider = new PayPalClient;
+    $provider->setApiCredentials(config('paypal'));
+    $provider->getAccessToken();
+    $response = $provider->capturePaymentOrder($request->input('token'));
+
+    if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+        $articuloId = session()->pull('articulo_id');
+    $precioVenta = session()->pull('precio_venta');
+        $userId = auth()->user()->id;
+
+        // Crea la factura
+        $factura = new Factura();
+        $factura->precio_venta = $precioVenta;
+        $factura->user_id = $userId;
+        $factura->articulo_id = $articuloId;
+        $factura->save();
+
+        return redirect()->route('facturas.show', ['factura' => $factura->id])->with('success', 'Compra realizada con éxito');
+    } else {
+        return redirect()->route('dashboard')->with('error', 'Error en la compra con PayPal');
+    }
+}
+
+public function paypalCancel()
+{
+    return redirect()->route('home')->with('error', 'Compra cancelada');
+}
+
 
 
 
