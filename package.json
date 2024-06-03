@@ -21,6 +21,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@paypal/react-paypal-js": "^8.3.0",
         "babylonjs": "^7.7.0",
         "babylonjs-loaders": "^7.7.0",
         "bootstrap": "^5.3.3",
