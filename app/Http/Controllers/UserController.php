@@ -84,20 +84,20 @@ class UserController extends Controller
     }
 
 
-    public function blockUser(User $usuario)
-    {
-        $usuario->blocked = true;
-        $usuario->update();
+    public function blockUser($id){
+        $user = User::find($id);
+        $user->blocked = true;
+        $user->save();
 
         return response()->json([
             'success' => true,
         ]);
     }
 
-    public function unBlockUser(User $usuario)
-    {
-        $usuario->blocked = false;
-        $usuario->update();
+    public function unBlockUser($id){
+        $user = User::find($id);
+        $user->blocked = false;
+        $user->save();
 
         return response()->json([
             'success' => true,

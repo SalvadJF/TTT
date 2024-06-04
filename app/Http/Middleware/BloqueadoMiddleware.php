@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckBlocked
+class BloqueadoMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,9 +16,10 @@ class CheckBlocked
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user() && $request->user()->blocked) {
-            // Usuario bloqueado, redirigir o mostrar un error
-            return redirect()->route('bloqueado');
+        $user = Auth::user();
+
+        if ($user && $user->blocked) {
+            return redirect('/bloqueado');
         }
 
         return $next($request);

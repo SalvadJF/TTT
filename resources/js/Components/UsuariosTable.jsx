@@ -50,7 +50,7 @@ export default function UsuariosTable({ usuarios }) {
 
     const handleBlockUser = async () => {
         try {
-            await axios.post(`/usuarios/blockUser/${usuarioToBlock}`);
+            await axios.post(`/usuarios/blockUser/${usuarioToBlock.id}`);
             setShowBlockModal(false);
             // Actualiza el estado del usuario bloqueado
             usuarioToBlock.blocked = true;
@@ -66,7 +66,7 @@ export default function UsuariosTable({ usuarios }) {
 
     const handleUnblockUser = async () => {
         try {
-            await axios.post(`/usuarios/unBlockUser/${usuarioToUnblock}`);
+            await axios.post(`/usuarios/unBlockUser/${usuarioToUnblock.id}`);
             setShowUnblockModal(false);
             // Actualiza el estado del usuario desbloqueado
             usuarioToUnblock.blocked = false;
@@ -74,6 +74,7 @@ export default function UsuariosTable({ usuarios }) {
             console.error('Error unblocking user:', error);
         }
     };
+
 
     return (
         <div className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
