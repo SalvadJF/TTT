@@ -20,6 +20,7 @@ Route::get('/', function () {
         return redirect()->route('bloqueado');
     }
 
+
     // Si el usuario no está bloqueado, renderizar la vista 'Welcome'
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -43,6 +44,10 @@ Route::get('/dashboard', function () {
 Route::get('/bloqueado', function () {
     return Inertia::render('Bloqueado');
 })->name('bloqueado');
+
+Route::get('/borrado', function () {
+    return Inertia::render('Borrado');
+})->name('borrado');
 
 
 Route::get('/nosotros', function () {
