@@ -54,8 +54,8 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
             <div className="ml-20 pt-40">
                 <BreadcrumbArticulosFunciones lugar="Crear Articulo" />
             </div>
-            <div className="max-w-sm mx-auto">
-                <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-5">
+            <div className="max-w-lg mx-auto mb-20">
+                <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-2">
                     Crear Artículo
                 </h1>
                 {flash.success && (
@@ -63,7 +63,7 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
                         {flash.success}
                     </div>
                 )}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="bg-gray-800 rounded-lg p-4">
                     <div>
                         <label
                             htmlFor="nombre"

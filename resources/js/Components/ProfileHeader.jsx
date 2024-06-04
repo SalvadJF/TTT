@@ -62,9 +62,30 @@ const ProfileHeader = ({ user }) => {
                         <div className="bg-gray-900 p-8 rounded-lg">
                             <h2 className="text-2xl font-koulen mb-4 text-center">Recarga de Monedero</h2>
                             <div className="font-koulen flex items-center gap-4 mb-2 mt-2">
-                                <button onClick={() => setSelectedAmount(10)} className='rounded-lg bg-green-500 p-2 hover:bg-green-700'>Recargar 10€</button>
-                                <button onClick={() => setSelectedAmount(20)} className='rounded-lg bg-yellow-500 p-2 hover:bg-yellow-700'>Recargar 20€</button>
-                                <button onClick={() => setSelectedAmount(50)} className='rounded-lg bg-blue-500 p-2 hover:bg-blue-700'>Recargar 50€</button>
+                                <button onClick={() => setSelectedAmount(10)} className='rounded-lg bg-green-500 p-2 hover:bg-green-700'>
+                                <img
+                                    src="/img/iconos/paypal.svg"
+                                    alt="Icono paypal"
+                                    className="w-4 h-4 mr-2 inline-block"
+                                />
+                                Recargar 10€
+                                </button>
+                                <button onClick={() => setSelectedAmount(20)} className='rounded-lg bg-yellow-500 p-2 hover:bg-yellow-700'>
+                                <img
+                                    src="/img/iconos/paypal.svg"
+                                    alt="Icono paypal"
+                                    className="w-4 h-4 mr-2 inline-block"
+                                />
+                                Recargar 20€
+                                </button>
+                                <button onClick={() => setSelectedAmount(50)} className='rounded-lg bg-blue-500 p-2 hover:bg-blue-700'>
+                                <img
+                                    src="/img/iconos/paypal.svg"
+                                    alt="Icono paypal"
+                                    className="w-4 h-4 mr-2 inline-block"
+                                />
+                                Recargar 50€
+                                </button>
                             </div>
                             <p className='font-lato text-center'>¿Deseas recargar {selectedAmount}€ en tu monedero?</p>
                             <div className="flex justify-end mt-6">
