@@ -251,7 +251,7 @@ use Inertia\Inertia;
     public function cambiarModelo(Request $request, Articulo $articulo)
     {
         $request->validate([
-            'modelo' => 'required|file',
+            'modelo' => 'required|file|max:1048576',
         ]);
 
 
