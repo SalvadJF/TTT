@@ -58,9 +58,9 @@ export default function Show({
 
             var camera = new BABYLON.ArcRotateCamera(
                 "Camera",
-                Math.PI / 2,
-                Math.PI / 4,
-                100,
+                Math.PI / 3,
+                Math.PI / 3,
+                150,
                 BABYLON.Vector3.Zero(),
                 scene
             );
