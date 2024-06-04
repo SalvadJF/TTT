@@ -67,7 +67,7 @@ use Inertia\Inertia;
                 'descripcion' => 'required|max:65535',
                 'tipo' => 'required|in:Modelo_3d,Textura',
                 'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-                'modelo' => 'file',
+                'modelo' => 'file|max:1048576',
                 'precio' => 'numeric|min:0|max:999.99',
                 'categorias' => 'required|array|max:3',
                 'categorias.*' => 'exists:categorias,id',
