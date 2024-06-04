@@ -49,11 +49,11 @@ const EditarNoticia = () => {
             <div className="ml-20 pt-40">
                 <BreadcrumbNoticiasFunciones lugar="Editar Noticia" />
             </div>
-            <div className="max-w-sm mx-auto">
+            <div className="max-w-lg mx-auto mb-20">
                 <h1 className="font-koulen text-3xl text-white mb-5 pt-5 pb-5">
                     Editar Noticia
                 </h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="bg-gray-800 rounded-lg p-4">
                     <div>
                         <label
                             htmlFor="titulo"

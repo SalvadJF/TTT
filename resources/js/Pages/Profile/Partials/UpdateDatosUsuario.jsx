@@ -75,7 +75,7 @@ export default function UpdateDatosUsuario({
                         type="file"
                         accept="image/*"
                         onChange={(e) => setData("avatar", e.target.files[0])}
-                        className="mt-1 block w-full text-black"
+                        className="mt-1 block w-full text-black bg-white"
                     />
                     <InputError className="mt-2" message={errors.avatar} />
                 </div>
