@@ -6,6 +6,7 @@ import ProfileHeader from "@/Components/ProfileHeader";
 import Acordeon from "@/Components/Acordeon";
 import ArticulosTableUser from "@/Components/ArticulosTableUser";
 import FacturasTableUser from "@/Components/FacturasTableUser";
+import UltimasVisitas from "@/Components/UltimasVisitas";
 ;
 
 export default function Index({ auth, user, articulos, facturas }) {
@@ -74,6 +75,15 @@ export default function Index({ auth, user, articulos, facturas }) {
                             >
                                 Modificar Mis datos
                             </a>
+                        </div>
+                    </Acordeon>
+                    <Acordeon
+                        title="Ultimas Visitas"
+                        isOpen={openAccordion === "visitas"}
+                        onToggle={() => toggleAccordion("visitas")}
+                    >
+                        <div>
+                            <UltimasVisitas />
                         </div>
                     </Acordeon>
                 </div>

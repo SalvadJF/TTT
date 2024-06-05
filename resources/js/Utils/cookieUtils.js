@@ -22,3 +22,21 @@ export const getCookie = (name) => {
 export const eraseCookie = (name) => {
     document.cookie = name + '=; Max-Age=-99999999;';
 };
+
+// Añadir articulos visitados a cookies
+export const addArticuloToCookie = (articulo) => {
+    const maxArticulos = 4;
+    let articulos = JSON.parse(getCookie("visitedArticulos") || "[]");
+
+    articulos = articulos.filter(a => a.id !== articulo.id); // Eliminar duplicados
+    articulos.unshift(articulo); // añade el articulo al principio
+    if (articulos.length > maxArticulos) {
+        articulos.pop(); // quira el ultimo articulo si hay mas de maxArticulos
+    }
+
+    setCookie("visitedArticulos", JSON.stringify(articulos), 7); // poner una duración de 7 dias
+};
+
+export const getVisitedArticulos = () => {
+    return JSON.parse(getCookie("visitedArticulos") || "[]");
+};

@@ -1,3 +1,4 @@
+import { setCookie, getCookie, eraseCookie, addArticuloToCookie } from "@/Utils/cookieUtils";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import ArticuloExposicion from "@/Components/ArticuloExposicion";
@@ -8,7 +9,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
-import { setCookie, getCookie, eraseCookie } from "@/Utils/cookieUtils";
 import SimuladorCompra from './Partials/SimularCompra';
 import LikeBoton from "@/Components/LikeBoton";
 import { BotonEtiqueta, BotonCategoria, BotonPrincipal } from "@/Components/Botones";
@@ -26,30 +26,9 @@ export default function Show({
 }) {
     const [mostrarModalCompra, setMostrarModalCompra] = useState(false);
 
-    const handleCompraClick = () => {
-        if (parseFloat(articulo.precio) === 0) {
-            window.location.href = `/img/modelos/${articulo.modelo}`;
-        } else {
-            setMostrarModalCompra(true);
-        }
-    };
-
-    const handleCerrarModalCompra = () => {
-        setMostrarModalCompra(false);
-    };
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    };
-
-    const formatText = (text) => {
-        return text.split(".").map((sentence, index, array) =>
-            index < array.length - 1 ? sentence + ".\n" : sentence
-        ).join("");
-    };
-
     useEffect(() => {
+        addArticuloToCookie({ id: articulo.id, nombre: articulo.nombre, created_at: articulo.created_at, imagen: articulo.imagen });
+
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
 
@@ -101,6 +80,29 @@ export default function Show({
             engine.dispose();
         };
     }, [articulo.modelo]);
+
+    const handleCompraClick = () => {
+        if (parseFloat(articulo.precio) === 0) {
+            window.location.href = `/img/modelos/${articulo.modelo}`;
+        } else {
+            setMostrarModalCompra(true);
+        }
+    };
+
+    const handleCerrarModalCompra = () => {
+        setMostrarModalCompra(false);
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    };
+
+    const formatText = (text) => {
+        return text.split(".").map((sentence, index, array) =>
+            index < array.length - 1 ? sentence + ".\n" : sentence
+        ).join("");
+    };
 
     return (
         <AuthenticatedLayout
