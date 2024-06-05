@@ -19,13 +19,13 @@ export default function Dashboard({ auth, noticias, articulos }) {
         >
             <Head title="Dashboard" />
 
-            <div class=" ml-20 pt-40">
+            <div className=" ml-20 pt-40">
                 <Breadcrumbs />
             </div>
 
             <Carrusel />
             <div>
-                <div class="flex flex-col items-center justify-center  p-10">
+                <div className="flex flex-col items-center justify-center  p-10">
                     <Encabezado texto="Novedades" />
                     <NoticiasIndex noticias={noticias} />
                     <BotonPrincipal ruta="/noticias" texto="Leer mas" />
@@ -33,7 +33,7 @@ export default function Dashboard({ auth, noticias, articulos }) {
             </div>
 
             <div>
-                <div class="flex flex-col items-center justify-center  p-10">
+                <div className="flex flex-col items-center justify-center  p-10">
                     <Encabezado texto="Ultimas Aportaciones" />
                     <ArticuloLista articulos={articulos} />
                     <BotonPrincipal ruta="/articulos" texto="Ver Galeria" />

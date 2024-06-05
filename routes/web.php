@@ -15,13 +15,6 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    // Verificar si el usuario está bloqueado
-    if (auth()->check() && auth()->user()->blocked) {
-        return redirect()->route('bloqueado');
-    }
-
-
-    // Si el usuario no está bloqueado, renderizar la vista 'Welcome'
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -32,13 +25,8 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
-    // Verificar si el usuario está bloqueado
-    if (auth()->check() && auth()->user()->blocked) {
-        return redirect()->route('bloqueado');
-    }
-
     return app(DashboardController::class)->index();
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'bloqueado'])->name('dashboard');
 
 
 Route::get('/bloqueado', function () {
@@ -52,18 +40,18 @@ Route::get('/borrado', function () {
 
 Route::get('/nosotros', function () {
     return Inertia::render('Nosotros');
-})->middleware(['auth', 'verified'])->name('nosotros');
+})->middleware(['auth', 'bloqueado'])->name('nosotros');
 
 Route::get('/derechos', function () {
     return Inertia::render('Derechos');
-})->middleware(['auth', 'verified'])->name('derechos');
+})->middleware(['auth', 'bloqueado'])->name('derechos');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified', 'bloqueado'])->group(function () {
     Route::get('/articulos/create', [ArticuloController::class, 'create'])->name('articulos.create');
     Route::post('/articulos', [ArticuloController::class, 'store'])->name('articulos.store');
     Route::get('/articulos/{articulo}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
     Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update');
-});
+
 
 Route::put('/noticias', [NoticiaController::class, 'store'])->name('noticias.store')->middleware('auth');
 Route::put('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticias.update')->middleware('auth');
@@ -77,8 +65,6 @@ Route::resource('articulos', ArticuloController::class);
 Route::resource('noticias', NoticiaController::class);
 
 Route::resource('profile', ProfileController::class);
-
-
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
@@ -122,5 +108,6 @@ Route::post('/recargar-monedero', [FacturaController::class, 'recargarMonedero']
 Route::get('/paypal-recarga-return', [FacturaController::class, 'paypalRecargaReturn'])->name('paypalRecargaReturn');
 Route::get('/paypal-recarga-cancel', [FacturaController::class, 'paypalRecargaCancel'])->name('paypalRecargaCancel');
 
+});
 
 require __DIR__.'/auth.php';
