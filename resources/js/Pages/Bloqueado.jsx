@@ -2,6 +2,23 @@ import { Link, Head } from '@inertiajs/react';
 import { ApplicationLogoGrande } from '@/Components/ApplicationLogo';
 
 export default function Welcome({ auth }) {
+
+    const buttonStyle = {
+        fontFamily: 'Koulen, sans-serif',
+        borderRadius: '0.375rem',
+        padding: '1rem 2.5rem',
+        color: 'white',
+        backgroundColor: 'black',
+        border: '1px solid transparent',
+        transition: 'background-color 0.3s, border-color 0.3s',
+        cursor: 'pointer',
+    };
+
+    const buttonHoverStyle = {
+        backgroundColor: '#7b0000',
+        borderColor: '#ff2d20',
+    };
+
     return (
         <>
             <Head title="Welcome" />
@@ -15,9 +32,14 @@ export default function Welcome({ auth }) {
                     <h2 className="font-koulen text-3xl font-bold text-white mb-4">Un Administrador a bloqueado tu cuenta</h2>
                     <p className="font-lato text-lg text-white mb-8">Ponte en contacto con nosotros a traves de nuestro Email</p>
                     <p className="font-lato text-lg text-white mb-8">TTT@gmail.com</p>
-                    <Link href={route('logout')} method="post" as="button">
-                                            Cerrar sesión
-                    </Link>
+                    <Link
+                                href={route('logout')} method="post" as="button"
+                                style={{ ...buttonStyle, margin: '1.25rem' }} // m-5
+                                onMouseEnter={e => Object.assign(e.target.style, buttonHoverStyle)}
+                                onMouseLeave={e => Object.assign(e.target.style, buttonStyle)}
+                            >
+                                Cerrar sesion
+                            </Link>
                 </div>
             </div>
         </>
