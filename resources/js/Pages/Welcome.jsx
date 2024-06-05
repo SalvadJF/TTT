@@ -23,7 +23,7 @@ export default function Welcome({ auth }) {
             <Head title="Welcome" />
 
             <div id="fondo" className="flex items-center justify-center min-h-screen">
-                <div className="text-center p-10 rounded-lg shadow-lg fade-in w-3/4 bg-opacity-10 bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
+                <div className="text-center p-10 rounded-2xl shadow-lg fade-in w-3/4 bg-opacity-10 bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150">
                     <div className="flex justify-center mb-4">
                         <ApplicationLogoGrande className="text-white" /> {/* Uso del logotipo grande */}
                     </div>
