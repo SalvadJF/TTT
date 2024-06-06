@@ -12,16 +12,16 @@ export default function Show({ auth, factura }) {
                 </h2>
             }
         >
-            <Head title="Factura" />
+            <Head title="Albaran" />
             <div className="ml-20 pt-40">
-            <BreadcrumbPerfilOtros nombre={`Factura Nº ${factura.id}`} />
+            <BreadcrumbPerfilOtros nombre={`Albaran Nº ${factura.id}`} />
             </div>
 
             <div className="max-w-screen-md mx-auto p-4 md:p-8">
                 <div className="bg-gray-800 rounded-lg shadow-xl p-4 md:p-8 lg:p-14">
                     <div className="text-center mb-4 md:mb-8">
                         <h1 className="text-xl md:text-3xl lg:text-4xl font-koulen text-white">
-                            Factura Nº {factura.id}
+                            Albaran Nº {factura.id}
                         </h1>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
@@ -36,7 +36,7 @@ export default function Show({ auth, factura }) {
                         <div className="text-white text-center">
                             <ul>
                                 <li className="font-koulen p-2">
-                                    Numero de Factura: {factura.id}
+                                    Numero de Albaran: {factura.id}
                                 </li>
                                 <li className="font-koulen p-2">
                                     Fecha de Emision: {new Date(factura.created_at).toLocaleDateString()}
@@ -64,7 +64,7 @@ export default function Show({ auth, factura }) {
                                 href={`/facturas/${factura.id}/pdf`}
                                 className="bg-green-800 hover:bg-green-900 text-white font-koulen py-2 md:py-3 px-3 md:px-4 rounded inline-block m-3"
                             >
-                                Descargar Factura PDF
+                                Descargar Albaran PDF
                             </a>
                         </div>
                     </div>

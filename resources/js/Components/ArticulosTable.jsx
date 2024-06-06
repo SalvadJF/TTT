@@ -92,16 +92,16 @@ export default function ArticulosTable({ articulos }) {
                     <tbody>
                         {currentItems.map((articulo) => (
                             <tr
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                className="border-b hover:bg-blue-100 text-center"
                                 key={articulo.id}
                             >
                                 <th
                                     scope="row"
-                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    className="px-6 py-4  font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
                                     {articulo.id}
                                 </th>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-4 ">
                                     <a
                                         href={`/articulos/${articulo.id}`}
                                         className="text-blue-600"
@@ -109,10 +109,10 @@ export default function ArticulosTable({ articulos }) {
                                         {articulo.nombre}
                                     </a>
                                 </td>
-                                <td className="px-6 py-4">{articulo.tipo}</td>
+                                <td className="px-6 py-4 ">{articulo.tipo}</td>
                                 <th
                                     scope="row"
-                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    className="px-6 py-4  font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
                                     <a
                                         href={`/usuarios/${articulo.user_id}`}
@@ -122,14 +122,14 @@ export default function ArticulosTable({ articulos }) {
                                     </a>
                                 </th>
 
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-4 ">
                                     {formatDate(articulo.created_at)}
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-4 ">
                                     {articulo.contadores[0].cantidad}
                                 </td>
 
-                                <td className="px-6 py-4 text-center">
+                                <td className="px-6 py-4  text-center">
                                     <div className="flex justify-center space-x-2">
                                         <div className="relative group inline-block">
                                             <CambiarImagenYModeloModal

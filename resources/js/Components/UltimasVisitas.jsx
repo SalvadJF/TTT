@@ -6,7 +6,7 @@ const UltimasVisitas = () => {
 
     return (
         <div className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-            <h3 className="font-koulen text-xl text-gray-800 dark:text-white mb-4 text-center">Últimas Visitas</h3>
+            <h3 className="font-koulen text-xl text-gray-800 dark:text-white mb-4 text-center">Ultimas Visitas</h3>
             {visitedArticulos.length === 0 ? (
                 <p className="text-gray-600 dark:text-gray-300 text-center font-koulen">
                     No se encontraron artículos visitados.
@@ -29,7 +29,9 @@ const UltimasVisitas = () => {
                         </thead>
                         <tbody>
                             {visitedArticulos.map((articulo, index) => (
-                                <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr
+                                className="border-b hover:bg-blue-100"
+                                key={index} >
                                     <td className="px-6 py-4">
                                         <div className="flex items-center justify-center">
                                             <img src={articulo.imagen} alt="Imagen Articulo" className="w-20 h-20" />

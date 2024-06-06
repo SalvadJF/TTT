@@ -8,6 +8,7 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
         nombre: "",
         descripcion: "",
         tipo: "",
+        licencia: "",
         imagen: null,
         modelo: null,
         categorias: [],
@@ -124,6 +125,33 @@ const CreateArticulo = ({ auth, categorias, etiquetas }) => {
                         {errors.tipo && (
                             <span className="error text-red-500">
                                 {errors.tipo}
+                            </span>
+                        )}
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="licencia"
+                            className="font-koulen block mb-2 text-sm font-medium text-white"
+                        >
+                            Licencia:
+                        </label>
+                        <select
+                            id="licencia"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={data.licencia}
+                            onChange={(e) => setData("licencia", e.target.value)}
+                        >
+                            <option value="CC0">CC0</option>
+                            <option value="CC-BY">CC-BY</option>
+                            <option value="CC-BY-SA">CC-BY-SA</option>
+                            <option value="CC-BY-ND">CC-BY-ND</option>
+                            <option value="CC-BY-NC">CC-BY-NC</option>
+                            <option value="CC-BY-NC-SA">CC-BY-NC-SA</option>
+                            <option value="CC-BY-NC-ND">CC-BY-NC-ND</option>
+                        </select>
+                        {errors.licencia && (
+                            <span className="error text-red-500">
+                                {errors.licencia}
                             </span>
                         )}
                     </div>

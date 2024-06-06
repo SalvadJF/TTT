@@ -87,7 +87,7 @@ export default function NoticiasTable({ noticias }) {
                     <tbody>
                         {currentItems.map((noticia) => (
                             <tr
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                className="border-b hover:bg-blue-100"
                                 key={noticia.id}
                             >
                                 <th
@@ -134,6 +134,7 @@ export default function NoticiasTable({ noticias }) {
                                                 src="/img/iconos/edit.svg"
                                                 alt="Icono Editar"
                                                 className="w-4 h-4"
+                                                style={{ minWidth: "12px", minHeight: "12px" }}
                                             />
                                         </a>
                                         <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
@@ -147,11 +148,13 @@ export default function NoticiasTable({ noticias }) {
                                                 handleShowDeleteModal(noticia)
                                             }
                                             className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
+
                                         >
                                             <img
                                                 src="/img/iconos/trash.svg"
                                                 alt="Icono Borrar"
                                                 className="w-4 h-4"
+                                                style={{ minWidth: "12px", minHeight: "12px" }}
                                             />
                                         </button>
                                         <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">

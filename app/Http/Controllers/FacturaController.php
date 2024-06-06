@@ -68,7 +68,7 @@ class FacturaController extends Controller
         $factura->load(['user', 'articulo.user']);
 
         $pdf = Pdf::loadView('pdf.factura', compact('factura'));
-        return $pdf->download('factura.pdf');
+        return $pdf->download('albaran.pdf');
     }
 
     public function simularCompra(Request $request)

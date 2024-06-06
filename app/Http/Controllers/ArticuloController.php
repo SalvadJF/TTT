@@ -61,52 +61,55 @@ use Inertia\Inertia;
       * Store a newly created resource in storage.
       */
       public function store(Request $request)
-        {
-            $validatedData = $request->validate([
-                'nombre' => 'required|max:255',
-                'descripcion' => 'required|max:65535',
-                'tipo' => 'required|in:Modelo_3d,Textura',
-                'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
-                'modelo' => 'file|max:1048576',
-                'precio' => 'numeric|min:0|max:999.99',
-                'categorias' => 'required|array|max:3',
-                'categorias.*' => 'exists:categorias,id',
-                'etiquetas' => 'required|array|max:3',
-                'etiquetas.*' => 'exists:etiquetas,id',
-            ]);
+      {
+          $validatedData = $request->validate([
+              'nombre' => 'required|max:255',
+              'descripcion' => 'required|max:65535',
+              'tipo' => 'required|in:Modelo_3d,Textura',
+              'licencia' => 'required|in:CC0,CC-BY,CC-BY-SA,CC-BY-ND,CC-BY-NC,CC-BY-NC-SA,CC-BY-NC-ND',
+              'imagen' => 'image|mimes:' . Articulo::MIME_IMAGEN,
+              'modelo' => 'file|max:1048576',
+              'precio' => 'numeric|min:0|max:999.99',
+              'categorias' => 'required|array|max:3',
+              'categorias.*' => 'exists:categorias,id',
+              'etiquetas' => 'required|array|max:3',
+              'etiquetas.*' => 'exists:etiquetas,id',
+          ]);
 
-            $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
-            $request->imagen->move(public_path('img/articulos'), $imagenNombre);
-            $imagenPath = 'img/articulos/' . $imagenNombre;
+          $imagenNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.' . $request->imagen->extension();
+          $request->imagen->move(public_path('img/articulos'), $imagenNombre);
+          $imagenPath = 'img/articulos/' . $imagenNombre;
 
-            $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
-            $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
+          $modeloNombre = 'Articulo_' . uniqid() . '_' . now()->format('d-m-Y') . '.stl';
+          $request->modelo->move(public_path('/img/modelos'), $modeloNombre);
 
-            $articulo = Articulo::create([
-                'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion,
-                'tipo' => $request->tipo,
-                'precio' => $request->precio,
-                'modelo' => $modeloNombre,
-                'imagen' => $imagenPath,
-                'user_id' => auth()->id(),
-            ]);
+          $articulo = Articulo::create([
+              'nombre' => $request->nombre,
+              'descripcion' => $request->descripcion,
+              'tipo' => $request->tipo,
+              'licencia' => $request->licencia, // Añadir licencia aquí
+              'precio' => $request->precio,
+              'modelo' => $modeloNombre,
+              'imagen' => $imagenPath,
+              'user_id' => auth()->id(),
+          ]);
 
-            // Crear un contador de Likes asociado al artículo con una cantidad inicial de 0
-            // Crear contadores para el artículo
-            $articulo->contadores()->createMany([
-                ['nombre' => 'Likes', 'cantidad' => 0],
-                ['nombre' => 'Visitas', 'cantidad' => 0],
-            ]);
+          // Crear un contador de Likes asociado al artículo con una cantidad inicial de 0
+          // Crear contadores para el artículo
+          $articulo->contadores()->createMany([
+              ['nombre' => 'Likes', 'cantidad' => 0],
+              ['nombre' => 'Visitas', 'cantidad' => 0],
+          ]);
 
-            $articulo->categorias()->attach($request->categorias);
-            $articulo->etiquetas()->attach($request->etiquetas);
+          $articulo->categorias()->attach($request->categorias);
+          $articulo->etiquetas()->attach($request->etiquetas);
 
-            // Mensaje flash para éxito
-            session()->flash('success', 'Artículo creado con éxito.');
+          // Mensaje flash para éxito
+          session()->flash('success', 'Artículo creado con éxito.');
 
-            return redirect()->route('articulos.show', $articulo);
-        }
+          return redirect()->route('articulos.show', $articulo);
+      }
+
 
 
 
@@ -189,11 +192,13 @@ use Inertia\Inertia;
             'descripcion' => 'required|max:65535',
             'tipo' => 'required|in:Modelo_3d,Textura',
             'precio' => 'numeric|min:0|max:999.99',
+            'licencia' => 'required|in:CC0,CC-BY,CC-BY-SA,CC-BY-ND,CC-BY-NC,CC-BY-NC-SA,CC-BY-NC-ND',
             'categorias' => 'required|array|max:3',
             'categorias.*' => 'exists:categorias,id',
             'etiquetas' => 'required|array|max:3',
             'etiquetas.*' => 'exists:etiquetas,id',
         ]);
+
 
         $articulo->update($validatedData);
 

@@ -12,6 +12,7 @@ import "babylonjs-loaders";
 import SimuladorCompra from './Partials/SimularCompra';
 import LikeBoton from "@/Components/LikeBoton";
 import { BotonEtiqueta, BotonCategoria, BotonPrincipal } from "@/Components/Botones";
+import LicenciaCC from "@/Components/LicenciaCC";
 
 export default function Show({
     auth,
@@ -184,10 +185,14 @@ export default function Show({
                             </div>
                         </div>
                     </div>
+                    <div className="flex justify-center items-center mb-4">
+                    <LicenciaCC licencia={articulo.licencia} />
+                    </div>
                     <p className="text-white">{formatText(articulo.descripcion)}</p>
                     <div className="text-white text-2xl mb-2">
                         {parseFloat(articulo.precio) === 0 ? "Gratis" : `Precio ${articulo.precio}€`}
                     </div>
+
                     <div className="flex flex-col items-center shadow md:flex-row p-5 m-3 justify-center text-2xl">
                         {auth.user.id === articulo.user_id ? (
                             <button

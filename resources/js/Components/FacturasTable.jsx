@@ -48,7 +48,7 @@ export default function FacturasTable({ facturas }) {
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
                     <tr>
-                        <th scope="col" className="px-6 py-3">ID de Factura</th>
+                        <th scope="col" className="px-6 py-3">ID de Albaran</th>
                         <th scope="col" className="px-6 py-3">Articulo</th>
                         <th scope="col" className="px-6 py-3">Comprador</th>
                         <th scope="col" className="px-6 py-3">Vendedor</th>
@@ -59,9 +59,11 @@ export default function FacturasTable({ facturas }) {
                 </thead>
                 <tbody>
                     {currentItems.map((factura) => (
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center" key={factura.id}>
+                        <tr
+                        className="border-b hover:bg-blue-100 text-center"
+                        key={factura.id}>
                             <td className="px-6 py-4">
-                                <a href={`/facturas/${factura.id}`} className="text-blue-600">Factura Nº {factura.id}</a>
+                                <a href={`/facturas/${factura.id}`} className="text-blue-600">Albaran Nº {factura.id}</a>
                             </td>
                             <td className="px-6 py-4">
                                 <a href={`/articulos/${factura.articulo.id}`} className="text-blue-600">{factura.articulo.nombre}</a>
@@ -77,7 +79,7 @@ export default function FacturasTable({ facturas }) {
                                 <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
                                 </button>
                                 <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
-                                                Borrar Factura
+                                                Borrar Albaran
                                             </span>
                             </div>
                             </td>
@@ -95,7 +97,7 @@ export default function FacturasTable({ facturas }) {
             {showDeleteModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-4 rounded-lg">
-                        <p className="text-lg font-semibold mb-4">¿Estás seguro de que quieres borrar esta factura?</p>
+                        <p className="text-lg font-semibold mb-4">¿Estás seguro de que quieres borrar este albaran?</p>
                         <div className="flex justify-center">
                             <button className="px-4 py-2 mr-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleConfirmDelete()}>Borrar</button>
                             <button className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400" onClick={() => setShowDeleteModal(false)}>Cancelar</button>

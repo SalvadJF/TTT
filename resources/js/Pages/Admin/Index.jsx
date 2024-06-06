@@ -109,9 +109,9 @@ export default function Index ({
                     linkHref={route('admin.comentarios')}
                 />
                 <AccordionItem
-                    title="Facturas"
+                    title="Albaranes"
                     count={facturasCount}
-                    createdAt={ultimaFactura ? formatDate(ultimaFactura.created_at) : 'No hay facturas'}
+                    createdAt={ultimaFactura ? formatDate(ultimaFactura.created_at) : 'No hay albaranes'}
                     linkText="Facturas DB"
                     linkHref={route('admin.facturas')}
                 />

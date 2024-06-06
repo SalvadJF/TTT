@@ -29,6 +29,7 @@ class ArticuloFactory extends Factory
         return [
             'nombre' => $this->faker->name,
             'descripcion' => $this->faker->sentence,
+            'licencia' => $this->faker->randomElement(['CC-BY', 'CC-BY-SA', 'CC-BY-ND', 'CC-BY-NC', 'CC-BY-NC-SA', 'CC-BY-NC-ND']),
             'tipo' => $this->faker->randomElement(['Modelo_3d', 'Textura']),
             'user_id' => function () {
                 // Si deseas asignar un usuario existente
