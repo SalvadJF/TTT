@@ -223,8 +223,7 @@ return [
         debe ser una cadena.',
     'timezone' => 'El campo
         debe ser una zona horaria válida.',
-    'unique' => 'El
-        ya ha sido tomado.',
+    'unique' => 'Ya existe en nuestra base de datos.',
     'uploaded' => 'El
         falló al subirse.',
     'uppercase' => 'El campo

@@ -21,6 +21,7 @@ class Articulo extends Model
         'imagen',
         'modelo',
         'precio',
+        'licencia',
         'user_id'
     ];
 

@@ -14,18 +14,18 @@ export default function Articulos ({
 return (
     <AuthenticatedLayout
         user={auth.user}
-        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Facturas</h2>}
+        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Albaranes</h2>}
     >
         <Head title="Admin" />
 
         <div class=" ml-20 pt-40">
-            <BreadcrumbAdminShows shows="Facturas" ruta={route('admin.facturas')} />
+            <BreadcrumbAdminShows shows="Albaranes" ruta={route('admin.facturas')} />
         </div>
 
         <AdminHeader admin={admin} />
 
         <div class=" ml-20">
-            <Encabezado texto="Facturas en la Base de datos" />
+            <Encabezado texto="Albaranes en la Base de datos" />
         </div>
 
         <FacturasTable facturas={facturas} />

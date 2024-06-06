@@ -94,7 +94,7 @@ export default function ArticulosTableUser ({ articulos }) {
                     <tbody>
                         {currentItems.map((articulo) => (
                             <tr
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                className="border-b hover:bg-blue-100 text-center"
                                 key={articulo.id}
                             >
                                 <th
@@ -141,6 +141,7 @@ export default function ArticulosTableUser ({ articulos }) {
                                                     src="/img/iconos/edit.svg"
                                                     alt="Icono Editar"
                                                     className="w-4 h-4"
+                                                    style={{ minWidth: "12px", minHeight: "12px" }}
                                                 />
                                             </a>
                                             <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
@@ -161,6 +162,7 @@ export default function ArticulosTableUser ({ articulos }) {
                                                     src="/img/iconos/trash.svg"
                                                     alt="Icono Borrar"
                                                     className="w-4 h-4"
+                                                    style={{ minWidth: "12px", minHeight: "12px" }}
                                                 />
                                             </button>
                                             <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">

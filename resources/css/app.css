@@ -51,19 +51,3 @@ nav {
     z-index: -3;
 }
 
-.buttonStyle {
-    font-family: "Koulen, sans-serif";
-    border-radius: "0.375rem";
-    padding: "1rem 2.5rem";
-    color: "white";
-    background-color: "black";
-    border: "1px solid transparent";
-    transition: "background-color 0.3s; border-color 0.3s";
-    cursor: "pointer";
-}
-
-.buttonHoverStyle {
-    background-color: "#7b0000";
-    border-color: "#ff2d20";
-}
-

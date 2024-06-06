@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('descripcion');
             $table->enum('tipo', ['Modelo_3d', 'Textura']);
+            $table->enum('licencia', ['CC0', 'CC-BY', 'CC-BY-SA', 'CC-BY-ND', 'CC-BY-NC', 'CC-BY-NC-SA', 'CC-BY-NC-ND']);
             $table->string('imagen')->default('/img/articulos/default.png')->nullable();
             $table->string('modelo')->default('default.stl')->nullable();
             $table->decimal('precio', 8, 2)->default(0);

@@ -33,6 +33,7 @@ class ArticuloSeeder extends Seeder
         'modelo' => 'Cap.stl',
         'precio' => 2.00,
         'user_id' => 2,
+        'licencia'  => 'CC-BY-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);
@@ -44,7 +45,8 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/GeometricWallHook_V3.webp',
         'modelo' => 'GeometricWallHook_V3.stl',
         'precio' => 4.00,
-        'user_id' => 2,
+        'user_id' => 3,
+        'licencia'  => 'CC-BY',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);
@@ -56,7 +58,8 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/loubie_aria_dragon.jpg',
         'modelo' => 'loubie_aria_dragon.stl',
         'precio' => 10.00,
-        'user_id' => 2,
+        'user_id' => 3,
+        'licencia'  => 'CC-BY-NC-SA',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);
@@ -68,7 +71,8 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/Normal_Pig.webp',
         'modelo' => 'Normal_Pig.stl',
         'precio' => 8.00,
-        'user_id' => 2,
+        'user_id' => 4,
+        'licencia'  => 'CC-BY-NC-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);
@@ -80,7 +84,8 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/Oddish.webp',
         'modelo' => 'Oddish.stl',
         'precio' => 12.00,
-        'user_id' => 2,
+        'user_id' => 5,
+        'licencia'  => 'CC-BY-NC-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);
@@ -92,7 +97,8 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/Skull01.webp',
         'modelo' => 'Skull01.stl',
         'precio' => 12.00,
-        'user_id' => 2,
+        'user_id' => 4,
+        'licencia'  => 'CC-BY-NC-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);
@@ -105,6 +111,7 @@ class ArticuloSeeder extends Seeder
         'modelo' => 'T60_Fallout4_main.stl',
         'precio' => 18.00,
         'user_id' => 2,
+        'licencia'  => 'CC0',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
     ]);

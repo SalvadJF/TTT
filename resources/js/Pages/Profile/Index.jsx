@@ -57,7 +57,7 @@ export default function Index({ auth, user, articulos, facturas }) {
 
                     </Acordeon>
                     <Acordeon
-                        title="Mis Facturas"
+                        title="Mis Albaranes"
                         isOpen={openAccordion === "facturas"}
                         onToggle={() => toggleAccordion("facturas")}
                     >
