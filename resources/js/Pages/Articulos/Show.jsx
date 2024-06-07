@@ -134,12 +134,12 @@ export default function Show({
                         </div>
                     </div>
                     {user ? (
-                        <div className="flex items-center justify-center md:justify-center mb-4 md:mb-0">
+                        <div className="flex items-center justify-center md:justify-center mb-4 md:mb-0 relative group">
                             <a href={route("usuarios.show", user.id)}>
                             <img
                                 src={user.avatar}
                                 alt="Avatar del usuario"
-                                className="w-16 h-16 rounded-full ml-3"
+                                className="w-16 h-16 rounded-full ml-3 transform transition-transform duration-300 group-hover:scale-150"
                             />
                             <span className="font-koulen ml-3 text-white">
                                 {user.name}
