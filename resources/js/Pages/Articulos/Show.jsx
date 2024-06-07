@@ -129,7 +129,7 @@ export default function Show({
                     <div className="flex items-center justify-center md:justify-center mb-4 md:mb-0">
                         <h1 className="text-white font-koulen">{articulo.nombre}</h1>
                         <div className="ml-3 pb-1 text-white">
-                            <LikeBoton articuloId={articulo.id} initialLikes={contadorLikes.cantidad} />
+                            <LikeBoton articuloId={articulo.id} initialLikes={contadorLikes.cantidad}  aria-label="Me gusta"/>
                         </div>
                     </div>
                     {user ? (
@@ -153,7 +153,7 @@ export default function Show({
                     <p className="text-white">Creada en <b>{formatDate(articulo.created_at)}</b></p>
                     <div className="flex flex-col justify-between mb-4">
                         <div className="text-white mb-2">
-                            <h6 className="font-koulen">Categorías:</h6>
+                            <h6 className="font-koulen">Categorías</h6>
                             <div className="flex flex-wrap justify-center">
                                 {categorias.length > 0 ? (
                                     categorias.map((categoria) => (
@@ -161,6 +161,7 @@ export default function Show({
                                             key={categoria.id}
                                             texto={categoria.nombre}
                                             className="m-1"
+                                            aria-label={`Categoría: ${categoria.nombre}`}
                                         />
                                     ))
                                 ) : (
@@ -169,7 +170,7 @@ export default function Show({
                             </div>
                         </div>
                         <div className="text-white">
-                            <h6 className="font-koulen">Etiquetas:</h6>
+                            <h6 className="font-koulen">Etiquetas</h6>
                             <div className="flex flex-wrap justify-center">
                                 {etiquetas.length > 0 ? (
                                     etiquetas.map((etiqueta) => (
@@ -177,6 +178,7 @@ export default function Show({
                                             key={etiqueta.id}
                                             texto={etiqueta.nombre}
                                             className="m-1"
+                                            aria-label={`Etiqueta: ${etiqueta.nombre}`}
                                         />
                                     ))
                                 ) : (
@@ -210,7 +212,9 @@ export default function Show({
                                 Ya has comprado este artículo
                             </button>
                         ) : (
-                            <button onClick={handleCompraClick} className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-full text-center rounded-lg text-white text-lg">
+                            <button onClick={handleCompraClick}
+                            className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-full text-center rounded-lg text-white text-lg"
+                            aria-label={parseFloat(articulo.precio) === 0 ? "Descargar" : "Comprar"}>
                                 {parseFloat(articulo.precio) === 0 ? "Descargar" : "Comprar"}
                             </button>
                         )}
