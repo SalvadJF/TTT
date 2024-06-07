@@ -11,6 +11,10 @@ class Etiqueta extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'nombre',
+    ];
+
     public function articulos()
     {
         return $this->belongsToMany(Articulo::class, 'articulos_etiquetas', 'etiqueta_id', 'articulo_id');

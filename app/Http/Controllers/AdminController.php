@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articulo;
+use App\Models\Categoria;
 use App\Models\Comentario;
+use App\Models\Etiqueta;
 use App\Models\Factura;
 use App\Models\Noticia;
 use App\Models\User;
@@ -36,6 +38,15 @@ class AdminController extends Controller
         $facturasCount = Factura::count();
         $ultimaFactura = Factura::latest()->first();
 
+        $categoriasCount = Categoria::count();
+        $ultimaCategoria = Categoria::latest()->first();
+
+        $etiquetasCount = Etiqueta::count();
+        $ultimaEtiqueta = Etiqueta::latest()->first();
+
+        $otrosCount = $categoriasCount + $etiquetasCount;
+        $ultimosOtros = collect([$ultimaCategoria, $ultimaEtiqueta])->filter()->sortByDesc('created_at')->first();
+
         return Inertia::render('Admin/Index', [
             'admin' => $admin,
             'usuariosCount' => $usuariosCount,
@@ -47,7 +58,9 @@ class AdminController extends Controller
             'comentariosCount' => $comentariosCount,
             'ultimoComentario' => $ultimoComentario,
             'facturasCount' => $facturasCount,
-            'ultimaFactura' => $ultimaFactura
+            'ultimaFactura' => $ultimaFactura,
+            'otrosCount' => $otrosCount,
+            'ultimosOtros' => $ultimosOtros
         ]);
 
     }
@@ -145,6 +158,25 @@ class AdminController extends Controller
             'admin' => $admin,
         ]);
 
+    }
+
+    public function otros()
+    {
+        $admin = Auth::user();
+
+        // Verificar si el usuario es administrador
+        if (!$admin->isAdmin()) {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
+
+        $categorias = Categoria::orderBy('id')->get();
+        $etiquetas = Etiqueta::orderBy('id')->get();
+
+        return Inertia::render('Admin/Otros', [
+            'categorias' => $categorias,
+            'etiquetas' => $etiquetas,
+            'admin' => $admin,
+        ]);
     }
 }
 

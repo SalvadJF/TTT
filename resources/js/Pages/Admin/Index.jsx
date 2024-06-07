@@ -56,7 +56,10 @@ export default function Index ({
     comentariosCount,
     ultimoComentario,
     facturasCount,
-    ultimaFactura
+    ultimaFactura,
+    otrosCount,
+    ultimosOtros
+
 }) {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -107,6 +110,13 @@ export default function Index ({
                     createdAt={ultimoComentario ? formatDate(ultimoComentario.created_at) : 'No hay comentarios'}
                     linkText="Comentarios DB"
                     linkHref={route('admin.comentarios')}
+                />
+                <AccordionItem
+                    title="Otros"
+                    count={otrosCount}
+                    createdAt={ultimosOtros ? formatDate(ultimosOtros.created_at) : 'No hay Otros elementos'}
+                    linkText="Otros Elementos DB"
+                    linkHref={route('admin.otros')}
                 />
                 <AccordionItem
                     title="Albaranes"
