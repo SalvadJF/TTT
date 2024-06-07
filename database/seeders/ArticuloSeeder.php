@@ -17,7 +17,7 @@ class ArticuloSeeder extends Seeder
     public function run(): void
 {
     // Crear artículos con la factoría
-    $factoryArticulos = Articulo::factory()->count(10)->create();
+    $factoryArticulos = Articulo::factory()->count(1)->create();
 
     // Obtener la fecha de creación del último artículo creado por la factoría
     $lastFactoryCreatedAt = $factoryArticulos->last()->created_at;
@@ -58,7 +58,7 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/loubie_aria_dragon.jpg',
         'modelo' => 'loubie_aria_dragon.stl',
         'precio' => 10.00,
-        'user_id' => 3,
+        'user_id' => 4,
         'licencia'  => 'CC-BY-NC-SA',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
@@ -71,7 +71,7 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/Normal_Pig.webp',
         'modelo' => 'Normal_Pig.stl',
         'precio' => 8.00,
-        'user_id' => 4,
+        'user_id' => 5,
         'licencia'  => 'CC-BY-NC-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
@@ -84,7 +84,7 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/Oddish.webp',
         'modelo' => 'Oddish.stl',
         'precio' => 12.00,
-        'user_id' => 5,
+        'user_id' => 6,
         'licencia'  => 'CC-BY-NC-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
@@ -97,7 +97,7 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/Skull01.webp',
         'modelo' => 'Skull01.stl',
         'precio' => 12.00,
-        'user_id' => 4,
+        'user_id' => 7,
         'licencia'  => 'CC-BY-NC-ND',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
@@ -110,7 +110,111 @@ class ArticuloSeeder extends Seeder
         'imagen' => '/img/articulos/T60_Fallout4_main.webp',
         'modelo' => 'T60_Fallout4_main.stl',
         'precio' => 18.00,
+        'user_id' => 8,
+        'licencia'  => 'CC0',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Pallet',
+        'descripcion' => 'Modelo de Pallet, para decoraciones o maquetas de arquitectura.',
+        'tipo' => 'Modelo_3d',
+        'imagen' => '/img/articulos/pallet.webp',
+        'modelo' => 'pallet.stl',
+        'precio' => 1.00,
+        'user_id' => 9,
+        'licencia'  => 'CC-BY-NC',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Gatitos',
+        'descripcion' => 'Figuritas de dos gatitos cariñosos, ideal para decorar tu casa.',
+        'tipo' => 'Modelo_3d',
+        'imagen' => '/img/articulos/2_Nuzzling_Cats.webp',
+        'modelo' => '2_Nuzzling_Cats.stl',
+        'precio' => 20.00,
+        'user_id' => 3,
+        'licencia'  => 'CC-BY',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Gafas Cool',
+        'descripcion' => 'Gafa con estilo pixel para hacerte el chulo.',
+        'tipo' => 'Textura',
+        'imagen' => '/img/articulos/ThugLifeGlasses.webp',
+        'modelo' => 'ThugLifeGlasses.stl',
+        'precio' => 0.00,
+        'user_id' => 4,
+        'licencia'  => 'CC0',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Pata de Mesa',
+        'descripcion' => 'Pata de repuesto para arreglar los desequilibros de tu mesa.',
+        'tipo' => 'Modelo_3d',
+        'imagen' => '/img/articulos/UpperPart.webp',
+        'modelo' => 'UpperPart.stl',
+        'precio' => 3.00,
+        'user_id' => 5,
+        'licencia'  => 'CC-BY-NC-SA',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Soporte para Nintendo Switch OLED',
+        'descripcion' => 'Soporte para Nintendo Switch con tematica de cristales.',
+        'tipo' => 'Modelo_3d',
+        'imagen' => '/img/articulos/OLED_front_only.webp',
+        'modelo' => 'OLED_front_only.stl',
+        'precio' => 15.00,
         'user_id' => 2,
+        'licencia'  => 'CC-BY-ND',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Elefante',
+        'descripcion' => 'Figurita de Elefante para decorar tu jardin.',
+        'tipo' => 'Modelo_3d',
+        'imagen' => '/img/articulos/elefanteB.webp',
+        'modelo' => 'elefanteB.stl',
+        'precio' => 1.00,
+        'user_id' => 6,
+        'licencia'  => 'CC0',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Recogedor de Pienso',
+        'descripcion' => 'Recogedor reutilizable para alimentar a tus mascotas.',
+        'tipo' => 'Modelo_3d',
+        'imagen' => '/img/articulos/Scoop.webp',
+        'modelo' => 'Scoop.stl',
+        'precio' => 8.00,
+        'user_id' => 7,
+        'licencia'  => 'CC-BY-SA',
+        'created_at' => $manualCreatedAt,
+        'updated_at' => $manualCreatedAt,
+    ]);
+
+    Articulo::create([
+        'nombre' => 'Codigo Morse',
+        'descripcion' => 'Plantilla con el abecedario en codigo morse.',
+        'tipo' => 'Textura',
+        'imagen' => '/img/articulos/Morse_Code_Template_Letters.webp',
+        'modelo' => 'Morse_Code_Template_Letters.stl',
+        'precio' => 10.00,
+        'user_id' => 8,
         'licencia'  => 'CC0',
         'created_at' => $manualCreatedAt,
         'updated_at' => $manualCreatedAt,
