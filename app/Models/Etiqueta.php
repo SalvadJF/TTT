@@ -11,6 +11,8 @@ class Etiqueta extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = "etiquetas";
+
     protected $fillable = [
         'nombre',
     ];

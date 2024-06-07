@@ -68,6 +68,12 @@ Route::resource('noticias', NoticiaController::class);
 
 Route::resource('profile', ProfileController::class);
 
+Route::put('/categorias/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
+Route::put('/etiquetas/{etiqueta}', [EtiquetaController::class, 'update'])->name('etiquetas.update');
+
+Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+Route::post('/etiquetas', [EtiquetaController::class, 'store'])->name('etiquetas.store');
+
 Route::resource('categorias', CategoriaController::class);
 Route::resource('etiquetas', EtiquetaController::class);
 

@@ -30,7 +30,7 @@ class EtiquetaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|unique|max:25'
+            'nombre' => 'required|unique:categorias|max:25'
         ]);
 
         $categoria = Etiqueta::create([
@@ -69,8 +69,8 @@ class EtiquetaController extends Controller
         }
 
         $validatedData = $request->validate([
-           'nombre' => 'required|unique|max:25',
-       ]);
+            'nombre' => 'required|unique:categorias|max:25'
+        ]);
 
 
        $etiqueta->update($validatedData);

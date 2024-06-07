@@ -112,7 +112,7 @@ export default function Index ({
                     linkHref={route('admin.comentarios')}
                 />
                 <AccordionItem
-                    title="Otros"
+                    title="Categorias y Etiquetas"
                     count={otrosCount}
                     createdAt={ultimosOtros ? formatDate(ultimosOtros.created_at) : 'No hay Otros elementos'}
                     linkText="Otros Elementos DB"

@@ -34,6 +34,19 @@ const BotonTipo = ({ texto }) => {
     );
 }
 
+const BotonTipoModal = ({ texto, onClick }) => {
+    return (
+        <div
+            className="flex justify-center text-center p-2 m-4 gap-2 w-1/5 font-koulen bg-orange-900 hover:bg-orange-600 rounded-lg border border-white focus:z-10 focus:ring-4 focus:ring-gray-100 text-white"
+            onClick={onClick}
+        >
+            <button>
+                {texto}
+            </button>
+        </div>
+    );
+}
+
 const BotonEtiqueta = ({ texto }) => {
     return (
         <div className="flex p-2 m-4  font-koulen bg-green-900 rounded-lg border border-white focus:z-10 focus:ring-4 focus:ring-gray-100 text-white">
@@ -51,4 +64,4 @@ const BotonCategoria = ({ texto }) => {
 }
 
 
-export { BotonPrincipal, BotonSecundario, BotonTipo, BotonEtiqueta, BotonCategoria };
+export { BotonPrincipal, BotonSecundario, BotonTipo, BotonTipoModal, BotonEtiqueta, BotonCategoria };
