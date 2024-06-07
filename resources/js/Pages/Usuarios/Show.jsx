@@ -54,7 +54,7 @@ const Show = ({ auth, usuario, articulos }) => {
                             placeholder="Buscar artículos..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="ml-10 mt-4 px-4 py-2 border rounded-md"
+                            className="px-4 py-2 border rounded-md ml-8  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
                         />
                     </div>
                     {currentItems.length > 0 ? (

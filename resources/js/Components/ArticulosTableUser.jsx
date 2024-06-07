@@ -71,7 +71,7 @@ export default function ArticulosTableUser ({ articulos }) {
         ) : (
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
-                    <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
+                    <thead className="text-sm font-koulen text-black uppercase bg-red-300">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Imagen
@@ -130,7 +130,7 @@ export default function ArticulosTableUser ({ articulos }) {
                                             <CambiarImagenYModeloModal
                                                 articuloId={articulo.id}
                                             />
-                                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                            <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Cambiar Archivos
                                             </span>
                                         </div>
@@ -146,7 +146,7 @@ export default function ArticulosTableUser ({ articulos }) {
                                                     style={{ minWidth: "12px", minHeight: "12px" }}
                                                 />
                                             </a>
-                                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                            <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Editar Articulo
                                             </span>
                                         </div>
@@ -167,7 +167,7 @@ export default function ArticulosTableUser ({ articulos }) {
                                                     style={{ minWidth: "12px", minHeight: "12px" }}
                                                 />
                                             </button>
-                                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                            <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Borrar Artículo
                                             </span>
                                         </div>
