@@ -26,7 +26,7 @@ class NoticiaSeeder extends Seeder
 
 
         Noticia::create([
-            'titulo' => 'Reconstruyen en 3D una erupcion en torno a un agujero negro de la Via Láctea',
+            'titulo' => 'Reconstruyen en 3D una erupcion en torno a un agujero negro de la Via Lactea',
             'resumen' => 'Científicos del Instituto de Tecnología de California (Caltech) han logrado reconstruir en tres dimensiones cómo se producen explosiones en el disco de gas que rodea al agujero negro supermasivo situado en el centro de nuestra galaxia, la Vía Láctea.',
             'contenido' => 'Este hito supone la primera vez que se consigue una recreación tridimensional del movimiento del gas en las proximidades de un agujero negro.
                             El equipo, liderado por la profesora Katie Bouman, utilizó redes neuronales y datos del radiotelescopio ALMA en Chile para generar un modelo 3D de una erupción ocurrida el 11 de abril de 2017.
@@ -55,7 +55,7 @@ class NoticiaSeeder extends Seeder
         ]);
 
         Noticia::create([
-            'titulo' => 'La historia de Guillermo, el impresor de prótesis en 3D que envía brazos bionicos a los amputados por la guerra de Ucrania',
+            'titulo' => 'La historia de Guillermo, el impresor de protesis en 3D que envía brazos bionicos a los amputados por la guerra de Ucrania',
             'resumen' => '"Ayudar es demasiado fácil como para no hacerlo". Con esta declaración de intenciones adornando la entrada recibe Ayúdame3D a quien llega a su oficina.
                             En un pequeño piso del barrio de Embajadores, en Madrid, Guillermo Martínez, fundador de esta productora de prótesis impresas en 3D, tiene el núcleo de operaciones donde "hacen magia".',
             'contenido' => 'Todo empezó por el interés de Guillermo por las impresoras 3D y por "qué se podía hacer con ellas, más allá de juguetes".
@@ -98,10 +98,10 @@ class NoticiaSeeder extends Seeder
         Noticia::create([
             'titulo' => 'Un "youtuber" español se clona a sí mismo con una impresora 3D gigante',
             'resumen' => 'El youtuber español Iván Miranda se está haciendo viral por publicar su tutorial más surrealista hasta la fecha: cómo clonarse a sí mismo con una impresora 3D gigante.',
-            'contenido' => 'El vasco, especializado en construcción digital, crea contenido en inglés sobre los cientos de proyectos surrealistas que consigue hacer con la impresora 3D y acumula más de 330.000 suscriptores.
+            'contenido' => 'El vasco, especializado en construcción digital, crea contenido en inglés sobre los cientos de proyectos surrealistas que consigue hacer con la impresora 3D y acumula más de 330000 suscriptores.
                             En las últimas semanas, ha llevado a cabo una locura que ha dejado sin palabras a cientos de usuarios y que sigue siendo compartido por la plataforma de Google.
                             Tras construir él mismo una impresora 3D gigante que permite realizar proyectos de increíbles magnitudes, ha decidido ponerlo a prueba con una maqueta única: su propia figura.
-                            Ha necesitado cuatro días para finalizar las 4.375 capas de plástico que componen a la escultura, desde la base hasta la cabeza. Todo realizado con el proceso FDM en el que las capas se apilan unas sobre otras.
+                            Ha necesitado cuatro días para finalizar las 4375 capas de plástico que componen a la escultura, desde la base hasta la cabeza. Todo realizado con el proceso FDM en el que las capas se apilan unas sobre otras.
                             Miranda ha utilizado el material PLA rojo y ha necesitado 108 horas de fabricación en el que 76 horas han sido de impresión y el resto para arreglar tres errores que casi hacen que el proyecto se desmorone por completo. ',
             'tipo' => 'Entrevista',
             'imagen' => '/img/noticias/el-youtuber-ivan-miranda-con-su-clon-3d.webp',
