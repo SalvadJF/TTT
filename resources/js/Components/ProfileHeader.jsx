@@ -41,11 +41,11 @@ const ProfileHeader = ({ user }) => {
     return (
         <div className="flex items-center gap-4 m-20 p-10 bg-opacity-10 bg-white bg-blur-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-saturate-150 rounded-lg">
         <div className="relative group inline-block">
-                <a href="/profile/editar" className="font-medium text-white inline-flex items-center bg-red-800 p-2 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:scale-150">
+                <a  href={`/profile/${user}/edit`} className="font-medium text-white inline-flex items-center bg-green-600 p-2 rounded-lg shadow-lg hover:bg-green-700 transform transition-transform duration-300 group-hover:scale-150">
                     <img src="/img/iconos/ajustes.svg" alt="Icono Editar" className="w-4 h-4" />
                 </a>
-                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
-                    Editar tus datos
+                <span className="absolute text-center bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs font-koulen rounded-md">
+                    Edita tus datos
                 </span>
             </div>
             <img className="text-white w-20 h-20 rounded-full" src={user.avatar} alt="imagen del usuario" />
@@ -53,7 +53,10 @@ const ProfileHeader = ({ user }) => {
             <div className="font-medium text-white">
                 <div className="font-koulen text-2xl">{user.name}</div>
                 <div className="font-koulen flex items-center gap-4 mb-2 mt-2 relative group">
-                    <button className="text-decoration-underline bg-red-800 hover:bg-red-900 rounded-lg p-2 transform transition-transform duration-300 group-hover:scale-110" onClick={() => setModalOpen(true)}>Monedero {user.monedero}</button>
+                    <button className="text-decoration-underline bg-violet-900 hover:bg-violet-950 rounded-lg p-2 transform transition-transform duration-300 group-hover:scale-110" onClick={() => setModalOpen(true)}>Monedero {user.monedero}</button>
+                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                    Recarga tu monedero
+                </span>
                 </div>
                 <div className="font-koulen flex items-center gap-4 mb-2">
                     <img src="/img/iconos/torta-cumpleanos.svg" alt="Icono Cumpleaños" className="w-4 h-4" />

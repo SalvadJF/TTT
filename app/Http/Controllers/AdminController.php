@@ -33,7 +33,7 @@ class AdminController extends Controller
         $ultimoArticulo = Articulo::latest()->first();
 
         $comentariosCount = Comentario::count();
-        $ultimoComentario = Comentario::latest()->first();
+        $ultimoComentario = Comentario::with('user')->latest()->first();
 
         $facturasCount = Factura::count();
         $ultimaFactura = Factura::latest()->first();

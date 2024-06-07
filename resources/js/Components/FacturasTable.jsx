@@ -61,7 +61,7 @@ export default function FacturasTable({ facturas }) {
                         </div>
                         ) : (
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300  text-center">
+                <thead className="text-sm font-koulen text-black uppercase bg-red-300  text-center">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID de Albaran</th>
                         <th scope="col" className="px-6 py-3">Articulo</th>
@@ -93,7 +93,7 @@ export default function FacturasTable({ facturas }) {
                                 <button type="button" onClick={() => handleShowDeleteModal(factura)} className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
                                 <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
                                 </button>
-                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Borrar Albaran
                                             </span>
                             </div>

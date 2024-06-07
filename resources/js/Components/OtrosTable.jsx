@@ -90,7 +90,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                         </div>
                         ) : (
                         <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
-                            <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
+                            <thead className="text-sm font-koulen text-black uppercase bg-red-300">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">ID</th>
                                     <th scope="col" className="px-6 py-3">Nombre</th>
@@ -114,7 +114,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                                     >
                                                         <img src="/img/iconos/edit.svg" alt="Icono Editar" className="w-4 h-4" />
                                                     </button>
-                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                    <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                         Editar Categoría
                                                     </span>
                                                 </div>
@@ -126,7 +126,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                                     >
                                                         <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
                                                     </button>
-                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                    <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                         Borrar
                                                     </span>
                                                 </div>
@@ -160,7 +160,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                         </div>
                         ) : (
                         <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
+                            <thead className="text-sm font-koulen text-black uppercase bg-red-300">
                             <tr>
                                     <th scope="col" className="px-6 py-3">
                                     ID</th>
@@ -185,7 +185,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                                     >
                                                         <img src="/img/iconos/edit.svg" alt="Icono Editar" className="w-4 h-4" />
                                                     </button>
-                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                    <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                         Editar Etiqueta
                                                     </span>
                                                 </div>
@@ -197,7 +197,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                                     >
                                                         <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
                                                     </button>
-                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                    <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                         Borrar
                                                     </span>
                                                 </div>

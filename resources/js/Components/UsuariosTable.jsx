@@ -99,7 +99,7 @@ export default function UsuariosTable({ usuarios }) {
                     </div>
                 ) : (
                     <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
-                        <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
+                        <thead className="text-sm font-koulen text-black uppercase bg-red-300">
                             <tr>
                                 <th scope="col" className="px-6 py-3">ID del Usuario</th>
                                 <th scope="col" className="px-6 py-3">Nombre</th>
@@ -139,7 +139,7 @@ export default function UsuariosTable({ usuarios }) {
                                                         >
                                                             <img src="/img/iconos/unlock.svg" alt="Icono Desbloquear" className="w-4 h-4" style={{ minWidth: "12px", minHeight: "12px" }} />
                                                         </button>
-                                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                        <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                             Desbloquear usuario
                                                         </span>
                                                     </div>
@@ -151,7 +151,7 @@ export default function UsuariosTable({ usuarios }) {
                                                         >
                                                             <img src="/img/iconos/lock.svg" alt="Icono Bloquear" className="w-4 h-4" style={{ minWidth: "12px", minHeight: "12px" }} />
                                                         </button>
-                                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                        <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                             Bloquear usuario
                                                         </span>
                                                     </div>
@@ -164,7 +164,7 @@ export default function UsuariosTable({ usuarios }) {
                                                     >
                                                         <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" style={{ minWidth: "12px", minHeight: "12px" }} />
                                                     </button>
-                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                    <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                         Borrar usuario
                                                     </span>
                                                 </div>

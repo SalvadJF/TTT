@@ -77,7 +77,7 @@ export default function NoticiasTable({ noticias }) {
                     </div>
                 ) : (
                 <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
-                    <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300 ">
+                    <thead className="text-sm font-koulen text-black uppercase bg-red-300 ">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 ID de la Noticia
@@ -139,7 +139,7 @@ export default function NoticiasTable({ noticias }) {
                                         <CambiarImagenModal
                                             noticiaId={noticia.id}
                                         />
-                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                        <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Cambiar Archivos
                                             </span>
                                         </div>
@@ -155,7 +155,7 @@ export default function NoticiasTable({ noticias }) {
                                                 style={{ minWidth: "12px", minHeight: "12px" }}
                                             />
                                         </a>
-                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                        <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Editar Noticia
                                             </span>
                                         </div>
@@ -175,7 +175,7 @@ export default function NoticiasTable({ noticias }) {
                                                 style={{ minWidth: "12px", minHeight: "12px" }}
                                             />
                                         </button>
-                                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                        <span className="font-koulen absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
                                                 Borrar Noticia
                                             </span>
                                         </div>
