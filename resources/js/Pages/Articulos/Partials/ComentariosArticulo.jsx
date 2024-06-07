@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function ComentariosArticulo({ comentarios, articulo, user }) {
+export default function ComentariosArticulo({ comentarios, articulo, auth }) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const { delete: handleDelete } = useForm();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -44,13 +44,13 @@ export default function ComentariosArticulo({ comentarios, articulo, user }) {
                                 <li className="flex items-start">
                                     <img
                                         className="w-12 h-12 mb-3 me-3 rounded-full sm:mb-0"
-                                        src={user.avatar}
-                                        alt={`Usuario ${user.name}`}
+                                        src={comentario.user.avatar}
+                                        alt={`Usuario ${comentario.user.name}`}
                                     />
                                     <div className="text-gray-600 dark:text-gray-400">
                                         <div className="text-white font-lato">
                                             <span className="font-medium text-white font-koulen">
-                                                {user.name}
+                                                {comentario.user.name}
                                             </span>{" "}
                                             comentó a{" "}
                                             <span className="font-lato text-yellow-300">
@@ -65,12 +65,14 @@ export default function ComentariosArticulo({ comentarios, articulo, user }) {
                                             {comentario.contenido}
                                         </div>
                                     </div>
-                                    <button
-                                        onClick={() => handleDeleteClick(comentario)}
-                                        className="inline-flex items-center px-3 py-2 ml-4 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-red-700 text-neutro-4 hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none"
-                                    >
-                                        <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
-                                    </button>
+                                    {(auth.user && (auth.user.id === comentario.user.id || auth.user.admin)) && (
+                                        <button
+                                            onClick={() => handleDeleteClick(comentario)}
+                                            className="inline-flex items-center px-3 py-2 ml-4 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-red-700 text-neutro-4 hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none"
+                                        >
+                                            <img src="/img/iconos/trash.svg" alt="Icono Borrar" className="w-4 h-4" />
+                                        </button>
+                                    )}
                                 </li>
                             </ol>
                         ))

@@ -9,9 +9,18 @@ export default function ComentariosTable({ comentarios }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [comentarioToDelete, setComentarioToDelete] = useState(null);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    };
+
     const filteredComentarios = useMemo(() => {
         return comentarios.data.filter(comentario =>
-            comentario.contenido.toLowerCase().includes(searchTerm.toLowerCase())
+            comentario.id.toString().includes(searchTerm.toLowerCase()) ||
+            comentario.comentable.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            comentario.user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            comentario.contenido.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            formatDate(comentario.created_at).includes(searchTerm.toLowerCase())
         );
     }, [comentarios.data, searchTerm]);
 
@@ -23,10 +32,7 @@ export default function ComentariosTable({ comentarios }) {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredComentarios.slice(indexOfFirstItem, indexOfLastItem);
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    };
+
 
     const getComentableName = (comentario) => {
         if (comentario.comentable_type === "App\\Models\\Articulo" && comentario.comentable) {
@@ -63,11 +69,16 @@ export default function ComentariosTable({ comentarios }) {
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="px-4 py-2 border rounded-md mb-4"
+                className="px-4 py-2 border rounded-md ml-4  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
             />
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            {filteredComentarios.length === 0 ? (
+                    <div className="text-center font-koulen py-4 text-gray-700 ">
+                        No hay resultados
+                    </div>
+                ) : (
+            <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
+                <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID del Comentario</th>
                         <th scope="col" className="px-6 py-3">Lugar</th>
@@ -120,6 +131,7 @@ export default function ComentariosTable({ comentarios }) {
                     ))}
                 </tbody>
             </table>
+        )}
             <div className="flex justify-center mt-4 mb-4">
                 {Array.from({ length: Math.ceil(filteredComentarios.length / itemsPerPage) }).map((_, index) => (
                     <button key={index} onClick={() => paginate(index + 1)} className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>

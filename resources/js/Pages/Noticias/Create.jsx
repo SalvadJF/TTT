@@ -5,9 +5,9 @@ import { BreadcrumbNoticiasFunciones } from "@/Components/BreadCrumb";
 const CreateNoticia = ({ auth, etiquetas }) => {
     const { data, setData, errors, post } = useForm({
         titulo: "",
-        resumen: "", // Nuevo campo: Resumen
+        resumen: "",
         contenido: "",
-        tipo: "", // Nuevo campo: Tipo
+        tipo: "",
         imagen: null,
         categorias: [],
         etiquetas: [],
@@ -54,7 +54,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             htmlFor="titulo"
                             className="font-koulen block mb-2 text-sm font-medium text-white"
                         >
-                            Titulo:
+                            Título:
                         </label>
                         <input
                             type="text"
@@ -62,9 +62,11 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.titulo ? 'border-red-500' : ''}`}
                             value={data.titulo}
                             onChange={(e) => setData("titulo", e.target.value)}
+                            aria-invalid={errors.titulo ? "true" : "false"}
+                            aria-describedby="titulo-error"
                         />
                         {errors.titulo && (
-                            <span className="error text-red-500">
+                            <span id="titulo-error" className="error text-red-500">
                                 {errors.titulo}
                             </span>
                         )}
@@ -82,9 +84,11 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.resumen ? 'border-red-500' : ''}`}
                             value={data.resumen}
                             onChange={(e) => setData("resumen", e.target.value)}
+                            aria-invalid={errors.resumen ? "true" : "false"}
+                            aria-describedby="resumen-error"
                         ></textarea>
                         {errors.resumen && (
-                            <span className="error text-red-500">
+                            <span id="resumen-error" className="error text-red-500">
                                 {errors.resumen}
                             </span>
                         )}
@@ -104,9 +108,11 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             onChange={(e) =>
                                 setData("contenido", e.target.value)
                             }
+                            aria-invalid={errors.contenido ? "true" : "false"}
+                            aria-describedby="contenido-error"
                         ></textarea>
                         {errors.contenido && (
-                            <span className="error text-red-500">
+                            <span id="contenido-error" className="error text-red-500">
                                 {errors.contenido}
                             </span>
                         )}
@@ -123,6 +129,8 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             className={`block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.tipo ? 'border-red-500' : ''}`}
                             value={data.tipo}
                             onChange={(e) => setData("tipo", e.target.value)}
+                            aria-invalid={errors.tipo ? "true" : "false"}
+                            aria-describedby="tipo-error"
                         >
                             <option value="">Selecciona un tipo</option>
                             <option value="Cronica">Cronica</option>
@@ -130,7 +138,7 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             <option value="Informacion">Información</option>
                         </select>
                         {errors.tipo && (
-                            <span className="error text-red-500">
+                            <span id="tipo-error" className="error text-red-500">
                                 {errors.tipo}
                             </span>
                         )}
@@ -163,7 +171,9 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             ))}
                         </div>
                         {errors.etiquetas && (
-                            <p className="text-red-500">{errors.etiquetas}</p>
+                            <p className="error text-red-500" id="etiquetas-error">
+                                {errors.etiquetas}
+                            </p>
                         )}
                     </div>
                     <div>
@@ -180,9 +190,11 @@ const CreateNoticia = ({ auth, etiquetas }) => {
                             onChange={(e) =>
                                 setData("imagen", e.target.files[0])
                             }
+                            aria-invalid={errors.imagen ? "true" : "false"}
+                            aria-describedby="imagen-error"
                         />
                         {errors.imagen && (
-                            <span className="error text-red-500">
+                            <span id="imagen-error" className="error text-red-500">
                                 {errors.imagen}
                             </span>
                         )}

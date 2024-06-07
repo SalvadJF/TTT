@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 export default function Footer() {
+    const [userCount, setUserCount] = useState(0);
+    const [articuloCount, setArticuloCount] = useState(0);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const userResponse = await axios.get('/users-count');
+            setUserCount(userResponse.data.count);
+
+            const articuloResponse = await axios.get('/articulos-count');
+            setArticuloCount(articuloResponse.data.count);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
     return (
         <footer className="bg-black dark:bg-gray-900 ">
             <div className="mx-auto w-full max-w-screen-xl">
@@ -55,10 +75,10 @@ export default function Footer() {
                         <h2 className="mb-6 text-sm font-semibold text-gray-300 uppercase">Miembros y Contenido</h2>
                         <ul className="text-white  font-lato">
                             <li className="mb-4">
-                                <p className="hover:underline">Miembros</p>
+                            <p className="hover:underline">Usuarios: {userCount}</p>
                             </li>
                             <li className="mb-4">
-                                <p className="hover:underline">Articulos</p>
+                            <p className="hover:underline">Artículos: {articuloCount}</p>
                             </li>
                         </ul>
                     </div>

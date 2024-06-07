@@ -12,10 +12,25 @@ export default function NoticiasTable({ noticias }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [noticiaToDelete, setNoticiaToDelete] = useState(null);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${
+            date.getMonth() + 1
+        }/${date.getFullYear()}`;
+        return formattedDate;
+    };
+
     const filteredNoticias = useMemo(() => {
-        return noticias.data.filter((noticia) =>
-            noticia.titulo.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        return noticias.data.filter((noticia) => {
+            const searchInLower = searchTerm.toLowerCase();
+            return (
+                noticia.id.toString().includes(searchInLower) ||
+                noticia.titulo.toLowerCase().includes(searchInLower) ||
+                noticia.usuario.name.toLowerCase().includes(searchInLower) ||
+                noticia.resumen.toLowerCase().includes(searchInLower) ||
+                formatDate(noticia.created_at).includes(searchInLower)
+            );
+        });
     }, [noticias.data, searchTerm]);
 
     const paginate = (pageNumber) => {
@@ -28,14 +43,6 @@ export default function NoticiasTable({ noticias }) {
         indexOfFirstItem,
         indexOfLastItem
     );
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = `${date.getDate()}/${
-            date.getMonth() + 1
-        }/${date.getFullYear()}`;
-        return formattedDate;
-    };
 
     const handleShowDeleteModal = (noticia) => {
         setNoticiaToDelete(noticia);
@@ -61,17 +68,25 @@ export default function NoticiasTable({ noticias }) {
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="px-4 py-2 border rounded-md mb-4"
+                className="px-4 py-2 border rounded-md ml-4  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
             />
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            {filteredNoticias.length === 0 ? (
+                    <div className="text-center font-koulen py-4 text-gray-700 dark:text-gray-400">
+                        No hay resultados
+                    </div>
+                ) : (
+                <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
+                    <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300 ">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 ID de la Noticia
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Titulo
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Resumen
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Autor
@@ -103,6 +118,9 @@ export default function NoticiasTable({ noticias }) {
                                     >
                                         {noticia.titulo}
                                     </a>
+                                </td>
+                                <td className="px-6 py-4">
+                                        {noticia.resumen}
                                 </td>
                                 <td className="px-6 py-4">
                                     <a
@@ -167,6 +185,7 @@ export default function NoticiasTable({ noticias }) {
                         ))}
                     </tbody>
                 </table>
+            )}
                 {/* Paginación */}
                 <div className="flex justify-center mt-4 mb-4">
                     {Array.from({

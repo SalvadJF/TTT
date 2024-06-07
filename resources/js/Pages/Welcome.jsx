@@ -37,6 +37,7 @@ export default function Welcome({ auth }) {
                             style={buttonStyle}
                             onMouseEnter={e => Object.assign(e.target.style, buttonHoverStyle)}
                             onMouseLeave={e => Object.assign(e.target.style, buttonStyle)}
+                            aria-label="Ir a la pagina principal"
                         >
                             Home
                         </Link>
@@ -47,6 +48,7 @@ export default function Welcome({ auth }) {
                                 style={{ ...buttonStyle, margin: '1.25rem' }} // m-5
                                 onMouseEnter={e => Object.assign(e.target.style, buttonHoverStyle)}
                                 onMouseLeave={e => Object.assign(e.target.style, buttonStyle)}
+                                aria-label="Ir a la página de inicio de sesión"
                             >
                                 Log in
                             </Link>
@@ -56,6 +58,7 @@ export default function Welcome({ auth }) {
                                 style={{ ...buttonStyle, margin: '1.25rem' }} // m-5
                                 onMouseEnter={e => Object.assign(e.target.style, buttonHoverStyle)}
                                 onMouseLeave={e => Object.assign(e.target.style, buttonStyle)}
+                                aria-label="Ir a la página de registro"
                             >
                                 Regístrate
                             </Link>

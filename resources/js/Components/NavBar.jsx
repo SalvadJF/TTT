@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
-import {ApplicationLogo} from '@/Components/ApplicationLogo';
+import { ApplicationLogo } from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 
@@ -15,7 +15,7 @@ export default function NavBar({ user, className = '', children, ...props }) {
                         <ApplicationLogo className="w-20 h-20" />
                     </Link>
                     <div className="flex items-center md:order-2 space-x-3 rtl:space-x-reverse">
-                        <div className=" sm:flex sm:items-center sm:ms-6">
+                        <div className="sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -24,6 +24,9 @@ export default function NavBar({ user, className = '', children, ...props }) {
                                                 type="button"
                                                 className="font-koulen flex text-sm bg-cyan-100 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                                 id="user-menu-button"
+                                                aria-haspopup="true"
+                                                aria-expanded={showingNavigationDropdown}
+                                                onClick={() => setShowingNavigationDropdown(!showingNavigationDropdown)}
                                             >
                                                 <span className="sr-only">Abrir Menu</span>
                                                 {user?.avatar ? (
@@ -35,13 +38,13 @@ export default function NavBar({ user, className = '', children, ...props }) {
                                         </span>
                                     </Dropdown.Trigger>
 
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href="/profile">Mi Perfil</Dropdown.Link>
+                                    <Dropdown.Content >
+                                        <Dropdown.Link href="/profile" className="font-koulen">Mi Perfil</Dropdown.Link>
                                         {user?.admin && (
-                                            <Dropdown.Link href={route('admin.index')}>Menu Admin</Dropdown.Link>
+                                            <Dropdown.Link href={route('admin.index')} className="font-koulen">Menu Admin</Dropdown.Link>
                                         )}
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Cerrar sesión
+                                        <Dropdown.Link href={route('logout')} method="post" as="button" className="font-koulen">
+                                            Cerrar sesion
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>

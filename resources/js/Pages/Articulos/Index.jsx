@@ -68,6 +68,7 @@ export default function Index({ auth, articulos, search, type }) {
                             ? "bg-red-900 text-white text-decoration-underline"
                             : "bg-transparent text-white"
                     }`}
+                    aria-label="Mostrar todos los artículos"
                 >
                     Todos
                 </button>
@@ -78,6 +79,7 @@ export default function Index({ auth, articulos, search, type }) {
                             ? "bg-red-900 text-white"
                             : "bg-transparent text-white"
                     }`}
+                    aria-label="Mostrar artículos de tipo Modelo 3D"
                 >
                     Modelo 3D
                 </button>
@@ -88,6 +90,7 @@ export default function Index({ auth, articulos, search, type }) {
                             ? "bg-red-900 text-white"
                             : "bg-transparent text-white"
                     }`}
+                    aria-label="Mostrar artículos de tipo Textura"
                 >
                     Textura
                 </button>
@@ -98,6 +101,7 @@ export default function Index({ auth, articulos, search, type }) {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="px-4 py-2 border rounded-md ml-4  text-white outline-none focus:border-opacity-0 bg-red-900"
+                    aria-label="Buscar artículos por nombre o descripción"
                 />
             </div>
 
@@ -124,6 +128,7 @@ export default function Index({ auth, articulos, search, type }) {
                                 ? "bg-red-600 text-white"
                                 : "bg-gray-500 text-white"
                         }`}
+                        aria-label={`Ir a la página ${index + 1}`}
                     >
                         {index + 1}
                     </button>

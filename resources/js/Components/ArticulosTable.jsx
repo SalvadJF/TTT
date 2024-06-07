@@ -11,10 +11,25 @@ export default function ArticulosTable({ articulos }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [articuloToDelete, setArticuloToDelete] = useState(null);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${
+            date.getMonth() + 1
+        }/${date.getFullYear()}`;
+        return formattedDate;
+    };
+
     const filteredArticulos = useMemo(() => {
-        return articulos.data.filter((articulo) =>
-            articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const searchTermLower = searchTerm.toLowerCase();
+        return articulos.data.filter((articulo) => {
+            return (
+                articulo.id.toString().includes(searchTermLower) ||
+                articulo.nombre.toLowerCase().includes(searchTermLower) ||
+                articulo.tipo.toLowerCase().includes(searchTermLower) ||
+                articulo.user.name.toLowerCase().includes(searchTermLower) ||
+                formatDate(articulo.created_at).includes(searchTermLower)
+            );
+        });
     }, [articulos.data, searchTerm]);
 
     const paginate = (pageNumber) => {
@@ -28,13 +43,7 @@ export default function ArticulosTable({ articulos }) {
         indexOfLastItem
     );
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = `${date.getDate()}/${
-            date.getMonth() + 1
-        }/${date.getFullYear()}`;
-        return formattedDate;
-    };
+
 
     const handleShowDeleteModal = (articulo) => {
         setArticuloToDelete(articulo);
@@ -60,11 +69,16 @@ export default function ArticulosTable({ articulos }) {
                 placeholder="Buscar..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="px-4 py-2 border rounded-md mb-4"
+                className="px-4 py-2 border rounded-md ml-4  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
             />
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            {filteredArticulos.length === 0 ? (
+                    <div className="text-center font-koulen py-4 text-gray-700 dark:text-gray-400">
+                        No hay resultados
+                    </div>
+                ) : (
+                <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
+                    <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 ID del Articulo
@@ -180,6 +194,7 @@ export default function ArticulosTable({ articulos }) {
                         ))}
                     </tbody>
                 </table>
+                )}
                 {/* Paginación */}
                 <div className="flex justify-center mt-4 mb-4">
                     {Array.from({

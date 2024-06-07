@@ -153,5 +153,11 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Avatar actualizado correctamente.');
     }
 
+    public function getUserCount()
+    {
+        $userCount = User::count();
+        return response()->json(['count' => $userCount]);
+    }
+
 
 }

@@ -13,6 +13,6 @@ class ComentarioSeeder extends Seeder
      */
     public function run(): void
     {
-        Comentario::factory()->count(10)->create();
+        Comentario::factory()->count(30)->create();
     }
 }
