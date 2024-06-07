@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { ApplicationLogoMedio } from '@/Components/ApplicationLogo';
 
-const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, onClose }) => {
+const SimuladorCompra = ({ articuloId, articuloPrecio, usuario, onClose }) => {
     const [mensaje, setMensaje] = useState('');
 
     const handleSimularCompra = async () => {
@@ -61,7 +61,7 @@ const SimuladorCompra = ({ articuloId, articuloPrecio, monedero, onClose }) => {
                         className="w-4 h-4 mr-2 inline-block"
                     />
                     Monedero
-                    <p className="mb-1">Saldo: {monedero}€</p>
+                    <p className="mb-1">Saldo: {usuario.monedero}€</p>
                 </button>
             </div>
             <div className="mb-2">

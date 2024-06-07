@@ -62,6 +62,7 @@ export default function Index({ auth, noticias }) {
             <div className="flex my-4 p-4 ml-4">
                 <button
                     onClick={() => setFilterType("all")}
+                    aria-label="Mostrar todas las noticias"
                     className={`font-koulen text-lg px-4 py-2 mr-2 rounded-md ${
                         filterType === "all"
                             ? "bg-red-900 text-white"
@@ -72,6 +73,7 @@ export default function Index({ auth, noticias }) {
                 </button>
                 <button
                     onClick={() => setFilterType("Cronica")}
+                    aria-label="Mostrar crónicas"
                     className={`font-koulen text-lg px-4 py-2 mr-2 rounded-md ${
                         filterType === "Cronica"
                             ? "bg-red-900 text-white"
@@ -82,6 +84,7 @@ export default function Index({ auth, noticias }) {
                 </button>
                 <button
                     onClick={() => setFilterType("Entrevista")}
+                    aria-label="Mostrar entrevistas"
                     className={`font-koulen text-lg px-4 py-2 mr-2 rounded-md ${
                         filterType === "Entrevista"
                             ? "bg-red-900 text-white"
@@ -92,6 +95,7 @@ export default function Index({ auth, noticias }) {
                 </button>
                 <button
                     onClick={() => setFilterType("Informacion")}
+                    aria-label="Mostrar noticias de información"
                     className={`font-koulen text-lg px-4 py-2 rounded-md ${
                         filterType === "Informacion"
                             ? "bg-red-900 text-white"
@@ -105,6 +109,7 @@ export default function Index({ auth, noticias }) {
                     placeholder="Buscar..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    aria-label="Buscar noticias"
                     className="px-4 py-2 border rounded-md ml-4 bg-red-900 text-white outline-none focus:border-opacity-0"
                 />
             </div>

@@ -7,6 +7,7 @@ import Acordeon from "@/Components/Acordeon";
 import ArticulosTableUser from "@/Components/ArticulosTableUser";
 import FacturasTableUser from "@/Components/FacturasTableUser";
 import UltimasVisitas from "@/Components/UltimasVisitas";
+import { BotonTipoRuta } from "@/Components/Botones";
 ;
 
 export default function Index({ auth, user, articulos, facturas }) {
@@ -43,15 +44,7 @@ export default function Index({ auth, user, articulos, facturas }) {
                         onToggle={() => toggleAccordion("usuarios")}
                     >
                         <div>
-                            <div>
-                                <a
-                                    href="/articulos/create"
-                                    className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-koulen rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                >
-                                    Crear Articulo
-                                </a>
-                            </div>
-
+                        <BotonTipoRuta ruta="/articulos/create" texto="Crear Articulo" />
                             <ArticulosTableUser articulos={articulos} />
                         </div>
 
@@ -62,20 +55,6 @@ export default function Index({ auth, user, articulos, facturas }) {
                         onToggle={() => toggleAccordion("facturas")}
                     >
                     <FacturasTableUser facturas={facturas} />
-                    </Acordeon>
-                    <Acordeon
-                        title="Mi Informacion"
-                        isOpen={openAccordion === "informacion"}
-                        onToggle={() => toggleAccordion("informacion")}
-                    >
-                        <div>
-                            <a
-                                href={`/profile/${user}/edit`}
-                                className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-koulen rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                            >
-                                Modificar Mis datos
-                            </a>
-                        </div>
                     </Acordeon>
                     <Acordeon
                         title="Ultimas Visitas"

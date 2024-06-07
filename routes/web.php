@@ -120,6 +120,9 @@ Route::post('/recargar-monedero', [FacturaController::class, 'recargarMonedero']
 Route::get('/paypal-recarga-return', [FacturaController::class, 'paypalRecargaReturn'])->name('paypalRecargaReturn');
 Route::get('/paypal-recarga-cancel', [FacturaController::class, 'paypalRecargaCancel'])->name('paypalRecargaCancel');
 
+Route::get('/users-count', [UserController::class, 'getUserCount']);
+Route::get('/articulos-count', [ArticuloController::class, 'getArticulosCount']);
+
 });
 
 require __DIR__.'/auth.php';

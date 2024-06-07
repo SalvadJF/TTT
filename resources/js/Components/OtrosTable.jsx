@@ -20,12 +20,14 @@ export default function OtrosTable({ categorias, etiquetas }) {
 
     const filteredCategorias = useMemo(() => {
         return categorias.filter((item) =>
+            item.id.toString().includes(searchTermCategorias.toLowerCase()) ||
             item.nombre.toLowerCase().includes(searchTermCategorias.toLowerCase())
         );
     }, [categorias, searchTermCategorias]);
 
     const filteredEtiquetas = useMemo(() => {
         return etiquetas.filter((item) =>
+            item.id.toString().includes(searchTermEtiquetas.toLowerCase()) ||
             item.nombre.toLowerCase().includes(searchTermEtiquetas.toLowerCase())
         );
     }, [etiquetas, searchTermEtiquetas]);
@@ -76,14 +78,19 @@ export default function OtrosTable({ categorias, etiquetas }) {
                     />
                     <input
                         type="text"
-                        placeholder="Buscar Categorías..."
+                        placeholder="Buscar Categorias..."
                         value={searchTermCategorias}
                         onChange={(e) => setSearchTermCategorias(e.target.value)}
-                        className="px-4 py-2 border rounded-md mb-4 w-full"
+                        className="px-4 py-2 border rounded-md ml-6  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
                     />
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        {filteredCategorias.length === 0 ? (
+                        <div className="text-center font-koulen py-4 text-gray-700 dark:text-gray-400">
+                            No hay resultados
+                        </div>
+                        ) : (
+                        <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
+                            <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">ID</th>
                                     <th scope="col" className="px-6 py-3">Nombre</th>
@@ -129,6 +136,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                 ))}
                             </tbody>
                         </table>
+                    )}
                     </div>
                 </div>
                 {/* Etiquetas */}
@@ -143,11 +151,16 @@ export default function OtrosTable({ categorias, etiquetas }) {
                         placeholder="Buscar Etiquetas..."
                         value={searchTermEtiquetas}
                         onChange={(e) => setSearchTermEtiquetas(e.target.value)}
-                        className="px-4 py-2 border rounded-md mb-4 w-full"
+                        className="px-4 py-2 border rounded-md ml-6  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
                     />
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    {filteredEtiquetas.length === 0 ? (
+                        <div className="text-center font-koulen py-4 text-gray-700 dark:text-gray-400">
+                            No hay resultados
+                        </div>
+                        ) : (
                         <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
                             <tr>
                                     <th scope="col" className="px-6 py-3">
                                     ID</th>
@@ -194,6 +207,7 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                 ))}
                             </tbody>
                         </table>
+                    )}
                     </div>
                 </div>
             </div>

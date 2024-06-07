@@ -9,9 +9,19 @@ export default function FacturasTable({ facturas }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [facturaToDelete, setFacturaToDelete] = useState(null);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        return formattedDate;
+    };
+
     const filteredFacturas = useMemo(() => {
         return facturas.filter(factura =>
-            factura.articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+            factura.id.toString().includes(searchTerm.toLowerCase()) ||
+            factura.articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            factura.articulo.user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            factura.precio_venta.toString().includes(searchTerm.toLowerCase()) ||
+            formatDate(factura.created_at).includes(searchTerm.toLowerCase())
         );
     }, [facturas.data, searchTerm]);
 
@@ -23,11 +33,6 @@ export default function FacturasTable({ facturas }) {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredFacturas.slice(indexOfFirstItem, indexOfLastItem);
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-        return formattedDate;
-    };
 
     const handleShowDeleteModal = (factura) => {
         setFacturaToDelete(factura);
@@ -43,13 +48,17 @@ export default function FacturasTable({ facturas }) {
 
     return (
         <div className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-            <input type="text" placeholder="Buscar..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="px-4 py-2 border rounded-md mb-4" />
+            <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} className="px-4 py-2 border rounded-md ml-4  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4" />
             {filteredFacturas.length === 0 ? (
                 <p className="text-gray-600 dark:text-gray-300 text-center font-koulen">No se encontraron albaranes.</p>
             ) : (
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+                        <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300 text-center">
                             <tr>
                                 <th scope="col" className="px-6 py-3">Numero de albaran</th>
                                 <th scope="col" className="px-6 py-3">Articulo</th>

@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Crear usuarios aleatorios
-        User::factory(10)->create();
+        User::factory(2)->create();
 
         $this->call([
 
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
             EtiquetaSeeder::class,
             ArticuloSeeder::class,
             NoticiaSeeder::class,
-            // ComentarioSeeder::class,
+            ComentarioSeeder::class,
             ContadorSeeder::class,
 
         ]);

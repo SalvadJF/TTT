@@ -119,14 +119,17 @@ use Inertia\Inertia;
       */
       public function show(Articulo $articulo)
     {
+        // El usuario autenticado
+        $usuario = auth()->user();
+
         // Obtener las categorías asociadas al artículo
         $categorias = $articulo->categorias()->get();
 
         // Obtener las etiquetas asociadas al artículo
         $etiquetas = $articulo->etiquetas()->get();
 
-        // Obtener los comentarios asociados al artículo
-        $comentarios = $articulo->comentarios()->get();
+        // Obtener los comentarios asociados al artículo, cargando la relación de usuario
+        $comentarios = $articulo->comentarios()->with('user')->get();
 
         // Obtener el usuario asociado al artículo
         $user = $articulo->user()->first();
@@ -153,6 +156,7 @@ use Inertia\Inertia;
             'etiquetas' => $etiquetas,
             'comentarios' => $comentarios,
             'user' => $user,
+            'usuario' => $usuario,
             'contadorLikes' => $contadorLikes,
             'comprado' => $comprado,
             'facturaId' => $facturaId,
@@ -296,6 +300,12 @@ use Inertia\Inertia;
         } else {
             return response()->json(['error' => 'No se encontro el Articulo o los Likes son 0'], 404);
         }
+    }
+
+    public function getArticulosCount()
+    {
+        $articulosCount = Articulo::count();
+        return response()->json(['count' => $articulosCount]);
     }
 
 

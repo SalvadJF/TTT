@@ -21,6 +21,7 @@ export default function Show({
     etiquetas,
     comentarios,
     user,
+    usuario,
     contadorLikes,
     comprado,
     facturaId
@@ -195,11 +196,11 @@ export default function Show({
                         {parseFloat(articulo.precio) === 0 ? "Gratis" : `Precio ${articulo.precio}€`}
                     </div>
 
-                    <div className="flex flex-col items-center shadow md:flex-row p-5 m-3 justify-center text-2xl">
+                    <div className="flex flex-col items-center shadow md:flex-row p-5 m-3 justify-center text-2xl relative group">
                         {auth.user.id === articulo.user_id ? (
                             <button
                                 disabled
-                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm"
+                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-1/2 text-center rounded-lg text-white text-sm transform transition-transform duration-300 group-hover:scale-150"
                                 title="Este artículo te pertenece"
                             >
                                Este artículo te pertenece
@@ -207,13 +208,13 @@ export default function Show({
                         ) : comprado ? (
                             <button
                                 onClick={() => window.location.href = `/facturas/${facturaId}`}
-                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-2/3 text-center rounded-lg text-white text-sm"
+                                className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-2/3 text-center rounded-lg text-white text-sm transform transition-transform duration-300 group-hover:scale-150"
                             >
                                 Ya has comprado este artículo
                             </button>
                         ) : (
                             <button onClick={handleCompraClick}
-                            className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-full text-center rounded-lg text-white text-lg"
+                            className="font-koulen py-3 px-5 mt-2 bg-red-800 hover:bg-red-900 w-full text-center rounded-lg text-white text-lg transform transition-transform duration-300 group-hover:scale-110"
                             aria-label={parseFloat(articulo.precio) === 0 ? "Descargar" : "Comprar"}>
                                 {parseFloat(articulo.precio) === 0 ? "Descargar" : "Comprar"}
                             </button>
@@ -222,7 +223,7 @@ export default function Show({
                 </div>
             </div>
             <div className="w-full p-5">
-                <ComentariosArticulo comentarios={comentarios} articulo={articulo} user={user} />
+                <ComentariosArticulo comentarios={comentarios} articulo={articulo} auth={auth} />
             </div>
             {mostrarModalCompra && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -231,7 +232,7 @@ export default function Show({
                         <SimuladorCompra
                             articuloId={articulo.id}
                             articuloPrecio={articulo.precio}
-                            monedero={user.monedero}
+                            usuario={usuario}
                             modelo={articulo.modelo}
                             onClose={handleCerrarModalCompra}
                         />

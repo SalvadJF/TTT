@@ -11,9 +11,19 @@ export default function ArticulosTableUser ({ articulos }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [articuloToDelete, setArticuloToDelete] = useState(null);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${
+            date.getMonth() + 1
+        }/${date.getFullYear()}`;
+        return formattedDate;
+    };
+
     const filteredArticulos = useMemo(() => {
         return articulos.filter((articulo) =>
-            articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+            articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            articulo.tipo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            formatDate(articulo.created_at).includes(searchTerm.toLowerCase())
         );
     }, [articulos.data, searchTerm]);
 
@@ -27,14 +37,6 @@ export default function ArticulosTableUser ({ articulos }) {
         indexOfFirstItem,
         indexOfLastItem
     );
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = `${date.getDate()}/${
-            date.getMonth() + 1
-        }/${date.getFullYear()}`;
-        return formattedDate;
-    };
 
     const handleShowDeleteModal = (articulo) => {
         setArticuloToDelete(articulo);
@@ -60,7 +62,7 @@ export default function ArticulosTableUser ({ articulos }) {
             placeholder="Buscar..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border rounded-md mb-4"
+            className="px-4 py-2 border rounded-md ml-4  text-white outline-none focus:border-opacity-5 bg-red-900 mb-4"
         />
         {filteredArticulos.length === 0 ? (
             <p className="text-gray-600 dark:text-gray-300 text-center font-koulen">
@@ -68,8 +70,8 @@ export default function ArticulosTableUser ({ articulos }) {
             </p>
         ) : (
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table className="w-full text-sm text-center rtl:text-right text-gray-500 ">
+                    <thead className="text-sm font-koulen text-gray-700 uppercase bg-red-300">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Imagen

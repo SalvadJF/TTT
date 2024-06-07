@@ -14,6 +14,7 @@ const EditarArticulo = () => {
         precio: articulo.precio
     });
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         put(route("articulos.update", articulo.id), {
@@ -73,6 +74,8 @@ const EditarArticulo = () => {
                         <input
                             type="text"
                             id="nombre"
+                            aria-label="Nombre"
+                            aria-describedby="nombre-error"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             value={data.nombre}
                             onChange={(e) => setData("nombre", e.target.value)}
@@ -93,6 +96,8 @@ const EditarArticulo = () => {
                         <textarea
                             id="descripcion"
                             rows="4"
+                            aria-label="Descripción"
+                            aria-describedby="descripcion-error"
                             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             value={data.descripcion}
                             onChange={(e) => setData("descripcion", e.target.value)}
@@ -112,6 +117,8 @@ const EditarArticulo = () => {
                         </label>
                         <select
                             id="tipo"
+                            aria-label="Tipo"
+                            aria-describedby="tipo-error"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             value={data.tipo}
                             onChange={(e) => setData("tipo", e.target.value)}
@@ -135,6 +142,8 @@ const EditarArticulo = () => {
                         </label>
                         <select
                             id="licencia"
+                            aria-label="Licencia"
+                            aria-describedby="licencia-error"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             value={data.licencia}
                             onChange={(e) => setData("licencia", e.target.value)}
@@ -164,6 +173,8 @@ const EditarArticulo = () => {
                         <input
                             type="number"
                             id="precio"
+                            aria-label="Precio"
+                            aria-describedby="precio-error"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             value={data.precio}
                             onChange={(e) => setData("precio", e.target.value)}

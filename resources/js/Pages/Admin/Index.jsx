@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { BreadcrumbAdmin } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
+import { BotonTipoRuta } from '@/Components/Botones';
 
 function AccordionItem({ title, count, createdAt, linkText, linkHref, children }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +36,7 @@ function AccordionItem({ title, count, createdAt, linkText, linkHref, children }
             <div id={`accordion-color-body-${title}`} className={`${isOpen ? '' : 'hidden'} gap-3 p-5`}>
                 <p className="mb-5 text-white dark:text-gray-400 font-koulen">Numero actual de {title.toLowerCase()} {count}</p>
                 <p className="mb-5 text-white dark:text-gray-400 font-koulen">Ultimo {title.toLowerCase()} creado : {createdAt}</p>
-                <a href={linkHref} className="font-koulen text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">{linkText}</a>
-                {children}
+               <BotonTipoRuta texto={linkText} ruta={linkHref} />
             </div>
         </div>
     );
@@ -122,7 +122,7 @@ export default function Index ({
                     title="Albaranes"
                     count={facturasCount}
                     createdAt={ultimaFactura ? formatDate(ultimaFactura.created_at) : 'No hay albaranes'}
-                    linkText="Facturas DB"
+                    linkText="Albaranes DB"
                     linkHref={route('admin.facturas')}
                 />
             </div>

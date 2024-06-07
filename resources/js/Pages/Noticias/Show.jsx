@@ -8,7 +8,7 @@ export default function Show({ auth, noticia, etiquetas }) {
     // Función para insertar saltos de línea después de cada punto
     const formatText = (text) => {
         return text
-            .split(".")
+            .split(". ")
             .map((sentence, index, array) =>
                 index < array.length - 1 ? sentence + ".\n" : sentence
             )
@@ -24,10 +24,10 @@ export default function Show({ auth, noticia, etiquetas }) {
                 </h2>
             }
         >
-            <Head title="noticia" />
+            <Head title={noticia} />
 
             <div className="ml-20 pt-40">
-                <BreadcrumbNoticiasShow noticia={noticia.titulo} />
+                <BreadcrumbNoticiasShow noticia={noticia} />
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-10 lg:p-20 w-full">

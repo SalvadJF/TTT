@@ -27,24 +27,11 @@ class ComentarioFactory extends Factory
      */
     public function definition()
     {
-        $models = [
-            Articulo::class,
-            Noticia::class,
-            User::class,
-            Comentario::class,
-        ];
-
-        $modelType = $this->faker->randomElement($models);
-
         return [
             'contenido' => $this->faker->paragraph,
-            'comentable_type' => $modelType,
-            'comentable_id' => function () use ($modelType) {
-                return $modelType::factory()->create()->id;
-            },
-            'user_id' => function () {
-                return User::inRandomOrder()->first()->id;
-            },
+            'comentable_type' => Articulo::class,
+            'comentable_id' => Articulo::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
