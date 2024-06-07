@@ -38,8 +38,8 @@ class CategoriaController extends Controller
         }
 
         $validatedData = $request->validate([
-           'nombre' => 'required|unique|max:25',
-       ]);
+            'nombre' => 'required|unique:categorias|max:25'
+        ]);
 
 
        $categoria->update($validatedData);

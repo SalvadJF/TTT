@@ -19,13 +19,13 @@ return (
     >
         <Head title="Admin" />
 
-        <div class=" ml-20 pt-40">
+        <div className=" ml-20 pt-40">
             <BreadcrumbAdminShows shows="Otros" ruta={route('admin.otros')} />
         </div>
 
         <AdminHeader admin={admin} />
 
-        <div class=" ml-20">
+        <div className=" ml-20">
             <Encabezado texto="Otros elementos en la Base de datos" />
         </div>
 

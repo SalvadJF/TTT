@@ -2,6 +2,8 @@ import React, { useState, useMemo } from "react";
 import { useForm } from "@inertiajs/react";
 import CrearCategoriaModal from "./CrearCategoriaModal";
 import CrearEtiquetaModal from "./CrearEtiquetaModal";
+import EditarEtiquetaModal from "./EditarEtiquetaModal";
+import EditarCategoriaModal from "./EditarCategoriaModal";
 import { BotonTipoModal } from "./Botones";
 
 export default function OtrosTable({ categorias, etiquetas }) {
@@ -12,6 +14,9 @@ export default function OtrosTable({ categorias, etiquetas }) {
     const [itemToDelete, setItemToDelete] = useState(null);
     const [showCrearCategoriaModal, setShowCrearCategoriaModal] = useState(false);
     const [showCrearEtiquetaModal, setShowCrearEtiquetaModal] = useState(false);
+    const [showEditCategoriaModal, setShowEditCategoriaModal] = useState(false);
+    const [showEditEtiquetaModal, setShowEditEtiquetaModal] = useState(false);
+    const [itemToEdit, setItemToEdit] = useState(null);
 
     const filteredCategorias = useMemo(() => {
         return categorias.filter((item) =>
@@ -48,16 +53,27 @@ export default function OtrosTable({ categorias, etiquetas }) {
         setShowCrearEtiquetaModal(true);
     };
 
+    const handleShowEditCategoriaModal = (item) => {
+        setItemToEdit(item);
+        setShowEditCategoriaModal(true);
+    };
+
+    const handleShowEditEtiquetaModal = (item) => {
+        setItemToEdit(item);
+        setShowEditEtiquetaModal(true);
+    };
+
+
     return (
         <div className="m-5 p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
             <div className="flex">
                 {/* Categorías */}
                 <div className="w-1/2 pr-2">
-                <BotonTipoModal
-                    texto="Crear Categoría"
-                    onClick={handleShowCrearCategoriaModal}
-                    className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                />
+                    <BotonTipoModal
+                        texto="Crear Categoría"
+                        onClick={handleShowCrearCategoriaModal}
+                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                    />
                     <input
                         type="text"
                         placeholder="Buscar Categorías..."
@@ -86,6 +102,18 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                                 <div className="relative group inline-block">
                                                     <button
                                                         type="button"
+                                                        onClick={() => handleShowEditCategoriaModal(item)}
+                                                        className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                    >
+                                                        <img src="/img/iconos/edit.svg" alt="Icono Editar" className="w-4 h-4" />
+                                                    </button>
+                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                        Editar Categoría
+                                                    </span>
+                                                </div>
+                                                <div className="relative group inline-block">
+                                                    <button
+                                                        type="button"
                                                         onClick={() => handleShowDeleteModal(item)}
                                                         className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-red-400 disabled:opacity-50 disabled:pointer-events-none"
                                                     >
@@ -105,11 +133,11 @@ export default function OtrosTable({ categorias, etiquetas }) {
                 </div>
                 {/* Etiquetas */}
                 <div className="w-1/2 pl-2">
-                <BotonTipoModal
-                    texto="Crear Etiqueta"
-                    onClick={handleShowCrearEtiquetaModal}
-                    className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                />
+                    <BotonTipoModal
+                        texto="Crear Etiqueta"
+                        onClick={handleShowCrearEtiquetaModal}
+                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                    />
                     <input
                         type="text"
                         placeholder="Buscar Etiquetas..."
@@ -120,8 +148,9 @@ export default function OtrosTable({ categorias, etiquetas }) {
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" className="px-6 py-3">ID</th>
+                            <tr>
+                                    <th scope="col" className="px-6 py-3">
+                                    ID</th>
                                     <th scope="col" className="px-6 py-3">Nombre</th>
                                     <th scope="col" className="px-6 py-3">Acciones</th>
                                 </tr>
@@ -135,6 +164,18 @@ export default function OtrosTable({ categorias, etiquetas }) {
                                         <td className="px-6 py-4">{item.nombre}</td>
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex justify-center space-x-2">
+                                                <div className="relative group inline-block">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleShowEditEtiquetaModal(item)}
+                                                        className="inline-flex items-center px-3 py-2 text-sm font-semibold border border-transparent rounded-lg gap-x-2 bg-no-aprobada text-neutro-4 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                    >
+                                                        <img src="/img/iconos/edit.svg" alt="Icono Editar" className="w-4 h-4" />
+                                                    </button>
+                                                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 bg-black text-white text-xs rounded-md">
+                                                        Editar Etiqueta
+                                                    </span>
+                                                </div>
                                                 <div className="relative group inline-block">
                                                     <button
                                                         type="button"
@@ -186,6 +227,21 @@ export default function OtrosTable({ categorias, etiquetas }) {
             {showCrearEtiquetaModal && (
                 <CrearEtiquetaModal onClose={() => setShowCrearEtiquetaModal(false)} />
             )}
+            {/* Modal de Editar Categoría */}
+            {showEditCategoriaModal && itemToEdit && (
+                <EditarCategoriaModal
+                    categoria={itemToEdit}
+                    onClose={() => setShowEditCategoriaModal(false)}
+                />
+            )}
+            {/* Modal de Editar Etiqueta */}
+            {showEditEtiquetaModal && itemToEdit && (
+                <EditarEtiquetaModal
+                    etiqueta={itemToEdit}
+                    onClose={() => setShowEditEtiquetaModal(false)}
+                />
+            )}
         </div>
     );
 }
+
