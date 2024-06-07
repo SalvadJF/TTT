@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FacturaController;
@@ -66,12 +68,16 @@ Route::resource('noticias', NoticiaController::class);
 
 Route::resource('profile', ProfileController::class);
 
+Route::resource('categorias', CategoriaController::class);
+Route::resource('etiquetas', EtiquetaController::class);
+
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
 Route::get('/admin/noticias', [AdminController::class, 'noticias'])->name('admin.noticias');
 Route::get('/admin/articulos', [AdminController::class, 'articulos'])->name('admin.articulos');
 Route::get('/admin/comentarios', [AdminController::class, 'comentarios'])->name('admin.comentarios');
 Route::get('/admin/facturas', [AdminController::class, 'facturas'])->name('admin.facturas');
+Route::get('/admin/otros', [AdminController::class, 'otros'])->name('admin.otros');
 
 
 

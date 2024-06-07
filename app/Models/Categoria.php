@@ -11,6 +11,10 @@ class Categoria extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'nombre',
+    ];
+
     public function articulos()
     {
         return $this->belongsToMany(Articulo::class, 'articulos_categorias', 'categoria_id', 'articulo_id');

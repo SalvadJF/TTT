@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Etiqueta;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreEtiquetaRequest;
-use App\Http\Requests\UpdateEtiquetaRequest;
+use Illuminate\Http\Request;
 
 class EtiquetaController extends Controller
 {
@@ -28,9 +27,19 @@ class EtiquetaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEtiquetaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|unique|max:25'
+        ]);
+
+        $categoria = Etiqueta::create([
+            'nombre' => $request->nombre,
+        ]);
+
+        session()->flash('success', 'Etiqueta creada con éxito.');
+
+        return;
     }
 
     /**
@@ -52,9 +61,23 @@ class EtiquetaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEtiquetaRequest $request, Etiqueta $etiqueta)
+    public function update(Request $request, Etiqueta $etiqueta)
     {
-        //
+        // Verificar si el usuario autenticado es administrador
+        if (!auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
+        $validatedData = $request->validate([
+           'nombre' => 'required|unique|max:25',
+       ]);
+
+
+       $etiqueta->update($validatedData);
+
+       session()->flash('success', 'Categoria actualizada con éxito.');
+
+       return;
     }
 
     /**
@@ -62,6 +85,13 @@ class EtiquetaController extends Controller
      */
     public function destroy(Etiqueta $etiqueta)
     {
-        //
+        // Verificar si el usuario autenticado es administrador
+        if (!auth()->user()->isAdmin()) {
+            abort(403); // No autorizado
+        }
+
+        $etiqueta->delete();
+
+       return;
     }
 }
