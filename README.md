@@ -10,15 +10,21 @@
 
 **TTT** permitirá a los usuarios subir, compartir y ver modelos y texturas en formato 3D. La aplicación tiene una galería de modelos 3D y funcionalidades de comunidad.
 
-La galería proporciona un espacio donde los usuarios pueden explorar, calificar y comentar sobre modelos y texturas en 3D subidos por otros usuarios.
+La aplicacion proporciona un espacio donde los usuarios pueden explorar, calificar y comentar sobre modelos y texturas en 3D subidos por otros usuarios.
 
 ## 2. Funcionalidad Principal de la Aplicación
 
-La funcionalidad principal de la aplicación es servir como una galería y un mercado para modelos y texturas en 3D. Los usuarios pueden explorar el contenido subido por otros usuarios, comentar y calificar los modelos.
+La funcionalidad principal de la aplicación es servir como una galería y un comercio para modelos y texturas en 3D.
 
-Además, la aplicación incluirá un sistema de mercado donde los usuarios podrán poner a la venta sus modelos a cambio de un precio. Es necesario registrarse o iniciar sesión.
+Es necesario registrarse o iniciar sesión.
 
-Los administradores tendrán un panel exclusivo donde podrán trabajar con la base de datos (borrar comentarios, bloquear usuarios, crear noticias, crear nuevas etiquetas o categorías).
+Los usuarios podrán poner a la venta sus modelos a cambio de un precio.
+
+Los usuarios pueden explorar el contenido subido por otros usuarios, comentar y calificar los modelos.
+
+
+
+Los administradores tendrán un panel donde podrán trabajar con la base de datos (borrar comentarios, bloquear usuarios, crear noticias, crear nuevas etiquetas o categorías).
 
 ## 3. Objetivos Generales
 
@@ -70,7 +76,7 @@ Esta es la vista que ve un usuario al entrar en la aplicación por primera vez, 
 <img src="public/img/documentacion/Dashboard.png" alt="Vista Dashboard">
 </div>
 
-Esta es la vista que verá un usuario al loguearse en la aplicación, donde se cargará el layout de autenticado y el usuario tendrá acceso a todos los recursos disponibles.
+Esta es la vista que verá un usuario al loguearse en la aplicación, donde se cargará el layout de Auth y el usuario tendrá acceso a todos los recursos disponibles.
 
 ### Elemento "Navegador"
 
@@ -78,7 +84,11 @@ Esta es la vista que verá un usuario al loguearse en la aplicación, donde se c
 <img src="public/img/documentacion/Navegador.png" alt="Elemento Navegador">
 </div>
 
-El navegador está presente en toda la aplicación siempre que el usuario esté logueado. Desde aquí puede dirigirse a las partes principales de la aplicación. Siempre hay migas de pan para guiar al usuario en qué lugar de la página se encuentra.
+El navegador está presente en toda la aplicación siempre que el usuario esté logueado.
+
+Desde aquí puede dirigirse a las partes principales de la aplicación.
+
+Siempre hay migas de pan para guiar al usuario en qué lugar de la página se encuentra.
 
 ### Elemento "Footer"
 
@@ -86,7 +96,9 @@ El navegador está presente en toda la aplicación siempre que el usuario esté 
 <img src="public/img/documentacion/Footer.png" alt="Elemento Footer">
 </div>
 
-Al igual que el navegador, este se encuentra en toda la página del usuario logueado. Desde este se puede acceder a los derechos reservados, enlaces de redes sociales y información de cuántos usuarios y artículos hay en la aplicación.
+Al igual que el navegador, este se encuentra en toda la página del usuario logueado.
+
+Desde este se puede acceder a los derechos reservados, enlaces de redes sociales y información de cuántos usuarios y artículos hay en la aplicación.
 
 ### Vista "Noticias"
 
@@ -94,7 +106,9 @@ Al igual que el navegador, este se encuentra en toda la página del usuario logu
 <img src="public/img/documentacion/Noticias.png" alt="Vista Noticias">
 </div>
 
-Esta vista permite al usuario consultar las noticias de la página. Posee una serie de filtros para facilitar las búsquedas y un buscador para los casos más específicos.
+Esta vista permite al usuario consultar las noticias de la página.
+
+Posee una serie de filtros para facilitar las búsquedas y un buscador para los casos más específicos.
 
 ### Vista "Noticia Show"
 
@@ -110,7 +124,11 @@ Esta es la vista de una noticia si accedemos a ella. Aquí podemos ver toda la i
 <img src="public/img/documentacion/Articulos.png" alt="Vista Artículos">
 </div>
 
-Esta vista permite al usuario consultar los artículos de la página. Posee una serie de filtros para facilitar las búsquedas y un buscador para los casos más específicos. El usuario también tiene la opción de darle "like" al artículo desde aquí.
+Esta vista permite al usuario consultar los artículos de la página.
+
+Posee una serie de filtros para facilitar las búsquedas y un buscador para los casos más específicos.
+
+El usuario también tiene la opción de darle "like" al artículo desde aquí.
 
 ### Vista "Artículo Show"
 
@@ -118,7 +136,17 @@ Esta vista permite al usuario consultar los artículos de la página. Posee una 
 <img src="public/img/documentacion/ArticuloShow.png" alt="Vista Artículo Show">
 </div>
 
-Esta es la vista de un artículo si accedemos a él. Aquí podemos ver toda la información disponible. El usuario puede ver el artículo renderizado a través de JS por medio de Babylon.ts e interactuar en vivo con el modelo. El usuario puede pagar el artículo ya sea por medio de un sistema de monedero de la página o desde la API de Paypal. Tras realizar la compra se le redirigirá a la vista de factura. Los usuarios también pueden comentar el artículo y, si es el dueño de este o el administrador, puede borrarlo aquí.
+Esta es la vista de un artículo si accedemos a él.
+
+Aquí podemos ver toda la información disponible.
+
+El usuario puede ver el artículo renderizado a través de JS por medio de Babylon.ts e interactuar en vivo con el modelo.
+
+El usuario puede pagar el artículo ya sea por medio de un sistema de monedero de la página o desde la API de Paypal.
+
+Tras realizar la compra se le redirigirá a la vista de factura.
+
+Los usuarios también pueden comentar el artículo y si es el dueño de este o el administrador, puede borrarlo aquí.
 
 ### Vista "API de Paypal"
 
@@ -134,7 +162,9 @@ Esta es la vista donde se llama a la API de Paypal.
 <img src="public/img/documentacion/Albaran.png" alt="Vista Albarán">
 </div>
 
-Esta es la vista donde se ven los datos de la compra del artículo por parte del usuario. Esta vista ofrece las funciones de descargar el artículo y descargar el albarán en PDF.
+Esta es la vista donde se ven los datos de la compra del artículo por parte del usuario.
+
+Esta vista ofrece las funciones de descargar el artículo y descargar el albarán en PDF.
 
 ### Vista "PDF"
 
@@ -166,7 +196,9 @@ Esta vista informa de los derechos legales que posee la página.
 <img src="public/img/documentacion/Perfil.png" alt="Vista Perfil">
 </div>
 
-Esta vista muestra nuestra información personal, qué artículos nos pertenecen y qué funciones podemos hacer (Editar y Borrar). También muestra nuestras compras en la aplicación, nuestras últimas visitas (las cuales funcionan por cookies), la opción de rellenar nuestro monedero a través de la API de Paypal, y la opción de llamar a la vista de editar perfil para cambiar nuestra información.
+Esta vista muestra nuestra información personal, qué artículos nos pertenecen y qué funciones podemos hacer (Editar y Borrar).
+
+También muestra nuestras compras en la aplicación, nuestras últimas visitas (las cuales funcionan por cookies), la opción de rellenar nuestro monedero a través de la API de Paypal, y la opción de llamar a la vista de editar perfil para cambiar nuestra información.
 
 ### Vista "Perfil Editar"
 
@@ -190,7 +222,11 @@ Esta vista muestra la información personal y artículos de otros usuarios de la
 <img src="public/img/documentacion/Admin.png" alt="Vista Admin">
 </div>
 
-Esta vista solo tendrá acceso a ella los que estén marcados como admin en la aplicación. Desde aquí el admin puede trabajar directamente con la base de datos sin saber cómo funciona esta. Aquí es donde se puede acceder al "create" de las noticias, pues solo un administrador puede hacerlas.
+Esta vista solo tendrá acceso a ella los que estén marcados como admin en la aplicación.
+
+Desde aquí el admin puede trabajar directamente con la base de datos sin saber cómo funciona esta.
+
+Aquí es donde se puede acceder al "create" de las noticias, pues solo un administrador puede hacerlas.
 
 ### Vista "Admin Bases de Datos"
 
@@ -198,7 +234,13 @@ Esta vista solo tendrá acceso a ella los que estén marcados como admin en la a
 <img src="public/img/documentacion/AdminBD.png" alt="Vista Admin Bases de Datos">
 </div>
 
-Esta vista muestra los elementos de la base de datos en base a lo que elija el admin. Desde aquí puede realizar las funciones de Editar o Borrar de los elementos. En el caso de Usuarios solo se puede Bloquear o Borrar al usuario. Un Usuario Bloqueado no puede acceder a la aplicación.
+Esta vista muestra los elementos de la base de datos en base a lo que elija el admin.
+
+Desde aquí puede realizar las funciones de Editar o Borrar de los elementos. 
+
+En el caso de Usuarios solo se puede Bloquear o Borrar al usuario.
+
+Un Usuario Bloqueado no puede acceder a la aplicación.
 
 ### Vista "Bloqueado"
 
@@ -214,13 +256,17 @@ Esta vista es donde será redirigido un usuario a través de un Middleware si es
 <img src="public/img/documentacion/Formulario.png" alt="Vista Formulario">
 </div>
 
-Los formularios de la aplicación tienen este aspecto visual. Todas las validaciones se realizan en conjunto de Laravel, Inertia y React.
+Los formularios de la aplicación tienen este aspecto visual.
+
+Todas las validaciones se realizan en conjunto de Laravel, Inertia y React.
 
 ## Configuración del Entorno
 
 ### Requisitos Previos
 
-Asegúrate de tener instalados PHP, Composer, Vite y PostgreSQL en tu sistema. Aquí tienes los comandos para instalarlos en un sistema basado en Debian como Ubuntu:
+Asegúrate de tener instalados PHP, Composer, Vite y PostgreSQL en tu sistema.
+
+Aquí tienes los comandos para instalarlos en un sistema basado en Debian como Ubuntu:
 
 #### Instalar PHP y extensiones necesarias
 
