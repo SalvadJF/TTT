@@ -44,7 +44,6 @@ const SimuladorCompra = ({ articuloId, articuloPrecio, usuario, onClose }) => {
             <div className="flex justify-center mb-4">
                 <ApplicationLogoMedio />
             </div>
-            <h1 className="font-koulen text-2xl mb-4">Simulador de Compra</h1>
             <div className="mb-4">
                 <h3 className="mb-1 font-koulen">Precio {articuloPrecio}€</h3>
             </div>
