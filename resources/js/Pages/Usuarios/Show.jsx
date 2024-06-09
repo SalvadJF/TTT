@@ -45,7 +45,7 @@ const Show = ({ auth, usuario, articulos }) => {
                 </div>
                 <div className="p-10 bg-opacity-10">
                     <ProfileOtroHeader user={usuario} />
-                    <h1 className="text-xl md:text-3xl lg:text-4xl font-koulen text-white ml-10">
+                    <h1 className="text-xl md:text-3xl lg:text-4xl font-koulen text-white ml-20">
                             Articulos de {usuario.name}
                         </h1>
                     <div>
@@ -54,7 +54,7 @@ const Show = ({ auth, usuario, articulos }) => {
                             placeholder="Buscar artículos..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="px-4 py-2 border rounded-md ml-8  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
+                            className="px-4 py-2 border rounded-md ml-20  text-white outline-none focus:border-opacity-0 bg-red-900 mb-4"
                         />
                     </div>
                     {currentItems.length > 0 ? (

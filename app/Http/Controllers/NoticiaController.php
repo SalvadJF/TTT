@@ -29,6 +29,13 @@ class NoticiaController extends Controller
      */
     public function create()
     {
+        $admin = Auth::user();
+
+        // Verificar si el usuario es administrador
+        if (!$admin->isAdmin()) {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
+
         $categorias = Categoria::all();
         $etiquetas = Etiqueta::all();
         return Inertia::render('Noticias/Create', [

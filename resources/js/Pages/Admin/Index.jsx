@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/react';
 import { BreadcrumbAdmin } from '@/Components/BreadCrumb';
 import AdminHeader from '@/Components/AdminHeader';
 import  AcordeonAdmin from '@/Components/AcordeonAdmin';
+import { BotonTipoRuta } from '@/Components/Botones';
 
 
 export default function Index ({
@@ -58,7 +59,9 @@ export default function Index ({
                     linkText="Artículos DB"
                     nombre={ultimoArticulo.nombre}
                     linkHref={route('admin.articulos')}
-                />
+                >
+                    <BotonTipoRuta texto={"Crear Articulo"} ruta={"articulos/create"} />
+                </AcordeonAdmin>
                 <AcordeonAdmin
                     title="Noticias"
                     count={noticiasCount}
@@ -67,7 +70,7 @@ export default function Index ({
                     nombre={ultimaNoticia.titulo}
                     linkHref={route('admin.noticias')}
                 >
-                    <a href="noticias/create" className="font-koulen text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Crear Nueva Noticia</a>
+                <BotonTipoRuta texto={"Crear Noticia"} ruta={"noticias/create"} />
                 </AcordeonAdmin>
                 <AcordeonAdmin
                     title="Comentarios"

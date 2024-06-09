@@ -1,7 +1,7 @@
 import { BotonTipoRuta } from "./Botones";
 import { useState } from "react";
 
-export default function AcordeonAdmin({ title, count, createdAt, linkText, linkHref, nombre }) {
+export default function AcordeonAdmin({ title, count, createdAt, linkText, linkHref, nombre, children }) {
     const [isOpen, setIsOpen] = useState(false);
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -45,7 +45,7 @@ export default function AcordeonAdmin({ title, count, createdAt, linkText, linkH
                     </p>
                     </div>
                     <BotonTipoRuta texto={linkText} ruta={linkHref} />
-
+                {children}
             </div>
         </div>
     );

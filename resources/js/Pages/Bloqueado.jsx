@@ -30,7 +30,7 @@ export default function Welcome({ auth }) {
                     </div>
                     <h1 className="font-koulen text-4xl font-bold text-white mb-4">No Puedes Entrar en la Aplicacion</h1>
                     <h2 className="font-koulen text-3xl font-bold text-white mb-4">Un Administrador a bloqueado tu cuenta</h2>
-                    <p className="font-lato text-lg text-white mb-8">Ponte en contacto con nosotros a traves de nuestro Email</p>
+                    <p className="font-lato text-lg text-white mb-8">Ponte en contacto con nosotros a traves de nuestro Email si quieres revisar tu caso</p>
                     <p className="font-lato text-lg text-white mb-8">TTT@gmail.com</p>
                     <Link
                                 href={route('logout')} method="post" as="button"
